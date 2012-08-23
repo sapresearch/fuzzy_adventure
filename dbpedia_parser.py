@@ -2,7 +2,7 @@
 import dbpediakit as dbk
 import dbk.archive
 
-archive_file = dbk.archive.fetch("long_abstracts")
+archive_file = dbk.archive.fetch("peopledata")
 archive_file
 
 tuples = dbk.archive.extract_text(archive_file)
