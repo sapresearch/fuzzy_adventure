@@ -2,12 +2,14 @@
 import dbpediakit as dbk
 import dbpediakit.archive
 
-archive_file = dbk.archive.fetch("persondata")
-archive_file
+def search(keyword1 = "test1", keyword2 = "test2"):
+    archive_file = dbk.archive.fetch("persondata")
+    #archive_file
 
-tuples = dbk.archive.extract_text(archive_file)
-tuples
+    tuples = dbk.archive.extract_text(archive_file)
+    #tuples
 
-first = tuples.next()
-first.id
-first.text[:60] + u"..."
+    for record in tuples:
+        if record.title == keyword1 or record.title == keyword2:
+            if record.text.find(keyword1) == -1 or record.text.find(keyword2) == -1:
+                print record   
