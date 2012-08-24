@@ -12,6 +12,8 @@ var
 sdist
 develop-eggs
 .installed.cfg
+external/stanford-parser-2008-10-26
+external/ogrisel-dbpediakit-400677b
 
 # Installer logs
 pip-log.txt
