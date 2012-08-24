@@ -10,6 +10,9 @@ def search(keyword1 = "test1", keyword2 = "test2"):
     #tuples
 
     for record in tuples:
-        if record.title == keyword1 or record.title == keyword2:
-            if record.text.find(keyword1) == -1 or record.text.find(keyword2) == -1:
-                print record   
+        arr = [keyword1, keyword2]
+        for keyword in arr:
+            if record.title.find(keyword) != -1:
+                arr.remove(keyword);
+                if record.text.find(arr[0]) != -1:
+                    print record
