@@ -25,14 +25,6 @@ def stanford_tree(sentence):
 			  
 	return parse.toString(), dependencies
 
-def question_type(question):
-	match = re.search('ROOT \((SQ)', question)
-	result = match.group(1)
-	qt = ''
-	if result == 'SQ':
-		qt = 'boolean'
-	return qt
-
 # return the subject, predicate and object of the question.
 def triple(sentence):
 	obj_relations = ['dobj', 'prep_in', 'prep_to']
@@ -44,7 +36,11 @@ def triple(sentence):
 		elif relation_type in obj_relations:
 			obj = rel.dep()
 	return subj, pred, obj
-	
+
+def subject(sentence):
+	np_subtree = re.search('\(NP.*', tree)
+	subj = re.search('\((NN|NNP|NNPS|NNS) \[[\d.]*\] ([^\)]*)', np_subtree.group(0))
+	return subj.group(2)
 
 def answer(terms):
 	ans = "I don't know"
@@ -59,10 +55,3 @@ def answer(terms):
 
 def question(sentence):
 	return answer(triples(pos_tag(sentence)))
-
-query = "Do tigers live in India?"
-query = "Can Americans travel to Cuba?"
-#query = raw_input("Enter a question to parse\n")
-tree, dep = stanford_tree(query)
-terms = triple(dep)
-print answer(terms)
