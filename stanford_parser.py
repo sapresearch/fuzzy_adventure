@@ -1,74 +1,76 @@
-class StamfordNode():
-    depth = 0
-    siblings = []
+import copy
+import re
+
+class StanfordNode():
     
-    def __init__(self, type = 'ROOT', word = None, index = 1, probability = 0.0, children = [], parent = None):
-        self.type = type
+    def __init__(self, node_type='ROOT', word=None, probability=0.0, children=[], parent=None):
+        self.node_type = node_type
         self.word = word
-        self.index = index
         self.probability = probability
         self.children = children
         self.parent = parent
+
+
         
-    def getType(self):
-        return self.type
+def parse(tree, parent=None, root_node=None, count=0, debug=False):
+	length = len(tree)
+	start_count, stop_count = 0, 0
+	sub_start, sub_stop = 0, 0
 
-    def getWord(self):
-        return self.word
+	next_section = ''
+	next_sections = []
+	for letter in tree:
 
-    def wordIndex():
-        return self.position
+		if letter == '(':
+			start_count += 1
+			sub_start += 1
+			if start_count == 2:
+				sub_start = 1
+				sub_stop = 0
+		elif letter == ')':
+			stop_count += 1
+			sub_stop += 1
 
-    def getProbability():
-        return self.probability
+		if sub_start == sub_stop and start_count > 0:
+			sub_start = 0
+			sub_stop = 0
+			copied = copy.copy(next_section)
+			if next_section != '' and next_section != ' ' and next_section != ')':
+				next_sections.append(copied)
+			next_section = ''
 
-    def children():
-        return children
+		if start_count == stop_count and start_count > 0:
+			break
 
-    def siblings():
-        return
+		if start_count >= 2:
+			next_section += letter
 
-    def depth():
-        return
 
-def parseString(tree):
-    start = '('
-    close = ')'
-    brac = '['
-    node_arr = []
-    word_count = 0
-    depth = 0
-    #siblings
 
-    arr = tree.split()
-    stack = []
-    par_node = 1
-    #print curr_node
-    for element in arr:
-        #print curr_node
-        if element[0] == start or element[0] == brac:
-            stack.append(element)
-            par_node = par_node + 1
-        elif element[-1] == close:
-            count = element.count(close)
-            w = element[:-count]
-            #print w
-            p = ''
-            t = ''
-            word_count = word_count + 1
-            i = word_count
-            for j in range(count):
-                #print "range " + str(range(count))
-                #print j
-                ele = stack.pop()
-                print ele
-                if ele[0] == brac:
-                    j = j + 1
-                    p = element[1:-1]
-                    #print p
-                elif ele[0] == start:
-                    t = element[1:]
-                    #print t
-                    node_arr.append(StamfordNode(t, w, i, p, [], par_node))
-                    #print "par "
-    return node_arr
+	# Create current node
+	node_type, prob, word = parse_node(tree)
+	current_node = StanfordNode(parent=parent, node_type=node_type, probability=prob, word=word)
+	if parent != None:
+		kids = copy.copy(current_node.parent.children)
+		kids.append(current_node)
+		current_node.parent.children = kids
+	if root_node == None:
+		root_node = current_node
+
+
+
+	#Create children
+	for section in next_sections:
+		count += 1
+		parse(section, current_node, root_node, count)
+	return root_node
+
+def parse_node(node):
+	node_type = re.search("\A\s?\((\w*)", node).group(1)
+ 	prob = re.search("\A\s?\(\w* \[(\d{0,2}\.\d*)\]", node)
+	word = re.search("\A\s?\(\w* \[(\d{0,2}\.\d*)\] (\w*)", node)
+	if word != None:
+		word = word.group(2)
+	if prob != None:
+		prob = prob.group(1)
+	return node_type, prob, word
