@@ -2,7 +2,6 @@ import copy
 import re
 
 class StanfordNode():
-    
     def __init__(self, node_type='ROOT', word=None, probability=0.0, children=[], parent=None):
         self.node_type = node_type
         self.word = word
@@ -10,7 +9,12 @@ class StanfordNode():
         self.children = children
         self.parent = parent
 
-
+    def np_subtree():
+        for child in self.children:
+            if child.node_type == 'NP':
+                return child
+                
+        
         
 def parse(tree, parent=None, root_node=None, count=0, debug=False):
 	length = len(tree)
@@ -45,8 +49,6 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
 		if start_count >= 2:
 			next_section += letter
 
-
-
 	# Create current node
 	node_type, prob, word = parse_node(tree)
 	current_node = StanfordNode(parent=parent, node_type=node_type, probability=prob, word=word)
@@ -56,8 +58,6 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
 		current_node.parent.children = kids
 	if root_node == None:
 		root_node = current_node
-
-
 
 	#Create children
 	for section in next_sections:
