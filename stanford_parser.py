@@ -9,13 +9,28 @@ class StanfordNode():
         self.children = children
         self.parent = parent
 
-    def np_subtree():
-        for child in self.children:
-            if child.node_type == 'NP':
-                return child
-                
-        
-        
+    def descendent(self, node_types):
+			return has_node(node_types, self.children)
+
+
+
+
+def has_node(node_types, kids, count=0):
+	if type(node_types) != list:
+		raise "Input for search must be a list"
+	grandchildren = []
+	types = []
+	answer = False
+	for child in kids:
+		if child.node_type in node_types:
+			answer = child
+		else:
+			grandchildren += child.children
+	if answer == False and count <= 200:
+		answer = has_node(node_types, grandchildren, count+1)
+	return answer
+
+
 def parse(tree, parent=None, root_node=None, count=0, debug=False):
 	length = len(tree)
 	start_count, stop_count = 0, 0
