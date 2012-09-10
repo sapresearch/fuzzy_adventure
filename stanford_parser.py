@@ -9,27 +9,28 @@ class StanfordNode():
         self.children = children
         self.parent = parent
 
-    def descendent(self, node_types):
-			return has_node(node_types, self.children)
+    def descendent(self, node_types, bfs = True):#true = breadth first search (bfs); depth first search (dfs) otherwise
+        kids = copy.copy(self.children)
+        if bfs == False:#for deepest node
+            last = None
+            for k in kids:
+                if k.node_type in node_types:
+                    last = k
+                kids += k.children
+            return last
+        else:#for breadth first search
+            for k in kids:
+                if k.node_type in node_types:
+                    return k
+                else:
+                    kids += k.children
+            return False
 
-
-
-
-def has_node(node_types, kids, count=0):
-	if type(node_types) != list:
-		raise "Input for search must be a list"
-	grandchildren = []
-	types = []
-	answer = False
-	for child in kids:
-		if child.node_type in node_types:
-			answer = child
-		else:
-			grandchildren += child.children
-	if answer == False and count <= 200:
-		answer = has_node(node_types, grandchildren, count+1)
-	return answer
-
+    def siblings(self):
+        parent = self.parent
+        kids = copy.copy(parent.children)
+        kids.remove(self)
+        return kids
 
 def parse(tree, parent=None, root_node=None, count=0, debug=False):
 	length = len(tree)
@@ -82,7 +83,7 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
 
 def parse_node(node):
 	node_type = re.search("\A\s?\((\w*)", node).group(1)
- 	prob = re.search("\A\s?\(\w* \[(\d{0,2}\.\d*)\]", node)
+	prob = re.search("\A\s?\(\w* \[(\d{0,2}\.\d*)\]", node)
 	word = re.search("\A\s?\(\w* \[(\d{0,2}\.\d*)\] (\w*)", node)
 	if word != None:
 		word = word.group(2)

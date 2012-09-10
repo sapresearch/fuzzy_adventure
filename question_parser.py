@@ -55,3 +55,7 @@ def answer(terms):
 
 def question(sentence):
 	return answer(triples(pos_tag(sentence)))
+
+
+string = 'A rare black squirrel has become a regular visitor to a suburban garden.'
+print stanford_tree(string)
