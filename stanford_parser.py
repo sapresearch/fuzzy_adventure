@@ -2,12 +2,13 @@ import copy
 import re
 
 class StanfordNode():
-    def __init__(self, node_type='ROOT', word=None, probability=0.0, children=[], parent=None):
+    def __init__(self, node_type='ROOT', word=None, probability=0.0, children=[], parent=None, index=None):
         self.node_type = node_type
         self.word = word
         self.probability = probability
         self.children = children
         self.parent = parent
+        self.index = index
 
     def descendent(self, node_types, bfs = True):#true = breadth first search (bfs); depth first search (dfs) otherwise
         kids = copy.copy(self.children)
@@ -26,11 +27,30 @@ class StanfordNode():
                     kids += k.children
             return False
 
+    def node_index(self, i):
+        kids = copy.copy(self.children)
+        for k in kids:
+            if k.index == i:
+                return k
+            else:
+                kids += k.children
+        return False
+
+    def word_search(self, word):
+        kids = copy.copy(self.children)
+        for k in kids:
+            if k.word.lower() == word.lower():
+                return k
+            else:
+                kids += k.children
+        return False
+
     def siblings(self):
         parent = self.parent
         kids = copy.copy(parent.children)
         kids.remove(self)
         return kids
+
 
 def parse(tree, parent=None, root_node=None, count=0, debug=False):
 	length = len(tree)
@@ -79,6 +99,16 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
 	for section in next_sections:
 		count += 1
 		parse(section, current_node, root_node, count)
+	
+	root_node.children[0].index = 'TN'
+	kids = copy.copy(root_node.children[0].children)
+	count = 0
+	for child in kids:
+		if child.word != '.' or child.word != '?':
+			child.index = count
+			count += 1
+			kids += child.children
+
 	return root_node
 
 def parse_node(node):

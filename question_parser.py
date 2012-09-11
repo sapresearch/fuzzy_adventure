@@ -58,4 +58,13 @@ def question(sentence):
 
 
 string = 'A rare black squirrel has become a regular visitor to a suburban garden.'
+string2 = "Where do tigers live?"
+string3 = "How do you run?"
+string4 = "When is it going to rain?"
+string5 = "Why will it rain?"
+
 print stanford_tree(string)
+print stanford_tree(string2)
+print stanford_tree(string3)
+print stanford_tree(string4)
+print stanford_tree(string5)
