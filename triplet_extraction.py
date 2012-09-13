@@ -98,4 +98,6 @@ def question_analysis(top_node):
 			elif n3.node_type == 'NP' and n4.node_type == 'VP':
 				predicate = extract_predicate(n4)
 				query = ['?', predicate, '?']
+	if query == False:
+		query = []
 	return query, question_type

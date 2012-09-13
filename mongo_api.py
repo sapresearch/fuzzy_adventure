@@ -1,5 +1,6 @@
 import pymongo
 from pymongo import Connection
+from bson.objectid import ObjectId
 import sys
 sys.path.append('./external/dbpediakit')
 import dbpediakit as dbk
@@ -17,6 +18,7 @@ def write_collection(data, collection):
 	db = connection[database]
 	c = db[collection]
 	for d in data:
+		print "Memory: " + str(sys.getsizeof(d))
 		c.insert(d)
 	return None
 
@@ -62,7 +64,9 @@ def create_word_index(data):
 	for record in data:
 		text = ' '.join([record['id'], record['title'], record['text']])
 		text = text.replace('.', '')
-		tokens = nltk.word_tokenize(text)
+		tokens = []
+		for token in nltk.word_tokenize(text):
+			tokens += token.lower().split('_')
 		tokens = filter(lambda a: a != '.', tokens)
 		mongo_id = record['_id']
 		for word in tokens:
@@ -73,13 +77,12 @@ def create_word_index(data):
 
 	output = []
 	sub_out = []
-	limit = 100000
+	limit = 20000
 	count = 0
 	for word,ids in words.items():
 		count += 1
 		sub_out.append({'word':word, 'ids':ids})
 		if count == limit:
-			print count
 			count = 0
 			copied = copy.copy(sub_out)
 			output.append(copied)
@@ -101,11 +104,22 @@ def ids_for_word(word):
 	
 """ Find the intersection for two words (ie the IDs of 
 the relational triples that have both of the words."""
-def intersection(word1, word2):
-	word1 = ids_for_word(word1)
-	word2 = ids_for_word(word2)
-	intersect = list(set(word1) & set(word2))
-	return intersect
+def intersection(words):
+	if len(words) == 0:
+		return []
+	all_ids = set(ids_for_word(words[0]))
+	for w in words:
+		ids = ids_for_word(w)
+		all_ids = all_ids & set(ids)
+	return list(all_ids)
 
 def union(a,b):
 	return list(set(a) | set(b))
+
+def find_by_words(words):
+	ids = intersection(words)
+	output = []
+	collection = Connection()[database]['person']
+	for i in ids:
+		output += collection.find({'_id': ObjectId(i)})
+	return output
