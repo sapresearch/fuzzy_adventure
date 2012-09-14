@@ -4,12 +4,13 @@ import stanford_client
 import triplet_extraction
 import time
 import mongo_api
+import re
 
 
 
 """ Main application function. """
 def ask_question(question):
-	tree = stanford_client.to_tree(q)
+	tree = stanford_client.to_tree(question)
 	root = stanford_parser.parse(tree)
 	top_node = root.children[0]
 	nodes, question_type = triplet_extraction.question_analysis(top_node)
@@ -17,23 +18,31 @@ def ask_question(question):
 	for n in nodes:
 		if n != '?':
 			triplet.append(n.word.lower())
-	answer = mongo_api.find_by_words(triplet)
+	if len(triplet) == 0:
+		answer = "I don't understand the question"
+	else:
+		answer = mongo_api.find_by_words(triplet)
+		if len(answer) == 0:
+			answer = "I don't know"
+		else:
+			answer = answer[0]
 	return answer, triplet
 
+def demo(verbose=False):
+	while True:
+		print "Ask a question:"
+		question = raw_input()
 
+		start = time.time()
+		answer, triplet = ask_question(question)
+		duration = time.time() - start
 
-q = "Where is the North Pole located?"
-q = "When did Albert Einstein die?"
-q = "Where do tigers live?"
-q = "When was Albert Einstein born?"
-q = "Where is the best French restaurant in San Francisco?"
+		verbose = re.match(".*-v", question) != None
+		if verbose:
+			print "Time: " + str(duration)
+			print "Parsed question: " + str(triplet)
+			
+		print "Answer: " + answer + "\n"
+	return None
 
-start = time.time()
-answer, triplet = ask_question(q)
-duration = time.time() - start
-
-print "Time: " + str(duration)
-print "Question: " + q
-print "Parsed triplet: " + str(triplet)
-print "Results: " + str(len(answer))
-print "Answer: " + str(answer)
+demo()

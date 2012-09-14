@@ -121,5 +121,25 @@ def find_by_words(words):
 	output = []
 	collection = Connection()[database]['person']
 	for i in ids:
-		output += collection.find({'_id': ObjectId(i)})
+		triplet = collection.find({'_id': ObjectId(i)})
+		sub = []
+		sub += triplet # You have to do this to force the triplet from a cursor object to a dictionary. It's ridiculous, but it works.
+		triplet = sub[0]
+		output.append(select_field(triplet, words))
+	return output
+
+""" Find the missing field from the triplet. Assume that
+if a word occurs in two out of three fields, then the third
+field is the one that the person was looking for.  If it isn't
+found, then guess. """
+def select_field(triplet, search_words):
+	fields = ['text', 'id', 'title']
+	missing = copy.copy(fields)
+	for f in fields:
+		field_tokens = nltk.word_tokenize(triplet[f])
+		for search in search_words:
+			if search in field_tokens:
+				missing.remove(f)
+	missing_field = fields[0] if len(missing) == 0 else missing[0]
+	output = triplet[missing_field]
 	return output
