@@ -5,8 +5,7 @@ import sys
 sys.path.append('./external/dbpediakit')
 import dbpediakit as dbk
 import dbpediakit.archive
-import time
-import nltk as nltk
+import nlp
 import copy
 
 database = 'fuzzy_adventure'
@@ -64,10 +63,7 @@ def create_word_index(data):
 	for record in data:
 		text = ' '.join([record['id'], record['title'], record['text']])
 		text = text.replace('.', '')
-		tokens = []
-		for token in nltk.word_tokenize(text):
-			tokens += token.lower().split('_')
-		tokens = filter(lambda a: a != '.', tokens)
+		tokens = nlp.tokens(text)
 		mongo_id = record['_id']
 		for word in tokens:
 			if word in words:
@@ -136,10 +132,10 @@ def select_field(triplet, search_words):
 	fields = ['text', 'id', 'title']
 	missing = copy.copy(fields)
 	for f in fields:
-		field_tokens = nltk.word_tokenize(triplet[f])
+		field_tokens = nlp.tokens(triplet[f])
 		for search in search_words:
 			if search in field_tokens:
-				missing.remove(f)
+				missing = filter(lambda m: m != f, missing)
 	missing_field = fields[0] if len(missing) == 0 else missing[0]
 	output = triplet[missing_field]
 	return output
