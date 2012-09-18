@@ -58,13 +58,19 @@ It returns a list that is suitable to be used to create another Mongo collection
 This is a list of hashes: [ {'word':'hello', 'ids':'the ids where that word was used'} ]
 After this list has been saved as a new Mongo collection, it can then be queried to
 find all the IDs in the other collection where that word occured."""
-def create_word_index(data):
+def create_word_index(data, string=False):
 	words = {}
+	#count = 0
 	for record in data:
+		#count += 1
+		#if count >= 10000:
+			#return words
 		text = ' '.join([record['id'], record['title'], record['text']])
 		text = text.replace('.', '')
 		tokens = nlp.tokens(text)
 		mongo_id = record['_id']
+		if string == True:
+			mongo_id = str(mongo_id.__str__())
 		for word in tokens:
 			if word in words:
 				words[word].append(mongo_id)
@@ -83,7 +89,7 @@ def create_word_index(data):
 			copied = copy.copy(sub_out)
 			output.append(copied)
 			sub_out = []
-	return output
+	return output, words
 
 """ Search for a single word."""
 def word_search(word):
@@ -109,8 +115,11 @@ def intersection(words):
 		all_ids = all_ids & set(ids)
 	return list(all_ids)
 
-def union(a,b):
-	return list(set(a) | set(b))
+def union(words):
+	all_ids = set([])
+	for w in words:
+		all_ids = all_ids | set(w)
+	return list(all_ids)
 
 def find_by_words(words):
 	ids = intersection(words)
