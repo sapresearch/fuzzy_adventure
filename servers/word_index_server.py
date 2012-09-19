@@ -10,7 +10,7 @@ server = SimpleXMLRPCServer(('localhost', 9000), logRequests=True)
 def load_word_index():
 	collection = 'word_index'
 	print sys.getsizeof(collection)
-	data = mongo_api.read_collection('person')
+	data = mongo_api.read_collection('person2')
 	_, words = mongo_api.create_word_index(data, True)
 	return words
 

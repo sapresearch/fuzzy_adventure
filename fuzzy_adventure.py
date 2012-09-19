@@ -25,17 +25,19 @@ def ask_question(question):
 			triplet.append(n.word.lower())
 	if len(triplet) == 0:
 		answer = "I don't understand the question"
+		full_answers = []
+		synonyms = []
 		search_time = 0.
 	else:
 		triplet = [ [triplet[0]], [triplet[1]] ]
 		start = time.time()
-		answer = triplet_search.search(triplet)
+		answers, full_answers, synonyms = triplet_search.search(triplet)
 		search_time = time.time() - start
-		if len(answer) == 0:
+		if len(answers) == 0:
 			answer = "I don't know"
 		else:
-			answer = answer[0]
-	return answer, triplet, tree, parse_time, search_time
+			answer = answers[0]
+	return answer, full_answers, tree, triplet, synonyms, parse_time, search_time
 
 def demo(verbose=False):
 	while True:
@@ -46,15 +48,18 @@ def demo(verbose=False):
 		question = re.sub("-v", '', question)
 
 		start = time.time()
-		answer, triplet, tree, parse_time, search_time = ask_question(question)
+		answer, all_answers, tree, triplet, synonyms, parse_time, search_time = ask_question(question)
 		duration = time.time() - start
 
 		if verbose:
-			print "Tree: " + str(tree)
-			print "Parsed triplet: " + str(triplet)
 			print "Time: " + str(round(duration, 3))
-			print "Parse time: " + str(round(parse_time, 3))
-			print "Search time: " + str(round(search_time, 3))
+			print "  Parse time: " + str(round(parse_time, 3))
+			print "  Search time: " + str(round(search_time, 3))
+			print "Parse Stack:"
+			print "  Tree: " + str(tree)
+			print "  Parsed triplet: " + str(triplet)
+			print "  Synonyms: " + str(synonyms)
+			print "  All answers: " + str(all_answers)
 			
 		print "Answer: " + answer + "\n"
 	return None

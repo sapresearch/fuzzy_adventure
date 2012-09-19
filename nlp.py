@@ -1,5 +1,4 @@
 import re
-import time
 import nltk
 from nltk.stem import PorterStemmer
 
@@ -10,7 +9,7 @@ def tokens(string):
 		tokenized += w.split("_")
 	
 	un_cameled = []
-	camel = re.compile("(.*)(Date|Name)")
+	camel = re.compile("(.*)(Date|Name|Place)") # hard-coded for DBpedia
 	for t in tokenized:
 		out = camel.match(t)
 		if out == None:
@@ -25,5 +24,8 @@ def tokens(string):
 		stemmed.append(s.lower())
 
 	filtered = filter(lambda s: s != '?' and s != ',' and s != '.' and s != "'s", stemmed)
-
 	return filtered
+
+def remove_stopwords(words):
+	no_stopwords = [w.strip() for w in words if w.strip() not in nltk.corpus.stopwords.words('english')]
+	return no_stopwords

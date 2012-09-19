@@ -46,6 +46,7 @@ def load_dbpedia():
 		r = {"id": record.id, "title":record.title, "text":record.text}
 		sub_out.append(r)
 		if count == limit:
+			print r
 			print count
 			count = 0
 			copied = copy.copy(sub_out)
@@ -62,12 +63,14 @@ def create_word_index(data, string=False):
 	words = {}
 	#count = 0
 	for record in data:
-		#count += 1
-		#if count >= 10000:
+		count += 1
+		#if count >= 50:
+			#print words
 			#return words
 		text = ' '.join([record['id'], record['title'], record['text']])
 		text = text.replace('.', '')
 		tokens = nlp.tokens(text)
+		print tokens
 		mongo_id = record['_id']
 		if string == True:
 			mongo_id = str(mongo_id.__str__())
