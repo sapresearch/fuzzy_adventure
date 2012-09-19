@@ -17,8 +17,6 @@ def load_word_index():
 print 'Loading'
 start = time.time()
 word_index = load_word_index()
-
-print sys.getsizeof(word_index)
 print time.time() - start
 print 'Ready'
 

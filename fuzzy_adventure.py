@@ -1,13 +1,13 @@
 import dbpedia_parser as dp
 import stanford_parser as stanford_parser
-import stanford_client
 import triplet_extraction
 import time
 import mongo_api
+import re
 import sys
 sys.path.append("./search_clients")
 import triplet_search
-import re
+import stanford_client
 
 
 
@@ -42,17 +42,21 @@ def demo(verbose=False):
 		print "Ask a question:"
 		question = raw_input()
 
+		verbose = re.match(".*-v", question) != None
+		question = re.sub("-v", '', question)
+
 		start = time.time()
 		answer, triplet, tree, parse_time, search_time = ask_question(question)
 		duration = time.time() - start
 
-		verbose = re.match(".*-v", question) != None
 		if verbose:
+			print "Tree: " + str(tree)
+			print "Parsed triplet: " + str(triplet)
 			print "Time: " + str(round(duration, 3))
 			print "Parse time: " + str(round(parse_time, 3))
 			print "Search time: " + str(round(search_time, 3))
-			print "Tree: " + str(tree)
-			print "Parsed triplet: " + str(triplet)
 			
 		print "Answer: " + answer + "\n"
 	return None
+
+demo()
