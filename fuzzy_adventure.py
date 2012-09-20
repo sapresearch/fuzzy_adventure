@@ -1,10 +1,11 @@
 import penn_treebank_parser as penn_treebank_parser
 import triplet_extraction
 import time
-import mongo_api
 import re
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure/search_clients")
+sys.path.append("/home/I829287/fuzzy_adventure/db")
+import mongo_api
 import triplet_search
 import stanford_client
 
@@ -17,12 +18,13 @@ def ask_question(question):
 	root = penn_treebank_parser.parse(tree)
 	top_node = root.children[0]
 	nodes, question_type = triplet_extraction.question_analysis(top_node)
+	print question_type
 	parse_time = time.time() - start
 	triplet = []
 	for n in nodes:
 		if n != '?' and type(n) != bool:
 			triplet.append(n.word.lower())
-	if len(triplet) == 0:
+	if len(triplet) <= 1:
 		answer = "I don't understand the question"
 		full_answers = []
 		synonyms = []
@@ -36,7 +38,7 @@ def ask_question(question):
 			answer = "I don't know"
 		else:
 			answer = answers[0]
-	return answer, full_answers, tree, triplet, synonyms, parse_time, search_time
+	return answer, question_type, full_answers, tree, triplet, synonyms, parse_time, search_time
 
 def demo(verbose=False):
 	while True:
@@ -47,7 +49,7 @@ def demo(verbose=False):
 		question = re.sub("-v", '', question)
 
 		start = time.time()
-		answer, all_answers, tree, triplet, synonyms, parse_time, search_time = ask_question(question)
+		answer, question_type, all_answers, tree, triplet, synonyms, parse_time, search_time = ask_question(question)
 		duration = time.time() - start
 
 		if verbose:
@@ -63,4 +65,4 @@ def demo(verbose=False):
 		print "Answer: " + answer + "\n"
 	return None
 
-#demo()
+demo()

@@ -52,7 +52,7 @@ def question_analysis(top_node):
 
 	if top_node.node_type == 'SQ':
 		if n1.node_type == 'NP':
-			question_type = 'yes_no'
+			question_type = 'boolean'
 			subject = extract_object(n1)
 			if n2.node_type == 'NP':
 				predicate = extract_predicate(n0)
@@ -64,7 +64,7 @@ def question_analysis(top_node):
 				query = [subject, predicate, obj]
 	elif top_node.node_type == 'SBARQ':
 		if n0.node_type == 'WHNP' and n1.node_type == 'SQ':
-			question_type = 'list'
+			question_type = 'occupation'
 			if n3.node_type == 'VP':
 				predicate = extract_predicate(n3)
 				obj = extract_object(predicate)

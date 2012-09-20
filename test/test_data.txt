@@ -1,0 +1,60 @@
+What Russian writer was both a novelist and a philosopher?	Ayn Rand	name
+What Algerian-French author died in Villeblevin?	Albert Camus	name
+Was Warhol a filmmaker?	Yes	boolean
+Who was the sixteenth president of the United States?	Abraham Lincoln	name
+What American president was born in Hardin County?	Abraham Lincoln	name
+When was Abraham Lincoln murdered?	1865-04-15	date
+What Confederate Army general died in Hardin County, Tennessee?	Albert Sidney Johnston	name
+Did Ayn Rand write any novels?	Yes	boolean
+Who was the second president of St. Ambrose University?	John Flannagan	name
+Was Bouchard a Australian ecologist?	No	boolean
+Where was Abraham Lincoln born?	Kentucky	Hardin_County	location
+What year was Ayn Rand born?	1905	date
+Who was Arthur Schopenhauer?	German Philosopher	occupation
+Which Albert was born in Tenneessee?	Albert_Sidney_Johnson	name
+Was Alfred Korzybski born in the United States?	No	boolean
+Where did Alexander the Great die?	Babylon	location
+What is the last name of the person named Akira?	Kurosawa	name
+What does Anna Kournikova do?	Tennis player and model	occupation
+What country was Mr. Speer born in?	Germany	loction
+Which architect was born in Mannheim?	Albert_Speer	name
+What poet was born in New Jersey?	Allen_Ginsberg	name
+What activist was born in New Jersey? Allen_Ginsberg	name
+Who was Aristophanes?	Athenian comic dramatist	occupation
+Which screenwriter was born in 1955?	Billy_Bob_Thornton	name
+Where did Beatrix Potter?	Near_and_Far_Sawrey	location
+Which american actor was born in 1913?	Burt_Lancaster	name
+Which swiss architect was born in 1599?	Francesco_Borromini	name
+What did Fred Hoyle do?	astronomer	writer	occupation
+Which actor was born in Alberta Canada?	Fay_Wray	name
+Where did Felix Hausdorff die?	Bonn	Germany	location
+Where was Babrak Karmal born?	Afghanistan	Kamari	location
+What year was Brian Lara born?	1969	date
+What month was Brian Lara born?	May	date
+What city was Brian De Palma born in?	Newark	location
+Where did Barbara Olson die?	Arlington	Virginia	location
+Where was Brion Gysin born?	Taplow	location
+Which Bulgarian-born novelist was born in 1905?	Elias_Canetti	name
+Which Norwegian composer and pianist was born in Bergen?	Edvard_Grieg	name
+Where was Django Reinhardt born?	Liberchies	location
+Where did Django Reinhardt die?	Avon	Sein-et-Marne	location
+What did Django Reinhardt do?	jazz guitarist	occupation
+What did Derek Walcott do?	poet	occupation
+Where poet was born in Saint Lucia in 1930?	Derek_Walcott	name
+What is the birthplace of Erwin Rommel?	Heidenheim_an_der_Brenz	Germany	location
+Where was Edgar Allan Poe born?	Boston	Massachusetts	location
+Which country was Eric Hoffer born?	United States	location
+Where did Eric Hoffer die?	San Francisco	California	location
+Where did Edmund Husserl die?	Germany	Freiburg	location
+What town was the birthplace of Dr. Seuss?	Springfield	Massachusetts	location
+Where was Denis Leary born?	Worcester	Massachusetts	location
+What year was Blink Lemon Jefferson born?	1893	date
+What was Blackbeard's name?	Edward_Teach	name
+United States Air Force general born in Arizona?	Barry_Goldwater	name
+Where did B.F. Skinner die?	Cambridge	Massachuesetts	location
+What year was Barney Bubbles born?	1942	date
+What day did Barney Bubbles die?	14	date
+Bill Bixby was born on what date?	1934-01-22	date
+Where was Bill Bryson born?	Des Moines	Iowa	location
+When did Bill Bryson die?	I don't know	boolean
+Where did Charlie Champlin die?	Vevey	Switzerland	location

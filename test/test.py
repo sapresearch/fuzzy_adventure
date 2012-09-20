@@ -1,53 +1,53 @@
 import sys
 sys.path.append("../")
 import fuzzy_adventure
-#test method
-def test():
-    questions, answers = test_data()
-    correct = 0.0
+import re
+import time
+
+def test(questions, answers, lex_types):
+    correct_answers = 0.0
+    correct_types = 0.0
+
+    start = time.time()
     for q in questions:
+        index = questions.index(q)
+        real_answers = answers[index]
+        lex_type = lex_types[index]
+        predicted_answer, predicted_lex_type, _, _, _, _, _, _ = fuzzy_adventure.ask_question(q)
+
         print q
-        real_answer = questions.index(q)
-        predicted_answer, _, _, _, _, _, _ = fuzzy_adventure.ask_question(q)
-        print predicted_answer
-        if real_answer == predicted_answer:
-            correct += 1
+        if predicted_lex_type == lex_type:
+					correct_types += 1
+					print "Right! " + predicted_lex_type
 
-    accuracy = correct / float(len(questions)) *100.0
-    return accuracy
+        if predicted_answer in real_answers:
+            correct_answers += 1
+            print "CORRECT:" + predicted_answer + " in " + str(real_answers)
+        else:
+            print "Incorrect:" + predicted_answer + " not in " + str(real_answers)
+        print "\n"
+    duration = time.time() - start
 
-#standard set of questions and answers (real)
-def test_data():
-    questions = []
-    answers = []
+    avg_time = duration / len(questions)
+    answer_accuracy = correct_answers / len(questions) * 100.0
+    type_accuracy = correct_types / len(questions) * 100.0
+    answer_accuracy, type_accuracy, avg_time = round(answer_accuracy, 1), round(type_accuracy, 1), round(avg_time, 3)
+    return answer_accuracy, type_accuracy, avg_time
 
-    questions.append("Was Warhol a filmmaker?")
-    answers.append("Yes")#Andy Warhol was an American artist, avant-garde filmmaker, writer and social figure
+def load_data(file_name):
+	questions, answers, lex_types = [], [], []
+	f = file(file_name)
+	for line in f.readlines():
+		line = line.split("\t")
+		lex_type = line.pop(-1)
+		lex_type = re.sub("[\r\n]", '', lex_type)
+		question = line.pop(0)
+		answer = line
 
-    questions.append("Who was the second president of St. Ambrose University?")
-    answers.append("John Flannagan")
+		lex_types.append(lex_type)
+		questions.append(question)
+		answers.append(answer)
+	return questions, answers, lex_types
 
-    questions.append("When was Albert Einstein born?")
-    answers.append("1879")#14 March 1879
-
-    questions.append("Was Bouchard a Australian ecologist?")
-    answers.append("No");#Canadian/Quebec ecologist
-
-    questions.append("Which state did Boo Ellis used to play for?")
-    answers.append("Minneapolis")
-
-    questions.append("Who was Edward Wasilewski?")
-    answers.append("Member of Anti-communist resistance in Poland")
-
-    questions.append("Was Hamad Al Tayyar a football player?")
-    answers.append("Yes")
-
-    questions.append("Who was John Albert Gardner?")
-    answers.append("American double murderer")
-
-    questions.append("Who was James A. Walker?")
-    answers.append("Confederate Army general")
-    
-    return questions, answers
-
-print test()
+questions, answers, lex_types = load_data('test_data.txt')
+print test(questions, answers, lex_types)

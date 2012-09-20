@@ -3,9 +3,9 @@ import pymongo
 from pymongo import Connection
 from bson.objectid import ObjectId
 import sys
-sys.path.append("../")
-sys.path.append("/home/I829287/fuzzy_adventure/models/")
-sys.path.append("/home/I829287/fuzzy_adventure/")
+sys.path.append("/home/I829287/fuzzy_adventure")
+sys.path.append("/home/I829287/fuzzy_adventure/models")
+sys.path.append("/home/I829287/fuzzy_adventure/db")
 sys.path.append("/home/I829287/fuzzy_adventure/external/dbpediakit")
 import mongo_api
 import synonym
