@@ -1,5 +1,3 @@
-import stanford_parser as sp
-
 noun_labels = ['NN', 'NNP', 'NNPS', 'NNS']
 verb_labels = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']
 adjective_labels = ['JJ', 'JJR', 'JJS']

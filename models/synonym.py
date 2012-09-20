@@ -6,4 +6,5 @@ import nlp
 def synonyms(word):
 	synonyms = wordnet_synonym.synonyms(word)
 	no_stopwords = nlp.remove_stopwords(synonyms)
-	return no_stopwords
+	stemmed = nlp.tokens(' '.join(no_stopwords))
+	return stemmed

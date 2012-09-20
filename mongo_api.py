@@ -2,7 +2,7 @@ import pymongo
 from pymongo import Connection
 from bson.objectid import ObjectId
 import sys
-sys.path.append('./external/dbpediakit')
+sys.path.append("/home/I829287/fuzzy_adventure/external/dbpediakit")
 import dbpediakit as dbk
 import dbpediakit.archive
 import nlp
@@ -63,14 +63,13 @@ def create_word_index(data, string=False):
 	words = {}
 	#count = 0
 	for record in data:
-		count += 1
+		#count += 1
 		#if count >= 50:
 			#print words
 			#return words
 		text = ' '.join([record['id'], record['title'], record['text']])
 		text = text.replace('.', '')
 		tokens = nlp.tokens(text)
-		print tokens
 		mongo_id = record['_id']
 		if string == True:
 			mongo_id = str(mongo_id.__str__())
@@ -127,7 +126,7 @@ def union(words):
 def find_by_words(words):
 	ids = intersection(words)
 	output = []
-	collection = Connection()[database]['person']
+	collection = Connection()[database]['person2']
 	for i in ids:
 		triplet = collection.find({'_id': ObjectId(i)})
 		sub = []

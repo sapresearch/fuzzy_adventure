@@ -1,11 +1,10 @@
-import dbpedia_parser as dp
-import stanford_parser as stanford_parser
+import penn_treebank_parser as penn_treebank_parser
 import triplet_extraction
 import time
 import mongo_api
 import re
 import sys
-sys.path.append("./search_clients")
+sys.path.append("/home/I829287/fuzzy_adventure/search_clients")
 import triplet_search
 import stanford_client
 
@@ -15,7 +14,7 @@ import stanford_client
 def ask_question(question):
 	start = time.time()
 	tree = stanford_client.to_tree(question)
-	root = stanford_parser.parse(tree)
+	root = penn_treebank_parser.parse(tree)
 	top_node = root.children[0]
 	nodes, question_type = triplet_extraction.question_analysis(top_node)
 	parse_time = time.time() - start
@@ -64,4 +63,4 @@ def demo(verbose=False):
 		print "Answer: " + answer + "\n"
 	return None
 
-demo()
+#demo()

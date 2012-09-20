@@ -1,3 +1,5 @@
+import sys
+sys.path.append("../")
 import fuzzy_adventure
 #test method
 def test():
@@ -6,7 +8,7 @@ def test():
     for q in questions:
         print q
         real_answer = questions.index(q)
-        predicted_answer, _, _, _, _ = fuzzy_adventure.ask_question(q)
+        predicted_answer, _, _, _, _, _, _ = fuzzy_adventure.ask_question(q)
         print predicted_answer
         if real_answer == predicted_answer:
             correct += 1

@@ -1,7 +1,7 @@
 import copy
 import re
 
-class StanfordNode():
+class PennTreebankNode():
     def __init__(self, node_type='ROOT', word=None, probability=0.0, children=[], parent=None, index=None):
         self.node_type = node_type
         self.word = word
@@ -87,7 +87,7 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
 
 	# Create current node
 	node_type, prob, word = parse_node(tree)
-	current_node = StanfordNode(parent=parent, node_type=node_type, probability=prob, word=word)
+	current_node = PennTreebankNode(parent=parent, node_type=node_type, probability=prob, word=word)
 	if parent != None:
 		kids = copy.copy(current_node.parent.children)
 		kids.append(current_node)
