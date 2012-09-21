@@ -8,6 +8,7 @@ sys.path.append("/home/I829287/fuzzy_adventure/db")
 import mongo_api
 import triplet_search
 import stanford_client
+import nlp
 
 
 
@@ -23,14 +24,11 @@ def ask_question(question):
 	triplet = []
 	for n in nodes:
 		if n != '?' and type(n) != bool:
-			triplet.append(n.word.lower())
+			triplet.append(n)
 	if len(triplet) <= 1:
 		answer = "I don't understand the question"
-		full_answers = []
-		synonyms = []
-		search_time = 0.
+		full_answers, synonyms, search_time = [], [], 0.
 	else:
-		triplet = [ [triplet[0]], [triplet[1]] ]
 		start = time.time()
 		answers, full_answers, synonyms = triplet_search.search(triplet)
 		search_time = time.time() - start

@@ -15,7 +15,7 @@ def test(questions, answers, lex_types):
         lex_type = lex_types[index]
         predicted_answer, predicted_lex_type, _, _, _, _, _, _ = fuzzy_adventure.ask_question(q)
 
-        print q
+        print "\n" + q
         if predicted_lex_type == lex_type:
 					correct_types += 1
 					print "Right! " + predicted_lex_type
@@ -25,7 +25,6 @@ def test(questions, answers, lex_types):
             print "CORRECT:" + predicted_answer + " in " + str(real_answers)
         else:
             print "Incorrect:" + predicted_answer + " not in " + str(real_answers)
-        print "\n"
     duration = time.time() - start
 
     avg_time = duration / len(questions)

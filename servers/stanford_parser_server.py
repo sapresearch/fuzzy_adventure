@@ -6,8 +6,9 @@ from edu.stanford.nlp import *
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
 
+lp = parser.lexparser.LexicalizedParser('../external/stanford-parser-2008-10-26/englishPCFG.ser.gz')
+
 def tree(sentence):
-	lp = parser.lexparser.LexicalizedParser('../external/stanford-parser-2008-10-26/englishPCFG.ser.gz')
 	lp.setOptionFlags(["-maxLength", "80", "-retainTmpSubcategories"])
 
 	tlp = trees.PennTreebankLanguagePack()

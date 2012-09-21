@@ -1,6 +1,7 @@
 import sys
 sys.path.append("../")
 sys.path.append("../external/dbpediakit")
+sys.path.append("../db")
 import mongo_api
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 import time
@@ -17,8 +18,7 @@ def load_word_index():
 print 'Loading'
 start = time.time()
 word_index = load_word_index()
-print time.time() - start
-print 'Ready'
+print "Ready. Load time for word index: " + str(time.time() - start)
 
 def search(words):
 	ids = []
@@ -26,19 +26,21 @@ def search(words):
 		syn_ids = []
 		for syn in synonyms:
 			if syn in word_index:
-				start = time.time()
 				syns = word_index[syn]
-				print "Time for " + syn + " " + str(time.time() - start)
 				syn_ids += syns
-		start = time.time()
 		ids.append(list(set(syn_ids)))
-		print "Append time " + str(time.time() - start)
-	start = time.time()
 	#intersection = mongo_api.intersection(ids)
 	print len(ids[0])
 	print len(ids[1])
-	intersection = list(set(ids[0]) & set(ids[1]))
-	print "intersection time " + str(time.time() - start)
+	start = time.time()
+	# This is ugly coding, but finding the intersection of the sets iteratively takes much longer.
+	# TODO Right now it's hardcoded for 2 or 3 synonym sets.  This needs to be more general.
+	if len(ids) == 2:
+		intersection = list(set(ids[0]) & set(ids[1]))
+	elif len(ids) == 3:
+		print len(ids[2])
+		intersection = list(set(ids[0]) & set(ids[1]) & set(ids[2]))
+	print "intersection time " + str(time.time() - start) + "\n"
 	return intersection
 
 

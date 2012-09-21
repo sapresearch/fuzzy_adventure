@@ -64,7 +64,7 @@ def create_word_index(data, string=False):
 	#count = 0
 	for record in data:
 		#count += 1
-		#if count >= 50:
+		#if count >= 50000:
 			#print words
 			#return words
 		text = ' '.join([record['id'], record['title'], record['text']])

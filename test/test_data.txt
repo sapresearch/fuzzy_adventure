@@ -1,3 +1,13 @@
+When did Friedrich_Hayek die in Germany?	1992-03-23	date
+Where in Pennsylvania was Elias Boudinot born?	Philadelphia	location
+Where was Ernst Kaltenbrunner executed?	Germany	Nuremberg	location
+What was E.T.A. Hoffmann's full name?	Ernst Theodor Wilhelm Hoffmann	name
+What English children's novelist died in Hampstead?	Enid Blyton	name
+What Italian physicist won a nobel prize?	Enrico Fermi	name
+What historian was born in Putney?	Edward Gibbon	name
+What did Friedrich Nietzsche do?	19th century philosopher	occupation
+What German mathematician died in Bonn?	Felix Hausdorff	name
+What pirate is famous for being the first person to circumnavigate the globe?	Francis Drake	name
 What Russian writer was both a novelist and a philosopher?	Ayn Rand	name
 What Algerian-French author died in Villeblevin?	Albert Camus	name
 Was Warhol a filmmaker?	Yes	boolean
@@ -12,7 +22,6 @@ Where was Abraham Lincoln born?	Kentucky	Hardin_County	location
 What year was Ayn Rand born?	1905	date
 Who was Arthur Schopenhauer?	German Philosopher	occupation
 Which Albert was born in Tenneessee?	Albert_Sidney_Johnson	name
-Was Alfred Korzybski born in the United States?	No	boolean
 Where did Alexander the Great die?	Babylon	location
 What is the last name of the person named Akira?	Kurosawa	name
 What does Anna Kournikova do?	Tennis player and model	occupation
@@ -55,6 +64,7 @@ Where did B.F. Skinner die?	Cambridge	Massachuesetts	location
 What year was Barney Bubbles born?	1942	date
 What day did Barney Bubbles die?	14	date
 Bill Bixby was born on what date?	1934-01-22	date
-Where was Bill Bryson born?	Des Moines	Iowa	location
+Where was Bill Bryson born?	Des_Moines,_Iowa	location
 When did Bill Bryson die?	I don't know	boolean
 Where did Charlie Champlin die?	Vevey	Switzerland	location
+Was Alfred Korzybski born in the United States?	No	boolean
