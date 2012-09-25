@@ -77,4 +77,8 @@ print to_write
 fo.write("(Recall, Precision, Recall(type), Avg Time) = " + str(to_write))
 
 #close opend file
+<<<<<<< Updated upstream
 fo.close()
+=======
+fo.close()
+>>>>>>> Stashed changes
