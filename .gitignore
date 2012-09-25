@@ -12,13 +12,8 @@ var
 sdist
 develop-eggs
 .installed.cfg
-external/stanford-parser-2008-10-26
-external/stanford-parser-2011-09-14.tgz
-external/stanford-parser-2011-09-14/
-external/ogrisel-dbpediakit-400677b
-external/dbpediakit
-external/stanford-parser-2010-07-09/
-external/stanford-parser-2010-07-09.tgz
+# ignore everything in external for now
+external/*
 servers/nohup.out
 test/output.txt
 
