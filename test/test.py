@@ -6,6 +6,7 @@ import time
 
 
 def test(questions, answers, lex_types):
+    #create/open file for writing
     fo = open("output.txt", "wb")
 
     correct_answers = 0.0
@@ -42,6 +43,7 @@ def test(questions, answers, lex_types):
         fo.write("\n\n")
     duration = time.time() - start
 
+    #calculate results
     avg_time = duration / len(questions)
     answer_recall = correct_answers / len(questions) * 100.0
     type_recall = correct_types / len(questions) * 100.0
@@ -49,9 +51,10 @@ def test(questions, answers, lex_types):
     lex_precision = correct_types/total_type_positives * 100
     answer_recall, precision, type_recall, lex_precision, avg_time = round(answer_recall, 1), round(precision, 1), round(type_recall, 1), round(lex_precision, 1), round(avg_time, 3)
 
+    #write results to file
     output = [answer_recall, precision, type_recall, lex_precision, avg_time]
-    fo.write("Recall, Precision, Recall(type), Precision(type), Avg Time) = " + str(output))
-    fo.close
+    fo.write("[Recall, Precision, Recall(type), Precision(type), Avg Time] = " + str(output))
+    fo.close #important to close file after writing
 
     return output
 
@@ -72,13 +75,3 @@ def load_data(file_name):
 
 questions, answers, lex_types = load_data('test_data.txt')
 print test(questions, answers, lex_types)
-to_write = test(questions, answers, lex_types)
-print to_write
-fo.write("(Recall, Precision, Recall(type), Avg Time) = " + str(to_write))
-
-#close opend file
-<<<<<<< Updated upstream
-fo.close()
-=======
-fo.close()
->>>>>>> Stashed changes
