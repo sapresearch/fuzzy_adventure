@@ -19,7 +19,6 @@ def ask_question(question):
 	root = penn_treebank_parser.parse(tree)
 	top_node = root.children[0]
 	nodes, question_type = triplet_extraction.question_analysis(top_node)
-	print question_type
 	parse_time = time.time() - start
 	triplet = []
 	for n in nodes:
@@ -63,4 +62,4 @@ def demo(verbose=False):
 		print "Answer: " + answer + "\n"
 	return None
 
-demo()
+#demo()

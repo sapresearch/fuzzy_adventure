@@ -69,8 +69,8 @@ When did Bill Bryson die?	I don't know	boolean
 Where did Charlie Champlin die?	Vevey	Switzerland	location
 Was Alfred Korzybski born in the United States?	No	boolean
 What year was Britney Spears born?	1981	date
-Where was Baruch Spinoza born?	The_Hauge	Netherlands	place
-Where was Bjarne Stroustrup born?	Aarhus	Denmark	place
+Where was Baruch Spinoza born?	Amsterdam	location
+Where was Bjarne Stroustrup born?	Aarhus	Denmark	location
 What year was Benny Andersson born?	1946	date
 What month was Benny Andersson born?	December	date
 Who is Bill Gates?	Business entrepreneur	occupation
@@ -78,17 +78,17 @@ Who was Bille August?	Film director	occupation
 Where was Bruce Sterling born?	Austin	Texas	location
 Who was Bridget Bardot?	French actress and animal welfare activist	occupation
 Who was Bruce Perens?	Computer programmer	occupation
-Where was Benjamin Disraeli born?	London	England	place
-Where did Benjamin Disraeli die?	London	England	place
+Where was Benjamin Disraeli born?	London	England	location
+Where did Benjamin Disraeli die?	London	England	location
 What year was Bernie Federko born?	1956	date
 Who was Bernie Federko?	Canadian ice hockey player	occupation
-What country was Bram Stoker born in?	Ireland	place
+What country was Bram Stoker born in?	Ireland	location
 Who was Bing Crosby?	American singer, actor	occupation
-Where did Bing Crosby die?	Madrid	Spain	place
+Where did Bing Crosby die?	Madrid	Spain	location
 When did Buckminster Fuller die?	1983-07-01	date
-Where did Blaise Pascal die?	Paris	France	place
-Where was Blythe Danner born?	Philadelphia	Pennsylvania	place
-What is the name of the town where Bertrand Russell was born?	Teellech	place
+Where did Blaise Pascal die?	Paris	France	location
+Where was Blythe Danner born?	United States	Philadelphia	Pennsylvania	location
+What is the name of the town where Bertrand Russell was born?	Teellech	location
 Who was Bertrand Russel?	Philosopher. logician, and mathematician	occupation
 Who was Bill Schelter?	American mathematician and programmer	occupation
 How old was Babe Ruth?	Major League baseball player	occupation
@@ -98,4 +98,3 @@ What did Carl Sagan do for a living?	Astronomy and planetary science	occupation
 Where was Caligula born?	Antium	Italia	Roman_Empire	location
 Where did Colette die?	Paris	France	location
 Where was Colette born?	Yonne	France	location
-
