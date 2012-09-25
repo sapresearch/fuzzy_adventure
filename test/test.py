@@ -72,3 +72,9 @@ def load_data(file_name):
 
 questions, answers, lex_types = load_data('test_data.txt')
 print test(questions, answers, lex_types)
+to_write = test(questions, answers, lex_types)
+print to_write
+fo.write("(Recall, Precision, Recall(type), Avg Time) = " + str(to_write))
+
+#close opend file
+fo.close()
