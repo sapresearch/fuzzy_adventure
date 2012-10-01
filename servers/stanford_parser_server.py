@@ -1,6 +1,5 @@
 import sys
 sys.path.append('../external/stanford-parser-2008-10-26/stanford-parser.jar')
-sys.path.append('../external/ogrisel-dbpediakit-400677b')
 from java.io import CharArrayReader
 from edu.stanford.nlp import *
 from SimpleXMLRPCServer import SimpleXMLRPCServer

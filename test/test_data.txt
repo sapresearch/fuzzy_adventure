@@ -25,7 +25,7 @@ Which Albert was born in Tenneessee?	Albert_Sidney_Johnson	name
 Where did Alexander the Great die?	Babylon	location
 What is the last name of the person named Akira?	Kurosawa	name
 What does Anna Kournikova do?	Tennis player and model	occupation
-What country was Mr. Speer born in?	Germany	loction
+What country was Mr. Speer born in?	Germany	location
 Which architect was born in Mannheim?	Albert_Speer	name
 What poet was born in New Jersey?	Allen_Ginsberg	name
 What activist was born in New Jersey? Allen_Ginsberg	name
@@ -56,7 +56,7 @@ Which country was Eric Hoffer born?	United States	location
 Where did Eric Hoffer die?	San Francisco	California	location
 Where did Edmund Husserl die?	Germany	Freiburg	location
 What town was the birthplace of Dr. Seuss?	Springfield	Massachusetts	location
-Where was Denis Leary born?	Worcester	Massachusetts	location
+Where was Denis Leary born?	United States	Massachusetts	Worcester,_Massachusetts	location
 What year was Blink Lemon Jefferson born?	1893	date
 What was Blackbeard's name?	Edward_Teach	name
 United States Air Force general born in Arizona?	Barry_Goldwater	name
@@ -75,7 +75,7 @@ What year was Benny Andersson born?	1946	date
 What month was Benny Andersson born?	December	date
 Who is Bill Gates?	Business entrepreneur	occupation
 Who was Bille August?	Film director	occupation
-Where was Bruce Sterling born?	Austin	Texas	location
+Where was Bruce Sterling born?	Austin,_Texas	location
 Who was Bridget Bardot?	French actress and animal welfare activist	occupation
 Who was Bruce Perens?	Computer programmer	occupation
 Where was Benjamin Disraeli born?	London	England	location
@@ -87,12 +87,12 @@ Who was Bing Crosby?	American singer, actor	occupation
 Where did Bing Crosby die?	Madrid	Spain	location
 When did Buckminster Fuller die?	1983-07-01	date
 Where did Blaise Pascal die?	Paris	France	location
-Where was Blythe Danner born?	United States	Philadelphia	Pennsylvania	location
+Where was Blythe Danner born?	United_States	Philadelphia	Pennsylvania	location
 What is the name of the town where Bertrand Russell was born?	Teellech	location
 Who was Bertrand Russel?	Philosopher. logician, and mathematician	occupation
 Who was Bill Schelter?	American mathematician and programmer	occupation
 How old was Babe Ruth?	Major League baseball player	occupation
-Where was Babe Ruth born?	Baltimore	Maryland	location
+Where was Babe Ruth born?	Baltimore,_Maryland	location
 Where did Carl Sagan die?	Seattle	Washington	location
 What did Carl Sagan do for a living?	Astronomy and planetary science	occupation
 Where was Caligula born?	Antium	Italia	Roman_Empire	location

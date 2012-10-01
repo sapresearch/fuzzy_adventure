@@ -5,18 +5,14 @@ import nltk
 from nltk import *
 import time
 
-zero = 8
-one = 1
-length = zero + one + one
+zero = 98 
+one = 2
+length = zero + one
 
-def random_vector(zero, one, negative):
+def random_vector(zero, one):
 	z = zeros(zero)
 	positives = ones(one)
-	if negative == True:
-		negatives = ones(one) - 2
-		merged = array(list(z) + list(positives) + list(negatives))
-	elif negative == False:
-		merged = array(list(z) + list(positives) + list(positives))
+	merged = array(list(z) + list(positives))
 	shuffle(merged)
 	return merged
 
@@ -27,15 +23,21 @@ def empty_vectors(words):
 		dict[w] = zeros(length)
 	return dict
 
-def word_vectors(corpus, negative):
+""" Takes as input a multidimensional array
+with a subarray for each section of the corpus:
+[['hello' 'world'], ['goodbye', 'world']]
+It returns a dictionary of each word to its vector. """
+def word_vectors(corpus):
 	count = 0
-	dict = empty_vectors(corpus)
-	for word in corpus:
-		if count % 10 == 0:
-			context_vector = random_vector(zero, one, negative)
-		dict[word] += context_vector
-		count += 1
-	return dict
+	all_words = []
+	for section in corpus:
+		all_words += section
+	vectors = empty_vectors(all_words)
+	for line in corpus:
+		context_vector = random_vector(zero, one)
+		for word in line:
+			vectors[word] += context_vector
+	return vectors
 
 def cosine(v1,v2):
 	return float(dot(v1,v2) / (norm(v1) * norm(v2)))
@@ -62,11 +64,11 @@ def save_cosines(vectors, file_name):
 
 
 #corpus = ['hey', 'there', 'how', 'are', 'you', 'i', 'am', 'good', 'but', 'it', 'is', 'raining', 'there']
-corpus = nltk.Text(word.lower() for word in nltk.corpus.brown.words())
-corpus = corpus.tokens[0:100]
+#corpus = nltk.Text(word.lower() for word in nltk.corpus.brown.words())
+#corpus = corpus.tokens[0:100]
 #start = time.time()
-dict = word_vectors(corpus, True)
-save_cosines(dict, 'y.txt')
+#dict = word_vectors(corpus, True)
+#save_cosines(dict, 'y.txt')
 #print time.time() - start
 #print cosine(dict['fly'], dict['pen'])
 #print cosine(dict['born'], dict['birth'])

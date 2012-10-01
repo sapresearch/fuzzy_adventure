@@ -11,13 +11,14 @@ import mongo_api
 import synonym
 import warnings
 import nlp
+import time
 
-def search(words):
+def search(words, lex_type):
 	synonyms = format_triplet(words)
 	proxy = xmlrpclib.ServerProxy('http://localhost:9000')
 	results = proxy.search(synonyms)
 	search_words = [item for sublist in synonyms for item in sublist] # flatten it
-	selected_fields, full_answers = nlp.extract_field(results, search_words)
+	selected_fields, full_answers = nlp.extract_field(results, search_words, lex_type)
 	return selected_fields, full_answers, synonyms
 
 def format_triplet(words):

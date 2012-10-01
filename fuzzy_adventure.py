@@ -1,14 +1,13 @@
 import penn_treebank_parser as penn_treebank_parser
 import triplet_extraction
 import time
-import re
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure/search_clients")
-sys.path.append("/home/I829287/fuzzy_adventure/db")
-import mongo_api
-import triplet_search
+sys.path.append("/home/I829287/fuzzy_adventure/models")
+import question_type
 import stanford_client
-import nlp
+import ensemble
+import re
 
 
 
@@ -18,7 +17,8 @@ def ask_question(question):
 	tree = stanford_client.to_tree(question)
 	root = penn_treebank_parser.parse(tree)
 	top_node = root.children[0]
-	nodes, question_type = triplet_extraction.question_analysis(top_node)
+	nodes, _ = triplet_extraction.question_analysis(top_node)
+	lexical_type = question_type.classify(question)
 	parse_time = time.time() - start
 	triplet = []
 	for n in nodes:
@@ -29,37 +29,25 @@ def ask_question(question):
 		full_answers, synonyms, search_time = [], [], 0.
 	else:
 		start = time.time()
-		answers, full_answers, synonyms = triplet_search.search(triplet)
+		answers, full_answers, synonyms = ensemble.search(triplet, lexical_type)
 		search_time = time.time() - start
 		if len(answers) == 0:
 			answer = "I don't know"
 		else:
 			answer = answers[0]
-	return answer, question_type, full_answers, tree, triplet, synonyms, parse_time, search_time
+	return answer, lexical_type, full_answers, tree, triplet, synonyms, parse_time, search_time
 
-def demo(verbose=False):
-	while True:
-		print "Ask a question:"
-		question = raw_input()
+def load_data(file_name):
+	questions, answers, lex_types = [], [], []
+	f = file(file_name)
+	for line in f.readlines():
+		line = line.split("\t")
+		lex_type = line.pop(-1)
+		lex_type = re.sub("[\r\n]", '', lex_type)
+		question = line.pop(0)
+		answer = line
 
-		verbose = re.match(".*-v", question) != None
-		question = re.sub("-v", '', question)
-
-		start = time.time()
-		answer, question_type, all_answers, tree, triplet, synonyms, parse_time, search_time = ask_question(question)
-		duration = time.time() - start
-
-		if verbose:
-			print "Time: " + str(round(duration, 3))
-			print "  Parse time: " + str(round(parse_time, 3))
-			print "  Search time: " + str(round(search_time, 3))
-			print "Parse Stack:"
-			print "  Tree: " + str(tree)
-			print "  Parsed triplet: " + str(triplet)
-			print "  Synonyms: " + str(synonyms)
-			print "  All answers: " + str(all_answers)
-			
-		print "Answer: " + answer + "\n"
-	return None
-
-#demo()
+		lex_types.append(lex_type)
+		questions.append(question)
+		answers.append(answer)
+	return questions, answers, lex_types
