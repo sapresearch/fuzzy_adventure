@@ -19,16 +19,18 @@ def test(questions, answers, lex_types):
         index = questions.index(q)
         real_answers = answers[index]
         lex_type = lex_types[index]
-        predicted_answer, predicted_lex_type, _, _, _, _, _, _ = fuzzy_adventure.ask_question(q)
+        predicted_answer, confidence, predicted_lex_type, _, tree, _, _, _, _ = fuzzy_adventure.ask_question(q)
 
         # Count the total positives for LAT and answers
         if predicted_answer != "I don't understand the question" and predicted_answer != "I don't know":
+            total_positives += 1.0
+        if "I don't know" in real_answers and predicted_answer != "I don't understand the question":
             total_positives += 1.0
         if predicted_lex_type != "unknown":
             total_type_positives += 1.0
 
         # Count hte total correct answers and LAT
-        fo.write(q)
+        fo.write("Confidence: " + str(confidence) + "\n" + q + "\nTree: " + str(tree))
         if predicted_lex_type == lex_type:
             correct_types += 1
             fo.write("\nCorrect LAT: " + predicted_lex_type)
@@ -42,6 +44,8 @@ def test(questions, answers, lex_types):
             fo.write("\nIncorrect answer:" + predicted_answer + " not in " + str(real_answers))
         fo.write("\n\n")
     duration = time.time() - start
+    print total_positives
+    print correct_answers
 
     #calculate results
     avg_time = duration / len(questions)

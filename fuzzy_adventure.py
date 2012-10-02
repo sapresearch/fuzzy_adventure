@@ -26,16 +26,12 @@ def ask_question(question):
 			triplet.append(n)
 	if len(triplet) <= 1:
 		answer = "I don't understand the question"
-		full_answers, synonyms, search_time = [], [], 0.
+		confidence, full_answers, synonyms, search_time = 0., [], [], 0.
 	else:
 		start = time.time()
-		answers, full_answers, synonyms = ensemble.search(triplet, lexical_type)
+		answer, confidence, full_answers, synonyms = ensemble.search(triplet, lexical_type)
 		search_time = time.time() - start
-		if len(answers) == 0:
-			answer = "I don't know"
-		else:
-			answer = answers[0]
-	return answer, lexical_type, full_answers, tree, triplet, synonyms, parse_time, search_time
+	return answer, confidence, lexical_type, full_answers, tree, triplet, synonyms, parse_time, search_time
 
 def load_data(file_name):
 	questions, answers, lex_types = [], [], []

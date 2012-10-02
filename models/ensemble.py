@@ -5,12 +5,17 @@ import triplet_search
 def search(question, lex_type):
 	weights = {'triplet_search':1.0}
 
-	answers = triplet_search.search(question, lex_type)
-	confidence = {}
-	#for a in answers:
-		#confidence[a]
-	return answers
+	selected_fields, full_answers, synonyms = triplet_search.search(question, lex_type)
+	answer, confidence = vote(selected_fields)
+	return answer, confidence, full_answers, synonyms
 
-
+# TODO 
+""" Merge answers from multiple search algorithms """
 def vote(answers):
-	return None
+	answer_count = len(answers)
+	confidence = 1.0/answer_count if answer_count > 0 else 0.
+	if confidence < 0.15:
+		answer = "I don't know"
+	else:
+		answer = answers[0]
+	return answer, confidence

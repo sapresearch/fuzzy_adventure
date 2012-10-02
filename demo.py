@@ -11,7 +11,7 @@ def demo(verbose=False):
 		question = re.sub("-v", '', question)
 
 		start = time.time()
-		answer, question_type, all_answers, tree, triplet, synonyms, parse_time, search_time = fuzzy_adventure.ask_question(question)
+		answer, confidence, lexical_type, all_answers, tree, triplet, synonyms, parse_time, search_time = fuzzy_adventure.ask_question(question)
 		duration = time.time() - start
 
 		if verbose:
@@ -19,6 +19,7 @@ def demo(verbose=False):
 			print "  Parse time: " + str(round(parse_time, 3))
 			print "  Search time: " + str(round(search_time, 3))
 			print "Parse Stack:"
+			print " Lexical Answer Type: " + lexical_type
 			print "  Tree: " + str(tree)
 			triplet_words = []
 			for t in triplet:
@@ -26,6 +27,7 @@ def demo(verbose=False):
 			print "  Parsed triplet: " + str(triplet_words)
 			print "  Synonyms: " + str(synonyms)
 			print "  All answers: " + str(all_answers)
+			print "Confidence: " + str(confidence)
 			
 		print "Answer: " + answer + "\n"
 	return None
