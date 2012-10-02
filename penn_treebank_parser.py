@@ -53,7 +53,7 @@ class PennTreebankNode():
 
 
 def parse(tree, parent=None, root_node=None, count=0, debug=False):
-	length = len(tree)
+	tree = re.sub('(\(ROOT )(.*)(\))', '\\2', tree)
 	start_count, stop_count = 0, 0
 	sub_start, sub_stop = 0, 0
 
@@ -100,11 +100,11 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
 		count += 1
 		parse(section, current_node, root_node, count)
 	
-	root_node.children[0].index = 'TN'
-	kids = copy.copy(root_node.children[0].children)
+	root_node.index = 'TN'
+	kids = copy.copy(root_node.children)
 	count = 0
 	for child in kids:
-		if child.word != '.' or child.word != '?':
+		if child.word != '.' and child.word != '?':
 			child.index = count
 			count += 1
 			kids += child.children

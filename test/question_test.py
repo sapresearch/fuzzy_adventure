@@ -19,7 +19,7 @@ def test(questions, answers, lex_types):
         index = questions.index(q)
         real_answers = answers[index]
         lex_type = lex_types[index]
-        predicted_answer, confidence, predicted_lex_type, _, tree, _, _, _, _ = fuzzy_adventure.ask_question(q)
+        predicted_answer, confidence, predicted_lex_type, _, tree, _, _  = fuzzy_adventure.ask_question(q)
 
         # Count the total positives for LAT and answers
         if predicted_answer != "I don't understand the question" and predicted_answer != "I don't know":

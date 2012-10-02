@@ -13,25 +13,25 @@ import re
 
 """ Main application function. """
 def ask_question(question):
-	start = time.time()
-	tree = stanford_client.to_tree(question)
-	root = penn_treebank_parser.parse(tree)
-	top_node = root.children[0]
-	nodes, _ = triplet_extraction.question_analysis(top_node)
-	lexical_type = question_type.classify(question)
-	parse_time = time.time() - start
-	triplet = []
-	for n in nodes:
-		if n != '?' and type(n) != bool:
-			triplet.append(n)
+	triplet, lexical_type, tree = question_decomposition(question)
 	if len(triplet) <= 1:
 		answer = "I don't understand the question"
 		confidence, full_answers, synonyms, search_time = 0., [], [], 0.
 	else:
-		start = time.time()
 		answer, confidence, full_answers, synonyms = ensemble.search(triplet, lexical_type)
-		search_time = time.time() - start
-	return answer, confidence, lexical_type, full_answers, tree, triplet, synonyms, parse_time, search_time
+	return answer, confidence, lexical_type, full_answers, tree, triplet, synonyms
+
+def question_decomposition(question):
+	lexical_type = question_type.classify(question)
+
+	tree = stanford_client.to_tree(question)
+	root = penn_treebank_parser.parse(tree)
+	nodes, _ = triplet_extraction.question_analysis(root)
+	triplet = []
+	for n in nodes:
+		if n != '?' and type(n) != bool:
+			triplet.append(n)
+	return triplet, lexical_type, tree
 
 def load_data(file_name):
 	questions, answers, lex_types = [], [], []
