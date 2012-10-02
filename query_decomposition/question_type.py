@@ -4,6 +4,7 @@ from numpy import *
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure/test")
 sys.path.append("/home/I829287/fuzzy_adventure")
+sys.path.append("/home/I829287/fuzzy_adventure/search")
 import fuzzy_adventure
 import word_space
 import time

@@ -44,8 +44,6 @@ def test(questions, answers, lex_types):
             fo.write("\nIncorrect answer:" + predicted_answer + " not in " + str(real_answers))
         fo.write("\n\n")
     duration = time.time() - start
-    print total_positives
-    print correct_answers
 
     #calculate results
     avg_time = duration / len(questions)
