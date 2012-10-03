@@ -3,6 +3,7 @@ from pymongo import Connection
 from bson.objectid import ObjectId
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure/external/dbpediakit")
+sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition")
 import dbpediakit as dbk
 import dbpediakit.archive
 import nlp

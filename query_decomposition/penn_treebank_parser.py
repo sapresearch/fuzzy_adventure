@@ -1,5 +1,8 @@
 import copy
 import re
+import sys
+sys.path.append("/home/I829287/fuzzy_adventure/search")
+import synonym
 
 class PennTreebankNode():
     def __init__(self, node_type='ROOT', word=None, probability=0.0, children=[], parent=None, index=None):
@@ -9,6 +12,22 @@ class PennTreebankNode():
         self.children = children
         self.parent = parent
         self.index = index
+
+    """ Return a list of proper nouns, if a node is a proper noun """
+    def chunk(self):
+        output = [self]
+        if self.node_type == 'NNP' or self.node_type == 'NNPS':
+            for s in self.siblings():
+                if s.index == self.index+1:
+                    output.append(s)
+        return output
+
+    def synonyms(self):
+        if self.node_type != 'NNP' and self.node_type != 'NNPS':
+            output = synonym.synonyms(self)
+        else:
+            output = [self.word]
+        return output
 
     def descendent(self, node_types, bfs = True):#true = breadth first search (bfs); depth first search (dfs) otherwise
         kids = copy.copy(self.children)

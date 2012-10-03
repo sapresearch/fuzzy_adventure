@@ -67,13 +67,3 @@ def extract_field(ids, words, lexical_filter):
 			field = mongo_api.select_field(triplet, words)
 			output.append(field)
 	return output, full_answers
-
-""" Return a list of proper nouns, if a node is a proper noun """
-def chunk(node):
-	output = [node.word]
-	if node.node_type == 'NNP' or node.node_type == 'NNPS':
-		siblings = node.siblings()
-		for s in siblings:
-			if s.index == node.index+1:
-				output.append(s.word)
-	return output

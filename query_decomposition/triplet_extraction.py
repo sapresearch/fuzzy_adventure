@@ -68,11 +68,11 @@ def question_analysis(top_node):
 			if n3.node_type == 'VP':
 				predicate = extract_predicate(n3)
 				obj = extract_object(predicate)
-				query = ['?', predicate, obj]
+				query = [predicate, obj]
 			elif n4.node_type == 'NP' and n5.node_type == 'VP':
 				subject = extract_subject(n4)
 				predicate = extract_predicate(n5)
-				query = [subject, predicate, '?']
+				query = [subject, predicate]
 		elif n0.node_type == 'WHADVP' and n1.node_type == 'SQ' and n4.node_type == 'NP':
 			# We skipped the "why" part of the algorithm.
 			# We skipped the reasonFilter part.
@@ -83,19 +83,19 @@ def question_analysis(top_node):
 				predicate = extract_predicate(n5)
 				if has_where != False:
 					question_type = "location"
-					query = [subject, predicate, '?']
+					query = [subject, predicate]
 				elif has_when != False:
 					question_type = "time"
-					query = [subject, predicate, '?']
+					query = [subject, predicate]
 				# skipped the reasonFilter else loop.
 		elif n0.node_type in ['WHADJP', 'WHNP'] and n1 in ['S', 'SQ']:
 			question_type = 'quantity'
 			if n3.node_type == 'VP':
 				predicate = extract_predicate(n3)
-				query = ['?', predicate, '?']
+				query = [predicate]
 			elif n3.node_type == 'NP' and n4.node_type == 'VP':
 				predicate = extract_predicate(n4)
-				query = ['?', predicate, '?']
+				query = [predicate]
 	if query == False:
 		query = []
 	return query, question_type
