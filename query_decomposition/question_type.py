@@ -3,14 +3,12 @@ from sklearn.ensemble import ExtraTreesClassifier
 from numpy import *
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure/test")
-sys.path.append("/home/I829287/fuzzy_adventure")
 import word_space
 import load_data
 
 vector_length = 100
 
-def train(file_path):
-	questions, _, types = load_data.load_data(file_path)
+def train(questions, types):
 	question_arrays = []
 	for q in questions:
 		question_arrays.append(q.split(" "))
@@ -32,9 +30,12 @@ def question_vectors(word_vector_hash, questions):
 		question_vectors.append(vect)
 	return question_vectors
 
-def classify(question):
-	model, word_vector_hash = train("/home/I829287/fuzzy_adventure/test/test_data.txt")
-	q = question.split(" ")
+def classify(query, model=None, word_vector_hash=None):
+	if model == None or word_vector_hash == None:
+		file_path = "/home/I829287/fuzzy_adventure/test/test_data.txt"
+		questions, _, types = load_data.load_data(file_path)
+		model, word_vector_hash = train(questions, types)
+	q = query.split(" ")
 	q_vect = question_vectors(word_vector_hash, [q])[0]
 	pred = model.predict(q_vect)[0]
 	return pred

@@ -1,11 +1,11 @@
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition")
-import penn_treebank_parser as penn_treebank_parser
+sys.path.append("/home/I829287/fuzzy_adventure/search")
+import penn_treebank_node
 import triplet_extraction
 import question_type
 import stanford_client
 import ensemble
-import re
 import nlp
 
 
@@ -20,7 +20,7 @@ def question_decomposition(question):
 	lexical_type = question_type.classify(question)
 
 	tree = stanford_client.to_tree(question)
-	root = penn_treebank_parser.parse(tree)
+	root = penn_treebank_node.parse(tree)
 	nodes, _ = triplet_extraction.question_analysis(root)
 
 	""" Create an array with each word and it's synonyms in a subarray:
@@ -42,20 +42,3 @@ def answer_search(triplet, lexical_type):
 	else:
 		answer, confidence, full_answers = ensemble.search(triplet, lexical_type)
 	return answer, confidence, full_answers
-
-""" This is here because if it's in the question_test.py file, then there's a loop when
-question_test requires fuzzy_adventure, which requires question_type, which requires question_test """
-def load_data(file_name):
-	questions, answers, lex_types = [], [], []
-	f = file(file_name)
-	for line in f.readlines():
-		line = line.split("\t")
-		lex_type = line.pop(-1)
-		lex_type = re.sub("[\r\n]", '', lex_type)
-		question = line.pop(0)
-		answer = line
-
-		lex_types.append(lex_type)
-		questions.append(question)
-		answers.append(answer)
-	return questions, answers, lex_types
