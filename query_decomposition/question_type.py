@@ -4,15 +4,13 @@ from numpy import *
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure/test")
 sys.path.append("/home/I829287/fuzzy_adventure")
-sys.path.append("/home/I829287/fuzzy_adventure/search")
-import fuzzy_adventure
 import word_space
-import time
+import load_data
 
 vector_length = 100
 
 def train(file_path):
-	questions, _, types = fuzzy_adventure.load_data(file_path)
+	questions, _, types = load_data.load_data(file_path)
 	question_arrays = []
 	for q in questions:
 		question_arrays.append(q.split(" "))
@@ -35,7 +33,6 @@ def question_vectors(word_vector_hash, questions):
 	return question_vectors
 
 def classify(question):
-	s = time.time()
 	model, word_vector_hash = train("/home/I829287/fuzzy_adventure/test/test_data.txt")
 	q = question.split(" ")
 	q_vect = question_vectors(word_vector_hash, [q])[0]

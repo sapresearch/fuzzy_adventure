@@ -1,7 +1,13 @@
 from nltk.corpus import wordnet
+import nlp
 import re
 
 def synonyms(word):
+	syns = wordnet_synonyms(word)
+	no_stopwords = nlp.remove_stopwords(syns)
+	return no_stopwords
+
+def wordnet_synonyms(word):
 	if is_proper_noun(word):
 		return [word]
 	word = node_or_string_to_string(word)

@@ -1,8 +1,6 @@
 import copy
 import re
-import sys
-sys.path.append("/home/I829287/fuzzy_adventure/search")
-import synonym
+import wordnet_synonym
 
 class PennTreebankNode():
     def __init__(self, node_type='ROOT', word=None, probability=0.0, children=[], parent=None, index=None):
@@ -16,15 +14,17 @@ class PennTreebankNode():
     """ Return a list of proper nouns, if a node is a proper noun """
     def chunk(self):
         output = [self]
-        if self.node_type == 'NNP' or self.node_type == 'NNPS':
-            for s in self.siblings():
-                if s.index == self.index+1:
-                    output.append(s)
+        proper_nouns = ['NNP', 'NNPS']
+        for node in output:
+            if node.node_type in proper_nouns:
+                for s in node.siblings():
+                    if s.index == node.index+1 and s.node_type in proper_nouns:
+                        output.append(s)
         return output
 
     def synonyms(self):
         if self.node_type != 'NNP' and self.node_type != 'NNPS':
-            output = synonym.synonyms(self)
+            output = wordnet_synonym.synonyms(self)
         else:
             output = [self.word]
         return output

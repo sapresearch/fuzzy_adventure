@@ -98,4 +98,10 @@ def question_analysis(top_node):
 				query = [predicate]
 	if query == False:
 		query = []
+	# Remove any False objects
+	not_false = []
+	for q in query:
+		if type(q) != bool:
+			not_false.append(q)
+	query = not_false
 	return query, question_type

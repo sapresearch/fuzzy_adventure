@@ -1,6 +1,7 @@
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure")
 import fuzzy_adventure
+import load_data
 import re
 import time
 
@@ -57,7 +58,6 @@ def test(questions, answers, lex_types):
     rounded = []
     for m in metrics:
         rounded.append(round(m, 3))
-    #f1_score, answer_recall, precision, type_recall, lex_precision, avg_time = round(f1_score, 1), round(answer_recall, 1), round(precision, 1), round(type_recall, 1), round(lex_precision, 1), round(avg_time, 3)
 
     #write results to file
     fo.write("[F1 Score, Recall, Precision, Recall(type), Precision(type), Avg Time] = " + str(rounded))
@@ -66,5 +66,5 @@ def test(questions, answers, lex_types):
     return rounded
 
 
-questions, answers, lex_types = fuzzy_adventure.load_data('test_data.txt')
+questions, answers, lex_types = load_data.load_data('test_data.txt')
 print test(questions, answers, lex_types)
