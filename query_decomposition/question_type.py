@@ -5,6 +5,7 @@ import sys
 sys.path.append("/home/I829287/fuzzy_adventure/test")
 import word_space
 import load_data
+import re
 
 vector_length = 100
 
@@ -31,6 +32,9 @@ def question_vectors(word_vector_hash, questions):
 	return question_vectors
 
 def classify(query, model=None, word_vector_hash=None):
+	pred = hardcode(query)
+	if pred != None:
+		return pred
 	if model == None or word_vector_hash == None:
 		file_path = "/home/I829287/fuzzy_adventure/test/test_data.txt"
 		questions, _, types = load_data.load_data(file_path)
@@ -39,3 +43,13 @@ def classify(query, model=None, word_vector_hash=None):
 	q_vect = question_vectors(word_vector_hash, [q])[0]
 	pred = model.predict(q_vect)[0]
 	return pred
+
+def hardcode(query):
+	lat = None
+	when = re.search("^(When|What (date|year|day|month)).*", query)
+	if type(when) != type(None):
+		lat = 'date'
+	where = re.search("^(Where|What (town|city|region|country)).*", query)
+	if type(where) != type(None):
+		lat = 'location'
+	return lat
