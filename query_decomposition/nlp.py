@@ -62,7 +62,7 @@ def extract_field(ids, words, lexical_filter):
 		sub += triplet # You have to do this to force the triplet from a cursor object to a dictionary. It's ridiculous, but it works.
 		triplet = sub[0]
 		lex_type = lexical_type(triplet)
-		if lex_type == lexical_filter:
+		if lex_type == lexical_filter or lexical_filter == 'boolean': # if it's boolean, select them all.
 			full_answers.append([triplet['id'], triplet['text'], triplet['title']])
 			field = mongo_api.select_field(triplet, words)
 			output.append(field)
