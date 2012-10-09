@@ -1,12 +1,14 @@
 import sys
 sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition")
 sys.path.append("/home/I829287/fuzzy_adventure/search")
+sys.path.append("/home/I829287/fuzzy_adventure/test")
 import penn_treebank_node
 import triplet_extraction
 import question_type
 import stanford_client
 import ensemble
 import nlp
+import load_data
 
 
 
@@ -17,7 +19,10 @@ def ask_question(question):
 	return answer, confidence, lexical_type, full_answers, tree, triplet, synonyms
 
 def question_decomposition(question):
-	lexical_type = question_type.classify(question)
+	file_path = "/home/I829287/fuzzy_adventure/test/lat_data.txt"
+	questions, _, types = load_data.load_data(file_path)
+	model, word_vector_hash = question_type.train(questions, types)
+	lexical_type = question_type.classify(question, model, word_vector_hash)
 
 	tree = stanford_client.to_tree(question)
 	root = penn_treebank_node.parse(tree)

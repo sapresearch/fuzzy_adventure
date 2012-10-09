@@ -1,4 +1,4 @@
-When did Friedrich_Hayek die in Germany?	1992-03-23	date
+When did Friedrich Hayek die in Germany?	1992-03-23	date
 Where in Pennsylvania was Elias Boudinot born?	Philadelphia	location
 Where was Ernst Kaltenbrunner executed?	Germany	Nuremberg	location
 What was E.T.A. Hoffmann's full name?	Ernst Theodor Wilhelm Hoffmann	name
@@ -19,7 +19,7 @@ Did Ayn Rand write any novels?	Yes	boolean
 Who was the second president of St. Ambrose University?	John Flannagan	name
 Was Bouchard a Australian ecologist?	No	boolean
 Where was Abraham Lincoln born?	Kentucky	Hardin_County	location
-What year was Ayn Rand born?	1905	date
+What year was Ayn Rand born?	1905	1905-02-02	date
 Who was Arthur Schopenhauer?	German Philosopher	occupation
 Which Albert was born in Tenneessee?	Albert_Sidney_Johnson	name
 Where did Alexander the Great die?	Babylon	location
@@ -38,8 +38,8 @@ What did Fred Hoyle do?	astronomer	writer	occupation
 Which actor was born in Alberta Canada?	Fay_Wray	name
 Where did Felix Hausdorff die?	Bonn	Germany	location
 Where was Babrak Karmal born?	Afghanistan	Kamari	location
-What year was Brian Lara born?	1969	date
-What month was Brian Lara born?	May	date
+What year was Brian Lara born?	1969	1969-05-02	date
+What month was Brian Lara born?	May	1969-05-02	date
 What city was Brian De Palma born in?	Newark	location
 Where did Barbara Olson die?	Arlington	Virginia	location
 Where was Brion Gysin born?	Taplow	location
@@ -61,18 +61,18 @@ What year was Blink Lemon Jefferson born?	1893	date
 What was Blackbeard's name?	Edward_Teach	name
 United States Air Force general born in Arizona?	Barry_Goldwater	name
 Where did B.F. Skinner die?	Cambridge	Massachuesetts	location
-What year was Barney Bubbles born?	1942	date
+What year was Barney Bubbles born?	1942	1942-07-30	date
 What day did Barney Bubbles die?	14	date
 Bill Bixby was born on what date?	1934-01-22	date
 Where was Bill Bryson born?	Des_Moines,_Iowa	location
 When did Bill Bryson die?	I don't know	boolean
 Where did Charlie Champlin die?	Vevey	Switzerland	location
 Was Alfred Korzybski born in the United States?	No	boolean
-What year was Britney Spears born?	1981	date
+What year was Britney Spears born?	1981	1981-12-02	date
 Where was Baruch Spinoza born?	Amsterdam	location
 Where was Bjarne Stroustrup born?	Aarhus	Denmark	location
-What year was Benny Andersson born?	1946	date
-What month was Benny Andersson born?	December	date
+What year was Benny Andersson born?	1946	1946-12-16	date
+What month was Benny Andersson born?	December	1946-12-16	date
 Who is Bill Gates?	Business entrepreneur	occupation
 Who was Bille August?	Film director	occupation
 Where was Bruce Sterling born?	Austin,_Texas	location
@@ -80,7 +80,7 @@ Who was Bridget Bardot?	French actress and animal welfare activist	occupation
 Who was Bruce Perens?	Computer programmer	occupation
 Where was Benjamin Disraeli born?	London	England	location
 Where did Benjamin Disraeli die?	London	England	location
-What year was Bernie Federko born?	1956	date
+What year was Bernie Federko born?	1956	1956-05-12	date
 Who was Bernie Federko?	Canadian ice hockey player	occupation
 What country was Bram Stoker born in?	Ireland	location
 Who was Bing Crosby?	American singer, actor	occupation

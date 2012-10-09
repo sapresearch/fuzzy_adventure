@@ -59,6 +59,7 @@ def question_analysis(top_node):
 				obj = extract_subject(n2)
 				query = [subject, predicate, obj]
 			else:
+				subject = extract_subject(n1)
 				predicate = extract_predicate(n2)
 				obj = extract_object(predicate)
 				query = [subject, predicate, obj]
@@ -68,6 +69,7 @@ def question_analysis(top_node):
 			if n3.node_type == 'VP':
 				predicate = extract_predicate(n3)
 				obj = extract_object(predicate)
+				#subj = extract_subject(n3)
 				query = [predicate, obj]
 			elif n4.node_type == 'NP' and n5.node_type == 'VP':
 				subject = extract_subject(n4)
@@ -96,6 +98,13 @@ def question_analysis(top_node):
 			elif n3.node_type == 'NP' and n4.node_type == 'VP':
 				predicate = extract_predicate(n4)
 				query = [predicate]
+	# my addition
+	elif top_node.node_type == 'SBAR':
+		if n0.node_type == 'WHNP' and n1.node_type in ['SQ', 'S']:
+			if n4.node_type == 'VP':
+				predicate = extract_predicate(n4)
+				obj = extract_subject(n4)
+				query = [predicate, obj]
 	if query == False:
 		query = []
 	# Remove any False objects
