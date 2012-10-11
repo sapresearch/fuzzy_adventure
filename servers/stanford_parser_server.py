@@ -1,11 +1,12 @@
 import sys
-sys.path.append('../external/stanford-parser-2008-10-26/stanford-parser.jar')
+sys.path.append('../external/stanford-parser-2012-07-09/stanford-parser.jar')
 from java.io import CharArrayReader
-from edu.stanford.nlp import *
+from edu.stanford.nlp.parser.lexparser import LexicalizedParser
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
+# '../external/stanford-parser-2008-10-26/englishPCFG.ser.gz' 
 
-lp = parser.lexparser.LexicalizedParser('../external/stanford-parser-2008-10-26/englishPCFG.ser.gz')
+lp = LexicalizedParser.loadModel()
 
 def tree(sentence):
 	lp.setOptionFlags(["-maxLength", "80", "-retainTmpSubcategories"])
@@ -23,7 +24,6 @@ def tree(sentence):
 
 	parse = parse.toString()
 	return parse#, dependencies
-
 
 server = SimpleXMLRPCServer(('localhost', 9001), logRequests=True)
 server.register_function(tree)

@@ -13,7 +13,6 @@ sdist
 develop-eggs
 .installed.cfg
 # ignore everything in external for now
-external/*
 servers/nohup.out
 test/output.txt
 
