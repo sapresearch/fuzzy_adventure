@@ -15,8 +15,7 @@ def tree(sentence):
 	toke = tlp.getTokenizerFactory().getTokenizer(CharArrayReader(sentence));
 	wordlist = toke.tokenize()
 		 
-	if (lp.parse(wordlist)):
-		parse = lp.getBestParse()
+    parse = lp.apply()
 			 
 	gsf = tlp.grammaticalStructureFactory()
 	gs = gsf.newGrammaticalStructure(parse)
