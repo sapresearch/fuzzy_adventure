@@ -3,10 +3,9 @@ import re
 import wordnet_synonym
 
 class PennTreebankNode():
-    def __init__(self, node_type='ROOT', word=None, probability=0.0, children=[], parent=None, index=None):
+    def __init__(self, node_type='ROOT', word=None, children=[], parent=None, index=None):
         self.node_type = node_type
         self.word = word
-        self.probability = probability
         self.children = children
         self.parent = parent
         self.index = index
@@ -105,8 +104,8 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
 			next_section += letter
 
 	# Create current node
-	node_type, prob, word = parse_node(tree)
-	current_node = PennTreebankNode(parent=parent, node_type=node_type, probability=prob, word=word)
+	node_type, word = parse_node(tree)
+	current_node = PennTreebankNode(parent=parent, node_type=node_type, word=word)
 	if parent != None:
 		kids = copy.copy(current_node.parent.children)
 		kids.append(current_node)
@@ -132,10 +131,7 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
 
 def parse_node(node):
 	node_type = re.search("\A\s?\((\w*)", node).group(1)
-	prob = re.search("\A\s?\(\w* \[(\d{0,2}\.\d*)\]", node)
-	word = re.search("\A\s?\(\w* \[(\d{0,2}\.\d*)\] (\w*)", node)
+	word = re.search("\A\s?\(\w* (\w*)", node)
 	if word != None:
-		word = word.group(2)
-	if prob != None:
-		prob = prob.group(1)
-	return node_type, prob, word
+		word = word.group(1)
+	return node_type, word

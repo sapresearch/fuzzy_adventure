@@ -23,6 +23,7 @@ def search(words):
 	for i in ids[1:]:
 		intersection = intersection & i
 	intersection = list(intersection)
+	intersection = [] if len(intersection) > 50 else intersection
 	return intersection
 
 
