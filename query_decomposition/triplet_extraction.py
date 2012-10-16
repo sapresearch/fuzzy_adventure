@@ -75,21 +75,28 @@ def question_analysis(top_node):
 				subject = extract_subject(n4)
 				predicate = extract_predicate(n5)
 				query = [subject, predicate]
-		elif n0.node_type == 'WHADVP' and n1.node_type == 'SQ' and n4.node_type == 'NP':
+			elif n1.descendent(['NP']) != False and n1.descendent(['VP']):
+				np = n1.descendent(['NP'])
+				vp = n1.descendent(['VP'])
+				predicate = extract_predicate(vp)
+				subject = extract_subject(np)
+				query = [subject, predicate]
+		elif n0.node_type == 'WHADVP' and n1.node_type == 'SQ':# and n4.node_type == 'NP':
+			np = n1.descendent(['NP'])
+			vp = n1.descendent(['VP'])
 			# We skipped the "why" part of the algorithm.
 			# We skipped the reasonFilter part.
-			if n5.node_type == 'VP':
-				has_where = top_node.word_search('where')
-				has_when = top_node.word_search('when')
-				subject = extract_subject(n4)
-				predicate = extract_predicate(n5)
-				if has_where != False:
-					question_type = "location"
-					query = [subject, predicate]
-				elif has_when != False:
-					question_type = "time"
-					query = [subject, predicate]
-				# skipped the reasonFilter else loop.
+			has_where = top_node.word_search('where')
+			has_when = top_node.word_search('when')
+			subject = extract_subject(np)
+			predicate = extract_predicate(vp)
+			if has_where != False:
+				question_type = "location"
+				query = [subject, predicate]
+			elif has_when != False:
+				question_type = "time"
+				query = [subject, predicate]
+			# skipped the reasonFilter else loop.
 		elif n0.node_type in ['WHADJP', 'WHNP'] and n1 in ['S', 'SQ']:
 			question_type = 'quantity'
 			if n3.node_type == 'VP':
@@ -98,13 +105,12 @@ def question_analysis(top_node):
 			elif n3.node_type == 'NP' and n4.node_type == 'VP':
 				predicate = extract_predicate(n4)
 				query = [predicate]
-	# my addition
-	elif top_node.node_type == 'SBAR':
-		if n0.node_type == 'WHNP' and n1.node_type in ['SQ', 'S']:
-			if n4.node_type == 'VP':
-				predicate = extract_predicate(n4)
-				obj = extract_subject(n4)
-				query = [predicate, obj]
+	elif top_node.node_type in ['SINV', 'S']:
+		subject = extract_subject(top_node)
+		predicate = extract_predicate(top_node)
+		obj = extract_object(predicate)
+		query = [subject, predicate, obj]
+		
 	if query == False:
 		query = []
 	# Remove any False objects

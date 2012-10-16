@@ -12,9 +12,11 @@ var
 sdist
 develop-eggs
 .installed.cfg
-# ignore everything in external for now
 servers/nohup.out
 test/output.txt
+external/stanford-parser-2008-10-26/
+external/stanford-parser-2012-07-09/
+external/dbpediakit/
 
 # Installer logs
 pip-log.txt

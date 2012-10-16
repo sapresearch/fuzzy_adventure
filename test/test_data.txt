@@ -1,5 +1,5 @@
 When did Friedrich Hayek die in Germany?	1992-03-23	date
-Where in Pennsylvania was Elias Boudinot born?	Philadelphia	location
+Where in Pennsylvania was Elias Boudinot born?	Philadelphia,_Pennsylvania	location
 Where was Ernst Kaltenbrunner executed?	Germany	Nuremberg	location
 What was E.T.A. Hoffmann's full name?	Ernst Theodor Wilhelm Hoffmann	name
 What English children's novelist died in Hampstead?	Enid Blyton	name
@@ -10,14 +10,14 @@ What German mathematician died in Bonn?	Felix Hausdorff	name
 What pirate is famous for being the first person to circumnavigate the globe?	Francis Drake	name
 What Russian writer was both a novelist and a philosopher?	Ayn Rand	name
 What Algerian-French author died in Villeblevin?	Albert Camus	name
-Was Warhol a filmmaker?	Yes	boolean
+Was Andy Warhol a filmmaker?	Yes	boolean
 Who was the sixteenth president of the United States?	Abraham Lincoln	name
 What American president was born in Hardin County?	Abraham Lincoln	name
 When was Abraham Lincoln murdered?	1865-04-15	date
 What Confederate Army general died in Hardin County, Tennessee?	Albert Sidney Johnston	name
 Did Ayn Rand write any novels?	Yes	boolean
 Who was the second president of St. Ambrose University?	John Flannagan	name
-Was Bouchard a Australian ecologist?	No	boolean
+Was Billy Bob Thornton president of the United States?	No	boolean
 Where was Abraham Lincoln born?	Kentucky	Hardin_County	location
 What year was Ayn Rand born?	1905	1905-02-02	date
 Who was Arthur Schopenhauer?	German Philosopher	occupation
@@ -31,7 +31,7 @@ What poet was born in New Jersey?	Allen_Ginsberg	name
 What activist was born in New Jersey? Allen_Ginsberg	name
 Who was Aristophanes?	Athenian comic dramatist	occupation
 Which screenwriter was born in 1955?	Billy_Bob_Thornton	name
-Where did Beatrix Potter?	Near_and_Far_Sawrey	location
+Where did Beatrix Potter die?	Near_and_Far_Sawrey	location
 Which american actor was born in 1913?	Burt_Lancaster	name
 Which swiss architect was born in 1599?	Francesco_Borromini	name
 What did Fred Hoyle do?	astronomer	writer	occupation
@@ -40,7 +40,7 @@ Where did Felix Hausdorff die?	Bonn	Germany	location
 Where was Babrak Karmal born?	Afghanistan	Kamari	location
 What year was Brian Lara born?	1969	1969-05-02	date
 What month was Brian Lara born?	May	1969-05-02	date
-What city was Brian De Palma born in?	Newark	location
+What city was Brian De Palma born in?	United_States	Newark	location
 Where did Barbara Olson die?	Arlington	Virginia	location
 Where was Brion Gysin born?	Taplow	location
 Which Bulgarian-born novelist was born in 1905?	Elias_Canetti	name
@@ -49,10 +49,10 @@ Where was Django Reinhardt born?	Liberchies	location
 Where did Django Reinhardt die?	Avon	Sein-et-Marne	location
 What did Django Reinhardt do?	jazz guitarist	occupation
 What did Derek Walcott do?	poet	occupation
-Where poet was born in Saint Lucia in 1930?	Derek_Walcott	name
+What poet was born in Saint Lucia in 1930?	Derek_Walcott	name
 What is the birthplace of Erwin Rommel?	Heidenheim_an_der_Brenz	Germany	location
 Where was Edgar Allan Poe born?	Boston	Massachusetts	location
-Which country was Eric Hoffer born?	United States	location
+Which country was Eric Hoffer born?	United_States	location
 Where did Eric Hoffer die?	San Francisco	California	location
 Where did Edmund Husserl die?	Germany	Freiburg	location
 What town was the birthplace of Dr. Seuss?	Springfield	Massachusetts	location
