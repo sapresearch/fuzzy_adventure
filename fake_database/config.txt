@@ -1,0 +1,8 @@
+{
+	"programmers": 300,
+	"teams": 10,
+	"bugs": 500,
+	"softwares": 100,
+	"messages": 1000,
+	"customers": 20
+}

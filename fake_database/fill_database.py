@@ -4,6 +4,14 @@ from bug import *
 from software import *
 from message import *
 import MySQLdb
+from configuration import *
+
+PROGRAMMERS = get_nb_programmers()
+TEAMS = get_nb_teams()
+BUGS = get_nb_bugs()
+SOFTWARES = get_nb_softwares()
+MESSAGES = get_nb_messages()
+
 
 # Open database connection
 db = MySQLdb.connect(host="localhost",user="root",passwd="",db="batcave")
@@ -31,24 +39,24 @@ sql = """CREATE TABLE messages (ID int, TEXT varchar(255), PROGRAMMER_ID int, CU
 db.query(sql)
 
 def fill_programmers():
-	for i in range(1, 301):
+	for i in range(0, PROGRAMMERS):
 		programmer = Programmer().get_new_programmer()
 		# Prepare SQL query to INSERT a record into the database.
 		sql = """INSERT INTO programmers (ID, FIRST_NAME,LAST_NAME, TEAM_ID) VALUES (%d, '%s', '%s', %d)""" \
-		% (i, programmer.first_name, programmer.last_name, programmer.team_id)
+		% (i + 1, programmer.first_name, programmer.last_name, programmer.team_id)
 		db.query(sql)
 
 		
 def fill_teams():
-	for i in range(1,11):
+	for i in range(0,TEAMS):
 		team = Team().get_new_team()
 		# Prepare SQL query to INSERT a record into the database.
 		sql = """INSERT INTO teams (TEAM_ID, MANAGER, SUPER_TEAM_ID) VALUES (%d, '%s', %d)""" \
-		% (i, team.manager, team.super_team_id)
+		% (i + 1, team.manager, team.super_team_id)
 		db.query(sql)
 	
 def fill_bugs():
-	for i in range(1, 500):
+	for i in range(0, BUGS):
 		bug = Bug().get_new_bug()
 		sql = """INSERT INTO bugs (START_DATE, CLOSE_DATE, CUSTOMER_ID, SOFTWARE_ID, PROGRAMMER_ID, DESCRIPTION) \
 		VALUES ('%s', '%s', %d, %d, %d, '%s')""" \
@@ -56,20 +64,20 @@ def fill_bugs():
 		db.query(sql)
 
 def fill_softwares():
-	for i in range(1,101):
+	for i in range(0,SOFTWARES):
 		software = Software().get_new_software()
 		# Prepare SQL query to INSERT a record into the database.
 		sql = """INSERT INTO softwares (SOFTWARE_ID, SUPER_SOFTWARE_ID) VALUES (%2d, %2d)""" \
-		% (i, software.super_software_id)
+		% (i + 1, software.super_software_id)
 		db.query(sql)
 
 def fill_messages():
-	for i in range(1,1001):
+	for i in range(0, MESSAGES):
 		message = Message().get_new_message()
 		# Prepare SQL query to INSERT a record into the database.
 		sql = """INSERT INTO messages (ID, TEXT, PROGRAMMER_ID, CUSTOMER_ID, BUG_ID, REPLY_ID) \
 		VALUES (%3d, '%s', %3d, %3d, %3d, %3d)""" \
-		% (i, message.text_body, message.programmer_to, message.customer_from, message.bug_id, message.reply_id)
+		% (i + 1, message.text_body, message.programmer_to, message.customer_from, message.bug_id, message.reply_id)
 		db.query(sql)
 
 		
@@ -82,7 +90,7 @@ fill_messages()
 db.query("""SELECT * FROM programmers""")
 results = db.store_result().fetch_row(0)
 for i in range (0, len(results), 30):
-	print "Id %-3d | Name %-25s | Team id %-2d" % (results[i][0], results[i][1] + results[i][2], results[i][3])
+	print "Id %-3d | Name %-25s | Team id %-2d" % (results[i][0], results[i][1] + ' ' + results[i][2], results[i][3])
 
 db.query("""SELECT * FROM teams""")
 results = db.store_result().fetch_row(0)
