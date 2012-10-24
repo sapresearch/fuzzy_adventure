@@ -1,9 +1,13 @@
 import random
 
-class Team(object):
+class RandomTeam(object):
 	
-	def get_new_team(self):
-		new_team = Team()
-		new_team.manager = 'John'
-		new_team.super_team_id = random.randint(1,5)
-		return new_team
+	count = 0
+	created_team = []
+	
+	def __init__(self):
+		RandomTeam.count += 1
+		self.id = RandomTeam.count
+		self.manager = 'John'
+		self.super_team_id = random.randint(1,5)
+		RandomTeam.created_team.append(self)

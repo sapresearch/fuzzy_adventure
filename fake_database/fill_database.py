@@ -40,24 +40,24 @@ db.query(sql)
 
 def fill_programmers():
 	for i in range(0, PROGRAMMERS):
-		programmer = Programmer().get_new_programmer()
+		programmer = RandomProgrammer()
 		# Prepare SQL query to INSERT a record into the database.
 		sql = """INSERT INTO programmers (ID, FIRST_NAME,LAST_NAME, TEAM_ID) VALUES (%d, '%s', '%s', %d)""" \
-		% (i + 1, programmer.first_name, programmer.last_name, programmer.team_id)
+		% (programmer.id, programmer.first_name, programmer.last_name, programmer.team_id)
 		db.query(sql)
 
 		
 def fill_teams():
 	for i in range(0,TEAMS):
-		team = Team().get_new_team()
+		team = RandomTeam()
 		# Prepare SQL query to INSERT a record into the database.
 		sql = """INSERT INTO teams (TEAM_ID, MANAGER, SUPER_TEAM_ID) VALUES (%d, '%s', %d)""" \
-		% (i + 1, team.manager, team.super_team_id)
+		% (team.id, team.manager, team.super_team_id)
 		db.query(sql)
 	
 def fill_bugs():
 	for i in range(0, BUGS):
-		bug = Bug().get_new_bug()
+		bug = RandomBug()
 		sql = """INSERT INTO bugs (START_DATE, CLOSE_DATE, CUSTOMER_ID, SOFTWARE_ID, PROGRAMMER_ID, DESCRIPTION) \
 		VALUES ('%s', '%s', %d, %d, %d, '%s')""" \
 		% (bug.start_date, bug.close_date, bug.customer_id, bug.software_id, bug.programmer_id, bug.description)
@@ -65,22 +65,21 @@ def fill_bugs():
 
 def fill_softwares():
 	for i in range(0,SOFTWARES):
-		software = Software().get_new_software()
+		software = RandomSoftware()
 		# Prepare SQL query to INSERT a record into the database.
 		sql = """INSERT INTO softwares (SOFTWARE_ID, SUPER_SOFTWARE_ID) VALUES (%2d, %2d)""" \
-		% (i + 1, software.super_software_id)
+		% (software.id, software.super_software_id)
 		db.query(sql)
 
 def fill_messages():
 	for i in range(0, MESSAGES):
-		message = Message().get_new_message()
+		message = RandomMessage()
 		# Prepare SQL query to INSERT a record into the database.
 		sql = """INSERT INTO messages (ID, TEXT, PROGRAMMER_ID, CUSTOMER_ID, BUG_ID, REPLY_ID) \
 		VALUES (%3d, '%s', %3d, %3d, %3d, %3d)""" \
-		% (i + 1, message.text_body, message.programmer_to, message.customer_from, message.bug_id, message.reply_id)
+		% (message.id, message.text_body, message.programmer_to, message.customer_from, message.bug_id, message.reply_id)
 		db.query(sql)
-
-		
+	
 fill_programmers()
 fill_teams()
 fill_bugs()

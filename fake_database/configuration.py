@@ -3,9 +3,6 @@ from json import *
 
 config_file = open('config.txt').read()
 configuration = json.loads(config_file)
-
-for item in configuration.items():
-	print type(item)
 	
 def get_nb_programmers():
 	return configuration['programmers']
