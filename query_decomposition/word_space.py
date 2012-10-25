@@ -5,14 +5,15 @@ import nltk
 from nltk import *
 import time
 
-zero = 98 
-one = 2
-length = zero + one
+zero = 98
+one = 1
+length = zero + one + one # for both positive an dnegative count.
 
 def random_vector(zero, one):
 	z = zeros(zero)
 	positives = ones(one)
-	merged = array(list(z) + list(positives))
+	negatives = ones(one) * -1
+	merged = array(list(z) + list(positives) + list(negatives))
 	shuffle(merged)
 	return merged
 
@@ -37,6 +38,11 @@ def word_vectors(corpus):
 		context_vector = random_vector(zero, one)
 		for word in line:
 			vectors[word] += context_vector
+
+	# Normalize them.
+	for word,vect in vectors.items():
+		norm = linalg.norm(vect)
+		vectors[word] = (vect/norm).round(2)
 	return vectors
 
 def cosine(v1,v2):
