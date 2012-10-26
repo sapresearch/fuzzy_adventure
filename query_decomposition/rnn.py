@@ -5,7 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import LinearRegression
 from copy import copy
 
-rows, columns = 100, 200
+rows, columns = 21, 42
 
 class RNN():
 
@@ -14,19 +14,18 @@ class RNN():
 		self.sentences = sentences
 		self.targets = targets
 		self.word_vectors = word_vectors
-		self.theta = self.random_matrix(0.5)#random.rand(rows, columns)
+		self.theta = self.random_matrix(0.01)
 		self.classifier = self.train_classifier()
 	
 	def train(self):
-		pop_size = 5
-		gen_size = 20
+		pop_size = 25
+		gen_size = 10
 		best = self.cost()
 		for g in range(gen_size):
 			parent = copy(self.theta)
 			best_theta = copy(parent)
 			for i in range(pop_size):
-				child = parent + self.random_matrix(0.25)
-				#child = child.round(2)
+				child = parent + self.random_matrix((1./(1+g))+0.1)
 				self.theta = child
 				self.classifier = self.train_classifier()
 				cost = self.cost()
@@ -37,12 +36,11 @@ class RNN():
 			print "Gen: " + str(g) + ". " + str(best)
 		self.theta = best_theta
 		print best
-		print self.theta
 		return best_theta
 
 	def random_matrix(self, scale=1):
 		mat = (random.rand(rows, columns) + (random.rand(rows, columns) * -1)) * scale
-		mat = mat.round(2)
+		mat = mat.round(5)
 		return mat
 
 	def activate(self, word1, word2):
@@ -51,7 +49,7 @@ class RNN():
 		parent = concatenate(parent, axis=1)
 		norm = linalg.norm(parent)
 		parent = parent/norm
-		parent = parent.round(2)
+		parent = parent.round(5)
 
 		vector = concatenate(vector, axis=1)
 		return parent, vector
@@ -91,17 +89,17 @@ class RNN():
 		reconstructor = LinearRegression()
 		reconstructor = reconstructor.fit(all_parents, all_kids)
 		preds = reconstructor.predict(all_parents)
-		#print preds[0]
-		#print all_kids[0]
-		#print np.mean((preds[0:1] - all_kids[0:1]) ** 2)
-		#print 'holla'
 
-		reconstruction_cost = np.mean((preds - all_kids) ** 2) ** 0.05#33
-		cost = total_cost/len(self.sentences)
-		combined = (cost + reconstruction_cost)/2.
+		alpha = 0.75
+		regularization_cost = np.mean((self.theta) ** 2) * alpha
+		reconstruction_cost = np.mean((preds - all_kids) ** 2) ** 0.05
+		classification_cost = total_cost/len(self.sentences)
+		combined = (classification_cost + reconstruction_cost)/2.
+		combined += regularization_cost
 		print "--"
 		print reconstruction_cost
-		print cost
+		print classification_cost
+		print regularization_cost
 		print combined
 		print "--"
 		return combined
@@ -131,7 +129,6 @@ class RNN():
 		for s in sentence:
 			word_vector = self.word_vectors[s] if s in self.word_vectors else random.rand(rows) * 0.001
 			vectors.append(word_vector)
-		#print sentence
 		sentence_vector, all_vectors, concatenated = self.merge(vectors, [], [])
 
 		correct = 0.
