@@ -2,6 +2,7 @@ import random
 import time
 from datetime import date, timedelta
 from configuration import *
+from programmer import *
 
 PROGRAMMERS = get_nb_programmers()
 SOFTWARES = get_nb_softwares()
@@ -31,3 +32,4 @@ class RandomBug(object):
 	def random_date_from(self, date):
 		delta = date.today() - date
 		return date + timedelta(random.randint(0, delta.days))
+		
