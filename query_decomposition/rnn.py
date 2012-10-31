@@ -5,7 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import LinearRegression
 from copy import copy
 
-rows, columns = 21, 42
+rows, columns = 11, 22
 
 class RNN():
 
@@ -17,9 +17,7 @@ class RNN():
 		self.theta = self.random_matrix(0.01)
 		self.classifier = self.train_classifier()
 	
-	def train(self):
-		pop_size = 25
-		gen_size = 10
+	def train(self, pop_size=10, gen_size=10):
 		best = self.cost()
 		for g in range(gen_size):
 			parent = copy(self.theta)
@@ -34,8 +32,7 @@ class RNN():
 					best = copy(cost)
 			self.theta = best_theta
 			print "Gen: " + str(g) + ". " + str(best)
-		self.theta = best_theta
-		print best
+		self.classifier = self.train_classifier()
 		return best_theta
 
 	def random_matrix(self, scale=1):
@@ -96,12 +93,6 @@ class RNN():
 		classification_cost = total_cost/len(self.sentences)
 		combined = (classification_cost + reconstruction_cost)/2.
 		combined += regularization_cost
-		print "--"
-		print reconstruction_cost
-		print classification_cost
-		print regularization_cost
-		print combined
-		print "--"
 		return combined
 	
 #	def recursive_parse(self, sentence, answer=False, calc_cost=False):
