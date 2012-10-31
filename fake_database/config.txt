@@ -3,6 +3,6 @@
 	"teams": 10,
 	"bugs": 500,
 	"softwares": 100,
-	"messages": 1000,
+	"messages": 100,
 	"customers": 20
 }

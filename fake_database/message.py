@@ -20,7 +20,7 @@ class RandomMessage(object):
 	def __init__(self):
 		RandomMessage.count += 1
 		self.id = RandomMessage.count
-		self.text_body = 'Maybe generate random text with trigram from Brown Corpus'#create_random_text(random.randint(0,50))
+		self.text_body = create_random_text(random.randint(0,50)) #'Maybe generate random text with trigram from Brown Corpus'#
 		self.programmer_to = random.randint(1, PROGRAMMERS)
 		self.customer_from = random.randint(1, CUSTOMERS)
 		self.bug_id = random.randint(1, BUGS)
@@ -36,6 +36,9 @@ def create_random_text(length):
 	sentence = word.capitalize()
 	for i in range(length):
 		key = bigramsCFD[word].max()
+		if(key == None):
+			break
+		
 		bigramsCFD[word].pop(key)
 		word = key
 		if (not (word == '.' or word == ',' or word == ';' or word == ':')):
