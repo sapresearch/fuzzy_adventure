@@ -118,6 +118,14 @@ class Preprocessing():
 			label = unique.index(skeleton)
 			labels.append(label)
 		return originals, labels, cleaned_trees
+
+	@classmethod
+	def query(self, query_label):
+		originals, skeletons, trees = self.generalize_sql()
+		unique = list(set(skeletons))
+		labels = []
+		query = unique[query_label]
+		return query
 	
 	@classmethod
 	def format_trees(self, tree):
