@@ -17,10 +17,12 @@ all_messages = load_db("""SELECT * FROM messages""")
 
 class OpenTransactions():
 
-	def __init__(self, all_trans):
-		self.open_count, self.close_count, self.start_date = self.counts(all_trans)
+	def __init__(self, all_trans, priorities=None):
+		self.open_count, self.close_count, self.start_date, self.end_date = self.counts(all_trans, priorities)
 
-	def counts(self, all_trans):
+	def counts(self, all_trans, priorities=None):
+		if priorities != None:
+			all_trans = filter(lambda t: t.priority in priorities, all_trans)
 		all_trans = sorted(all_trans, key=lambda trans: trans.start)
 		first = all_trans[0].start
 		last = all_trans[-1].start
@@ -48,13 +50,17 @@ class OpenTransactions():
 
 		#print "Open count: " + str(open_count)
 		#print "Close count: " + str(close_count)
-		return open_count, close_count, first
+		return open_count, close_count, first, last
 
 	def open(self, date):
+		if date not in self.open_count:
+			if date < self.end_date:
+				while date not in self.open_count:
+					date += timedelta(days=1)
+			else:
+				date = self.end_date
 		open = self.open_count[date]
-		print open
 		close = self.close_count[date] - self.close_count[self.start_date]
-		print close
 		total = open - close
 		return total
 
@@ -109,6 +115,24 @@ class Transaction():
 		print "Number of type: " + str(total_count)
 		avg = total/total_count
 		return avg
+	
+	@classmethod
+	def avg_duration_by_others_open(self, all_trans, _open):
+		groups = {}
+		for i in range(30):
+			groups[(i*5)] = []
+		for t in all_trans:
+			duration = round((t.duration() * 2), -1)/2
+			if duration in groups:
+				others_open = _open.open(t.start)
+				groups[duration].append(others_open)
+		for k,v in groups.items():
+			length = float(len(v))
+			avg_open = sum(v)/length if length > 0 else 0
+			avg_open = round(avg_open)
+			groups[k] = avg_open
+		groups = sorted(groups.iteritems())
+		return groups
 
 class Message():
 
@@ -138,11 +162,13 @@ class Message():
 				return m
 
 
-s = time.time()
-params = Transaction.all()
-open_ = OpenTransactions(params)
-print params[5000].start
-print open_.open(params[5000].start)
+#s = time.time()
+#params = Transaction.all()
+#open_ = OpenTransactions(params, ['Very high', 'High'])
+#august = datetime.date(datetime(2012, 8, 1))
+#params = filter(lambda p: p.start >= august, params)
+#print len(params)
+#print Transaction.avg_duration_by_others_open(params, open_)
 #for prior in ['Low', 'Medium', 'High', 'Very high']:
 	#print str(prior) + ': ' + str(Transaction.avg_duration([prior]))
-print "Duration: " + str(time.time() - s)
+#print "Duration: " + str(time.time() - s)
