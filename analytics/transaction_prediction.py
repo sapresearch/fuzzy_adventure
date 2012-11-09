@@ -1,6 +1,6 @@
 from transaction_analytics import Transaction, OpenTransactions
-from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from numpy import *
 import math
@@ -25,11 +25,14 @@ class TransactionPrediction():
 		print "Training items: " + str(len(trans))
 		for t in trans:
 			t_data = []
-			#t_data.append(1.) # bias unit.
 			t_data.append(very_high.open(t.start))
+			t_data.append(very_high.open(t.start) ** 2)
 			t_data.append(high.open(t.start))
+			t_data.append(high.open(t.start) ** 2)
 			t_data.append(medium.open(t.start))
+			t_data.append(medium.open(t.start) ** 2)
 			t_data.append(low.open(t.start))
+			t_data.append(low.open(t.start) ** 2)
 			priority = priorities[t.priority]
 			t_data.append(priority)
 			data.append(t_data)
@@ -55,22 +58,33 @@ class TransactionPrediction():
 	@classmethod
 	def duration(self):
 		data, targets = TransactionPrediction.training_data()
-		test_d, test_t = data[1::2], targets[1::2]
-		data = data[0::2]
-		targets = targets[0::2]
+		test_d, test_t = data[2::3], targets[2::3]
+		data = data[0::3] + data[1::3]
+		targets = targets[0::3] + targets[1::3]
 		print "Training items: " + str(len(data))
-		#model = LinearRegression()
-		model = GradientBoostingRegressor(n_estimators=5, learn_rate=1.0, max_depth=5, random_state=0, loss='ls')
+		#model = GradientBoostingRegressor(n_estimators=10, learn_rate=1.0, max_depth=10, random_state=0, loss='ls')
+		model = LinearRegression(normalize=True)
 		model = model.fit(data, targets)
 		print model
 
 		preds = model.predict(test_d)
-		print [round(i) for i in preds[40:200]]
+		preds = preds - 2.5
+		new = []
+		for i in preds:
+			if i < 0.:
+				new.append(0.)
+			else:
+				new.append(round(i))
+		preds = array(new)
+		print [round(i, 1) for i in preds[40:200]]
 		print "--------------"
 		print targets[40:200]
 		print "--------------"
 		cost = mean(((preds - test_t) ** 2) ** 0.5)
 		print "Avg error: " + str(cost)
+		preds = zeros(len(test_d))
+		cost = mean(((preds - test_t) ** 2) ** 0.5)
+		print "Benchmark avg error: " + str(cost)
 		return cost
 
 #TransactionPrediction.training_data()
