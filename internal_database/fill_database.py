@@ -155,7 +155,6 @@ def insert_component(component):
 	
 def insert_messages(messages):
 	# messages is an array of dictionnary containing the information of every message
-	#raw_input(messages)
 	if(len(messages) == 0):
 		return -1
 	
@@ -208,21 +207,6 @@ def create_single_message_query(message):
 
 	return sql
 
-
-def delete_duplicates():
-	db = MySQLdb.connect(host="localhost",user="root",passwd="",db="batcave")
-	sql = """SELECT id, trans_number FROM transactions"""
-	db.query(sql)
-	rows = db.store_result().fetch_row(0)
-	hash = {}
-
-	for row in rows:
-		row_tuple = row[0]
-		hash[row_tuple[1]] = row_tuple[0]
-
-	freq = nltk.FreqDist(hash)
-	
-	
 	
 # INSERTING IN DB
 start = time.time()
