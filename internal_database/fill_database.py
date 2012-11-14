@@ -3,108 +3,155 @@ from transactions import *
 from sys import argv
 from utility import *
 from datetime import datetime
+from collections import Counter
 import time
+import _mysql as mdb
+import os
 
-script, file_name = argv
 
+script, directory_name = argv
 db = MySQLdb.connect(host="localhost",user="root",passwd="",db="batcave")
-
 create_db_schema(db)
+transactions_treated = Counter()
+programmers_treated = Counter()
+components_treated = Counter()
 
-transactions = Transaction.load_transactions(file_name)
+def main():
+	if (not os.path.exists(directory_name)):
+		raise NameError('This path does not exists')
+	
+	file_list = []
+	# If the path provided is a directory, get a list of what's inside
+	if (os.path.isdir(directory_name)):
+		file_list = os.listdir(directory_name)
+		
+	# If the path provided is a file, append it to the file list
+	else:
+		raise NameError('%s is not a valid directory' % directory_name)
+	
+	print "\n%d files to import" % len(file_list)
+	for file in file_list:
+		print "\t-  %s" % file
+	print ""
+	
+	for file in file_list:
+		path = os.path.join(directory_name, file)
+		if (not os.path.isfile(path)):
+			print "File %s cannot be read because it's not a file" % file
+			continue
+		print "Loading transactions from %s" % path
+		transactions = Transaction.load_transactions(path)
+		insert_all_transactions(transactions)
 
+
+def insert_all_transactions(transactions):
+	count = 0
+	start_count = time.time()
+	nb_transactions = len(transactions)
+	for transaction in transactions:
+		insert_transaction(transaction)
+		count += 1
+		print "\t%d%% completed\r" % (count * 100 / nb_transactions),
+
+	print "%s to complete the insertion process.\n" % pretty_print_duration(time.time() - start_count)
+
+	
 def insert_transaction(transaction):
 
-		transaction_number = transaction.transaction_number
-		
-		programmer = camel_case(transaction.message_attributes['Processor'])
-		programmer = escape_string(programmer)
-		programmer_id = insert_programmer(programmer)
-		
-		recipient = escape_string(transaction.origins['Recipient'])
-		sender = transaction.origins['Sender']
-		short_text = escape_string(transaction.short_text)
-		client = transaction.system['Client']
-		system_release = transaction.system['Release']
-		system = transaction.system['System']
-		priority = transaction.message_attributes['Priority']
-		language = transaction.message_attributes['Language']
-		status = transaction.message_attributes['Status']
-		
-		component = transaction.message_attributes['Component']
-		component_id = insert_component(component)
-		
-		description = escape_string(transaction.description)
-		message_id = insert_messages(transaction.messages) #Fill Messages table first
-		
-		sql = \
-			"""INSERT INTO transactions 
-						(trans_number, 
-						programmer_id,
-						recipient, 
-						sender, 
-						short_text, 
-						client, 
-						system_release, 
-						system, 
-						priority, 
-						language, 
-						status,
-						component_id,
-						description,
-						message_id) 
-			VALUES      ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, '%s', %d)""" \
-						%(transaction_number, \
-						programmer_id, \
-						recipient, \
-						sender, \
-						short_text, \
-						client, \
-						system_release, \
-						system, \
-						priority, \
-						language, \
-						status,  \
-						component_id, \
-						description, \
-						message_id)
+	transaction_number = transaction.transaction_number
+	# Increment the count of the transaction for futur reference
+	transactions_treated[transaction_number] += 1
+	
+	# Find out if a transaction number has already be treated
+	if transactions_treated[transaction_number] > 1:
+		# If so, the early return
+		return None
 
+	programmer = camel_case(transaction.message_attributes['Processor'])
+	programmer = escape_string(programmer)
+	programmer_id = insert_programmer(programmer)
+	
+	recipient = escape_string(transaction.origins['Recipient'])
+	sender = transaction.origins['Sender']
+	short_text = escape_string(transaction.short_text)
+	client = transaction.system['Client']
+	system_release = transaction.system['Release']
+	system = transaction.system['System']
+	priority = transaction.message_attributes['Priority']
+	language = transaction.message_attributes['Language']
+	status = transaction.message_attributes['Status']
+	
+	component = transaction.message_attributes['Component']
+	component_id = insert_component(component)
+	
+	description = escape_string(transaction.description)
+	message_id = insert_messages(transaction.messages) #Fill Messages table first
+	
+	sql = \
+		"""INSERT INTO transactions 
+					(trans_number, 
+					programmer_id,
+					recipient, 
+					sender, 
+					short_text, 
+					client, 
+					system_release, 
+					system, 
+					priority, 
+					language, 
+					status,
+					component_id,
+					description,
+					message_id) 
+		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, '%s', %d)""" \
+					%(transaction_number, \
+					programmer_id, \
+					recipient, \
+					sender, \
+					short_text, \
+					client, \
+					system_release, \
+					system, \
+					priority, \
+					language, \
+					status,  \
+					component_id, \
+					description, \
+					message_id)
+
+	try:
 		db.query(sql)
+	except ProgrammingError:
+		print "Transaction %s could not be inserted" % transaction_number
 
 
 def insert_programmer(programmer):
-	sql = """SELECT id FROM programmers WHERE name = '%s'""" % programmer
-	db.query(sql)
-	rows = db.store_result().fetch_row(0)
-	# If not already in the database, insert it
-	if len(rows) == 0:
-		sql = """INSERT INTO programmers (name) VALUES ('%s')""" % programmer
+	programmers_treated[programmer] += 1
+	
+	if programmers_treated[programmer] > 1:
+		sql = """SELECT id FROM programmers WHERE name = '%s'""" % programmer
 		db.query(sql)
-		return db.insert_id()
-	# If already in the database, return its id
-	elif len(rows) == 1:
-		row_tuple = rows[0]
-		return row_tuple[0]
-	else:
-		print "Duplicate programmer found in the database. This should not happen since we assume that all programmers have different names"
-		
+		row = db.store_result().fetch_row()
+		return row[0][0]
+
+	sql = """INSERT INTO programmers (name) VALUES ('%s')""" % programmer
+	db.query(sql)
+	return db.insert_id()
+
 
 def insert_component(component):
-	sql = """SELECT id FROM components WHERE name = '%s'""" % component
-	db.query(sql)
-	rows = db.store_result().fetch_row(0)
-	# If not already in the database, insert it
-	if len(rows) == 0:
-		sql = """INSERT INTO components (name) VALUES ('%s')""" % component
+	components_treated[component] += 1
+
+	if components_treated[component] > 1:
+		sql = """SELECT id FROM components WHERE name = '%s'""" % component
 		db.query(sql)
-		return db.insert_id()
-	# If already in the database, return its id
-	elif len(rows) == 1:
-		row_tuple = rows[0]
-		return row_tuple[0]
-	else:
-		print "Duplicate component found in the database. This should not happen since we assume that all programmers have different names"
+		row = db.store_result().fetch_row()
+		return row[0][0]
 		
+	sql = """INSERT INTO components (name) VALUES ('%s')""" % component
+	db.query(sql)
+	return db.insert_id()
+
 	
 def insert_messages(messages):
 	# messages is an array of dictionnary containing the information of every message
@@ -162,40 +209,38 @@ def create_single_message_query(message):
 	return sql
 
 
-# LOADING FROM FILE TEST
-start = time.time()
-programmers = []
-components = []
-for transaction in transactions:
-	programmer_name = transaction.message_attributes['Processor']
-	programmers.append(camel_case(programmer_name))
+def delete_duplicates():
+	db = MySQLdb.connect(host="localhost",user="root",passwd="",db="batcave")
+	sql = """SELECT id, trans_number FROM transactions"""
+	db.query(sql)
+	rows = db.store_result().fetch_row(0)
+	hash = {}
+
+	for row in rows:
+		row_tuple = row[0]
+		hash[row_tuple[1]] = row_tuple[0]
+
+	freq = nltk.FreqDist(hash)
 	
-	component_name = transaction.message_attributes['Component']
-	components.append(component_name)
 	
-programmers = set(programmers)
-components = set(components)
-
-print "%f seconds to extract %d programmers and %d components in a set" \
-% ((time.time() - start), len(programmers), len(components))
-
-
+	
 # INSERTING IN DB
 start = time.time()
-end_time_trans = None
+main()
+total_time = (time.time() - start)
 
-for transaction in transactions:
-	insert_transaction(transaction)
-	end_time_trans = time.time()
-	
 
-	
 # TEST 
 db.query("""SELECT * FROM transactions""")
 rows = db.store_result().fetch_row(0)
+print "%s to load %d transactions in the database"\
+% (pretty_print_duration(total_time), len(rows))
 
-print "%f seconds to load %d transactions in the database"\
-% ((end_time_trans - start), len(rows))
+print "Here's a list of duplicates for your convenience"
+duplicate_list = transactions_treated.most_common(10)
+for duplicate in duplicate_list:
+	if duplicate[1] > 1:
+		print duplicate
 	
 db.query("""SELECT * FROM programmers""")
 rows = db.store_result().fetch_row(0)
@@ -209,6 +254,8 @@ print "%d components inserted into the database" % len(rows)
 db.query("""SELECT * FROM messages""")
 rows = db.store_result().fetch_row(0)
 print "%d messages inserted into the database" % len(rows)
+
+
 
 
 db.close()

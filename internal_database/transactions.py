@@ -1,4 +1,5 @@
 from section import *
+from utility import *
 import time
 
 
@@ -49,8 +50,8 @@ class Transaction(object):
 			
 			transactions.append(transaction)
 			
-		print "%s seconds to load %d transactions from the file"\
-		% ((time.time() - start), len(transactions))
+		print "%s to load %d transactions from the file: %s"\
+		% (pretty_print_duration(time.time() - start), len(transactions), file_name)
 		return transactions
 		
 
