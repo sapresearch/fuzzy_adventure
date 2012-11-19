@@ -65,7 +65,7 @@ class Transaction(object):
 			if (len(transactions[i]) < 10) :
 				index_to_pop.append(i)
 
-		# When splitting, it's possible to have undisirable  items. Remove them here
+		# When splitting, it's possible to have undesirable  items. Remove them here
 		for i in range(len(index_to_pop) - 1, -1, -1):
 			transactions.pop(i)
 

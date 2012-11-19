@@ -1,16 +1,24 @@
 import MySQLdb
+from utility import *
 
-
-def create_db_schema(db):
-	create_transactions_table(db)
-	create_programmers_table(db)
-	create_messages_table(db)
-	create_components_table(db)
+def create_db_schema(db, delete = False):
+	if(delete):
+		delete_persistence(delete)
+		drop_tables(db)
+		create_transactions_table(db)
+		create_programmers_table(db)
+		create_messages_table(db)
+		create_components_table(db)
 
 	
-def create_transactions_table(db):
-	# Drop table if it already exist using execute() method.
+def drop_tables(db):
 	db.query("DROP TABLE IF EXISTS transactions")
+	db.query("DROP TABLE IF EXISTS programmers")
+	db.query("DROP TABLE IF EXISTS messages")
+	db.query("DROP TABLE IF EXISTS components")
+	print("Tables 'transactions, programmers, messages, components' droped from the database")
+	
+def create_transactions_table(db):
 	sql = """CREATE TABLE transactions( 
 		id             INT NOT NULL AUTO_INCREMENT, 
 		trans_number   VARCHAR(50), 
@@ -32,19 +40,19 @@ def create_transactions_table(db):
 		FOREIGN KEY (component_id) REFERENCES components(id), 
 		FOREIGN KEY (message_id) REFERENCES messages(id))""" 
 	db.query(sql)
+	print("Table 'transactions' created")
 
 
 def create_programmers_table(db):
-	db.query("DROP TABLE IF EXISTS programmers")
 	sql = """CREATE TABLE programmers( 
 		id   INT NOT NULL AUTO_INCREMENT, 
 		name VARCHAR(80), 
 		PRIMARY KEY (id)) """
 	db.query(sql)
+	print("Table 'programmers' created")
 
 
 def create_messages_table(db):
-	db.query("DROP TABLE IF EXISTS messages")
 	sql = """CREATE TABLE messages( 
 		id       INT NOT NULL AUTO_INCREMENT, 
 		type     VARCHAR(30), 
@@ -55,13 +63,14 @@ def create_messages_table(db):
 		PRIMARY KEY (id), 
 		FOREIGN KEY (reply_id) REFERENCES messages(id)) """
 	db.query(sql)
+	print("Table 'messages' created")
 
 
 def create_components_table(db):
-	db.query("DROP TABLE IF EXISTS components")
 	sql = """CREATE TABLE components( 
 		id   INT NOT NULL AUTO_INCREMENT, 
 		name VARCHAR(30), 
 		PRIMARY KEY (id)) """
 	db.query(sql)
+	print("Table 'components' created")
 

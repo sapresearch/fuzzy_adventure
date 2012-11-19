@@ -3,18 +3,13 @@ from transactions import *
 from sys import argv
 from utility import *
 from datetime import datetime
-from collections import Counter
 import time
-import _mysql as mdb
+import MySQLdb
 import os
+import argparse
 
-
-script, directory_name = argv
-db = MySQLdb.connect(host="localhost",user="root",passwd="",db="batcave")
-create_db_schema(db)
-transactions_treated = Counter()
-programmers_treated = Counter()
-components_treated = Counter()
+# Easier on the eye to print an empty line after the command line
+print ""
 
 def main():
 	if (not os.path.exists(directory_name)):
@@ -25,11 +20,10 @@ def main():
 	if (os.path.isdir(directory_name)):
 		file_list = os.listdir(directory_name)
 		
-	# If the path provided is a file, append it to the file list
 	else:
 		raise NameError('%s is not a valid directory' % directory_name)
 	
-	print "\n%d files to import" % len(file_list)
+	print "\n%d file(s) to import" % len(file_list)
 	for file in file_list:
 		print "\t-  %s" % file
 	print ""
@@ -37,7 +31,7 @@ def main():
 	for file in file_list:
 		path = os.path.join(directory_name, file)
 		if (not os.path.isfile(path)):
-			print "File %s cannot be read because it's not a file" % file
+			print "File %s cannot be read because it's not a file\n" % file
 			continue
 		print "Loading transactions from %s" % path
 		transactions = Transaction.load_transactions(path)
@@ -51,7 +45,8 @@ def insert_all_transactions(transactions):
 	for transaction in transactions:
 		insert_transaction(transaction)
 		count += 1
-		print "\t%d%% completed\r" % (count * 100 / nb_transactions),
+		#duration = pretty_print_duration(int(time.time() - start_count))
+		print "\t%d%% completed\r" % ((count * 100 / nb_transactions)),
 
 	print "%s to complete the insertion process.\n" % pretty_print_duration(time.time() - start_count)
 
@@ -72,16 +67,16 @@ def insert_transaction(transaction):
 	programmer_id = insert_programmer(programmer)
 	
 	recipient = escape_string(transaction.origins['Recipient'])
-	sender = transaction.origins['Sender']
+	sender = escape_string(transaction.origins['Sender'])
 	short_text = escape_string(transaction.short_text)
-	client = transaction.system['Client']
-	system_release = transaction.system['Release']
-	system = transaction.system['System']
-	priority = transaction.message_attributes['Priority']
-	language = transaction.message_attributes['Language']
-	status = transaction.message_attributes['Status']
+	client = escape_string(transaction.system['Client'])
+	system_release = escape_string(transaction.system['Release'])
+	system = escape_string(transaction.system['System'])
+	priority = escape_string(transaction.message_attributes['Priority'])
+	language = escape_string(transaction.message_attributes['Language'])
+	status = escape_string(transaction.message_attributes['Status'])
 	
-	component = transaction.message_attributes['Component']
+	component = escape_string(transaction.message_attributes['Component'])
 	component_id = insert_component(component)
 	
 	description = escape_string(transaction.description)
@@ -121,8 +116,9 @@ def insert_transaction(transaction):
 
 	try:
 		db.query(sql)
-	except ProgrammingError:
+	except MySQLdb.ProgrammingError:
 		print "Transaction %s could not be inserted" % transaction_number
+		print "Query used: %s" % sql
 
 
 def insert_programmer(programmer):
@@ -184,7 +180,7 @@ def insert_messages(messages):
 def create_single_message_query(message):
 	# reply_id is left out. It will be added in insert_messages
 	
-	type = message['Type']
+	type = escape_string(message['Type'])
 	
 	author = message['Author']
 	author = escape_string(camel_case(author))
@@ -207,39 +203,35 @@ def create_single_message_query(message):
 
 	return sql
 
+
+update, delete, directory_name, database = arguments_parser()
+
+
+
+db = MySQLdb.connect(host="localhost",user="root",passwd="",db=database)
+
+
 	
+create_db_schema(db, delete)
+try:
+	update_persistence(db, update)
+except OSError as ose:
+	print ose
+	exit()
+
+
+
 # INSERTING IN DB
+transactions_treated, programmers_treated, components_treated = load_persistence()
 start = time.time()
 main()
 total_time = (time.time() - start)
+dump_persistence(transactions_treated, programmers_treated, components_treated)
 
 
+print "%s to complete the entire process" % pretty_print_duration(total_time)
 # TEST 
-db.query("""SELECT * FROM transactions""")
-rows = db.store_result().fetch_row(0)
-print "%s to load %d transactions in the database"\
-% (pretty_print_duration(total_time), len(rows))
-
-print "Here's a list of duplicates for your convenience"
-duplicate_list = transactions_treated.most_common(10)
-for duplicate in duplicate_list:
-	if duplicate[1] > 1:
-		print duplicate
-	
-db.query("""SELECT * FROM programmers""")
-rows = db.store_result().fetch_row(0)
-print "%d programmers inserted into the database" % len(rows)
-
-
-db.query("""SELECT * FROM components""")
-rows = db.store_result().fetch_row(0)
-print "%d components inserted into the database" % len(rows)
-
-db.query("""SELECT * FROM messages""")
-rows = db.store_result().fetch_row(0)
-print "%d messages inserted into the database" % len(rows)
-
-
+print_stats(db)
 
 
 db.close()
