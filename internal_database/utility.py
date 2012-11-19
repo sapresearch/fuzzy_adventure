@@ -155,12 +155,13 @@ def print_stats(db):
 	
 def arguments_parser():
 	parser = argparse.ArgumentParser()
+	group = parser.add_mutually_exclusive_group()
 	
-	parser.add_argument('-u', action='store_true', default = False, \
+	group.add_argument('-u', action='store_true', default = False, \
 		help="""Update the persistence lists of the informations in the database. 
 		Use in case you suspect the database is not up-to-date.""")
 		
-	parser.add_argument('-d', action='store_true', default = False,\
+	group.add_argument('-d', action='store_true', default = False,\
 		help='Delete the database and start from scratch.')
 		
 	parser.add_argument('-directory', required=True, \
