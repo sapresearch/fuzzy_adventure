@@ -19,8 +19,8 @@ class Transaction(object):
 	def load_transactions(file_name):
 		start = time.time()
 		transactions = []
-		for line in Transaction.get_transactions(file_name):
-			sections = separate_sections(line)
+		for transaction_to_parse in Transaction.get_transactions(file_name):
+			sections = separate_sections(transaction_to_parse)
 
 			transaction_number = get_transaction_number(sections)
 			origins = get_origins(sections)
@@ -28,7 +28,7 @@ class Transaction(object):
 			system = get_system(sections)
 			message_attributes = get_message_attributes(sections)
 			description = get_description(sections)
-			messages = get_messages(line)
+			messages = get_messages(transaction_to_parse)
 
 			transaction = Transaction()
 			transaction.transaction_number = transaction_number
@@ -57,19 +57,20 @@ class Transaction(object):
 
 	@staticmethod
 	def get_transactions(file_name):
-		transactions = open(file_name).read().split("\nR/3 Internal Message: ")
+		regex = re.compile('[\r\n]{2,4}(R\/3 Internal Message: )(.{26})[\r\n]{2,4}_{72}')
+		file = open(file_name).read()
+		splits = re.split(regex, file)
 
-		index_to_pop = []
-		for i in range(len(transactions)):
-			# Arbitrary length to discard the non transaction split
-			if (len(transactions[i]) < 10) :
-				index_to_pop.append(i)
+		# Pop the first item because it's empty. The very first line of a file
+		splits.pop(0)
+		numbers = [splits[i] for i in range(len(splits)) if i % 3 == 1]
+		bodies = [splits[i] for i in range(len(splits)) if i % 3 == 2]
+	
 
-		# When splitting, it's possible to have undesirable  items. Remove them here
-		for i in range(len(index_to_pop) - 1, -1, -1):
-			transactions.pop(i)
+		transactions = [numbers[i] + '\n' + ('_' * 72) + bodies[i] for i in range(len(numbers))]
 
 		return transactions
+
 	
 		
 	def __str__(self):

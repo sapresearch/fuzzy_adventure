@@ -7,6 +7,7 @@ import time
 import MySQLdb
 import os
 import argparse
+from persistence_manager import *
 
 # Easier on the eye to print an empty line after the command line
 print ""
@@ -31,11 +32,17 @@ def main():
 	for file in file_list:
 		path = os.path.join(directory_name, file)
 		if (not os.path.isfile(path)):
-			print "File %s cannot be read because it's not a file\n" % file
+			print "File '%s' cannot be read because it's not a file\n" % file
 			continue
 		print "Loading transactions from %s" % path
-		transactions = Transaction.load_transactions(path)
-		insert_all_transactions(transactions)
+		try:
+			transactions = Transaction.load_transactions(path)
+			insert_all_transactions(transactions)
+		except Exception as e:
+			print "An error occured while treating the file %s." % path
+			print type(e)
+			print e.args
+			print ""
 
 
 def insert_all_transactions(transactions):
@@ -205,28 +212,23 @@ def create_single_message_query(message):
 
 
 update, delete, directory_name, database = arguments_parser()
-
-
-
 db = MySQLdb.connect(host="localhost",user="root",passwd="",db=database)
+set_persistences(database)
 
-
-	
+# INSERTING IN DB
 create_db_schema(db, delete)
+
 try:
-	update_persistence(db, update)
+	update_persistences(db, update)
 except OSError as ose:
 	print ose
 	exit()
 
-
-
-# INSERTING IN DB
-transactions_treated, programmers_treated, components_treated = load_persistence()
+transactions_treated, programmers_treated, components_treated = load_persistences()
 start = time.time()
 main()
 total_time = (time.time() - start)
-dump_persistence(transactions_treated, programmers_treated, components_treated)
+dump_persistences()
 
 
 print "%s to complete the entire process" % pretty_print_duration(total_time)

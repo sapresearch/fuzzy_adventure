@@ -30,7 +30,15 @@ def get_origins(sections):
 	return origins
 
 def get_short_text(sections):
-	return sections[2].split('Short Text')[1].strip()
+
+	try:
+		short_text_section = sections[2]
+		
+		splits = short_text_section.split('Short Text')
+		return splits[1].strip()
+	except Exception:
+		raw_input(sections)
+
 
 	
 def get_system(sections):

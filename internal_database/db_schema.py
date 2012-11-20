@@ -1,9 +1,9 @@
 import MySQLdb
-from utility import *
+from persistence_manager import *
 
 def create_db_schema(db, delete = False):
 	if(delete):
-		delete_persistence(delete)
+		delete_persistences(delete)
 		drop_tables(db)
 		create_transactions_table(db)
 		create_programmers_table(db)
