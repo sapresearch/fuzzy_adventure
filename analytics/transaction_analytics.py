@@ -7,11 +7,16 @@ import copy
 
 
 def load_db(sql):
+	s = time.time()
 	db = MySQLdb.connect(host="localhost", user="root", passwd="", db="batcave_beta")
 	db.query(sql)
 	trans = db.store_result().fetch_row(0)
 	db.close()
-	return trans
+	print "In load DB. Duration: " + str(time.time() - s) + ". Query: " + str(sql)
+	all_t = {}
+	for t in trans:
+		all_t[t[0]] = t
+	return all_t
 
 all_messages = load_db("""SELECT * FROM messages""")
 
@@ -69,9 +74,10 @@ class Transaction():
 
 	previous_start = datetime.date(datetime(2012, 3, 3))
 
-	def __init__(self, params, previous_transaction=None):
+	def __init__(self, params, filtered_messages, previous_transaction=None):
 		self.priority = params[9]
-		self.first_message = Message.find(params[14])
+		message_id = params[14]
+		self.first_message = Message.find(message_id)
 		self.messages = Message.message_chain(self.first_message)
 		self.start = self.get_start(previous_transaction)
 		self.end = self.get_end()
@@ -79,10 +85,12 @@ class Transaction():
 
 	@classmethod
 	def all(self):
-		all_params = load_db("""SELECT * FROM transactions""")#[0:5000]
+		filtered_messages = all_messages
+		all_params = load_db("""SELECT * FROM transactions""")
 		all_trans = []
-		for p in all_params:
-			t = Transaction(p)
+		s = time.time()
+		for p in all_params.values():
+			t = Transaction(p, filtered_messages)
 			all_trans.append(t)
 		return all_trans
 	
@@ -145,23 +153,33 @@ class Message():
 		if message == None:
 			return []
 		next_message_id = message[0]
-		messages = Message.all()
 		chain = []
-		for m in messages:
-			if m[0] == next_message_id:
-				chain.append(m)
-				next_message_id = m[5]
-				if next_message_id == None:
-					return chain
+		while next_message_id != None:
+			next_message = all_messages[next_message_id]
+			chain.append(next_message)
+			next_message_id = next_message[5]
+		return chain
+		#for m in all_messages:
+			#if m[0] == next_message_id:
+				#chain.append(m)
+				#next_message_id = m[5]
+				#if next_message_id == None:
+					#return chain
 	
 	@classmethod
 	def find(self, message_id):
-		messages = self.all()
-		for m in messages:
-			if m[0] == message_id:
-				return m
+		messages = all_messages#Message.all
+		if message_id in messages:
+			return messages[message_id]
+		else:
+			return None
+		#for m in messages:
+			#if m[0] == message_id:
+				#messages.remove(m)
+				#return m, messages
 
 
+#Transaction.all()
 #s = time.time()
 #params = Transaction.all()
 #open_ = OpenTransactions(params, ['Very high', 'High'])

@@ -5,6 +5,7 @@ from sklearn.metrics import mean_squared_error
 from numpy import *
 import math
 from datetime import datetime
+import time
 
 class TransactionPrediction():
 
@@ -20,7 +21,7 @@ class TransactionPrediction():
 		targets = []
 
 		# Only select ones after August
-		august = datetime.date(datetime(2012, 8, 1))
+		august = datetime.date(datetime(2012, 2, 1))
 		trans = filter(lambda p: p.start >= august, trans)
 		print "Training items: " + str(len(trans))
 		for t in trans:
@@ -68,7 +69,6 @@ class TransactionPrediction():
 		print model
 
 		preds = model.predict(test_d)
-		preds = preds - 2.5
 		new = []
 		for i in preds:
 			if i < 0.:
@@ -87,5 +87,7 @@ class TransactionPrediction():
 		print "Benchmark avg error: " + str(cost)
 		return cost
 
+s = time.time()
 #TransactionPrediction.training_data()
 print TransactionPrediction.duration()
+print "Duration: " + str(time.time() - s)
