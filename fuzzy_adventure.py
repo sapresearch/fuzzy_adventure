@@ -47,3 +47,4 @@ def answer_search(triplet, lexical_type):
 	else:
 		answer, confidence, full_answers = ensemble.search(triplet, lexical_type)
 	return answer, confidence, full_answers
+
