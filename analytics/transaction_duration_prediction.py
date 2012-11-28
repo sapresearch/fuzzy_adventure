@@ -4,7 +4,15 @@ from sklearn.linear_model import Ridge
 from sklearn.linear_model import RidgeCV
 import MySQLdb
 from datetime import *
-import numpy
+import numpy as np
+from pybrain.tools.shortcuts import buildNetwork
+from pybrain.datasets import SupervisedDataSet
+from pybrain.supervised.trainers import BackpropTrainer
+from pybrain.structure import TanhLayer
+import time
+
+
+
 
 priorities = ['Very high', 'High', 'Medium', 'Low']
 statuses = ['Confirmed', \
@@ -22,7 +30,7 @@ def get_base_informations():
 	"""
 	Obtain the basic informations needed from the database for the duration prediction
 	"""
-	db = MySQLdb.connect(host="localhost", user="root", passwd="", db="batcave")
+	db = MySQLdb.connect(host="localhost", user="root", passwd="", db="batcave_beta")
 
 	db.query("""SELECT * FROM transactions""")
 	transactions = db.store_result().fetch_row(0)
@@ -54,11 +62,11 @@ def stem_components(components):
 		
 def vectorize_priority(transaction):
 	"""
-	Return a numpy array containing all zeros except for the transaction's priority.
+	Return a np array containing all zeros except for the transaction's priority.
 	This array act as a classifier. Only the priority of the transaction is equal to one,
 	all other priorities are zeros.
 	"""
-	vector = numpy.zeros(len(priorities))
+	vector = np.zeros(len(priorities))
 	priority = transaction[9]
 	for i in range(len(priorities)):
 		vector[i] = int(priorities[i] == priority)
@@ -67,11 +75,11 @@ def vectorize_priority(transaction):
 
 def vectorize_status(transaction):
 	"""
-	Return a numpy array containing all zeros except for the transaction's status.
+	Return a np array containing all zeros except for the transaction's status.
 	This array act as a classifier. Only the status of the transaction is equal to one,
 	all other statuses are zeros.
 	"""
-	vector = numpy.zeros(len(statuses))
+	vector = np.zeros(len(statuses))
 	status = transaction[11]
 	for i in range(len(statuses)):
 		vector[i] = int(statuses[i] == status)
@@ -80,14 +88,15 @@ def vectorize_status(transaction):
 		
 def vectorize_component(transaction):
 	"""
-	Returns a numpy array containing all zeros except for the transaction's component.
+	Returns a np array containing all zeros except for the transaction's component.
 	This array act as a classifier. Only the component of the transaction is equal to one,
 	all other components are zeros.
 	"""
-	vector = numpy.zeros(len(stemmed_components))
-	component_id = transaction[12]
+	vector = np.zeros(len(stemmed_components))
+	component_id = transaction[12] - 1
 	#raw_input(component_id)
 	component = components[component_id]
+
 	#raw_input(component)
 	component = component.split('-')[0]
 	#raw_input(component)
@@ -101,14 +110,17 @@ def build_transaction_features(transaction):
 	Build the transaction's features. This is where new features must be added.
 	At the moment, priority, status and component are beeing considered.
 	"""
-	features = numpy.array([])
-	features = numpy.append(features, vectorize_priority(transaction))
-	features = numpy.append(features, vectorize_status(transaction))
-	features = numpy.append(features, vectorize_component(transaction))
+	features = np.array([])
+	features = np.append(features, vectorize_priority(transaction))
+	features = np.append(features, vectorize_status(transaction))
+	features = np.append(features, vectorize_component(transaction))
 	return features
 
 	
 def get_message_chain(transaction):
+	"""
+	Returns all the messages associated with a transaction as an array
+	"""
 	messages_chain = []
 	first_message_id = int(transaction[14])
 	if first_message_id == -1:
@@ -124,27 +136,48 @@ def get_message_chain(transaction):
 
 
 def get_messages_time_span(messages):
+	"""
+	Based on a list of messages, returns the time elapsed between the first and the last one.
+	"""
 	first_message = messages[0]
 	last_message = messages[-1]
 	return (last_message[3] - first_message[3]).days + 1
 
 	
 def ridgeCV(data, targets):
+	"""
+	Returns a RidgeCV linear model for predictions with alphas [1, 10, 20, 30, 35]
+	Takes the data and the associated targets as arguments.
+	"""
 	model = RidgeCV(alphas=[1, 10, 20, 30, 35])
 	model.fit(data, targets)
 	return model
 	
 def lasso(data, targets):
+	"""
+	Returns a Lasso linear model for predictions with alpha 0.1
+	Takes the data and the associated targets as arguments.
+	"""
 	model = Lasso(alpha=0.1)
 	model.fit(data, targets)
 	return model
 	
 def linear_regression(data, targets):
+	"""
+	Returns a Linear Regression model for predictions.
+	Takes the data and the associated targets as arguments.
+	"""
 	model = LinearRegression()
 	model.fit(data, targets)
 	return model
 	
 def extract_data_from_transactions(transactions):
+	"""
+	From a list of transctions, returns a 2D array of the featured transactions and an array of 
+	the associated targets.
+	The features transactions 2D array is of dimension nbTranscations X nbFeatures
+	The targets array is of dimension nbTransactions X 1
+	"""
 	featured_transactions = []
 	targets = []
 	#transactions = [t for t in transactions if len(get_message_chain(t)) > 0]
@@ -153,13 +186,54 @@ def extract_data_from_transactions(transactions):
 		features = build_transaction_features(transaction)
 		
 		# Add the array of features of that transaction to the test set
-		featured_transactions.append(numpy.array(features))
+		featured_transactions.append(np.array(features))
 		targets.append(get_messages_time_span(get_message_chain(transaction)))
 		
-	featured_transactions = numpy.array(featured_transactions)
-	targets = numpy.array(targets)
+	featured_transactions = np.array(featured_transactions)
+	targets = np.array(targets)
 	
 	return featured_transactions, targets
+	
+	
+def mean_squared_error(model, test_data, test_targets):
+	"""
+	Returns the mean squared error of a model's predictions vs the real targets.
+	"""
+	print "%d targets are greater than 1" % len(test_targets[test_targets > 1])
+	preds = model.predict(test_data)
+
+	squared_sum = 0
+	for i in range(len(preds)):
+		s = "Target: %f | Pred: %f" % (test_targets[i], preds[i])
+		raw_input(s)
+		squared_sum = (preds[i] - test_targets[i])**2
+	
+	mse = (np.mean(squared_sum))**0.5
+	
+	return mse
+	
+
+def score(model, test_data, test_targets):
+	"""
+	Returns a model's score of its predictions vs the real targets
+	"""
+	return model.score(test_data, test_targets)
+	
+	
+def predictions(model, test_data):
+	"""
+	Returns an array of a model's predictions
+	"""
+	return model.predict(test_data)
+	
+	
+def negative_predictions(predictions):
+	"""
+	Returns an array of the negative value predictions. This is informative. Besides knowing
+	how many were negatives there is no use for this function.
+	"""
+	return predictions[predictions < 0]
+
 	
 transactions, messages, components = get_base_informations()
 stemmed_components = stem_components(components)
@@ -169,13 +243,16 @@ transactions = [t for t in transactions if len(get_message_chain(t)) > 0]
 
 featured_transactions, targets = extract_data_from_transactions(transactions)
 
-size = 9
-training_data = [featured_transactions[i] for i in range(len(featured_transactions)) if (i % size != 0)]
-training_targets = [targets[i] for i in range(len(targets)) if (i % size != 0)]
+size = 0.9
+training_size = int(len(featured_transactions) * size)
+test_size = len(featured_transactions) - training_size
+training_data = featured_transactions[:training_size]
+training_targets = targets[:training_size]
 print "%d transactions in the training set" % len(training_data)
 
-test_data = [featured_transactions[i] for i in range(len(featured_transactions)) if (i % size == 0)]
-test_targets = [targets[i] for i in range(len(targets)) if (i % size == 0)]
+test_data = featured_transactions[-test_size:]
+test_targets = targets[-test_size:]
+print len(test_targets[test_targets > 1] )
 print "%d transactions in the test set" % len(test_data)
 
 
@@ -183,59 +260,56 @@ ridge_model = ridgeCV(training_data, training_targets)
 lasso_model = lasso(training_data, training_targets)
 linear_regression_model = linear_regression(training_data, training_targets)
 
-ridge_predictions = ridge_model.predict(test_data)
-lasso_predictions = lasso_model.predict(test_data)
-linear_regression_predictions = linear_regression_model.predict(test_data)
+print "Ridge score: %f" % score(ridge_model, test_data, test_targets)
+print "Lasso score: %f" % score(lasso_model, test_data, test_targets)
+print "Linear score: %f" % score(linear_regression_model, test_data, test_targets)
 
-i = 0
-neg_ridge = []
-for prediction in ridge_predictions:
-	if prediction < 0:
-		neg_ridge.append(prediction)
-		i += 1
+ridge_predictions = predictions(ridge_model, test_data)
+lasso_predictions = predictions(lasso_model, test_data)
+linear_regression_predictions = predictions(linear_regression_model, test_data)
 
-print "%d negative values in ridge predictions" % i
 
-neg_lasso = []		
-i = 0
-for prediction in lasso_predictions:
-	if prediction < 0:
-		neg_lasso.append(prediction)
-		i += 1
-		
-print "%d negative values in lasso predictions" % i
 
-neg_linear = []	
-i = 0	
-for prediction in linear_regression_predictions:
-	if prediction < 0:
-		neg_linear.append(prediction)
-		i += 1
-		
-print "%d negative values in linear regression predictions" % i
+neg_ridge = negative_predictions(ridge_predictions)
+print "%d negative values in ridge predictions" % len(neg_ridge)
+
+neg_lasso = negative_predictions(lasso_predictions)	
+print "%d negative values in lasso predictions" % len(neg_lasso)
+
+neg_linear = negative_predictions(linear_regression_predictions)	
+print "%d negative values in linear regression predictions" % len(neg_linear)
 		
 		
-ridge_squared_error_sum = 0
-lasso_squared_error_sum = 0
-linear_reg_squared_error_sum = 0
-zeros_bench_sum = 0
-for i in range(len(test_data)):
-	ridge_squared_error_sum = (ridge_predictions[i] - test_targets[i])**2
-	lasso_squared_error_sum = (lasso_predictions[i] - test_targets[i])**2
-	linear_reg_squared_error_sum = (linear_regression_predictions[i] - test_targets[i])**2
+ridge_mse = mean_squared_error(ridge_model, test_data, test_targets)
+lasso_mse = mean_squared_error(lasso_model, test_data, test_targets)
+linear_regression_mse = mean_squared_error(linear_regression_model, test_data, test_targets)
 
-print "Mean Squared Error using ridge = %f. Best alpha is %f" % (numpy.mean(ridge_squared_error_sum)**0.5, ridge_model.best_alpha)
-print "Mean Squared Error using lasso = %f" % numpy.mean(lasso_squared_error_sum)**0.5
-print "Mean Squared Error using linear regression = %f" % numpy.mean(linear_reg_squared_error_sum)**0.5
+print "Mean Squared Error using ridge = %f. Best alpha is %f" % (ridge_mse, ridge_model.best_alpha)
+print "Mean Squared Error using lasso = %f" % lasso_mse
+print "Mean Squared Error using linear regression = %f" % linear_regression_mse
 
-for i in range(len(test_data)):
-	ridge_squared_error_sum = (ridge_predictions[i])**2
-	lasso_squared_error_sum = (lasso_predictions[i])**2
-	linear_reg_squared_error_sum = (linear_regression_predictions[i])**2
+
+ridge_squared_error = mean_squared_error(ridge_model, test_data, np.ones(len(test_data)))
+lasso_squared_error = mean_squared_error(lasso_model, test_data, np.ones(len(test_data)))
+linear_reg_squared_error = mean_squared_error(linear_regression_model, test_data, np.ones(len(test_data)))
 	
-print "Zeros bench using ridge = %f" % numpy.mean(ridge_squared_error_sum)**0.5
-print "Zeros bench using lasso = %f" % numpy.mean(lasso_squared_error_sum)**0.5
-print "Zeros bench using linear regression = %f" % numpy.mean(linear_reg_squared_error_sum)**0.5
+print "Ones bench using ridge = %f" % ridge_squared_error
+print "Ones bench using lasso = %f" % lasso_squared_error
+print "Ones bench using linear regression = %f" % linear_reg_squared_error
 
 
 
+#start = time.time()
+#net = buildNetwork(72, 3, 1, hiddenclass = TanhLayer, bias = True)
+#ds = SupervisedDataSet(72, 1)
+
+#for i in range(len(training_data)):
+#	ds.addSample(training_data[i], training_targets[i])
+
+#trainer = BackpropTrainer(net, ds)
+#print trainer.trainUntilConvergence()
+
+#print "Prediceted value:", net.activate(test_data[0])
+#print "Real value:", test_targets[0]
+
+#print "NN took %f seconds with a trainUntilConvergence()" % (time.time()-start)
