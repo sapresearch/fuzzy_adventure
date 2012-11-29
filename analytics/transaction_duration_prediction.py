@@ -34,7 +34,7 @@ def get_base_informations():
 
 	db.query("""SELECT * FROM transactions""")
 	transactions = db.store_result().fetch_row(0)
-	print "%d transactions loaded from the database." % len(transactions)
+	print "\n%d transactions loaded from the database." % len(transactions)
 
 	db.query("""SELECT * FROM messages""")
 	messages = db.store_result().fetch_row(0)
@@ -149,9 +149,10 @@ def ridgeCV(data, targets):
 	Returns a RidgeCV linear model for predictions with alphas [1, 10, 20, 30, 35]
 	Takes the data and the associated targets as arguments.
 	"""
-	model = RidgeCV(alphas=[1, 10, 20, 30, 35])
+	model = RidgeCV(alphas=[1, 10, 30, 60, 100])
 	model.fit(data, targets)
 	return model
+	
 	
 def lasso(data, targets):
 	"""
@@ -162,6 +163,7 @@ def lasso(data, targets):
 	model.fit(data, targets)
 	return model
 	
+	
 def linear_regression(data, targets):
 	"""
 	Returns a Linear Regression model for predictions.
@@ -170,6 +172,7 @@ def linear_regression(data, targets):
 	model = LinearRegression()
 	model.fit(data, targets)
 	return model
+	
 	
 def extract_data_from_transactions(transactions):
 	"""
@@ -195,18 +198,14 @@ def extract_data_from_transactions(transactions):
 	return featured_transactions, targets
 	
 	
-def mean_squared_error(model, test_data, test_targets):
+def mean_squared_error(test_data, test_targets):
 	"""
 	Returns the mean squared error of a model's predictions vs the real targets.
 	"""
-	print "%d targets are greater than 1" % len(test_targets[test_targets > 1])
-	preds = model.predict(test_data)
 
 	squared_sum = 0
-	for i in range(len(preds)):
-		s = "Target: %f | Pred: %f" % (test_targets[i], preds[i])
-		raw_input(s)
-		squared_sum = (preds[i] - test_targets[i])**2
+	for i in range(len(test_data)):
+		squared_sum += (test_data[i] - test_targets[i])**2
 	
 	mse = (np.mean(squared_sum))**0.5
 	
@@ -234,11 +233,12 @@ def negative_predictions(predictions):
 	"""
 	return predictions[predictions < 0]
 
-	
+
 transactions, messages, components = get_base_informations()
 stemmed_components = stem_components(components)
 # Filter the transactions that have no messages.
 # This is done only because the messages are used to determine the duration of a transaction
+# If we had any other way of assuming the duration, we wouldn't have to filter.
 transactions = [t for t in transactions if len(get_message_chain(t)) > 0]
 
 featured_transactions, targets = extract_data_from_transactions(transactions)
@@ -248,11 +248,10 @@ training_size = int(len(featured_transactions) * size)
 test_size = len(featured_transactions) - training_size
 training_data = featured_transactions[:training_size]
 training_targets = targets[:training_size]
-print "%d transactions in the training set" % len(training_data)
+print "\n%d transactions in the training set" % len(training_data)
 
 test_data = featured_transactions[-test_size:]
 test_targets = targets[-test_size:]
-print len(test_targets[test_targets > 1] )
 print "%d transactions in the test set" % len(test_data)
 
 
@@ -260,7 +259,7 @@ ridge_model = ridgeCV(training_data, training_targets)
 lasso_model = lasso(training_data, training_targets)
 linear_regression_model = linear_regression(training_data, training_targets)
 
-print "Ridge score: %f" % score(ridge_model, test_data, test_targets)
+print "\nRidge score: %f" % score(ridge_model, test_data, test_targets)
 print "Lasso score: %f" % score(lasso_model, test_data, test_targets)
 print "Linear score: %f" % score(linear_regression_model, test_data, test_targets)
 
@@ -268,34 +267,32 @@ ridge_predictions = predictions(ridge_model, test_data)
 lasso_predictions = predictions(lasso_model, test_data)
 linear_regression_predictions = predictions(linear_regression_model, test_data)
 
+	
+ridge_mse = mean_squared_error(ridge_predictions, test_targets)
+lasso_mse = mean_squared_error(lasso_predictions, test_targets)
+linear_regression_mse = mean_squared_error(linear_regression_predictions, test_targets)
 
-
-neg_ridge = negative_predictions(ridge_predictions)
-print "%d negative values in ridge predictions" % len(neg_ridge)
-
-neg_lasso = negative_predictions(lasso_predictions)	
-print "%d negative values in lasso predictions" % len(neg_lasso)
-
-neg_linear = negative_predictions(linear_regression_predictions)	
-print "%d negative values in linear regression predictions" % len(neg_linear)
-		
-		
-ridge_mse = mean_squared_error(ridge_model, test_data, test_targets)
-lasso_mse = mean_squared_error(lasso_model, test_data, test_targets)
-linear_regression_mse = mean_squared_error(linear_regression_model, test_data, test_targets)
-
-print "Mean Squared Error using ridge = %f. Best alpha is %f" % (ridge_mse, ridge_model.best_alpha)
+print "\nMean Squared Error using ridge = %f. Best alpha is %f" % (ridge_mse, ridge_model.best_alpha)
 print "Mean Squared Error using lasso = %f" % lasso_mse
 print "Mean Squared Error using linear regression = %f" % linear_regression_mse
 
 
-ridge_squared_error = mean_squared_error(ridge_model, test_data, np.ones(len(test_data)))
-lasso_squared_error = mean_squared_error(lasso_model, test_data, np.ones(len(test_data)))
-linear_reg_squared_error = mean_squared_error(linear_regression_model, test_data, np.ones(len(test_data)))
+
+neg_ridge = negative_predictions(ridge_predictions)
+print "\n%d negative values in ridge predictions" % len(neg_ridge)
+neg_lasso = negative_predictions(lasso_predictions)	
+print "%d negative values in lasso predictions" % len(neg_lasso)
+neg_linear = negative_predictions(linear_regression_predictions)	
+print "%d negative values in linear regression predictions" % len(neg_linear)
+		
+		
+ridge_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
+lasso_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
+lin_reg_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
 	
-print "Ones bench using ridge = %f" % ridge_squared_error
-print "Ones bench using lasso = %f" % lasso_squared_error
-print "Ones bench using linear regression = %f" % linear_reg_squared_error
+print "\nnes bench using ridge = %f" % ridge_mse_bench
+print "Ones bench using lasso = %f" % lasso_mse_bench
+print "Ones bench using linear regression = %f" % lin_reg_mse_bench
 
 
 
