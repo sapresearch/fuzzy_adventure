@@ -203,10 +203,7 @@ def mean_squared_error(test_data, test_targets):
 	Returns the mean squared error of a model's predictions vs the real targets.
 	"""
 
-	squared_sum = 0
-	for i in range(len(test_data)):
-		squared_sum += (test_data[i] - test_targets[i])**2
-	
+	squared_sum = ((test_data - test_targets)**2).sum()
 	mse = (np.mean(squared_sum))**0.5
 	
 	return mse
