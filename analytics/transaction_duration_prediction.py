@@ -30,7 +30,7 @@ def get_base_informations():
 	"""
 	Obtain the basic informations needed from the database for the duration prediction
 	"""
-	db = MySQLdb.connect(host="localhost", user="root", passwd="", db="batcave_beta")
+	db = MySQLdb.connect(host="localhost", user="root", passwd="", db="batcave")
 
 	db.query("""SELECT * FROM transactions""")
 	transactions = db.store_result().fetch_row(0)
@@ -202,9 +202,8 @@ def mean_squared_error(test_data, test_targets):
 	"""
 	Returns the mean squared error of a model's predictions vs the real targets.
 	"""
-
-	squared_sum = ((test_data - test_targets)**2).sum()
-	mse = (np.mean(squared_sum))**0.5
+	squared = ((test_data - test_targets)**2)
+	mse = (np.mean(squared))**0.5
 	
 	return mse
 	
@@ -240,7 +239,7 @@ transactions = [t for t in transactions if len(get_message_chain(t)) > 0]
 
 featured_transactions, targets = extract_data_from_transactions(transactions)
 
-size = 0.9
+size = 0.7
 training_size = int(len(featured_transactions) * size)
 test_size = len(featured_transactions) - training_size
 training_data = featured_transactions[:training_size]
@@ -281,13 +280,13 @@ neg_lasso = negative_predictions(lasso_predictions)
 print "%d negative values in lasso predictions" % len(neg_lasso)
 neg_linear = negative_predictions(linear_regression_predictions)	
 print "%d negative values in linear regression predictions" % len(neg_linear)
-		
-		
+
+
 ridge_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
 lasso_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
 lin_reg_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
 	
-print "\nnes bench using ridge = %f" % ridge_mse_bench
+print "\nOnes bench using ridge = %f" % ridge_mse_bench
 print "Ones bench using lasso = %f" % lasso_mse_bench
 print "Ones bench using linear regression = %f" % lin_reg_mse_bench
 
