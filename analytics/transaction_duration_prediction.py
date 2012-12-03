@@ -250,7 +250,7 @@ test_data = featured_transactions[-test_size:]
 test_targets = targets[-test_size:]
 print "%d transactions in the test set" % len(test_data)
 
-
+"""
 ridge_model = ridgeCV(training_data, training_targets)
 lasso_model = lasso(training_data, training_targets)
 linear_regression_model = linear_regression(training_data, training_targets)
@@ -289,20 +289,28 @@ lin_reg_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
 print "\nOnes bench using ridge = %f" % ridge_mse_bench
 print "Ones bench using lasso = %f" % lasso_mse_bench
 print "Ones bench using linear regression = %f" % lin_reg_mse_bench
+"""
+
+print "\n", "~" * 50
+print "\tNEURAL NETWORK"
+print "~" * 50
+
+for j in range(1,100):
+	f = file('result.txt','a')
+	start = time.time()
+	net = buildNetwork(72, 3, 1, hiddenclass = TanhLayer, bias = True)
+	ds = SupervisedDataSet(72, 1)
 
 
+	for i in range(len(training_data[:20 * j])):
+		ds.addSample(training_data[i], training_targets[i])
 
-#start = time.time()
-#net = buildNetwork(72, 3, 1, hiddenclass = TanhLayer, bias = True)
-#ds = SupervisedDataSet(72, 1)
 
-#for i in range(len(training_data)):
-#	ds.addSample(training_data[i], training_targets[i])
+	trainer = BackpropTrainer(net, ds)
+	print trainer.trainUntilConvergence()
 
-#trainer = BackpropTrainer(net, ds)
-#print trainer.trainUntilConvergence()
-
-#print "Prediceted value:", net.activate(test_data[0])
-#print "Real value:", test_targets[0]
-
-#print "NN took %f seconds with a trainUntilConvergence()" % (time.time()-start)
+	#f.write("Predicted value: %f" % net.activate(test_data[0]))
+	#f.write("Real value:" % test_targets[0])
+	f.write("\nSize: %d\n" % (20 * j))
+	f.write("NN took %f seconds with a trainUntilConvergence()\n" % (time.time()-start))
+	f.close()
