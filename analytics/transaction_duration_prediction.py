@@ -11,6 +11,7 @@ from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.structure import TanhLayer
 import time
 
+import NN_weights_persistence
 
 
 
@@ -295,22 +296,23 @@ print "\n", "~" * 50
 print "\tNEURAL NETWORK"
 print "~" * 50
 
-for j in range(1,100):
-	f = file('result.txt','a')
-	start = time.time()
-	net = buildNetwork(72, 3, 1, hiddenclass = TanhLayer, bias = True)
-	ds = SupervisedDataSet(72, 1)
+
+f = file('result.txt','a')
+start = time.time()
+net = buildNetwork(72, 3, 1, hiddenclass = TanhLayer, bias = True)
+ds = SupervisedDataSet(72, 1)
 
 
-	for i in range(len(training_data[:20 * j])):
-		ds.addSample(training_data[i], training_targets[i])
+for i in range(len(training_data)):
+	ds.addSample(training_data[i], training_targets[i])
 
 
-	trainer = BackpropTrainer(net, ds)
-	print trainer.trainUntilConvergence()
+trainer = BackpropTrainer(net, ds)
+print trainer.trainUntilConvergence()
 
-	#f.write("Predicted value: %f" % net.activate(test_data[0]))
-	#f.write("Real value:" % test_targets[0])
-	f.write("\nSize: %d\n" % (20 * j))
-	f.write("NN took %f seconds with a trainUntilConvergence()\n" % (time.time()-start))
-	f.close()
+NN_weights_persistence.dump(net.params)
+
+#f.write("Predicted value: %f" % net.activate(test_data[0]))
+#f.write("Real value:" % test_targets[0])
+f.write("NN took %f seconds with a trainUntilConvergence()\n" % (time.time()-start))
+f.close()

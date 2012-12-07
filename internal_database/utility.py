@@ -1,4 +1,4 @@
-import MySQLdb
+import MySQLdb as mdb
 import pickle
 from collections import Counter
 import os
@@ -7,7 +7,7 @@ from persistence import *
 
 	
 def escape_string(string):
-	return str(MySQLdb.escape_string(string))
+	return str(mdb.escape_string(string))
 	
 	
 def camel_case(string):
@@ -54,9 +54,6 @@ def print_stats(db):
 	rows = db.store_result().fetch_row(0)
 	print "%d components in the database" % len(rows)
 
-	db.query("""SELECT * FROM messages""")
-	rows = db.store_result().fetch_row(0)
-	print "%d messages in the database" % len(rows)
 	
 	
 def arguments_parser():
@@ -84,3 +81,7 @@ def arguments_parser():
 	database = args.database
 	
 	return update, delete, directory_name, database
+	
+	
+def open_database(database):
+	return mdb.connect(host="localhost", user="root", passwd="", db=database)

@@ -52,15 +52,14 @@ def insert_all_transactions(transactions):
 	for transaction in transactions:
 		insert_transaction(transaction)
 		count += 1
-		#duration = pretty_print_duration(int(time.time() - start_count))
 		print "\t%d%% completed\r" % ((count * 100 / nb_transactions)),
 
 	print "%s to complete the insertion process.\n" % pretty_print_duration(time.time() - start_count)
 
 	
 def insert_transaction(transaction):
-
-	transaction_number = transaction.transaction_number
+	
+	transaction_number = transaction.trans_number
 	# Increment the count of the transaction for futur reference
 	transactions_treated[transaction_number] += 1
 	
@@ -69,57 +68,34 @@ def insert_transaction(transaction):
 		# If so, the early return
 		return None
 
-	programmer = camel_case(transaction.message_attributes['Processor'])
+	programmer = camel_case(transaction.processor)
 	programmer = escape_string(programmer)
 	programmer_id = insert_programmer(programmer)
 	
-	recipient = escape_string(transaction.origins['Recipient'])
-	sender = escape_string(transaction.origins['Sender'])
-	short_text = escape_string(transaction.short_text)
-	client = escape_string(transaction.system['Client'])
-	system_release = escape_string(transaction.system['Release'])
-	system = escape_string(transaction.system['System'])
-	priority = escape_string(transaction.message_attributes['Priority'])
-	language = escape_string(transaction.message_attributes['Language'])
-	status = escape_string(transaction.message_attributes['Status'])
-	
-	component = escape_string(transaction.message_attributes['Component'])
+	start_date = transaction.start_date
+	end_date = transaction.end_date
+	status = escape_string(transaction.status)
+	priority = transaction.priority
+	component = escape_string(transaction.component)
 	component_id = insert_component(component)
-	
-	description = escape_string(transaction.description)
-	message_id = insert_messages(transaction.messages) #Fill Messages table first
-	
+
 	sql = \
 		"""INSERT INTO transactions 
 					(trans_number, 
 					programmer_id,
-					recipient, 
-					sender, 
-					short_text, 
-					client, 
-					system_release, 
-					system, 
-					priority, 
-					language, 
+					start_date,
+					end_date,
 					status,
-					component_id,
-					description,
-					message_id) 
-		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, '%s', %d)""" \
+					priority,
+					component_id) 
+		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', %d)""" \
 					%(transaction_number, \
 					programmer_id, \
-					recipient, \
-					sender, \
-					short_text, \
-					client, \
-					system_release, \
-					system, \
-					priority, \
-					language, \
+					start_date, \
+					end_date, \
 					status,  \
-					component_id, \
-					description, \
-					message_id)
+					priority, \
+					component_id)
 
 	try:
 		db.query(sql)
@@ -156,61 +132,6 @@ def insert_component(component):
 	return db.insert_id()
 
 	
-def insert_messages(messages):
-	# messages is an array of dictionnary containing the information of every message
-	if(len(messages) == 0):
-		return -1
-	
-	message = messages[0]
-	
-	sql = create_single_message_query(message)
-	db.query(sql)
-	first_message_id = db.insert_id()
-	previous_insertion_id = first_message_id
-
-	for i in range(1, len(messages)):
-		message = messages[i]
-		sql = create_single_message_query(message)
-		db.query(sql)
-		
-		# Update the parent message with the reply_id
-		reply_id = db.insert_id()
-		sql = """UPDATE messages SET reply_id=%d WHERE id=%d""" % (reply_id, previous_insertion_id)
-		db.query(sql)
-		
-		# Make the currently inserted message the previous_insertion_id
-		previous_insertion_id = reply_id
-	
-	return first_message_id
-
-
-def create_single_message_query(message):
-	# reply_id is left out. It will be added in insert_messages
-	
-	type = escape_string(message['Type'])
-	
-	author = message['Author']
-	author = escape_string(camel_case(author))
-
-	date = message['Date']
-	if date == '':
-		print message
-	date = datetime.strptime(date,"%d.%m.%Y %H:%M:%S")
-		
-	body = escape_string(message['Body'])
-	
-	sql = \
-		"""INSERT INTO messages 
-					(type, author, date, body) 
-		VALUES		('%s', '%s', '%s', '%s')""" \
-					%(type, \
-					author, \
-					date, \
-					body)
-
-	return sql
-
-
 update, delete, directory_name, database = arguments_parser()
 db = MySQLdb.connect(host="localhost",user="root",passwd="",db=database)
 set_persistences(database)

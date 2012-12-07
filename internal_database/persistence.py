@@ -30,7 +30,7 @@ class CounterPersistence(object):
 		try:
 			file = open(self.path(), 'rb')
 			self.persistence = pickle.load(file)
-			print "-> '%s loaded' from file" % self.path()
+			print "-> '%s' loaded from file" % self.path()
 			file.close()
 		except IOError:
 			self.persistence = Counter()
