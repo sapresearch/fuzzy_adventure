@@ -1,0 +1,13 @@
+
+100000 transactions loaded from the database.
+14603 programmers
+5 priority levels
+13 different status
+45 contract priority levels
+425 different products
+62 component families in the database
+86941 featured transactions
+15153 features for a transaction
+
+60858 transactions in the training set
+26083 transactions in the test set

@@ -182,3 +182,27 @@ NN took 11848.017277 seconds with a trainUntilConvergence()
 
 Size: 1240
 NN took 25190.591470 seconds with a trainUntilConvergence()
+
+Size: 1280
+NN took 71340.879439 seconds with a trainUntilConvergence()
+
+Size: 1300
+NN took 12797.547084 seconds with a trainUntilConvergence()
+
+Size: 1320
+NN took 76839.346140 seconds with a trainUntilConvergence()
+
+Size: 1340
+NN took 17435.855719 seconds with a trainUntilConvergence()
+
+Size: 1360
+NN took 1748.519530 seconds with a trainUntilConvergence()
+
+Size: 1380
+NN took 28948.033820 seconds with a trainUntilConvergence()
+
+Size: 1400
+NN took 26510.212849 seconds with a trainUntilConvergence()
+
+Size: 1420
+NN took 680.619876 seconds with a trainUntilConvergence()
