@@ -18,14 +18,16 @@ def drop_tables(db):
 	
 def create_transactions_table(db):
 	sql = """CREATE TABLE transactions( 
-		id             INT NOT NULL AUTO_INCREMENT, 
-		trans_number   VARCHAR(50), 
-		programmer_id  INT, 
-		start_date     DATE, 
-		end_date	   DATE,
-		status         VARCHAR(30), 
-		priority	   VARCHAR(20),
-		component_id   INT, 
+		id                INT NOT NULL AUTO_INCREMENT, 
+		trans_number      VARCHAR(50), 
+		programmer_id     INT, 
+		start_date        DATE, 
+		end_date	      DATE,
+		status            VARCHAR(30), 
+		priority	      VARCHAR(20),
+		contract_priority VARCHAR(10),
+		product           VARCHAR (30),
+		component_id      INT, 
 		PRIMARY KEY (id), 
 		FOREIGN KEY (programmer_id) REFERENCES programmers(id), 
 		FOREIGN KEY (component_id) REFERENCES components(id))""" 

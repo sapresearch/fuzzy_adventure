@@ -25,3 +25,12 @@ def get_transaction_status(transaction):
 	
 def get_transaction_priority(transaction):
 	return transaction['Priority']
+	
+
+def get_contract_priority(transaction):
+	return transaction['Contract Priority']	
+	
+	
+def get_product(transaction):
+	return transaction['Product']
+	

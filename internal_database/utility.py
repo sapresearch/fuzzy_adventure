@@ -60,17 +60,17 @@ def arguments_parser():
 	parser = argparse.ArgumentParser()
 	group = parser.add_mutually_exclusive_group()
 	
-	group.add_argument('-u', action='store_true', default = False, \
+	group.add_argument('-u', action='store_true', default=False, \
 		help="""Update the persistence lists of the informations in the database. 
 		Use in case you suspect the database is not up-to-date.""")
 		
-	group.add_argument('-d', action='store_true', default = False,\
+	group.add_argument('-d', action='store_true', default=False,\
 		help='Delete the database and start from scratch.')
 		
 	parser.add_argument('-directory', required=True, \
 	help='The directory containing the files to import in the database.')
 	
-	parser.add_argument('-database', default='batcave', \
+	parser.add_argument('-database', required=True, default='batcave', \
 	help='The database in which to perform the import of all transactions.')
 	
 	args = parser.parse_args()	

@@ -76,6 +76,8 @@ def insert_transaction(transaction):
 	end_date = transaction.end_date
 	status = escape_string(transaction.status)
 	priority = transaction.priority
+	contract_priority = transaction.contract_priority
+	product = transaction.product
 	component = escape_string(transaction.component)
 	component_id = insert_component(component)
 
@@ -87,14 +89,18 @@ def insert_transaction(transaction):
 					end_date,
 					status,
 					priority,
+					contract_priority,
+					product,
 					component_id) 
-		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', %d)""" \
+		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s', %d)""" \
 					%(transaction_number, \
 					programmer_id, \
 					start_date, \
 					end_date, \
 					status,  \
 					priority, \
+					contract_priority, \
+					product, \
 					component_id)
 
 	try:

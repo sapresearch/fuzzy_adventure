@@ -1,5 +1,6 @@
 import numpy as np
 from datetime import datetime
+from transactionFields import *
 
 
 def import_transactions_from_file(file_name):
@@ -87,5 +88,4 @@ def transformIntoDate(string):
 		return date
 	except ValueError:
 		return string
-
 

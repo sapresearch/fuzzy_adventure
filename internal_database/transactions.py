@@ -13,8 +13,10 @@ class Transaction(object):
 		self.end_date = None
 		self.status = None 
 		self.priority = None
+		self.contract_priority = None
+		self.product = None
 
-		
+#|Short text  |Pointers  |Escalating|Planned Organization|Customer Calls |Operating |SolMan Type|System ID |System ID |Start of Escalation |Overrun Flag   |Active SAP Status|Escalation Type|Hold Flag |Solving Level |Attribute |24h Flag|Corporation         |Escalating Level    |Fast Track|R/3 Install. Number |Year|		
 	@staticmethod
 	def load_transactions(file_name):
 		start = time.time()
@@ -29,6 +31,8 @@ class Transaction(object):
 			end_date = tf.get_transaction_end_date(raw_transaction)
 			status = tf.get_transaction_status(raw_transaction)
 			priority = tf.get_transaction_priority(raw_transaction)
+			contract_priority = tf.get_contract_priority(raw_transaction)
+			product = tf.get_product(raw_transaction)
 			
 			# Create the object
 			transaction = Transaction()
@@ -39,6 +43,8 @@ class Transaction(object):
 			transaction.end_date = end_date 
 			transaction.status = status 
 			transaction.priority = priority
+			transaction.contract_priority = contract_priority
+			transaction.product = product
 
 			# Add the objects to the transactions list
 			transactions.append(transaction)
