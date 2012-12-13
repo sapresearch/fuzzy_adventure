@@ -22,7 +22,6 @@ def dump(persistence):
 		file = open('NN_weights.p', 'wb')
 		pickle.dump(persistence, file)
 		# Make it none accessible after dumping it. Forcing the use of load() afterward
-
 		file.close()
 	except pickle.PickleError:
 		print "A problem occured with dumping the persistance.\
@@ -30,4 +29,3 @@ def dump(persistence):
 		
 		
 
-dump(load())

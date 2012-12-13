@@ -13,6 +13,10 @@ import time
 
 import NN_weights_persistence
 
+# Vectorization librairies
+import featured_transaction as ft
+from sklearn.feature_extraction import DictVectorizer
+from scipy.sparse import csr_matrix
 
 
 priorities = []
@@ -30,56 +34,38 @@ def get_base_informations():
 	"""
 	db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
 
-	db.query("""SELECT * FROM transactions LIMIT 100000""")
+	db.query("""SELECT *, programmers.name, components.name 
+	FROM transactions, programmers, components 
+	WHERE programmer_id = programmers.id AND component_id = components.id 
+	LIMIT 100000""")
 	transactions = db.store_result().fetch_row(0,1)
+
+	# Filter the transactions that have no end date.
+	transactions = [t for t in transactions if t['end_date'] is not None]
 	print "\n%d transactions loaded from the database." % len(transactions)
 
 	db.query("""SELECT * FROM components""")
 	rows = db.store_result().fetch_row(0,1)
-	components = [row['name'] for row in rows]
-	
-	db.query("""SELECT * FROM programmers""")
-	rows = db.store_result().fetch_row(0,1)
-	programmers = [row['name'] for row in rows]
+	#components = [row['name'] for row in rows]
+	components = list(set([transaction['components.name'] for transaction in transactions]))
+	print "%d components" % len(components)
+	programmers = list(set([transaction['programmers.name'] for transaction in transactions]))
 	print "%d programmers" % len(programmers)
 	
-	priorities = priority_set(db)
+
+	priorities = list(set([transaction['priority'] for transaction in transactions]))
 	print "%d priority levels" % len(priorities)
-	statuses = status_set(db)
+	statuses = list(set([transaction['status'] for transaction in transactions]))
 	print "%d different status" % len(statuses)
-	contract_priorities = contract_priority_set(db)
+	contract_priorities = list(set([transaction['contract_priority'] for transaction in transactions]))
 	print "%d contract priority levels" % len(contract_priorities)
-	products = product_set(db)
+	products = list(set([transaction['product'] for transaction in transactions]))
 	print "%d different products" % len(products)
 	db.close()
 	
 	return transactions, components
 	
 
-def priority_set(db):
-	db.query("""SELECT priority FROM transactions""")
-	rows = db.store_result().fetch_row(0,1)
-	return list(set([row['priority'] for row in rows]))
-
-
-def status_set(db):
-	db.query("""SELECT status FROM transactions""")
-	rows = db.store_result().fetch_row(0,1)
-	return list(set([row['status'] for row in rows])	)
-	
-	
-def contract_priority_set(db):
-	db.query("""SELECT contract_priority FROM transactions""")
-	rows = db.store_result().fetch_row(0,1)
-	return list(set([row['contract_priority'] for row in rows]))
-
-	
-def product_set(db):
-	db.query("""SELECT product FROM transactions""")
-	rows = db.store_result().fetch_row(0,1)
-	return list(set([row['product'] for row in rows]))
-	
-	
 def stem_components(components):
 	"""
 	Return a list containing all the components stem.
@@ -204,10 +190,10 @@ def transaction_duration(transaction):
 	
 def ridgeCV(data, targets):
 	"""
-	Returns a RidgeCV linear model for predictions with alphas [1, 10, 20, 30, 35]
+	Returns a RidgeCV linear model for predictions with alphas [1, 10, 50, 100, 1000]
 	Takes the data and the associated targets as arguments.
 	"""
-	model = RidgeCV(alphas=[1, 10, 30, 60, 100])
+	model = RidgeCV(alphas=[1, 10, 1000])
 	model.fit(data, targets)
 	return model
 	
@@ -245,19 +231,21 @@ def extract_data_from_transactions(transactions):
 
 	nb_transactions = len(transactions)
 	modulo = nb_transactions / 100
-	count = 0;
+
 	for transaction in transactions:
-		features = build_transaction_features(transaction)
-		#print "\t%d%% completed\r" % (count / modulo),
+		#features = build_transaction_features(transaction)
+		features = ft.FeaturedTransaction(transaction).as_dict()
+
 		# Add the array of features of that transaction to the set
-		count += 1
 		featured_transactions.append(features)
 		targets.append(transaction_duration(transaction))
 	
 	
-	featured_transactions = np.array(featured_transactions)
+	#featured_transactions = np.array(featured_transactions)
 	targets = np.array(targets)
-	
+	vec = DictVectorizer()
+	featured_transactions = vec.fit_transform(featured_transactions)
+
 	
 	return featured_transactions, targets
 	
@@ -295,32 +283,34 @@ def negative_predictions(predictions):
 
 
 transactions, components = get_base_informations()
-stemmed_components = stem_components(components)
-
-# Filter the transactions that have no messages.
-# This is done only because the messages are used to determine the duration of a transaction
-# If we had any other way of assuming the duration, we wouldn't have to filter.
-transactions = [t for t in transactions if t['end_date'] is not None]
+#stemmed_components = stem_components(components)
 
 featured_transactions, targets = extract_data_from_transactions(transactions)
+featured_transactions_as_array = featured_transactions.todense()
 
-print "%d featured transactions" % len(featured_transactions)
-print "%d features for a transaction" % len(featured_transactions[0])
+
+print "\n%d featured transactions" % featured_transactions.shape[0]
+print "%d features for a transaction" % featured_transactions.shape[1]
+
 
 size = 0.7
-training_size = int(len(featured_transactions) * size)
-test_size = len(featured_transactions) - training_size
-training_data = featured_transactions[:training_size]
-training_targets = targets[:training_size]
-print "\n%d transactions in the training set" % len(training_data)
 
-test_data = featured_transactions[-test_size:]
+training_size = int(len(featured_transactions_as_array) * size)
+test_size = len(featured_transactions_as_array) - training_size
+
+training_data = csr_matrix(featured_transactions_as_array[:training_size])
+training_targets = targets[:training_size]
+
+
+print "\n%d transactions in the training set" % len(training_data.toarray())
+
+test_data = csr_matrix(featured_transactions_as_array[-test_size:])
 test_targets = targets[-test_size:]
-print "%d transactions in the test set" % len(test_data)
+print "%d transactions in the test set" % len(test_data.toarray())
 
 start = time.time()
 ridge_model = ridgeCV(training_data, training_targets)
-print "Took %s seconds to complete ridge model with %d training examples" %(time.time() - start, len(training_data))
+print "Took %s seconds to complete ridge model with %d training examples" %(time.time() - start, len(training_data.toarray()))
 #lasso_model = lasso(training_data, training_targets)
 #linear_regression_model = linear_regression(training_data, training_targets)
 
@@ -351,13 +341,10 @@ print "\n%d negative values in ridge predictions" % len(neg_ridge)
 #print "%d negative values in linear regression predictions" % len(neg_linear)
 
 
-ridge_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
-#lasso_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
-#lin_reg_mse_bench = mean_squared_error(np.ones(len(test_data)), test_targets)
-	
-print "\nOnes bench using ridge = %f" % ridge_mse_bench
-#print "Ones bench using lasso = %f" % lasso_mse_bench
-#print "Ones bench using linear regression = %f" % lin_reg_mse_bench
+mse_bench = mean_squared_error(np.ones(len(test_data.toarray())), test_targets)
+print "\nBench using 1 as predicted value for all test set = %f" % mse_bench
+
+
 
 """
 print "\n", "~" * 50
