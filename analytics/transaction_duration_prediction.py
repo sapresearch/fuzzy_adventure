@@ -19,51 +19,24 @@ from sklearn.feature_extraction import DictVectorizer
 from scipy.sparse import csr_matrix
 
 
-priorities = []
-statuses = []
-programmers = []
-contract_priorities = []
-products = []
-
-
-
-def get_base_informations():
-	global priorities, statuses, programmers, contract_priorities, products
-	"""
-	Obtain the basic informations needed from the database for the duration prediction
-	"""
+def get_transactions():
+	if transactions is not None:
+		return transcations
+		
 	db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
-
 	db.query("""SELECT *, programmers.name, components.name 
 	FROM transactions, programmers, components 
 	WHERE programmer_id = programmers.id AND component_id = components.id 
 	LIMIT 100000""")
 	transactions = db.store_result().fetch_row(0,1)
-
-	# Filter the transactions that have no end date.
+	db.close()
+	
+	# Filter the transactions that have no end date. We only need the transactions that we can
+	# create a label.
 	transactions = [t for t in transactions if t['end_date'] is not None]
 	print "\n%d transactions loaded from the database." % len(transactions)
 
-	db.query("""SELECT * FROM components""")
-	rows = db.store_result().fetch_row(0,1)
-	#components = [row['name'] for row in rows]
-	components = list(set([transaction['components.name'] for transaction in transactions]))
-	print "%d components" % len(components)
-	programmers = list(set([transaction['programmers.name'] for transaction in transactions]))
-	print "%d programmers" % len(programmers)
-	
-
-	priorities = list(set([transaction['priority'] for transaction in transactions]))
-	print "%d priority levels" % len(priorities)
-	statuses = list(set([transaction['status'] for transaction in transactions]))
-	print "%d different status" % len(statuses)
-	contract_priorities = list(set([transaction['contract_priority'] for transaction in transactions]))
-	print "%d contract priority levels" % len(contract_priorities)
-	products = list(set([transaction['product'] for transaction in transactions]))
-	print "%d different products" % len(products)
-	db.close()
-	
-	return transactions, components
+	return transactions
 		
 	
 def transaction_duration(transaction):
@@ -112,7 +85,6 @@ def vectorize_data(transactions):
 	The features transactions 2D array is of dimension nbTranscations X nbFeatures
 	The targets array is of dimension nbTransactions X 1
 	"""
-
 	featured_transactions = []
 	targets = []
 
@@ -132,7 +104,7 @@ def vectorize_data(transactions):
 	
 	return featured_transactions, targets
 	
-	
+
 def mean_squared_error(test_data, test_targets):
 	"""
 	Returns the mean squared error of a model's predictions vs the real targets.
@@ -165,7 +137,7 @@ def negative_predictions(predictions):
 	return predictions[predictions < 0]
 
 
-transactions, components = get_base_informations()
+transactions = get_transactions()
 
 featured_transactions, targets = vectorize_data(transactions)
 featured_transactions_as_array = featured_transactions.todense()
