@@ -64,17 +64,6 @@ def get_base_informations():
 	db.close()
 	
 	return transactions, components
-	
-
-def stem_components(components):
-	"""
-	Return a list containing all the components stem.
-	A component stem is the top hierarchy for that component's family.
-	e.g. SRD-CC-IAM is SRD
-	"""
-	component_set = set([component.split('-')[0] for component in components])
-	print "%d component families in the database" % len(component_set)
-	return list(component_set)
 		
 	
 def transaction_duration(transaction):
@@ -116,7 +105,7 @@ def linear_regression(data, targets):
 	return model
 	
 	
-def extract_data_from_transactions(transactions):
+def vectorize_data(transactions):
 	"""
 	From a list of transctions, returns a 2D array of the featured transactions and an array of 
 	the associated targets.
@@ -128,7 +117,6 @@ def extract_data_from_transactions(transactions):
 	targets = []
 
 	for transaction in transactions:
-
 		features = ft.FeaturedTransaction(transaction).as_dict()
 
 		# Add the array of features of that transaction to the set
@@ -178,9 +166,8 @@ def negative_predictions(predictions):
 
 
 transactions, components = get_base_informations()
-#stemmed_components = stem_components(components)
 
-featured_transactions, targets = extract_data_from_transactions(transactions)
+featured_transactions, targets = vectorize_data(transactions)
 featured_transactions_as_array = featured_transactions.todense()
 
 

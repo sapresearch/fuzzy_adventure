@@ -17,3 +17,17 @@ class FeaturedTransaction(object):
 		features['Product'] = self.transaction['product']
 	
 		return features
+		
+		
+	def stem_component(component):
+		"""
+		Return the component stem.
+		A component stem is the top hierarchy for that component's family.
+		e.g. SRD-CC-IAM is SRD
+		"""
+		stem = component.split('-')[0]
+		
+		if stem == "" or stem is None:
+			raise ValueError
+		
+		return stem
