@@ -77,108 +77,6 @@ def stem_components(components):
 	return list(component_set)
 		
 	
-def vectorize_programmer(transaction):
-	"""
-	Return a np array containing all zeros except for the transaction's programmer.
-	This array act as a classifier. Only the programmer of the transaction is equal to one,
-	all other programmers are zeros.
-	"""
-	vector = np.zeros(len(programmers))
-	programmer = transaction['priority']
-	for i in range(len(programmers)):
-		vector[i] = int(programmers[i] == programmer)
-	return vector
-
-
-def vectorize_priority(transaction):
-	"""
-	Return a np array containing all zeros except for the transaction's priority.
-	This array act as a classifier. Only the priority of the transaction is equal to one,
-	all other priorities are zeros.
-	"""
-
-	vector = np.zeros(len(priorities))
-	priority = transaction['priority']
-	for i in range(len(priorities)):
-		vector[i] = int(priorities[i] == priority)
-	return vector
-
-
-def vectorize_status(transaction):
-	"""
-	Return a np array containing all zeros except for the transaction's status.
-	This array act as a classifier. Only the status of the transaction is equal to one,
-	all other statuses are zeros.
-	"""
-	vector = np.zeros(len(statuses))
-	status = transaction['status']
-	for i in range(len(statuses)):
-		vector[i] = int(statuses[i] == status)
-	return vector
-		
-		
-def vectorize_component(transaction):
-	"""
-	Returns a np array containing all zeros except for the transaction's component.
-	This array act as a classifier. Only the component of the transaction is equal to one,
-	all other components are zeros.
-	"""
-	vector = np.zeros(len(stemmed_components))
-	component_id = transaction['component_id'] - 1
-
-	component = components[component_id]
-
-
-	component = component.split('-')[0]
-
-	for i in range(len(stemmed_components)):
-		vector[i] = int(stemmed_components[i] == component)
-	return vector
-		
-
-def vectorize_contract_priority(transaction):
-	"""
-	Return a np array containing all zeros except for the transaction's contract priorities.
-	This array act as a classifier. Only the contract priority of the transaction is equal to one,
-	all other contract priorities are zeros.
-	"""
-	vector = np.zeros(len(contract_priorities))
-	contract_priority = transaction['contract_priority']
-	for i in range(len(contract_priorities)):
-		vector[i] = int(contract_priorities[i] == contract_priority)
-	return vector
-	
-	
-def vectorize_product(transaction):
-	"""
-	Return a np array containing all zeros except for the transaction's product.
-	This array act as a classifier. Only the product of the transaction is equal to one,
-	all other contract products are zeros.
-	"""
-	vector = np.zeros(len(products))
-	product = transaction['product']
-	for i in range(len(products)):
-		vector[i] = int(products[i] == product)
-	return vector
-	
-	
-def build_transaction_features(transaction):
-	"""
-	Build the transaction's features. This is where new features must be added.
-	At the moment, priority, status and component are beeing considered.
-	"""
-	features = np.array([])
-	features = np.append(features, vectorize_priority(transaction))
-	features = np.append(features, vectorize_status(transaction))
-	features = np.append(features, vectorize_component(transaction))
-	features = np.append(features, vectorize_programmer(transaction))
-	features = np.append(features, vectorize_contract_priority(transaction))
-	features = np.append(features, vectorize_product(transaction))
-	
-	len(features)
-	return features
-
-
 def transaction_duration(transaction):
 	"""
 	Based on a list of messages, returns the time elapsed between the first and the last one.
@@ -193,7 +91,7 @@ def ridgeCV(data, targets):
 	Returns a RidgeCV linear model for predictions with alphas [1, 10, 50, 100, 1000]
 	Takes the data and the associated targets as arguments.
 	"""
-	model = RidgeCV(alphas=[1, 10, 1000])
+	model = RidgeCV(alphas=[1, 10, 50, 100, 1000])
 	model.fit(data, targets)
 	return model
 	
@@ -229,11 +127,8 @@ def extract_data_from_transactions(transactions):
 	featured_transactions = []
 	targets = []
 
-	nb_transactions = len(transactions)
-	modulo = nb_transactions / 100
-
 	for transaction in transactions:
-		#features = build_transaction_features(transaction)
+
 		features = ft.FeaturedTransaction(transaction).as_dict()
 
 		# Add the array of features of that transaction to the set
