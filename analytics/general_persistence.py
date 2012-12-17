@@ -12,7 +12,7 @@ def load(file_name):
 		file.close()
 	except IOError:
 		persistence = []
-
+		
 	return persistence
 	
 	

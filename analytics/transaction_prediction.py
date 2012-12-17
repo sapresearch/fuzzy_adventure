@@ -39,6 +39,7 @@ class TransactionPrediction():
 			data.append(t_data)
 			targets.append(t.duration())
 
+		
 		# Scale each feature.
 		# Find the max item fo reach feature and scale.
 		num_of_features = len(data[0])

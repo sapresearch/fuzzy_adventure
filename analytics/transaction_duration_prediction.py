@@ -2,6 +2,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Lasso
 from sklearn.linear_model import Ridge
 from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import ElasticNet
 import MySQLdb
 from datetime import *
 import numpy as np
@@ -19,15 +20,13 @@ from sklearn.feature_extraction import DictVectorizer
 from scipy.sparse import csr_matrix
 
 
-def get_transactions():
-	if transactions is not None:
-		return transcations
+def get_transactions(nb_trans):
 		
 	db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
 	db.query("""SELECT *, programmers.name, components.name 
 	FROM transactions, programmers, components 
 	WHERE programmer_id = programmers.id AND component_id = components.id 
-	LIMIT 100000""")
+	LIMIT %d""" % nb_trans)
 	transactions = db.store_result().fetch_row(0,1)
 	db.close()
 	
@@ -48,6 +47,12 @@ def transaction_duration(transaction):
 	return (end_date - start_date).days + 1
 
 	
+def elastic_net(data, targets):
+	model = ElasticNet(alpha=1, rho=0.7)
+	model.fit(data, targets)
+	return model
+
+
 def ridgeCV(data, targets):
 	"""
 	Returns a RidgeCV linear model for predictions with alphas [1, 10, 50, 100, 1000]
@@ -122,7 +127,7 @@ def score(model, test_data, test_targets):
 	return model.score(test_data, test_targets)
 	
 	
-def predictions(model, test_data):
+def model_predictions(model, test_data):
 	"""
 	Returns an array of a model's predictions
 	"""
@@ -137,68 +142,61 @@ def negative_predictions(predictions):
 	return predictions[predictions < 0]
 
 
-transactions = get_transactions()
+def main(nb_transactions):
 
-featured_transactions, targets = vectorize_data(transactions)
-featured_transactions_as_array = featured_transactions.todense()
+	
+	transactions = get_transactions(nb_transactions)
 
-
-print "\n%d featured transactions" % featured_transactions.shape[0]
-print "%d features for a transaction" % featured_transactions.shape[1]
-
-
-size = 0.7
-
-training_size = int(len(featured_transactions_as_array) * size)
-test_size = len(featured_transactions_as_array) - training_size
-
-training_data = csr_matrix(featured_transactions_as_array[:training_size])
-training_targets = targets[:training_size]
+	featured_transactions, targets = vectorize_data(transactions)
+	featured_transactions_as_array = featured_transactions.todense()
 
 
-print "\n%d transactions in the training set" % len(training_data.toarray())
+	print "\n%d featured transactions" % featured_transactions.shape[0]
+	print "%d features for a transaction" % featured_transactions.shape[1]
 
-test_data = csr_matrix(featured_transactions_as_array[-test_size:])
-test_targets = targets[-test_size:]
-print "%d transactions in the test set" % len(test_data.toarray())
 
-start = time.time()
-ridge_model = ridgeCV(training_data, training_targets)
-print "Took %s seconds to complete ridge model with %d training examples" %(time.time() - start, len(training_data.toarray()))
+	size = 0.8
+	training_size = int(len(featured_transactions_as_array) * size)
+	test_size = len(featured_transactions_as_array) - training_size
+	training_data = csr_matrix(featured_transactions_as_array[:training_size])
+	training_targets = targets[:training_size]
+
+
+	print "\n%d transactions in the training set" % len(training_data.toarray())
+
+	test_data = csr_matrix(featured_transactions_as_array[-test_size:])
+	test_targets = targets[-test_size:]
+	print "%d transactions in the test set" % len(test_data.toarray())
+
+	
+	model = elastic_net(training_data.todense(), training_targets)
+	print type(model), '\n'
+	
+	start = time.time()
+	print "Took %s seconds to complete with %d training examples" %(time.time() - start, len(training_data.toarray()))
+	print "\nScore: %f" % score(model, test_data, test_targets)
+	predictions = model_predictions(model, test_data)
+	mse = mean_squared_error(predictions, test_targets)
+	print "\nMean Squared Error = %f." % (mse)
+	neg = negative_predictions(predictions)
+	print "\n%d negative values in predictions" % len(neg)
+
+	max_duration = np.amax(training_targets)
+	random_prediction = np.random.gamma(5, 1, size = len(test_targets))
+	mse_bench = mean_squared_error(random_prediction, test_targets)
+	print "\nBench using random as predicted value for all test set = %f" % mse_bench
+
+	return mse
+
+#ridge_model = ridgeCV(training_data, training_targets)
+#print "Took %s seconds to complete ridge model with %d training examples" %(time.time() - start, len(training_data.toarray()))
 #lasso_model = lasso(training_data, training_targets)
 #linear_regression_model = linear_regression(training_data, training_targets)
 
-print "\nRidge score: %f" % score(ridge_model, test_data, test_targets)
-#print "Lasso score: %f" % score(lasso_model, test_data, test_targets)
-#print "Linear score: %f" % score(linear_regression_model, test_data, test_targets)
-
-ridge_predictions = predictions(ridge_model, test_data)
-#lasso_predictions = predictions(lasso_model, test_data)
-#linear_regression_predictions = predictions(linear_regression_model, test_data)
-
-	
-ridge_mse = mean_squared_error(ridge_predictions, test_targets)
-#lasso_mse = mean_squared_error(lasso_predictions, test_targets)
-#linear_regression_mse = mean_squared_error(linear_regression_predictions, test_targets)
-
-print "\nMean Squared Error using ridge = %f. Best alpha is %f" % (ridge_mse, ridge_model.best_alpha)
-#print "Mean Squared Error using lasso = %f" % lasso_mse
-#print "Mean Squared Error using linear regression = %f" % linear_regression_mse
 
 
 
-neg_ridge = negative_predictions(ridge_predictions)
-print "\n%d negative values in ridge predictions" % len(neg_ridge)
-#neg_lasso = negative_predictions(lasso_predictions)	
-#print "%d negative values in lasso predictions" % len(neg_lasso)
-#neg_linear = negative_predictions(linear_regression_predictions)	
-#print "%d negative values in linear regression predictions" % len(neg_linear)
-
-
-mse_bench = mean_squared_error(np.ones(len(test_data.toarray())), test_targets)
-print "\nBench using 1 as predicted value for all test set = %f" % mse_bench
-
-
+main(10000)
 
 """
 print "\n", "~" * 50
