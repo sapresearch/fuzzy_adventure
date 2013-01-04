@@ -1,39 +1,65 @@
+# Scikit Learn Librairies (Linear Models)
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Lasso
 from sklearn.linear_model import Ridge
 from sklearn.linear_model import RidgeCV
 from sklearn.linear_model import ElasticNet
-import MySQLdb
-from datetime import *
-import numpy as np
+
+# Pybrain Librairies (NN)
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.datasets import SupervisedDataSet
 from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.structure import TanhLayer
-import time
 
-import NN_weights_persistence
+# Misc
+import MySQLdb
+from datetime import *
+import numpy as np
+import time
+import general_persistence
+import random
 
 # Vectorization librairies
 import featured_transaction as ft
 from sklearn.feature_extraction import DictVectorizer
 from scipy.sparse import csr_matrix
 
-
+all_transactions = []
 def get_transactions(nb_trans):
-		
-	db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
-	db.query("""SELECT *, programmers.name, components.name 
-	FROM transactions, programmers, components 
-	WHERE programmer_id = programmers.id AND component_id = components.id 
-	LIMIT %d""" % nb_trans)
-	transactions = db.store_result().fetch_row(0,1)
-	db.close()
-	
+	global all_transactions
+
+	if len(all_transactions) == 0:
+		db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTowerSpace")
+
+		# Put all the transactions in memory. This could be an issue with bigger data
+		start = time.time()
+		db.query("""SELECT *, programmers.name, components.name 
+		FROM transactions, programmers, components 
+		WHERE programmer_id = programmers.id AND component_id = components.id""")
+		all_transactions = db.store_result().fetch_row(0,1) # Rows are returned as dictionnary [column name, value]
+		print "\n%-60s | %-s" % ("Importing all transactions from the database", pretty_print_duration(time.time() - start))
+		db.close()
+
+	# Create a pool of integer to query random row in the database. No repeat.
+	start = time.time()
+	total_nb_transactions = len(all_transactions)
+	choose_from = range(1,total_nb_transactions)
+	random.shuffle(choose_from)
+
+	# If the number of transactions asked is greater than what is available, return everything
+	if nb_trans > len(choose_from):
+		nb_trans = len(choose_from)
+
+	transactions = []
+	for i in range(nb_trans):
+		index = choose_from[i]
+		transactions.append(all_transactions[index])
+	print "%-60s | %-s" % ("Choosing random transactions", pretty_print_duration(time.time() - start))
+
 	# Filter the transactions that have no end date. We only need the transactions that we can
 	# create a label.
 	transactions = [t for t in transactions if t['end_date'] is not None]
-	print "\n%d transactions loaded from the database." % len(transactions)
+	print "%-60s | %-d" % ("Transactions left after filtering on end date not null",  len(transactions))
 
 	return transactions
 		
@@ -87,23 +113,19 @@ def vectorize_data(transactions):
 	"""
 	From a list of transctions, returns a 2D array of the featured transactions and an array of 
 	the associated targets.
-	The features transactions 2D array is of dimension nbTranscations X nbFeatures
-	The targets array is of dimension nbTransactions X 1
+	The features transactions 2D array is of size nbTranscations X nbFeatures
+	The targets array is of size nbTransactions X 1
 	"""
 	featured_transactions = []
 	targets = []
 
 	for transaction in transactions:
 		features = ft.FeaturedTransaction(transaction).as_dict()
-
-		# Add the array of features of that transaction to the set
 		featured_transactions.append(features)
 		targets.append(transaction_duration(transaction))
-	
-	
-	#featured_transactions = np.array(featured_transactions)
+
 	targets = np.array(targets)
-	vec = DictVectorizer()
+	vec = ft.Vectorizer()
 	featured_transactions = vec.fit_transform(featured_transactions)
 
 	
@@ -143,17 +165,15 @@ def negative_predictions(predictions):
 
 
 def main(nb_transactions):
+	print "\n*************************************"
+	print "	              %s" % nb_transactions
+	print "*************************************\n"
 
-	
 	transactions = get_transactions(nb_transactions)
-
 	featured_transactions, targets = vectorize_data(transactions)
-	featured_transactions_as_array = featured_transactions.todense()
+	featured_transactions_as_array = featured_transactions#
 
-
-	print "\n%d featured transactions" % featured_transactions.shape[0]
-	print "%d features for a transaction" % featured_transactions.shape[1]
-
+	print "\n%-60s | %d" % ("Features for a transaction", len(featured_transactions[0]))
 
 	size = 0.8
 	training_size = int(len(featured_transactions_as_array) * size)
@@ -161,32 +181,64 @@ def main(nb_transactions):
 	training_data = csr_matrix(featured_transactions_as_array[:training_size])
 	training_targets = targets[:training_size]
 
-
-	print "\n%d transactions in the training set" % len(training_data.toarray())
+	print "%-60s | %d" % ("Transactions in the training set", len(training_data.toarray()))
 
 	test_data = csr_matrix(featured_transactions_as_array[-test_size:])
 	test_targets = targets[-test_size:]
-	print "%d transactions in the test set" % len(test_data.toarray())
+	print "%-60s | %d" % ("Transactions in the test set", len(test_data.toarray()))
 
-	
-	model = elastic_net(training_data.todense(), training_targets)
-	print type(model), '\n'
-	
 	start = time.time()
+	model = elastic_net(training_data.todense(), training_targets)
+	print '\n',type(model)
 	print "Took %s seconds to complete with %d training examples" %(time.time() - start, len(training_data.toarray()))
-	print "\nScore: %f" % score(model, test_data, test_targets)
+
+	print "\n%-60s | %f" % ("Score", score(model, test_data, test_targets))
 	predictions = model_predictions(model, test_data)
 	mse = mean_squared_error(predictions, test_targets)
-	print "\nMean Squared Error = %f." % (mse)
+	print "%-60s | %f" % ("Mean Squared Error", mse)
 	neg = negative_predictions(predictions)
-	print "\n%d negative values in predictions" % len(neg)
+	print "%d negative values in predictions" % len(neg)
 
 	max_duration = np.amax(training_targets)
 	random_prediction = np.random.gamma(5, 1, size = len(test_targets))
 	mse_bench = mean_squared_error(random_prediction, test_targets)
 	print "\nBench using random as predicted value for all test set = %f" % mse_bench
 
-	return mse
+
+	training_predictions = model_predictions(model, training_data)
+	training_mse = mean_squared_error(training_predictions, training_targets)
+
+	return mse, training_mse
+
+
+def pretty_print_duration(duration):
+
+	days = int(duration / 3600 / 24)
+	duration = duration - days * 3600 * 24
+
+	hours = int(duration / 3600)
+	duration = duration - hours * 3600
+
+	minutes = int(duration / 60)
+	duration = duration - minutes * 60
+
+	seconds = duration
+	
+	pretty = ""
+	if days > 0:
+		pretty = "%d day(s) " % days
+	if hours > 0 or days > 0:
+		pretty += "%d hour(s) " % hours
+	if minutes > 0 or hours > 0 or days > 0:
+		pretty += "%d minute(s) " % minutes
+	if seconds > 0 or minutes > 0 or hours > 0 or days > 0:
+		if seconds < 1:
+			pretty += "%f second" % seconds
+		else:	
+			pretty += "%d second(s)" % seconds
+
+	return pretty
+
 
 #ridge_model = ridgeCV(training_data, training_targets)
 #print "Took %s seconds to complete ridge model with %d training examples" %(time.time() - start, len(training_data.toarray()))
@@ -194,33 +246,10 @@ def main(nb_transactions):
 #linear_regression_model = linear_regression(training_data, training_targets)
 
 
+mse = []
+for x in range(5000, 1000000, 1000):
+	y_mse, y_training_mse = main(x)
+	tuple = (x, y_mse, y_training_mse)
+	mse.append(tuple)
 
-
-main(10000)
-
-"""
-print "\n", "~" * 50
-print "\tNEURAL NETWORK"
-print "~" * 50
-
-
-f = file('result.txt','a')
-start = time.time()
-net = buildNetwork(72, 3, 1, hiddenclass = TanhLayer, bias = True)
-ds = SupervisedDataSet(72, 1)
-
-
-for i in range(len(training_data)):
-	ds.addSample(training_data[i], training_targets[i])
-
-
-trainer = BackpropTrainer(net, ds)
-print trainer.trainUntilConvergence()
-
-NN_weights_persistence.dump(net.params)
-
-#f.write("Predicted value: %f" % net.activate(test_data[0]))
-#f.write("Real value:" % test_targets[0])
-f.write("NN took %f seconds with a trainUntilConvergence()\n" % (time.time()-start))
-f.close()
-"""
+general_persistence.dump(mse, 'sampleFunction')

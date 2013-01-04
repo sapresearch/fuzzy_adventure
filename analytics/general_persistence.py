@@ -19,7 +19,7 @@ def load(file_name):
 def dump(persistence, file_name):
 	"""Dump the persistence in the file. Load must be called before in order to have something to dump."""
 	try:
-		file = open('NN_weights.p', 'wb')
+		file = open(file_name, 'wb')
 		pickle.dump(persistence, file)
 		# Make it none accessible after dumping it. Forcing the use of load() afterward
 		file.close()

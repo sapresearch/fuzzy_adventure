@@ -68,13 +68,25 @@ def buildTransactions(transactions):
 	transactionsList = []
 	for i in range(1, len(transactions)):
 		transactionHash = {}
+		sent_date = None
+		completed_date = None
 		for j in range(len(headers)):
 			header = headers[j]
 			item = transactions[i][j]
 
-			# Systematically try to transform the item in a date. 
-			# If it's not a date then the original string is returned
-			item = transformIntoDate(item)
+			if header == "Sent Date":
+				sent_date = item
+				continue
+			elif header == "Completed Date":
+				completed_date = item
+				continue
+			elif header == "Sent Time":
+				sent_date_time = sent_date + " " + item
+				item = transformIntoDate(sent_date_time)
+			elif header == "Completed Time":
+				completed_date_time = completed_date + " " + item
+				item = transformIntoDate(completed_date_time)
+			
 			transactionHash[header] = item
 			
 		transactionsList.append(transactionHash)
@@ -83,9 +95,6 @@ def buildTransactions(transactions):
 	
 	
 def transformIntoDate(string):
-	try:
-		date = datetime.strptime(string,"%d.%m.%Y")
-		return date
-	except ValueError:
-		return string
+	date = datetime.strptime(string,"%d.%m.%Y %H:%M:%S")
+	return date
 

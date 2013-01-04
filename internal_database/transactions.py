@@ -15,8 +15,9 @@ class Transaction(object):
 		self.priority = None
 		self.contract_priority = None
 		self.product = None
+		self.os = None
 
-#|Short text  |Pointers  |Escalating|Planned Organization|Customer Calls |Operating |SolMan Type|System ID |System ID |Start of Escalation |Overrun Flag   |Active SAP Status|Escalation Type|Hold Flag |Solving Level |Attribute |24h Flag|Corporation         |Escalating Level    |Fast Track|R/3 Install. Number |Year|		
+#|Short text  |Pointers  |Escalating|Planned Organization|Customer Calls |SolMan Type|System ID |System ID |Start of Escalation |Overrun Flag   |Active SAP Status|Escalation Type|Hold Flag |Solving Level |Attribute |24h Flag|Corporation         |Escalating Level    |Fast Track|R/3 Install. Number |Year|		
 	@staticmethod
 	def load_transactions(file_name):
 		start = time.time()
@@ -33,6 +34,7 @@ class Transaction(object):
 			priority = tf.get_transaction_priority(raw_transaction)
 			contract_priority = tf.get_contract_priority(raw_transaction)
 			product = tf.get_product(raw_transaction)
+			os = tf.get_os(raw_transaction)
 			
 			# Create the object
 			transaction = Transaction()
@@ -45,6 +47,7 @@ class Transaction(object):
 			transaction.priority = priority
 			transaction.contract_priority = contract_priority
 			transaction.product = product
+			transaction.os = os
 
 			# Add the objects to the transactions list
 			transactions.append(transaction)

@@ -33,4 +33,8 @@ def get_contract_priority(transaction):
 	
 def get_product(transaction):
 	return transaction['Product']
+
+
+def get_os(transaction):
+	return transaction['Operating']
 	
