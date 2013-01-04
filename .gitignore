@@ -35,3 +35,6 @@ pip-log.txt
 *.asc
 #Persistence files
 *.p
+
+analytics/*.txt
+nohup.out
