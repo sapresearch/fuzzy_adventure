@@ -37,4 +37,8 @@ def get_product(transaction):
 
 def get_os(transaction):
 	return transaction['Operating']
+
+
+def get_system_type(transaction):
+	return transaction['System Type']
 	

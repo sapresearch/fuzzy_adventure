@@ -165,9 +165,8 @@ def negative_predictions(predictions):
 
 
 def main(nb_transactions):
-	print "\n*************************************"
-	print "	              %s" % nb_transactions
-	print "*************************************\n"
+
+	print_header_with(nb_transactions)
 
 	transactions = get_transactions(nb_transactions)
 	featured_transactions, targets = vectorize_data(transactions)
@@ -240,6 +239,18 @@ def pretty_print_duration(duration):
 	return pretty
 
 
+def print_header_with(value):
+	value_len = len(str(value))
+	print ''
+	print '*' * 40
+	spacer = (40 - value_len) / 2
+	print ' ' * spacer,
+	print str(value)
+	print '*' * 40
+	print ''
+
+
+
 #ridge_model = ridgeCV(training_data, training_targets)
 #print "Took %s seconds to complete ridge model with %d training examples" %(time.time() - start, len(training_data.toarray()))
 #lasso_model = lasso(training_data, training_targets)
@@ -247,7 +258,7 @@ def pretty_print_duration(duration):
 
 
 mse = []
-for x in range(5000, 1000000, 1000):
+for x in range(5000, 6001, 1000):
 	y_mse, y_training_mse = main(x)
 	tuple = (x, y_mse, y_training_mse)
 	mse.append(tuple)

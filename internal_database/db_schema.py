@@ -28,6 +28,7 @@ def create_transactions_table(db):
 		contract_priority VARCHAR(10),
 		product           VARCHAR (30),
 		os				  VARCHAR (15),
+		system_type		  CHAR,
 		component_id      INT, 
 		PRIMARY KEY (id), 
 		FOREIGN KEY (programmer_id) REFERENCES programmers(id), 

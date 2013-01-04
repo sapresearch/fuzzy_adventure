@@ -79,6 +79,7 @@ def insert_transaction(transaction):
 	contract_priority = transaction.contract_priority
 	product = transaction.product
 	os = transaction.os
+	system_type = transaction.system_type
 	component = escape_string(transaction.component)
 	component_id = insert_component(component)
 
@@ -93,8 +94,9 @@ def insert_transaction(transaction):
 					contract_priority,
 					product,
 					os,
+					system_type,
 					component_id) 
-		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)""" \
+		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)""" \
 					%(transaction_number, \
 					programmer_id, \
 					start_date, \
@@ -104,6 +106,7 @@ def insert_transaction(transaction):
 					contract_priority, \
 					product, \
 					os, \
+					system_type, \
 					component_id)
 
 	try:

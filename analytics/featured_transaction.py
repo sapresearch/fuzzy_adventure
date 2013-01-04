@@ -18,6 +18,7 @@ class FeaturedTransaction(object):
 		features['Contract Priority'] = self.transaction['contract_priority']	
 		features['Product'] = self.transaction['product']
 		features['OS'] = self.transaction['os']
+		#features['System Type'] = self.transaction['system_type']
 		return features
 		
 	
@@ -26,6 +27,7 @@ class Vectorizer(object):
 	def __init__(self):
 		self.maps = {}
 		self.sets = {}
+		self.features_type = {}
 
 	def fit_transform(self, inputs):
 		"""
@@ -45,22 +47,40 @@ class Vectorizer(object):
 		return result
 
 
-	def build_sets(self, features):
+	def build_sets(self, inputs):
 		"""
 		Takes a list of dictionnaries (hash) representing features/inputs and returns a dictonnaries (hash) with the feature names and the possible values associated with it.
-		Raises ValueError if the dictonnaries do not all contain the same features.
 		"""
 		
-		keys = features[0].keys()
+		keys = inputs[0].keys()
+		self.obtain_features_type(inputs)
 		for key in keys:
 			feature_set = list()
-			for feature in features:
-				if feature.has_key(key):
-					if feature_set.count(feature[key]) == 0:
-						feature_set.append(feature[key])
+			for inp in inputs:
+				if self.features_type[key] is type('') and feature_set.count(inp[key]) == 0:
+					feature_set.append(inp[key])
+			self.sets[key] = list(feature_set)
+
+
+	def obtain_features_type(self, inputs):
+		"""
+		Takes a list of dictionnaries (hash) representing features/inputs and returns a dictonnaries (hash) with the features' type.
+		Raises ValueError if the dictonnaries do not all contain the same features.
+		"""
+		keys = inputs[0].keys()
+		
+		for key in keys:
+			feature_type = type(inputs[0][key])
+			# If some special treatement needs to be done for a particular feature (e.g. force it to be a string even though it's a number)
+			# it can be done here
+			for inp in inputs:
+				if inp.has_key(key):
+					if type(inp[key]) is not feature_type:
+						feature_type = type('')
+						break
 				else:
 					raise ValueError('The list of dictionnaries must all contain the same information. i.e. they must all have the same features.')
-			self.sets[key] = list(feature_set)
+			self.features_type[key] = feature_type
 
 
 	def build_maps(self):
@@ -79,8 +99,8 @@ class Vectorizer(object):
 		"""
 		Returns a list of all the features name. Must have called fit_transform first, otherwise RuntimeError is raised.
 		"""
-		if self.maps is not None:
-			return self.maps.keys()
+		if self.features_type is not None:
+			return self.features_type.keys()
 		else:
 			raise RuntimeError('No features have been fitted. Call fit_transform first.')
 
@@ -108,8 +128,11 @@ class Vectorizer(object):
 		vector = []
 		for key in keys:
 			value = input[key]
-			map = self.map(key)
-			numerical_value = map[value]
-			vector.append(numerical_value)
+			try:
+				map = self.map(key)
+				numerical_value = map[value]
+				vector.append(numerical_value)
+			except:
+				vector.append(value)
 
 		return vector

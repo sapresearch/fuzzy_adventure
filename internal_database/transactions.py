@@ -16,6 +16,7 @@ class Transaction(object):
 		self.contract_priority = None
 		self.product = None
 		self.os = None
+		self.system_type = None
 
 #|Short text  |Pointers  |Escalating|Planned Organization|Customer Calls |SolMan Type|System ID |System ID |Start of Escalation |Overrun Flag   |Active SAP Status|Escalation Type|Hold Flag |Solving Level |Attribute |24h Flag|Corporation         |Escalating Level    |Fast Track|R/3 Install. Number |Year|		
 	@staticmethod
@@ -35,6 +36,7 @@ class Transaction(object):
 			contract_priority = tf.get_contract_priority(raw_transaction)
 			product = tf.get_product(raw_transaction)
 			os = tf.get_os(raw_transaction)
+			system_type = tf.get_system_type(raw_transaction)
 			
 			# Create the object
 			transaction = Transaction()
@@ -48,6 +50,7 @@ class Transaction(object):
 			transaction.contract_priority = contract_priority
 			transaction.product = product
 			transaction.os = os
+			transactions.system_type = system_type
 
 			# Add the objects to the transactions list
 			transactions.append(transaction)
