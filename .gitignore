@@ -36,5 +36,6 @@ pip-log.txt
 #Persistence files
 *.p
 
-analytics/*.txt
+*.txt
 nohup.out
+analytics/sampleFunction
