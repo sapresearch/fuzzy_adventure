@@ -70,7 +70,7 @@ def transaction_duration(transaction):
 	"""
 	start_date = transaction['start_date']
 	end_date = transaction['end_date']
-	return (end_date - start_date).days + 1
+	return (end_date - start_date).total_seconds()
 
 	
 def elastic_net(data, targets):
@@ -194,14 +194,14 @@ def main(nb_transactions):
 	print "\n%-60s | %f" % ("Score", score(model, test_data, test_targets))
 	predictions = model_predictions(model, test_data)
 	mse = mean_squared_error(predictions, test_targets)
-	print "%-60s | %f" % ("Mean Squared Error", mse)
+	print "%-60s | %s" % ("Mean Squared Error", pretty_print_duration(mse))
 	neg = negative_predictions(predictions)
 	print "%d negative values in predictions" % len(neg)
 
 	max_duration = np.amax(training_targets)
 	random_prediction = np.random.gamma(5, 1, size = len(test_targets))
 	mse_bench = mean_squared_error(random_prediction, test_targets)
-	print "\nBench using random as predicted value for all test set = %f" % mse_bench
+	print "\nBench using random as predicted value for all test set = %s" % pretty_print_duration(mse_bench)
 
 
 	training_predictions = model_predictions(model, training_data)
@@ -244,8 +244,7 @@ def print_header_with(value):
 	print ''
 	print '*' * 40
 	spacer = (40 - value_len) / 2
-	print ' ' * spacer,
-	print str(value)
+	print ' ' * spacer, str(value)
 	print '*' * 40
 	print ''
 

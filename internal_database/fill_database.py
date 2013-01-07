@@ -45,6 +45,7 @@ def main():
 			print ""
 
 
+
 def insert_all_transactions(transactions):
 	count = 0
 	start_count = time.time()
@@ -145,7 +146,7 @@ def insert_component(component):
 
 	
 update, delete, directory_name, database = arguments_parser()
-db = MySQLdb.connect(host="localhost",user="root",passwd="nolwen",db=database)
+db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db=database)
 set_persistences(database)
 
 # INSERTING IN DB

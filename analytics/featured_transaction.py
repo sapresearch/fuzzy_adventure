@@ -18,7 +18,7 @@ class FeaturedTransaction(object):
 		features['Contract Priority'] = self.transaction['contract_priority']	
 		features['Product'] = self.transaction['product']
 		features['OS'] = self.transaction['os']
-		#features['System Type'] = self.transaction['system_type']
+		features['System Type'] = self.transaction['system_type']
 		return features
 		
 	
@@ -39,6 +39,7 @@ class Vectorizer(object):
 
 		self.build_sets(inputs)
 		self.build_maps()
+
 		result = []
 		for input in inputs:
 			vec = self.vectorize_input(input)
@@ -57,10 +58,10 @@ class Vectorizer(object):
 		for key in keys:
 			feature_set = list()
 			for inp in inputs:
-				if self.features_type[key] is type('') and feature_set.count(inp[key]) == 0:
+				#if self.features_type[key] is type('') and feature_set.count(inp[key]) == 0:
+				if feature_set.count(inp[key]) == 0:
 					feature_set.append(inp[key])
 			self.sets[key] = list(feature_set)
-
 
 	def obtain_features_type(self, inputs):
 		"""
@@ -68,7 +69,6 @@ class Vectorizer(object):
 		Raises ValueError if the dictonnaries do not all contain the same features.
 		"""
 		keys = inputs[0].keys()
-		
 		for key in keys:
 			feature_type = type(inputs[0][key])
 			# If some special treatement needs to be done for a particular feature (e.g. force it to be a string even though it's a number)
@@ -78,6 +78,8 @@ class Vectorizer(object):
 					if type(inp[key]) is not feature_type:
 						feature_type = type('')
 						break
+					#elif (<condition>):
+						#do something
 				else:
 					raise ValueError('The list of dictionnaries must all contain the same information. i.e. they must all have the same features.')
 			self.features_type[key] = feature_type
@@ -134,5 +136,4 @@ class Vectorizer(object):
 				vector.append(numerical_value)
 			except:
 				vector.append(value)
-
 		return vector

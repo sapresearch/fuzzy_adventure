@@ -50,7 +50,7 @@ class Transaction(object):
 			transaction.contract_priority = contract_priority
 			transaction.product = product
 			transaction.os = os
-			transactions.system_type = system_type
+			transaction.system_type = system_type
 
 			# Add the objects to the transactions list
 			transactions.append(transaction)

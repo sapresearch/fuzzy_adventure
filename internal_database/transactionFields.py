@@ -1,44 +1,107 @@
+from datetime import datetime
 
+"""
+Here you add the getters you need. A transaction is fed as a dictionnary of {column title: value}. 
+The column title (for the purpose of this project) comes from the text file exported from our private database.
+The keys for the dictionnary (the transaction) are the headers of the columns from the text files.
+"""
 def get_transaction_number(transaction):
-	return transaction['Pointers']
+	key = 'Pointers'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found.\n%r" % (key, transaction))
 
 
 def get_transaction_component(transaction):
-	return transaction['Component']
+	key = 'Component'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found." % key)
 
 	
 def get_transaction_processor(transaction):
-	return transaction['Processor']
-	
+	key = 'Processor'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found." % key)
+
 	
 def get_transaction_start_date(transaction):
-	return transaction['Sent date']
-	
+	date_key = 'Sent date'
+	time_key = 'Sent Time'
+	if date_key in transaction and time_key in transaction:
+		date = transaction[date_key]
+		time = transaction[time_key]
+		date_time = date + " " + time
+		return datetime.strptime(date_time,"%d.%m.%Y %H:%M:%S")
+	else:
+		raise LookupError("Either the key '%s' or '%s' could not be found." % (date_key, time_key))
+
 	
 def get_transaction_end_date(transaction):
-	return transaction['Completed']
+	date_key = 'Completed'
+	time_key = 'Completed Time'
+	if date_key in transaction and time_key in transaction:
+		date = transaction[date_key]
+		time = transaction[time_key]
+		date_time = date + " " + time
+		try:
+			return datetime.strptime(date_time,"%d.%m.%Y %H:%M:%S")
+		except ValueError:
+			pass
+	else:
+		raise LookupError("Either the key '%s' or '%s' could not be found." % (date_key, time_key))
 	
 	
 def get_transaction_status(transaction):
-	return transaction['Status']
+	key = 'Status'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found." % key)
 
 	
 def get_transaction_priority(transaction):
-	return transaction['Priority']
+	key = 'Priority'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found." % key)
+
 	
 
 def get_contract_priority(transaction):
-	return transaction['Contract Priority']	
-	
+	key = 'Contract Priority'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found."% key)
+
 	
 def get_product(transaction):
-	return transaction['Product']
+	key = 'Product'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found."% key)
 
 
 def get_os(transaction):
+	key = 'Operating'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found."% key)
+
 	return transaction['Operating']
 
 
 def get_system_type(transaction):
-	return transaction['System Type']
-	
+	key = 'System Type'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found."% key)

@@ -16,11 +16,20 @@ def import_transactions_from_file(file_name):
 	# Fourth row contains the headers
 	headers = splitColumns(lines[3])
 	transactions = []
+	transactions.append(cleanColumns(headers))
 	for line in lines:
 		splitted_line = splitColumns(line)
+
 		if len(splitted_line) < len(headers):
 			continue
-		transactions.append(cleanColumns(splitted_line))
+
+		cleanColumns(splitted_line)
+
+		# Sometimes the file can contain the headers in the middle of the file
+		# Skip that line if that happens
+		if splitted_line == headers:
+			continue
+		transactions.append(splitted_line)
 		
 	return buildTransactions(transactions)
 	
@@ -55,7 +64,6 @@ def cleanColumns(line):
 	line.pop()
 	return line
 
-
 	
 def buildTransactions(transactions):
 	"""
@@ -68,33 +76,11 @@ def buildTransactions(transactions):
 	transactionsList = []
 	for i in range(1, len(transactions)):
 		transactionHash = {}
-		sent_date = None
-		completed_date = None
 		for j in range(len(headers)):
 			header = headers[j]
 			item = transactions[i][j]
-
-			if header == "Sent Date":
-				sent_date = item
-				continue
-			elif header == "Completed Date":
-				completed_date = item
-				continue
-			elif header == "Sent Time":
-				sent_date_time = sent_date + " " + item
-				item = transformIntoDate(sent_date_time)
-			elif header == "Completed Time":
-				completed_date_time = completed_date + " " + item
-				item = transformIntoDate(completed_date_time)
-			
 			transactionHash[header] = item
 			
 		transactionsList.append(transactionHash)
 	return transactionsList
 	
-	
-	
-def transformIntoDate(string):
-	date = datetime.strptime(string,"%d.%m.%Y %H:%M:%S")
-	return date
-
