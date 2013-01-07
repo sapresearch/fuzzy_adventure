@@ -262,4 +262,4 @@ for x in range(5000, 6001, 1000):
 	tuple = (x, y_mse, y_training_mse)
 	mse.append(tuple)
 
-general_persistence.dump(mse, 'sampleFunction')
+general_persistence.dump(mse, 'sampleFunction.out')

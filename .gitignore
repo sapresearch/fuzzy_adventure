@@ -37,5 +37,4 @@ pip-log.txt
 *.p
 
 *.txt
-nohup.out
-analytics/sampleFunction
+*.out
