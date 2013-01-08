@@ -35,6 +35,10 @@ class NLQuery():
 		db.close()
 		return result
 
+
+""" Takes a training set of questions and their equivalent SQL queries.
+It classifies a question with the SQL query based on the words used.
+It converts a question to a vector and then uses a random forest for a classifier. """
 class QueryModel():
 
 	def __init__(self):#, nl_queries, sql_queries):
