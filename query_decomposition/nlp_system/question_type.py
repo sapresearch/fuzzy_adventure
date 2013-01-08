@@ -2,9 +2,10 @@ from sklearn import tree
 from sklearn.ensemble import ExtraTreesClassifier
 from numpy import *
 import sys
-sys.path.append("/home/I829287/fuzzy_adventure/test")
+#sys.path.append("/home/I829287/fuzzy_adventure/test")
 import word_space
-import load_data
+sys.path.append("../")
+#import load_data
 import re
 
 vector_length = 100

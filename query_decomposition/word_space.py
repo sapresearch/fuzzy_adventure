@@ -3,6 +3,11 @@ from random import shuffle
 from numpy.linalg import norm
 import nltk
 from nltk import *
+from sklearn import tree
+from sklearn.ensemble import ExtraTreesClassifier
+import sys
+sys.path.append("/home/I829287/fuzzy_adventure/test")
+import load_data
 import time
 
 zero = 98
@@ -69,15 +74,45 @@ def save_cosines(vectors, file_name):
 	f.close
 
 
-#corpus = ['hey', 'there', 'how', 'are', 'you', 'i', 'am', 'good', 'but', 'it', 'is', 'raining', 'there']
-#corpus = nltk.Text(word.lower() for word in nltk.corpus.brown.words())
-#corpus = corpus.tokens[0:100]
-#start = time.time()
-#dict = word_vectors(corpus, True)
-#save_cosines(dict, 'y.txt')
-#print time.time() - start
-#print cosine(dict['fly'], dict['pen'])
-#print cosine(dict['born'], dict['birth'])
-#print cosine(dict['man'], dict['woman'])
-#print cosine(dict['girl'], dict['woman'])
-#print cosine(dict['man'], dict['work'])
+class WordSpace():
+
+	def __init__(self, file_path, vector_length=100):
+		self.file_path = file_path
+		self.vector_length = vector_length
+	
+	def train(self, questions, types):
+		question_arrays = []
+		for q in questions:
+			question_arrays.append(q.split(" "))
+	
+		word_vector_hash = word_vectors(question_arrays)
+		questions = self.question_vectors(word_vector_hash, question_arrays)
+	
+		xtrees = ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=1, random_state=0)
+		model = xtrees.fit(questions, types)
+		return model, word_vector_hash
+	
+	def question_vectors(self, word_vector_hash, questions):
+		question_vectors = []
+		for q in questions:
+			vect = zeros(self.vector_length)
+			for word in q:
+				if word in word_vector_hash:
+					vect += word_vector_hash[word]
+			question_vectors.append(vect)
+		return question_vectors
+	
+	def hardcode(self, query):
+		return None
+
+	def classify(self, query, model=None, word_vector_hash=None):
+		pred = self.hardcode(query)
+		if pred != None:
+			return pred
+		if model == None or word_vector_hash == None:
+			questions, _, types = load_data.load_data(self.file_path)
+			model, word_vector_hash = self.train(questions, types)
+		q = query.split(" ")
+		q_vect = self.question_vectors(word_vector_hash, [q])[0]
+		pred = model.predict(q_vect)[0]
+		return pred

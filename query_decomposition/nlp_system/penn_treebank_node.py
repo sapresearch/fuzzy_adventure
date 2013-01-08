@@ -1,5 +1,7 @@
 import copy
 import re
+import sys
+sys.path.append("../")
 import wordnet_synonym
 
 class PennTreebankNode():
