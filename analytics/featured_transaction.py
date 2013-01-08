@@ -17,8 +17,8 @@ class FeaturedTransaction(object):
 		features['Priority'] = self.transaction['priority']
 		features['Contract Priority'] = self.transaction['contract_priority']	
 		features['Product'] = self.transaction['product']
-		features['OS'] = self.transaction['os']
-		features['System Type'] = self.transaction['system_type']
+		#features['OS'] = self.transaction['os']
+		#features['System Type'] = self.transaction['system_type']
 		return features
 		
 	
@@ -58,10 +58,11 @@ class Vectorizer(object):
 		for key in keys:
 			feature_set = list()
 			for inp in inputs:
-				#if self.features_type[key] is type('') and feature_set.count(inp[key]) == 0:
-				if feature_set.count(inp[key]) == 0:
+				if self.features_type[key] is type('') and feature_set.count(inp[key]) == 0:
+				#if feature_set.count(inp[key]) == 0:
 					feature_set.append(inp[key])
 			self.sets[key] = list(feature_set)
+
 
 	def obtain_features_type(self, inputs):
 		"""
@@ -74,7 +75,7 @@ class Vectorizer(object):
 			# If some special treatement needs to be done for a particular feature (e.g. force it to be a string even though it's a number)
 			# it can be done here
 			for inp in inputs:
-				if inp.has_key(key):
+				if key in inp:
 					if type(inp[key]) is not feature_type:
 						feature_type = type('')
 						break
@@ -112,7 +113,7 @@ class Vectorizer(object):
 		Returns the map corresponding to the specified feature name.
 		Raises ValueError if the name does not exist, 
 		"""
-		if self.maps.has_key(feature_name):
+		if feature_name in self.maps:
 			return self.maps[feature_name]
 		else:
 			raise ValueError('No feature goes by the specified name.')

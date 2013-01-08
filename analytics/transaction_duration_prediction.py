@@ -126,8 +126,9 @@ def vectorize_data(transactions):
 
 	targets = np.array(targets)
 	vec = ft.Vectorizer()
+	start = time.time()
 	featured_transactions = vec.fit_transform(featured_transactions)
-
+	print "%-60s | %-s" % ("Fit Transform the transactions", pretty_print_duration(time.time() - start))
 	
 	return featured_transactions, targets
 	
@@ -164,10 +165,10 @@ def negative_predictions(predictions):
 	return predictions[predictions < 0]
 
 
-def main(nb_transactions):
+def main(nb_transactions, model):
 
 	print_header_with(nb_transactions)
-
+	print type(model)
 	transactions = get_transactions(nb_transactions)
 	featured_transactions, targets = vectorize_data(transactions)
 	featured_transactions_as_array = featured_transactions#
@@ -177,19 +178,20 @@ def main(nb_transactions):
 	size = 0.8
 	training_size = int(len(featured_transactions_as_array) * size)
 	test_size = len(featured_transactions_as_array) - training_size
-	training_data = csr_matrix(featured_transactions_as_array[:training_size])
+	training_data = featured_transactions_as_array[:training_size]
 	training_targets = targets[:training_size]
 
-	print "%-60s | %d" % ("Transactions in the training set", len(training_data.toarray()))
+	print "%-60s | %d" % ("Transactions in the training set", len(training_data))
 
 	test_data = csr_matrix(featured_transactions_as_array[-test_size:])
 	test_targets = targets[-test_size:]
 	print "%-60s | %d" % ("Transactions in the test set", len(test_data.toarray()))
 
 	start = time.time()
-	model = elastic_net(training_data.todense(), training_targets)
-	print '\n',type(model)
-	print "Took %s seconds to complete with %d training examples" %(time.time() - start, len(training_data.toarray()))
+	#model = elastic_net(training_data, training_targets)
+	model.fit(training_data, training_targets)
+	
+	print "Took %s seconds to complete with %d training examples" %(time.time() - start, len(training_data))
 
 	print "\n%-60s | %f" % ("Score", score(model, test_data, test_targets))
 	predictions = model_predictions(model, test_data)
@@ -250,16 +252,21 @@ def print_header_with(value):
 
 
 
-#ridge_model = ridgeCV(training_data, training_targets)
-#print "Took %s seconds to complete ridge model with %d training examples" %(time.time() - start, len(training_data.toarray()))
-#lasso_model = lasso(training_data, training_targets)
-#linear_regression_model = linear_regression(training_data, training_targets)
-
-
 mse = []
-for x in range(5000, 6001, 1000):
+models = []
+models.append(ElasticNet(alpha=1, rho=0.7))
+#models.append(RidgeCV(alphas=[1, 10, 50, 100, 1000]))
+#models.append(Lasso(alpha=0.1))
+#models.append(LinearRegression())
+
+for model in models:
+	main(500000, model)
+
+"""
+for x in range(500000, 501000, 1000):
 	y_mse, y_training_mse = main(x)
 	tuple = (x, y_mse, y_training_mse)
 	mse.append(tuple)
 
 general_persistence.dump(mse, 'sampleFunction.out')
+"""
