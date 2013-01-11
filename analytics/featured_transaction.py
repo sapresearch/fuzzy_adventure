@@ -13,10 +13,10 @@ class FeaturedTransaction(object):
 		features['Component'] = self.transaction['components.name']
 		# Classify programmers by level of expertise instead
 		#features['Programmer'] = self.transaction['programmers.name']
-		features['Status'] = self.transaction['status']
+		#features['Status'] = self.transaction['status']
 		features['Priority'] = self.transaction['priority']
 		features['Contract Priority'] = self.transaction['contract_priority']	
-		features['Product'] = self.transaction['product']
+		#features['Product'] = self.transaction['product']
 		#features['OS'] = self.transaction['os']
 		#features['System Type'] = self.transaction['system_type']
 		return features
