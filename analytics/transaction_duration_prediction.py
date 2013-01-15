@@ -19,6 +19,7 @@ import numpy as np
 import time
 import general_persistence
 import random
+from data import Population
 
 # Vectorization librairies
 import featured_transaction as ft
@@ -117,21 +118,12 @@ def vectorize_data(transactions):
     The features transactions 2D array is of size nbTranscations X nbFeatures
     The targets array is of size nbTransactions X 1
     """
-    featured_transactions = []
-    targets = []
-
-    for transaction in transactions:
-        features = ft.FeaturedTransaction(transaction).as_dict()
-        featured_transactions.append(features)
-        targets.append(transaction_duration(transaction))
-
-    targets = np.array(targets)
     vec = ft.Vectorizer()
     start = time.time()
-    featured_transactions = vec.fit_transform(featured_transactions)
+    vec_transactions = vec.fit_transform(transactions)
     print "%-60s | %-s" % ("Fit Transform the transactions", pretty_print_duration(time.time() - start))
     
-    return featured_transactions, targets
+    return vec_transactions
     
 
 def mean_squared_error(test_data, test_targets):
@@ -203,23 +195,26 @@ def main(nb_transactions, model):
 
     print_header_with(str(nb_transactions) + ' - ' + model.__class__.__name__)
 
-    transactions = get_transactions(nb_transactions)
-    featured_transactions, targets = vectorize_data(transactions)
-    featured_transactions_as_array = featured_transactions
+    population = Population(nb_transactions)
+    transactions = vectorize_data(population.transactions)
+    print "\n%-60s | %d" % ("Features for a transaction", len(transactions[0].features_))
 
-    print "\n%-60s | %d" % ("Features for a transaction", len(featured_transactions[0]))
+    training_size = int(len(transactions) * 0.6)
+    CV_size = int(len(transactions) * 0.8)
+    test_size = len(transactions) - CV_size
 
-    size = 0.8
-    training_size = int(len(featured_transactions_as_array) * size)
-    test_size = len(featured_transactions_as_array) - training_size
-    training_data = featured_transactions_as_array[:training_size]
-    training_targets = targets[:training_size]
-
+    training_data = [t.features_ for t in transactions[:training_size]]
+    training_targets = [t.target_ for t in transactions[:training_size]]
     print "%-60s | %d" % ("Transactions in the training set", len(training_data))
 
-    test_data = featured_transactions_as_array[-test_size:]
-    test_targets = targets[-test_size:]
+    CV_data = [t.features_ for t in transactions[training_size:CV_size]]
+    CV_targets = [t.target_ for t in transactions[training_size:CV_size]]
+    print "%-60s | %d" % ("Transactions in the CV set", len(CV_data))
+
+    test_data = [t.features_ for t in transactions[-test_size:]]
+    test_targets = [t.target_ for t in transactions[-test_size:]]
     print "%-60s | %d" % ("Transactions in the test set", len(test_data))
+
 
     start = time.time()
     model.fit(training_data, training_targets)
@@ -239,11 +234,11 @@ def main(nb_transactions, model):
     print "\nBench using random as predicted value for all test set = %s" % pretty_print_duration(mse_bench)
     """
 
-    durations = mean_duration_per_priority(transactions[:training_size])
-    mean_predictions = predictions_with_mean_duration(transactions[-test_size:], durations)
-    mse_mean = mean_squared_error(mean_predictions, test_targets)
-    print "\nBench using mean values based on priority = %s" % pretty_print_duration(mse_mean)
-    print durations
+    #durations = mean_duration_per_priority(transactions[:training_size])
+    #mean_predictions = predictions_with_mean_duration(transactions[-test_size:], durations)
+    #mse_mean = mean_squared_error(mean_predictions, test_targets)
+    #print "\nBench using mean values based on priority = %s" % pretty_print_duration(mse_mean)
+    #print durations
 
     training_predictions = model_predictions(model, training_data)
     training_mse = mean_squared_error(training_predictions, training_targets)
@@ -293,24 +288,24 @@ def print_header_with(value):
 
 mse = []
 models = []
-models.append(ElasticNet(alpha=1, rho=0.7))
-models.append(RidgeCV(alphas=[1, 10, 50, 100, 1000]))
-models.append(Lasso(alpha=0.1))
-models.append(LinearRegression())
-models.append(SVR())
-
-for model in models:
-    main(50000, model)
-
-
-
-
+#models.append(ElasticNet(alpha=1, rho=0.7))
+#models.append(RidgeCV(alphas=[1, 10, 50, 100, 1000]))
+#models.append(Lasso(alpha=0.1))
+#models.append(LinearRegression())
+models.append(SVR(epsilon=3600, verbose=True))
 
 """
-for x in range(500000, 501000, 1000):
-    y_mse, y_training_mse = main(x)
+for model in models:
+    main(10000, model)
+"""
+
+
+
+
+
+for x in range(1000, 50000, 100):
+    y_mse, y_training_mse = main(x, models[0])
     tuple = (x, y_mse, y_training_mse)
     mse.append(tuple)
 
-general_persistence.dump(mse, 'sampleFunction.out')
-"""
+general_persistence.dump(mse, 'SVR.out')
