@@ -1,3 +1,8 @@
+import sys
+
+sys.path.append('/home/I834397/Git/fuzzy_adventure/internal_database')
+from utility import *
+
 # Scikit Learn Librairies (Linear Models)
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Lasso
@@ -20,6 +25,7 @@ import time
 import general_persistence
 import random
 from data import Population
+import math
 
 # Vectorization librairies
 import featured_transaction as ft
@@ -194,7 +200,7 @@ def predictions_with_mean_duration(test_data, durations):
 def main(nb_transactions, model):
 
     print_header_with(str(nb_transactions) + ' - ' + model.__class__.__name__)
-
+ 
     population = Population(nb_transactions)
     transactions = vectorize_data(population.transactions)
     print "\n%-60s | %d" % ("Features for a transaction", len(transactions[0].features_))
@@ -214,8 +220,20 @@ def main(nb_transactions, model):
     test_data = [t.features_ for t in transactions[-test_size:]]
     test_targets = [t.target_ for t in transactions[-test_size:]]
     print "%-60s | %d" % ("Transactions in the test set", len(test_data))
+    
+    """
+    transactions = [(x/100., math.sin(x/100.)) for x in range(5000)]
+    print transactions
+    training_size = int(len(transactions) * 0.6)
+    CV_size = int(len(transactions) * 0.8)
+    test_size = len(transactions) - CV_size
 
+    training_data = [[t[0], t[0]**2, t[0]**3, t[0]**4, t[0]**5] for t in transactions[:training_size]]
+    training_targets = [t[1] for t in transactions[:training_size]]
 
+    test_data = [[t[0], t[0]**2, t[0]**3, t[0]**4, t[0]**5] for t in transactions[-test_size:]]
+    test_targets = [t[1] for t in transactions[-test_size:]]
+    """
     start = time.time()
     model.fit(training_data, training_targets)
     
@@ -246,35 +264,6 @@ def main(nb_transactions, model):
     return mse, training_mse
 
 
-def pretty_print_duration(duration):
-
-    days = int(duration / 3600 / 24)
-    duration = duration - days * 3600 * 24
-
-    hours = int(duration / 3600)
-    duration = duration - hours * 3600
-
-    minutes = int(duration / 60)
-    duration = duration - minutes * 60
-
-    seconds = duration
-    
-    pretty = ""
-    if days > 0:
-        pretty = "%d day(s) " % days
-    if hours > 0 or days > 0:
-        pretty += "%d hour(s) " % hours
-    if minutes > 0 or hours > 0 or days > 0:
-        pretty += "%d minute(s) " % minutes
-    if seconds > 0 or minutes > 0 or hours > 0 or days > 0:
-        if seconds < 1:
-            pretty += "%f second" % seconds
-        else:    
-            pretty += "%d second(s)" % seconds
-
-    return pretty
-
-
 def print_header_with(value):
     value_len = len(str(value))
     print ''
@@ -292,7 +281,7 @@ models = []
 #models.append(RidgeCV(alphas=[1, 10, 50, 100, 1000]))
 #models.append(Lasso(alpha=0.1))
 #models.append(LinearRegression())
-models.append(SVR(epsilon=3600, verbose=True))
+models.append(SVR(epsilon=3600))
 
 """
 for model in models:
@@ -303,7 +292,7 @@ for model in models:
 
 
 
-for x in range(40000, 40100, 100):
+for x in range(1000, 21000, 1000):
     y_mse, y_training_mse = main(x, models[0])
     tuple = (x, y_mse, y_training_mse)
     mse.append(tuple)

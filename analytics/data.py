@@ -65,9 +65,9 @@ class Transaction(object):
         #self.features_['Status'] = transaction['status']
         self.features_['Priority'] = transaction['priority']
         self.features_['Contract Priority'] = transaction['contract_priority']   
-        #self.features_['Product'] = transaction['product']
-        #self.features_['OS'] = transaction['os']
-        #self.features_['System Type'] = transaction['system_type']
+        self.features_['Product'] = transaction['product']
+        self.features_['OS'] = transaction['os']
+        self.features_['System Type'] = transaction['system_type']
         self.features_['Attribute'] = transaction['attribute']
         self.features_['Solving Level'] = transaction['solving_level']
         self.features_['24h Flag'] = transaction['flag_24h']
@@ -79,4 +79,4 @@ class Transaction(object):
         self.target_ = (end_date - start_date).total_seconds()
 
     def __str__(self):
-        return "Target: ", self.target_, "\n", self.features_
+        return "Target: " + str(self.target_) + "\n" + str(self.features_)

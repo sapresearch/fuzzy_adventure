@@ -1,33 +1,13 @@
 import data
+import numpy as np
 
-class FeaturedTransaction(object):
-
-	def __init__(self, transaction):
-		# The transaction comes from a database as a dictionnary
-		self.transaction = transaction
-
-		
-	def as_dict(self):
-		features = {}
-		
-		#features['Component'] = self.transaction['components.name']
-		# Classify programmers by level of expertise instead
-		#features['Programmer'] = self.transaction['programmers.name']
-		#features['Status'] = self.transaction['status']
-		features['Priority'] = self.transaction['priority']
-		#features['Contract Priority'] = self.transaction['contract_priority']	
-		#features['Product'] = self.transaction['product']
-		#features['OS'] = self.transaction['os']
-		#features['System Type'] = self.transaction['system_type']
-		return features
-		
-	
 class Vectorizer(object):
 
 	def __init__(self):
 		self.maps = {}
 		self.sets = {}
 		self.features_type = {}
+		self.means_map = {}
 
 	def fit_transform(self, transactions, normalize = False):
 		"""
@@ -40,15 +20,9 @@ class Vectorizer(object):
 
 		self.build_sets(transactions)
 		self.build_maps()
+		self.vectorize_input_as_means(transactions)
 
-		for item in self.maps.items():
-			raw_input(item)
-
-		result = []
-		for transaction in transactions:
-			transaction.features_ = self.vectorize_input(transaction)
-			result.append(transaction)
-
+		result = self.vectorize_inputs(transactions)
 		return result
 
 
@@ -124,22 +98,44 @@ class Vectorizer(object):
 			raise ValueError('No feature goes by the specified name.')
 
 
-	def vectorize_input(self, transaction):
+	def vectorize_inputs(self, transactions):
 		"""
 		Uses the maps previously created to associate the feature value to a numerical one for the specified input.
 		Raises ValueError if 'input' is not a dictionnary.
 		"""
-		if not isinstance(transaction.features_, dict):
-			raise ValueError("Every input must be dictionnary with the feature names as the key and its corresponding value as the value.")
 
+		result = []
 		keys = self.features()
-		vector = []
-		for key in keys:
-			value = transaction.features_[key]
-			try:
-				map = self.map(key)
-				numerical_value = map[value]
-				vector.append(numerical_value)
-			except:
-				vector.append(value)
-		return vector
+
+		for transaction in transactions:
+			features = []
+			if not isinstance(transaction.features_, dict):
+				raise ValueError("Every input must be dictionnary with the feature names as the key and its corresponding value as the value.")
+			for key in keys:
+				value = transaction.features_[key]
+
+				mean = self.means_map[key][value]
+				features.append(mean)
+				"""
+				try:
+					mapping = self.map(key)
+					numerical_value = mapping[value]
+					features.append(numerical_value)
+				except:
+					features.append(value)
+				"""
+
+			transaction.features_ = features
+			result.append(transaction)
+
+		return result
+
+
+	def vectorize_input_as_means(self, transactions):
+		self.means_map = {}
+		for key in self.sets.keys():
+			pairs = {}
+			for value in self.sets[key]:
+				mean = np.mean([t.target_ for t in transactions if t.features_[key] == value])
+				pairs[value] = mean
+			self.means_map[key] = pairs
