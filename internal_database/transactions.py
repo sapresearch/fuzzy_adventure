@@ -17,6 +17,9 @@ class Transaction(object):
 		self.product = None
 		self.os = None
 		self.system_type = None
+		self.attribute = None
+		self.solving_level = None
+		self.flag_24h = None
 
 #|Short text  |Pointers  |Escalating|Planned Organization|Customer Calls |SolMan Type|System ID |System ID |Start of Escalation |Overrun Flag   |Active SAP Status|Escalation Type|Hold Flag |Solving Level |Attribute |24h Flag|Corporation         |Escalating Level    |Fast Track|R/3 Install. Number |Year|		
 	@staticmethod
@@ -37,6 +40,10 @@ class Transaction(object):
 			product = tf.get_product(raw_transaction)
 			os = tf.get_os(raw_transaction)
 			system_type = tf.get_system_type(raw_transaction)
+			attribute = tf.get_attribute(raw_transaction)
+			solving_level = tf.get_solving_level(raw_transaction)
+			flag_24h = tf.get_24h_flag(raw_transaction)
+
 			
 			# Create the object
 			transaction = Transaction()
@@ -51,6 +58,9 @@ class Transaction(object):
 			transaction.product = product
 			transaction.os = os
 			transaction.system_type = system_type
+			transaction.attribute = attribute
+			transaction.solving_level = solving_level
+			transaction.flag_24h = flag_24h
 
 			# Add the objects to the transactions list
 			transactions.append(transaction)

@@ -10,12 +10,12 @@ class FeaturedTransaction(object):
 	def as_dict(self):
 		features = {}
 		
-		features['Component'] = self.transaction['components.name']
+		#features['Component'] = self.transaction['components.name']
 		# Classify programmers by level of expertise instead
 		#features['Programmer'] = self.transaction['programmers.name']
 		#features['Status'] = self.transaction['status']
 		features['Priority'] = self.transaction['priority']
-		features['Contract Priority'] = self.transaction['contract_priority']	
+		#features['Contract Priority'] = self.transaction['contract_priority']	
 		#features['Product'] = self.transaction['product']
 		#features['OS'] = self.transaction['os']
 		#features['System Type'] = self.transaction['system_type']
@@ -29,7 +29,7 @@ class Vectorizer(object):
 		self.sets = {}
 		self.features_type = {}
 
-	def fit_transform(self, transactions):
+	def fit_transform(self, transactions, normalize = False):
 		"""
 		Takes a list of Transaction objects.
 		If the value associated with a key is a string, it will get converted to a numerical value to be used by a regression model.
@@ -40,6 +40,9 @@ class Vectorizer(object):
 
 		self.build_sets(transactions)
 		self.build_maps()
+
+		for item in self.maps.items():
+			raw_input(item)
 
 		result = []
 		for transaction in transactions:
@@ -64,6 +67,7 @@ class Vectorizer(object):
 			self.sets[key] = list(feature_set)
 
 
+
 	def obtain_features_type(self, transactions):
 		"""
 		Takes a list of dictionnaries (hash) representing features/inputs and returns a dictonnaries (hash) with the features' type.
@@ -84,6 +88,7 @@ class Vectorizer(object):
 				else:
 					raise ValueError('The list of dictionnaries must all contain the same information. i.e. they must all have the same features.')
 			self.features_type[key] = feature_type
+
 
 
 	def build_maps(self):

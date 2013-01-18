@@ -84,6 +84,10 @@ def insert_transaction(transaction):
 	component = escape_string(transaction.component)
 	component_id = insert_component(component)
 
+	attribute = transaction.attribute
+	solving_level = transaction.solving_level
+	flag_24h = transaction.flag_24h
+
 	sql = \
 		"""INSERT INTO transactions 
 					(trans_number, 
@@ -96,8 +100,11 @@ def insert_transaction(transaction):
 					product,
 					os,
 					system_type,
+					attribute,
+					solving_level,
+					flag_24h,
 					component_id) 
-		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)""" \
+		VALUES      ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)""" \
 					%(transaction_number, \
 					programmer_id, \
 					start_date, \
@@ -108,6 +115,9 @@ def insert_transaction(transaction):
 					product, \
 					os, \
 					system_type, \
+					attribute, \
+					solving_level, \
+					flag_24h, \
 					component_id)
 
 	try:

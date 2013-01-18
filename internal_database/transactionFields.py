@@ -105,3 +105,66 @@ def get_system_type(transaction):
 		return transaction[key]
 	else:
 		raise LookupError("The key '%s' could not be found."% key)
+
+
+def get_attribute(transaction):
+	key = 'Attribute'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found."% key)
+
+
+def get_solving_level(transaction):
+	key = 'Solving Level'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found."% key)
+
+
+def get_24h_flag(transaction):
+	key = '24h Flag'
+	if key in transaction:
+		return transaction[key]
+	else:
+		raise LookupError("The key '%s' could not be found."% key)
+
+"""
+M
+Priority  
+Sent date 
+Sent Time 
+Completed 
+Completed Time
+Changed on
+System Type
+Status                   
+Number of cylces
+Number of notes
+Component           
+Short text                                                                     
+Processor           
+Product        
+Pointers                
+Escalating
+Planned Organization
+Customer Calls 
+Operating 
+SolMan Type
+System ID 
+Start of Escalation 
+Overrun Flag   
+Active SAP Status
+Escalation Type
+Hold Flag 
+Solving Level 
+Attribute 
+24h Flag  
+Contract Priority   
+Corporation         
+Escalating Level    
+Fast Track
+R/3 Install. Number 
+Year
+"""

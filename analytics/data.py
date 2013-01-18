@@ -49,10 +49,11 @@ class Population(object):
 
 
 class Transaction(object):
-    features_ = {}
-    target_ = None
+
 
     def __init__(self, transaction):
+        self.features_ = {}
+        self.target_ = None
         self.features(transaction)
         self.target(transaction)
 
@@ -67,9 +68,15 @@ class Transaction(object):
         #self.features_['Product'] = transaction['product']
         #self.features_['OS'] = transaction['os']
         #self.features_['System Type'] = transaction['system_type']
+        self.features_['Attribute'] = transaction['attribute']
+        self.features_['Solving Level'] = transaction['solving_level']
+        self.features_['24h Flag'] = transaction['flag_24h']
 
 
     def target(self, transaction):
         start_date = transaction['start_date']
         end_date = transaction['end_date']
         self.target_ = (end_date - start_date).total_seconds()
+
+    def __str__(self):
+        return "Target: ", self.target_, "\n", self.features_

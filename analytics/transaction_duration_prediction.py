@@ -303,7 +303,7 @@ for model in models:
 
 
 
-for x in range(1000, 50000, 100):
+for x in range(40000, 40100, 100):
     y_mse, y_training_mse = main(x, models[0])
     tuple = (x, y_mse, y_training_mse)
     mse.append(tuple)
