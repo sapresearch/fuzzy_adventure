@@ -280,8 +280,8 @@ models = []
 #models.append(ElasticNet(alpha=1, rho=0.7))
 #models.append(RidgeCV(alphas=[1, 10, 50, 100, 1000]))
 #models.append(Lasso(alpha=0.1))
-#models.append(LinearRegression())
-models.append(SVR(epsilon=3600))
+models.append(LinearRegression())
+#models.append(SVR(epsilon=3600))
 
 """
 for model in models:
@@ -292,7 +292,7 @@ for model in models:
 
 
 
-for x in range(1000, 21000, 1000):
+for x in range(1000, 40000, 100):
     y_mse, y_training_mse = main(x, models[0])
     tuple = (x, y_mse, y_training_mse)
     mse.append(tuple)
