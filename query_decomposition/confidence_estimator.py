@@ -3,7 +3,7 @@ import MySQLdb as mdb
 from enum import Enum
 
 LAT = Enum('Programmer','Component','Integer', 'Priority', 'Unknown')
-db = mdb.connect(host="localhost", user="root", passwd="nolwen", db="batcave")
+db = mdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
 
 
 def LAT_match(answer, LAT):
@@ -15,6 +15,7 @@ def LAT_match(answer, LAT):
     Return
         Boolean
     """
+
     return get_LAT(answer) == LAT
 
 
