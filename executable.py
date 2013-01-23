@@ -1,27 +1,30 @@
 import sys
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors")
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition")
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/nlp_system")
+sys.path.append("/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/template_selectors")
+sys.path.append("/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/term_selectors")
+sys.path.append("/home/I834397/Git/fuzzy_adventure/query_decomposition")
+sys.path.append("/home/I834397/Git/fuzzy_adventure/query_decomposition/nlp_system")
 from bayes import Bayes
 from word_space import WordSpace
 from template_type import TemplateClassifier
 import MySQLdb
 import time
 import re
-sys.path.append("/home/I829287/fuzzy_adventure/test")
+sys.path.append("/home/I834397/Git/fuzzy_adventure/test")
 import load_data
 import confidence_estimator
 ###
 import stanford_client
 import penn_treebank_node
 import triplet_extraction
+from term_selector import TermSelector
+import nlp
 
 """ Main executable file for the whole system.
 To use it, run the demo() function to let the user input questions to
 the command line, or the test() function to find the number of questions
 that it correctly classifies. """
 
-data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
+data_file = "/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
 def to_sql(nl_query):
 	# Use Bayes classifier
 	#bayes = Bayes(data_file)
@@ -31,8 +34,14 @@ def to_sql(nl_query):
 	word_space = WordSpace(data_file)
 	tc = TemplateClassifier(word_space)
 	sql, lat_type = tc.template(nl_query)
-	return sql, lat_type
+	print sql
+	keywords = nlp.tokens(nl_query)
+	keywords = nlp.remove_stopwords(keywords)
+	answer = TermSelector.fill_in_the_blanks(sql, keywords)
 
+	return answer, lat_type
+
+"""
 def execute(sql):
 	db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
 	print sql
@@ -40,6 +49,7 @@ def execute(sql):
 	result = db.store_result().fetch_row(0)[0][0]
 	db.close()
 	return result
+"""
 
 def demo(verbose=False):
 	while True:
@@ -50,15 +60,15 @@ def demo(verbose=False):
 		query = re.sub("-v", '', query)
 
 		start = time.time()
-		sql, lat_type = to_sql(query)
-		sql = sql[0]
-		answer = execute(sql)
+		answer, lat_type = to_sql(query)
+		#sql = sql[0]
+		#answer = execute(sql)
 		confidence = confidence_estimator.LAT_match(answer, lat_type)
 		duration = time.time() - start
 
 		if verbose:
 			print "Time: " + str(round(duration, 3))
-			print "SQL: " + str(sql)
+			#print "SQL: " + str(sql)
 			print "LAT Type: " + str(lat_type)
 			print "Confidence: " + str(confidence)
 		print "Answer: " + str(answer) + "\n"

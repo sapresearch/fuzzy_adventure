@@ -1,8 +1,9 @@
 import re
 import MySQLdb as mdb
+import decimal
 from enum import Enum
 
-LAT = Enum('Programmer','Component','Integer', 'Priority', 'Unknown')
+LAT = Enum('Programmer','Component','Integer', 'Priority', 'Decimal', 'Unknown')
 db = mdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
 
 
@@ -15,7 +16,7 @@ def LAT_match(answer, LAT):
     Return
         Boolean
     """
-
+    print type(answer)
     return get_LAT(answer) == LAT
 
 
@@ -38,6 +39,9 @@ def get_LAT(answer):
 
     if is_priority(answer):
         return LAT.Priority
+
+    if is_decimal(answer):
+        return LAT.Decimal
 
     return LAT.Unknown
 
@@ -73,7 +77,7 @@ def is_component(answer):
     """
     Check to see if the answer is a Component
     Parameters
-        answer: String containing the answer
+        answer: Variable containing the answer
     Return
         Boolean. If the answer is of Component type
     """
@@ -90,7 +94,7 @@ def is_integer(answer):
     """
     Check to see if the answer is an Integer
     Parameters
-        answer: String containing the answer
+        answer: Variable containing the answer
     Return
         Boolean. If the answer is of Integer type
     """
@@ -101,8 +105,18 @@ def is_priority(answer):
     """
     Check to see if the answer is a Priority
     Parameters
-        answer: String containing the answer
+        answer: Variable containing the answer
     Return
         Boolean. If the answer is of Priority type
     """
     return answer in ['Very High', 'High', 'Medium', 'Low']
+
+def is_decimal(answer):
+    """
+    Check to see if the answer is a Decimal
+    Parameters
+        answer: Variable containing the answer
+    Return
+        Boolean. If the answer is of Decimal type
+    """
+    return isinstance(answer, decimal.Decimal)

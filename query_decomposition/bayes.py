@@ -1,7 +1,7 @@
 import nlp
 from sklearn.naive_bayes import GaussianNB
 import sys
-sys.path.append("/home/I829287/fuzzy_adventure/test")
+sys.path.append("/home/I834397/Git/fuzzy_adventure/test")
 import load_data
 
 class Bayes():
