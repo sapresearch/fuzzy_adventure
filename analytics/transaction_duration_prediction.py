@@ -242,6 +242,7 @@ def main(nb_transactions, model):
     print "\n%-60s | %f" % ("Score", score(model, test_data, test_targets))
     predictions = model_predictions(model, test_data)
     mse = mean_squared_error(predictions, test_targets)
+    print "Coef |", model.coef_
     print "%-60s | %s" % ("Mean Squared Error", pretty_print_duration(mse))
     neg = negative_predictions(predictions)
     print "%d negative values in predictions" % len(neg)
@@ -278,9 +279,9 @@ def print_header_with(value):
 mse = []
 models = []
 #models.append(ElasticNet(alpha=1, rho=0.7))
-#models.append(RidgeCV(alphas=[1, 10, 50, 100, 1000]))
+models.append(RidgeCV(alphas=[1, 10, 50, 100, 1000]))
 #models.append(Lasso(alpha=0.1))
-models.append(LinearRegression())
+#models.append(LinearRegression())
 #models.append(SVR(epsilon=3600))
 
 """
@@ -292,7 +293,7 @@ for model in models:
 
 
 
-for x in range(1000, 40000, 100):
+for x in range(1000, 40100, 100):
     y_mse, y_training_mse = main(x, models[0])
     tuple = (x, y_mse, y_training_mse)
     mse.append(tuple)
