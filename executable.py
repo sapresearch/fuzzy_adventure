@@ -35,6 +35,7 @@ def to_sql(nl_query):
 
 def execute(sql):
 	db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
+	print sql
 	db.query(sql)
 	result = db.store_result().fetch_row(0)[0][0]
 	db.close()
@@ -50,6 +51,7 @@ def demo(verbose=False):
 
 		start = time.time()
 		sql, lat_type = to_sql(query)
+		sql = sql[0]
 		answer = execute(sql)
 		confidence = confidence_estimator.LAT_match(answer, lat_type)
 		duration = time.time() - start
@@ -74,7 +76,7 @@ def test():
 	print "Accuracy: " + str(correct/len(text))		
 	print "Total tested: " + str(len(text))
 
-#demo()
+demo()
 #test()
 
 
@@ -85,10 +87,10 @@ def triplet(question):
 	nodes, _ = triplet_extraction.question_analysis(root)
 	return nodes
 
-q = "How long does it take on average to close a high priority ticket?"
-q = "How many transactions did Hank Zimmermann close?"
-nodes = triplet(q)
-for n in nodes:
-	for c in n.chunk():
-		print c.word
+#q = "How long does it take on average to close a high priority ticket?"
+#q = "How many transactions did Hank Zimmermann close?"
+#nodes = triplet(q)
+#for n in nodes:
+#	for c in n.chunk():
+#		print c.word
 
