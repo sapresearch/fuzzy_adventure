@@ -137,10 +137,15 @@ For a medium ticket, how long should I wait before it's closed?		D
 For a medium transaction, how long does it typically take?		D
 How long does it take Jeff to close a ticket on average?		E
 How long does it take Jeff to fix a transaction on average?		E
-What's the average time it takes Jeff to complete a ticket?		E
-How much time will Jeff take to close a ticket?		E
-How long does it usually take Jeff to finish a ticket?		E
-If I assign this ticket to Jeff, how long is it going to take?		E
-How long does Jeff generally take to complete a ticket?		E
-How long does it take Jeff on average to close a ticket?		E
-How much time does it take Jeff to close a transaction?		E
+What's the average time it takes 01010444 to complete a ticket?		E
+How much time will 010104441 take to close a ticket?		E
+How long does it usually take 010104442 to finish a ticket?		E
+If I assign this ticket to 010104443, how long is it going to take?		E
+How long does 010104444 generally take to complete a ticket?		E
+How long does it take 010104445 on average to close a ticket?		E
+How much time does it take 010104446 to close a transaction?		E
+How long does 010104447 take to finish a ticket?		E
+How fast is 010104448 at closing tickets?		E
+What is 010104449's average time to close a ticket?		E
+What's the average time it takes 0101044410 to close a ticket?		E
+Tell me the time it takes 0101044411 to close a ticket on average.		E

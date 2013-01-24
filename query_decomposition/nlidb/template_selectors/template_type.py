@@ -29,5 +29,5 @@ class TemplateClassifier():
 	def template(self, query):
 		klass = self.model.classify(query)
 		sql = self.templates[klass][0]
-		lat_type = self.templates[klass][1]
-		return sql, lat_type
+		lat_type = self.templates[klass][1] # we aren't using this right now
+		return sql, klass

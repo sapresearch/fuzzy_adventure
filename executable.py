@@ -1,15 +1,15 @@
 import sys
-sys.path.append("/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/template_selectors")
-sys.path.append("/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/term_selectors")
-sys.path.append("/home/I834397/Git/fuzzy_adventure/query_decomposition")
-sys.path.append("/home/I834397/Git/fuzzy_adventure/query_decomposition/nlp_system")
+sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors")
+sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/nlidb/term_selectors")
+sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition")
+sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/nlp_system")
 from bayes import Bayes
 from word_space import WordSpace
 from template_type import TemplateClassifier
 import MySQLdb
 import time
 import re
-sys.path.append("/home/I834397/Git/fuzzy_adventure/test")
+sys.path.append("/home/I829287/fuzzy_adventure/test")
 import load_data
 import confidence_estimator
 ###
@@ -24,17 +24,18 @@ To use it, run the demo() function to let the user input questions to
 the command line, or the test() function to find the number of questions
 that it correctly classifies. """
 
-data_file = "/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
-def to_sql(nl_query):
-	# Use Bayes classifier
-	#bayes = Bayes(data_file)
-	#tc = TemplateClassifier(bayes)
+data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
 
-	# Use word space classifier
-	word_space = WordSpace(data_file)
-	tc = TemplateClassifier(word_space)
+# Use Bayes classifier
+bayes = Bayes(data_file)
+tc = TemplateClassifier(bayes)
+
+# Use word space classifier
+#word_space = WordSpace(data_file)
+#tc = TemplateClassifier(word_space)
+
+def to_sql(nl_query):
 	sql, lat_type = tc.template(nl_query)
-	print sql
 	keywords = nlp.tokens(nl_query)
 	keywords = nlp.remove_stopwords(keywords)
 	answer = TermSelector.fill_in_the_blanks(sql, keywords)
@@ -76,18 +77,20 @@ def demo(verbose=False):
 
 def test():
 	text, _, targets = load_data.load_data(data_file)
-	text, targets = text[0::2], targets[0::2]
+	text, targets = text[1::2], targets[1::2]
 	correct = 0.
 	for i,t in enumerate(text):
 		target = targets[i]
 		sql, key = to_sql(t)
+		print key
+		print target
 		if key == target:
 			correct += 1.
 	print "Accuracy: " + str(correct/len(text))		
 	print "Total tested: " + str(len(text))
 
-demo()
-#test()
+#demo()
+test()
 
 
 def triplet(question):
