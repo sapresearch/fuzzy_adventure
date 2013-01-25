@@ -7,6 +7,8 @@ def extract_triplet(tree):
 	np_subtree = tree.descendent(["NP"])
 	vp_subtree = tree.descendent(["VP"])
 
+	print np_subtree, vp_subtree
+
 	subject = extract_subject(np_subtree)
 	predicate = extract_predicate(vp_subtree)
 	obj = extract_object(predicate)
