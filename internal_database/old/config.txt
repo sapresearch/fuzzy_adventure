@@ -1,8 +1,0 @@
-{
-	"programmers": 300,
-	"teams": 10,
-	"bugs": 500,
-	"softwares": 100,
-	"messages": 100,
-	"customers": 20
-}
