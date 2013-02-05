@@ -7,7 +7,7 @@ class Components(models.Model):
     	return self.name;
 
     class Meta:
-        db_table = u'components'
+        db_table = u'Component'
 
 
 class Programmers(models.Model):
@@ -17,7 +17,7 @@ class Programmers(models.Model):
     	return self.name;
 
     class Meta:
-        db_table = u'programmers'
+        db_table = u'Programmer'
 
 
 class Transactions(models.Model):
@@ -40,5 +40,5 @@ class Transactions(models.Model):
     	return self.trans_number;
 
     class Meta:
-        db_table = u'transactions'
+        db_table = u'Transaction'
 

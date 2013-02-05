@@ -1,0 +1,39 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Fuzzy Adventure</title>
+	<!--><link href="{{ STATIC_URL }}/style.css" rel="stylesheet" type="text/css"></!-->
+	<style type="text/css">
+		body {
+		margin-top: 30px
+		}
+
+		#search {
+			padding-top: 150px;
+		}
+
+		#search_box input{
+			position:absolute;
+			left:50%;
+			width: 600px;
+			margin-left: -300px;
+		}
+
+		#search_button {
+			position:absolute;
+			left:50%;
+			width: 60px;
+			margin-top: 30px;
+			margin-left: -30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="search">
+		<form action="/search" method="get">
+			<span id="search_box"><input type="text" name="q"></span><br>
+			<span id="search_button"><input type="submit" value="Search"></span>
+		</form>
+	</div>
+</body>
+</head>

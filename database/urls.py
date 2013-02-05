@@ -1,10 +1,14 @@
 from django.conf.urls.defaults import *
+from transactions import views
+from database import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+	('^$', views.home),
+	('^search/$', views.search),
     # Example:
     # (r'^database/', include('database.foo.urls')),
 
