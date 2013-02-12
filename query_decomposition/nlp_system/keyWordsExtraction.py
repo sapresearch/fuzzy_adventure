@@ -1,39 +1,60 @@
 
 # This program returns the key words in a sentence/question and the category of the sentence. 
 #@ INPUT: tree (The output of penn_treebank_node)
+import wordnet_synonym 
+import porter2
+import penn_treebank_node
 
 def questionType(tree):
 
     np = tree.descendent(['NP'])
-    has_which_employee = tree.word_search('employee')
-    has_which_component = tree.word_search('component')or tree.word_search('components')
 
+    has_employee = tree.word_search('employee')
+    # has_which_employee = tree.word_search('one')
+    has_component = tree.word_search('component')
+    has_transaction = tree.word_search('transaction')
+    # has_which_component = tree.word_search('components')
+
+    # if n0.node_type in ['WHADVP','WHNP'] and n1.node_type in ['S', 'SQ']:
     if tree.word_search('who'):
         return 'Employee'
     elif tree.word_search('where'):
         return 'Location'
     elif tree.word_search('when'):
         return 'Time'
-    elif np and (tree.word_search('which') or tree.word_search('what')):
-        if has_which_employee:
+    elif np and (np.word_search('which') or np.word_search('what')):
+        if has_employee:
             return "Employee"
-         # or np.word_search('person') or np.word_search('member of the team') or np.word_search('team member') or np.word_search('member')
-        if has_which_component:
+        elif has_component:
+            return "Component"
+        elif has_transaction:
+            return 'transaction'
+        else:
             return "Component"
     elif tree.word_search('name'):
         if tree.word_search('person'):
             return 'Employee'
     elif tree.word_search('name'):
         if tree.word_search('component'):
-            return 'component'
+            return 'Component'
+    elif tree.word_search('how'):
+        if tree.word_search('many'):
+            return 'How_quantity'
+        else:
+            return 'How_quality'
+    
 
 def keyWordsExtraction(top_node):
 
+    verb_labels = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']
     question_type = questionType(top_node)
-    keyWords = set()
+    keyWords = dict()
     NPS=[]
     JPS =[]
     # query = False
+    nouns = set()
+    verbs = set()
+    prepositions_Adjs = set()
 
     i = 0
     nodes=[]
@@ -42,49 +63,57 @@ def keyWordsExtraction(top_node):
         i = i+1
 
     for node in nodes:
+        # To make sure the proper noun will be always added to the keywords.
+        if wordnet_synonym.is_proper_noun(node):
+            nouns.add(node)
         if node.descendent ('NP'):
             NPS.append(node)
         if node.descendent('ADJP'):
             JPS.append(node)
         
-    VP = node.descendent(['VP'])
-    PP = node.descendent(['PP'])
+    VP = nodes[1].descendent(['VP'])
+    PP = nodes[1].descendent(['PP'])
+
+
 
     if top_node.node_type in ['SBARQ','SBAR','S']:
 
+            
             if VP:
-                if VP.descendent('VBZ'):
-                    keyWords.add(VP.descendent('VBZ'))
+                for v in verb_labels:
+                    if VP.descendent(v):
+
+                        verbs.add(VP.descendent(v))
+
 
             for np in NPS:
                 if np.descendent('NP'):
-                    keyWords.add(np.descendent('NP'))
+                    nouns.add(np.descendent('NP'))
                 if np.descendent('JJS'):
-                    keyWords.add(np.descendent('JJS'))
+                    nouns.add(np.descendent('JJS'))
                 if np.descendent('NN'):
-                    keyWords.add(np.descendent('NN'))
+                    nouns.add(np.descendent('NN'))
                 if np.descendent('NNS'):
-                    keyWords.add(np.descendent('NNS'))
+                    nouns.add(np.descendent('NNS'))
                 if np.descendent('NNP'):
-                    keyWords.add(np.descendent('NNP'))
+                    nouns.add(np.descendent('NNP'))
 
 
             for jp in JPS:
                 # adj_node = None
                 if jp.descendent('RBS'):
-                    keyWords.add(jp.descendent('RBS'))
+                    prepositions_Adjs.add(jp.descendent('RBS'))
                 if jp.descendent('JJ'):
-                    keyWords.add(jp.descendent('JJ'))
+                    prepositions_Adjs.add(jp.descendent('JJ'))
                 elif jp.descendent('JJS'):
-                    keyWords.add(jp.descendent('JJS'))
+                    prepositions_Adjs.add(jp.descendent('JJS'))
 
 
             if PP:
-                if PP.descendent('IN'):
-                    keyWords.add(PP.descendent('IN'))
+                # if PP.descendent('IN'):
+                #     keyWords.add(PP.descendent('IN'))
                 if PP.descendent('NN'):
-                    keyWords.add(PP.descendent('NN'))
+                    prepositions_Adjs.add(PP.descendent('NN'))
 
-
+    keyWords = {'Nouns':nouns, 'Verbs':verbs, 'Adjectives and Propositions':prepositions_Adjs} 
     return keyWords, question_type
-
