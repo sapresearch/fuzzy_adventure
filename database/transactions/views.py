@@ -4,9 +4,10 @@ import os
 import sys
 sys.path.append(os.environ['FUZZY_ADVENTURE'])
 import executable
+import settings
 
 def home(request):
-	return render_to_response('search_form.html')
+	return render_to_response('search_form.html', {'STATIC_URL', settings.STATIC_URL})
 
 
 def search(request):
