@@ -1,12 +1,12 @@
 import en
 import string
 
+'''def required value''' 
 def checkDB(lookFor, table):
 	# print lookFor, table
 	# raw_input('')
 	defaultValue = ''
 
-	transactions_table = dict()
 	components_table =['id','name']
 	transactions_table = {'ID' : 'id','TRANSACTION' : 'trans_number','PROGRAMMER' : 'programmer_id','START' : 'start_date','END' : 'end_date','STATUS' :'status','PRIORITY':'priority','CONTRACT PRIORITY' :'contract_priority','PRODUCT' : 'product','COMPONENT ID' :'component_id'}
 	programmers_table = ['id','name']

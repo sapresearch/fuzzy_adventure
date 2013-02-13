@@ -6,8 +6,8 @@ def answerGenerator(question, allWords, conditions, what):
 
 
 	if 'causes delay' in allWords:
-		allWords_temp.append('component')
-		conditions_temp.add('causes delay')
+		allWords.append('component')
+		conditions.add('causes delay')
 
 	if 'backlog' in allWords:
 		allWords.append('transaction')
