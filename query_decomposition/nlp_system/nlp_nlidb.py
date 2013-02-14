@@ -31,16 +31,7 @@ def nlp_nlidb(question):
 	uniqueWords = list(set(extracted_words + glossaryMatches))
 	allWords, conditions, target = answerGenerator(question, uniqueWords)
 
-	tables, required_values = semanticNet.createRelations(allWords, target)
+	tables = semanticNet.tables(allWords)
+	required_values = semanticNet.required_values(tables, allWords)
 
 	return allWords, required_values, target, conditions, tables, question_type
- 
-
-
-question = "Who is the most effective employee on my team?"
-question = "Who is the best employee?"
-allWords, defaultValues, what, conditions, tables, question_type = nlp_nlidb(question)
-#print 'question_type = ', question_type
-#print '*'*30
-#print allWords
-#print defaultValues

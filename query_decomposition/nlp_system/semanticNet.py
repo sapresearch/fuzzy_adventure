@@ -1,60 +1,34 @@
 import sys
 sys.path.append("../../external")
 import en
-import string
 
 '''def required value''' 
-def checkDB(lookFor, table):
-	# print lookFor, table
-	# raw_input('')
-	defaultValue = ''
+def required_values(lookFor, allWords):
+	singulars = [en.noun.singular(w.lower()) for w in allWords]
+	required_values = []
 
 	components_table =['id','name']
 	transactions_table = {'ID' : 'id','TRANSACTION' : 'trans_number','PROGRAMMER' : 'programmer_id','START' : 'start_date','END' : 'end_date','STATUS' :'status','PRIORITY':'priority','CONTRACT PRIORITY' :'contract_priority','PRODUCT' : 'product','COMPONENT ID' :'component_id'}
 	programmers_table = ['id','name']
 
 	# find the table, field and default value:
-	lookFor = lookFor.lower()
-	if (lookFor == 'component'):
-		defaultValue = 'ID and Name'
+	if 'components_table' in lookFor:
+		required_values.append('ID and Name')
 		 # + '. \nTable: '+ table
-	elif (lookFor == 'employee'):
-		defaultValue = 'ID and Name'
+	if 'programmers_table' in lookFor:
+		required_values.append('ID and Name')
 		 # + '. \nTable: '+ table
-	elif (table == 'transactions_table'):
-		lookFor = lookFor.upper()
-		if transactions_table[lookFor]:
-			defaultValue = transactions_table[lookFor]
-	return defaultValue
+	if 'transactions_table' in lookFor:
+		for word in singulars:
+			if word.upper() in transactions_table:
+				required_values.append(transactions_table[word.upper()])
+	return required_values
 
-
-def findTable(lookingFor):
-
-	table = ''
-
-	# print lookingFor
-	if lookingFor != None:
-		lookingFor = lookingFor.lower()
-		if lookingFor == 'component':
-			table = 'components_table'
-		elif lookingFor == 'employee':
-			table = 'programmers_table'
-		elif lookingFor == 'transaction':
-			table = 'transactions_table'
-	return table
-
-# def findField(field):
-# 	if field in components_table:
-# 		return 'components_table'
-	
-def createRelations(allWords, what):
+def tables(allWords):
+	tables = []
 	foundTables = set()
-	def_vals = []
-	for w in allWords:
-		singular = en.noun.singular(w)
-		table = findTable(singular)
-		if table != '':
-			foundTables.add(table)
-			def_vals.append(checkDB(singular, table))
-
-	return foundTables, def_vals
+	singulars = [en.noun.singular(w.lower()) for w in allWords]
+	table_names = {'component': 'components_table', 'employee':'programmers_table', 'transaction':'transactions_table'}
+	for word,table_name in table_names.iteritems():
+		if word in singulars: tables.append(table_name)
+	return tables 
