@@ -1,4 +1,3 @@
-import sys
 # from nltk import WordNetLemmatizer as WN_Lemmatizer
 # from nltk.stem import PorterStemmer as PStemmer
 import en
@@ -7,8 +6,8 @@ import string
 # a value. Then seperates the phrases base on their word counts and save them in the relevant glossary.
 def createGlossary():
 	# sys.path.append('/home/I837185/git/fuzzy_adventure/Context-based Data/')
-	glossary = open('glossary.txt', 'r')
-	glossary_processed = open('glossary_processed.txt', 'a')
+	glossary = open("../../context_based_data/glossary.txt", 'r')
+	glossary_processed = open("glossary_processed.txt", 'a')
 	text = glossary.readlines()
 	# values = []
 	glossary_one_word = dict()

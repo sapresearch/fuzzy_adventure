@@ -68,22 +68,3 @@ while True:
 		print print_table
 		print print_defaultValue
 		print print_condition
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

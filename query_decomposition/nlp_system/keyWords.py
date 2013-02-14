@@ -1,8 +1,9 @@
 
 # This program returns the key words in a sentence/question and the category of the sentence. 
 #@ INPUT: tree (The output of penn_treebank_node)
+import sys
+sys.path.append("../")
 import wordnet_synonym 
-import porter2
 import penn_treebank_node
 from stanford_client import to_tree
 import penn_treebank_node
