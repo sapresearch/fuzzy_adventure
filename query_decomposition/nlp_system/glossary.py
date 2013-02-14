@@ -7,7 +7,7 @@ import string
 def createGlossary():
 	# sys.path.append('/home/I837185/git/fuzzy_adventure/Context-based Data/')
 	glossary = open("../../context_based_data/glossary.txt", 'r')
-	glossary_processed = open("glossary_processed.txt", 'a')
+	glossary_processed = open("../../context_based_data/glossary_processed.txt", 'a')
 	text = glossary.readlines()
 	# values = []
 	glossary_one_word = dict()

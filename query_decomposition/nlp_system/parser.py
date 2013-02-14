@@ -1,12 +1,10 @@
-# This program returns the key words in a sentence/question and the category of the sentence. 
-#@ INPUT: tree (The output of penn_treebank_node)
+""" This program returns the key words in a sentence/question and the category of the sentence. 
+@ INPUT: tree (The output of penn_treebank_node) """
 import sys
 sys.path.append("../")
 import wordnet_synonym 
-import penn_treebank_node
-from stanford_client import to_tree
-import penn_treebank_node
 import string
+import operator
 
 def questionType(tree):
     np = tree.descendent(['NP'])
@@ -46,8 +44,7 @@ def questionType(tree):
             return 'How_quality'
     
 
-def keyWordsExtraction(top_node):
-
+def key_words(top_node, question):
     verb_labels = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']
     question_type = questionType(top_node)
     keyWords = dict()
@@ -118,48 +115,47 @@ def keyWordsExtraction(top_node):
                     prepositions_Adjs.add(PP.descendent('NN'))
 
     keyWords = {'Nouns':nouns, 'Verbs':verbs, 'Adjectives and Propositions':prepositions_Adjs} 
-    return keyWords, question_type
 
+    """ Custom parsing """
+    more_possesive_adjective = possesive_adjectives(question)
+    all_adjs = keyWords['Adjectives and Propositions'].union(more_possesive_adjective)
+    keyWords['Adjectives and Propositions'] = all_adjs
 
-def formatKeyWords(question):
-    buf=[]
+    nouns, verbs, adj = _formatKeyWords(keyWords)
+    return nouns, verbs, adj
+
+def _formatKeyWords(keyWords):
     nouns = []
     verbs = []
     adjs_prpos = []
-    tree = to_tree(question)
-    keyWords_allNull = 0
-    print tree
-    root = penn_treebank_node.parse(tree)
-    keyWords, question_type = keyWordsExtraction(root)
-    # print question_type
+
+    # Check that at least 1 keyword was found.
+    all_keywords = [item for sublist in keyWords.values() for item in sublist]
+    if len(all_keywords) < 1: print "No keywords found! \r\n"
+
+    for n in keyWords['Nouns']:
+        if n!= None:
+            # n_lemmatized = WN_Lemmatizer().lemmatize(n.word)
+            # nouns.append(str(n_lemmatized))
+            nouns.append(str(n.word))
+    for v in keyWords['Verbs']:
+        if v!= None:
+            # v_stemmed = PStemmer().stem(v.word)
+            # verbs.append(str(v_stemmed))
+            verbs.append(str(v.word))
+
+    for adj in keyWords['Adjectives and Propositions']:
+        if adj!= None:
+            adjs_prpos.append(str(adj.word))
+
+    return nouns, verbs, adjs_prpos
+
+def possesive_adjectives(question):
+    no_punctuation = question.translate(string.maketrans("",""), string.punctuation)
+    words = no_punctuation.split()
     possesive_adjs = ['my','your','his','her','their','its','our']
-    # check for all three keys of the dictionary if they are empty:
-    if ([a for a in keyWords.values() if a == []]):
-        keyWords_allNull = keyWords_allNull  + 1
-    if keyWords_allNull==3:
-        print("No keywords found! \r\n")
-    else:
-            # temp = []
-        for n in keyWords['Nouns']:
-            if n!= None:
-                # n_lemmatized = WN_Lemmatizer().lemmatize(n.word)
-                # nouns.append(str(n_lemmatized))
-                nouns.append(str(n.word))
-        for v in keyWords['Verbs']:
-            if v!= None:
-                # v_stemmed = PStemmer().stem(v.word)
-                # verbs.append(str(v_stemmed))
-                verbs.append(str(v.word))
-
-        for adj in keyWords['Adjectives and Propositions']:
-            if adj!= None:
-                adjs_prpos.append(str(adj.word))
-
-        # print temp
-        q_noPunc = question.translate(string.maketrans("",""), string.punctuation)
-        words = q_noPunc.split()
-        for w in words:
-            if w in possesive_adjs:
-                adjs_prpos.append(w)
-
-    return nouns,verbs, adjs_prpos, question_type
+    adjective_prepositions = set()
+    for w in words:
+        if w in possesive_adjs:
+            adjective_prepositions.append(w)
+	return adjective_prepositions

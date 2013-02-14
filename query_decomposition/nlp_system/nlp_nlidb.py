@@ -2,16 +2,22 @@ import sys
 import string
 from  semanticNet import *
 from answerGenerator import answerGenerator
-import keyWords
+import parser
 import semanticNet
 import wordnet_synonym 
 from glossary import *
 import en
+import stanford_client
+import penn_treebank_node
 
 def nlp_nlidb(question):
 
 	'''STEP1: Extracting the keywords using keyWordExtraction:'''
-	nouns, verbs, adjs_prpos, question_type = keyWords.formatKeyWords(question)
+	tree = stanford_client.to_tree(question)
+	top_node = penn_treebank_node.parse(tree)
+	nouns, verbs, adjs_prpos = parser.key_words(top_node, question)
+	question_type = parser.questionType(top_node)
+
 	to_remove = []
 	"remove the auxiliary verb 'to be':"
 	for v in verbs:
