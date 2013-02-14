@@ -1,8 +1,8 @@
-
 ''' Answer generator includes a list of rules that are manually entered by the user to improve the performance and find the answer'''
 
-def answerGenerator(question, allWords, conditions, what):
+def answerGenerator(question, allWords):
 #definitions:
+	conditions, what = set(), set()
 
 
 	if 'causes delay' in allWords:
@@ -23,7 +23,6 @@ def answerGenerator(question, allWords, conditions, what):
 		# print question.split()
 		conditions.add('Maximum value')
 		what.add('transaction')
-
 
 	if 'my' in question.split():
 		manager_ID = raw_input("what is your Employee ID?")
@@ -57,4 +56,5 @@ def answerGenerator(question, allWords, conditions, what):
 		what.add('transaction')
 		conditions.add('Maximum')
 
-	return (allWords, conditions, what)
+	allWords = list(set(allWords))
+	return allWords, conditions, what

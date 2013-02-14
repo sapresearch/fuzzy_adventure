@@ -1,4 +1,3 @@
-
 # This program returns the key words in a sentence/question and the category of the sentence. 
 #@ INPUT: tree (The output of penn_treebank_node)
 import sys

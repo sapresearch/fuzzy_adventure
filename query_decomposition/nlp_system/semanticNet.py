@@ -47,20 +47,14 @@ def findTable(lookingFor):
 # 	if field in components_table:
 # 		return 'components_table'
 	
-def createRelations(allWords, what, tables):
+def createRelations(allWords, what):
 	foundTables = set()
 	def_vals = []
 	for w in allWords:
-		w1 = en.noun.singular(w)
-		table = findTable(w1)
-		if table!= '':
+		singular = en.noun.singular(w)
+		table = findTable(singular)
+		if table != '':
 			foundTables.add(table)
-			def_vals.append(checkDB(w1,table))
+			def_vals.append(checkDB(singular, table))
 
 	return foundTables, def_vals
-
-
-
-
-
-
