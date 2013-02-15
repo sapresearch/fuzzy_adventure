@@ -138,3 +138,9 @@ def checkGlossary(question):
 	# print 'glossaryMatches = ', glossaryMatches
 	# print remove_list
 	return glossaryMatches, remove_list
+
+def generalizedKeywords(question, keyWords):
+	glossaryMatches, remove_list = checkGlossary(question)
+	keyWords = [x for x in keyWords if x not in remove_list]
+	uniqueWords = list(set(keyWords + glossaryMatches))
+	return uniqueWords
