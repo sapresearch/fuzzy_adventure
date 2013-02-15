@@ -26,11 +26,10 @@ root.configure(background='#3F464D')
 
 e = Entry(font=('Baskerville Old Face', 13))
 e.pack(fill=X, padx=20, pady=5)
-
+e.focus_set()
 
 answer_label = Label(background='#3F464D', fg='#D1D9E0')
 answer_label.pack()
-
 
 def query(event):
     question = e.get()
