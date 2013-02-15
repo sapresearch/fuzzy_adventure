@@ -27,8 +27,9 @@ root.configure(background='#3F464D')
 e = Entry(font=('Baskerville Old Face', 13))
 e.pack(fill=X, padx=20, pady=5)
 
-l = Label(background='#3F464D', fg='#D1D9E0')
-l.pack()
+
+answer_label = Label(background='#3F464D', fg='#D1D9E0')
+answer_label.pack()
 
 
 def query(event):
@@ -36,13 +37,18 @@ def query(event):
     print question
     if question is not '' and question is not None:
         answer, lat_type = FuzzyAdventure.to_sql(question)
-        l.config(text=answer)
+        answer_label.config(text=answer)
     
 def quit(event): 
-    l.config(text='I must be going, my planet needs me!')
+    answer_label.config(text='I must be going, my planet needs me!')
     print('I must be going, my planet needs me!') # event gives widget, x/y, etc.
     sys.exit()
 
+def copy(event):
+    answer = answer_label['text']
+    if answer is not '' and answer is not None:
+		root.clipboard_clear()
+		root.clipboard_append(answer)
 
 l2 = Label(bg='#67717A')
 l2.pack(side=BOTTOM, fill=X, padx=20, pady=(10,5))
@@ -53,7 +59,9 @@ widget = Button(None, text='Answer Me!', relief='groove', bg='#67717A', fg='#D1D
 widget.pack(padx=5, pady=5)
 
 widget.bind('<Button-1>', query)
-
+widget.bind('<Button-3>', copy)
+e.bind('<Return>', query)
+root.bind('<Escape>', quit)
 root.mainloop()
 
 
