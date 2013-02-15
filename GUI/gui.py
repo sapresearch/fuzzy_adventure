@@ -36,7 +36,10 @@ def query(event):
     print question
     if question is not '' and question is not None:
         answer, lat_type = FuzzyAdventure.to_sql(question)
+        if answer is None: answer = 'No answer found'
         answer_label.config(text=answer)
+    else:
+    	answer_label.config(text='')
     
 def quit(event): 
     answer_label.config(text='I must be going, my planet needs me!')
