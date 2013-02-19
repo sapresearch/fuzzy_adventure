@@ -5,7 +5,7 @@ import my_parser
 #from  semanticNet import *
 from answerGenerator import answerGenerator
 import semanticNet
-import wordnet_synonym 
+#import wordnet_synonym 
 import glossary
 import stanford_client
 import penn_treebank_node
@@ -30,6 +30,7 @@ def nlp_nlidb(question):
 	'''Creating Links between allWords and tables' entities'''
 	tables = semanticNet.tables(allWords)
 	required_values = semanticNet.required_values(tables, allWords)
+	#print allWords, required_values, target, conditions, tables, question_type, question
 	merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
 	#return allWords, required_values, target, conditions, tables, question_type, 
 	return merged
@@ -50,20 +51,23 @@ def merge(allWords, required_values, target, conditions, tables, question_type, 
 
 def rewrite():
 	path = "../nlidb/template_selectors/data2.txt"
-	questions, _, _ = load_data.load_data(path)
+	questions, _, types = load_data.load_data(path)
 	supplemented = []
-	for q in questions:
-		allWords, required_values, target, conditions, tables, question_type = nlp_nlidb(q)
-		allWords = ' '.join(allWords)
-		required_values = ' '.join(required_values)
-		target = ' '.join(target)
-		conditions = ' '.join(conditions)
-		tables = ' '.join(tables)
-		values = [allWords, required_values, target, conditions, tables, question_type, q]
-		formatted = []
-		for v in values:
-			if v != None: formatted.append(v)
-		data = ' '.join(formatted)
+	for i,q in enumerate(questions):
+		t = types[i]
+		#allWords, required_values, target, conditions, tables, question_type = nlp_nlidb(q)
+		#allWords = ' '.join(allWords)
+		#required_values = ' '.join(required_values)
+		#target = ' '.join(target)
+		#conditions = ' '.join(conditions)
+		#tables = ' '.join(tables)
+		#values = [allWords, required_values, target, conditions, tables, question_type, q]
+		values = [nlp_nlidb(q) + q]
+		#formatted = []
+		#for v in values:
+			#if v != None: formatted.append(v)
+		data = ' '.join(values)
+		data = data + "\t\t" + t
 		supplemented.append(data)
 	supplemented = "\n".join(supplemented)
 	new_file = file('more.txt', 'a')

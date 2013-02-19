@@ -19,7 +19,7 @@ def answerGenerator(question, allWords):
 		conditions.add('solve')
 		what.add('transaction')
 
-	if 'most' in allWords or question.split():
+	if 'most' in allWords or 'most' in question.split():
 		# print question.split()
 		conditions.add('Maximum value')
 		what.add('transaction')
@@ -58,6 +58,12 @@ def answerGenerator(question, allWords):
 		what.add('component')
 		what.add('transaction')
 		conditions.add('Maximum')
+	
+	if 'average' in allWords or 'average' in question.split():
+		what.add('component')
+		what.add('transaction')
+		conditions.add('average')
+
 
 	allWords = list(set(allWords))
 	return allWords, conditions, what

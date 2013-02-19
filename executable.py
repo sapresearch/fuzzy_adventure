@@ -23,7 +23,7 @@ that it correctly classifies. """
 
 
 #data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
-data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/more.txt"
+data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/more2.txt"
 	
 # Use Bayes classifier
 bayes = Bayes(data_file)
@@ -87,3 +87,5 @@ class FuzzyAdventure():
 	
 #q = "Who is my best employee?"
 FuzzyAdventure.test()
+#q = "How long does it take to close a high priority ticket?"
+#FuzzyAdventure.to_sql(q)
