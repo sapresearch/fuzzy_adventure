@@ -40,10 +40,11 @@ def query(event):
         answer_label.config(text=answer)
     else:
     	answer_label.config(text='')
+    print answer_label['text']
     
 def quit(event): 
     answer_label.config(text='I must be going, my planet needs me!')
-    print('I must be going, my planet needs me!') # event gives widget, x/y, etc.
+    print('I must be going, my planet needs me!')
     sys.exit()
 
 def copy(event):
