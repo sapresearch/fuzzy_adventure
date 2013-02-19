@@ -11,7 +11,8 @@ I don't want the Bayes class or the WordSpace class to inherit this function fro
 in other modules where this function isn't necessary. """
 
 import sys
-sys.path.append("/home/I834397//fuzzy_adventure/query_decomposition")
+import os
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition")
 from confidence_estimator import *
 class TemplateClassifier():
 

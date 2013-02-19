@@ -1,15 +1,16 @@
+import os
 import sys
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition")
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors")
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/nlidb/term_selectors")
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/nlp_system")
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition")
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlidb/template_selectors")
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlidb/term_selectors")
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlp_system")
 from bayes import Bayes
 from word_space import WordSpace
 from template_type import TemplateClassifier
 import MySQLdb
 import time
 import re
-sys.path.append("/home/I829287/fuzzy_adventure/test")
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/test")
 import load_data
 import confidence_estimator
 from term_selector import TermSelector

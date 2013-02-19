@@ -10,7 +10,8 @@ import glossary
 import stanford_client
 import penn_treebank_node
 import sys
-sys.path.append("/home/I829287/fuzzy_adventure/test")
+import os
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/test")
 import load_data
 
 def nlp_nlidb(question):

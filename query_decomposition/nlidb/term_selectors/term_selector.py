@@ -1,6 +1,7 @@
 import MySQLdb
 import sys
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition/")
+import os
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition")
 import permutation
 from time import time
 
