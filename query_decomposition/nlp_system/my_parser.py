@@ -1,7 +1,7 @@
 """ This program returns the key words in a sentence/question and the category of the sentence. 
 @ INPUT: tree (The output of penn_treebank_node) """
 import sys
-sys.path.append("../")
+sys.path.append("/home/I829287/fuzzy_adventure/external")
 import wordnet_synonym 
 import string
 import operator

@@ -14,6 +14,7 @@ import load_data
 import confidence_estimator
 from term_selector import TermSelector
 import nlp
+import nlp_nlidb
 
 """ Main executable file for the whole system.
 To use it, run the FuzzyAdventure.demo() function to let the user input questions to
@@ -21,7 +22,8 @@ the command line, or the FuzzyAdventure.test() function to find the number of qu
 that it correctly classifies. """
 
 
-data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
+#data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
+data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/more.txt"
 	
 # Use Bayes classifier
 bayes = Bayes(data_file)
@@ -35,7 +37,9 @@ class FuzzyAdventure():
 
 	@classmethod
 	def to_sql(self, nl_query):
-		sql, lat_type = tc.template(nl_query)
+		supplemented = nlp_nlidb.nlp_nlidb(nl_query)
+		print supplemented 
+		sql, lat_type = tc.template(supplemented)
 		keywords = nlp.tokens(nl_query)
 		keywords = nlp.remove_stopwords(keywords)
 		answer = TermSelector.fill_in_the_blanks(sql, keywords)
@@ -67,13 +71,19 @@ class FuzzyAdventure():
 	
 	@classmethod
 	def test(self):
+		data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
 		text, _, targets = load_data.load_data(data_file)
 		text, targets = text[1::2], targets[1::2]
 		correct = 0.
 		for i,t in enumerate(text):
 			target = targets[i]
 			sql, key = self.to_sql(t)
+			print "Question: ", t
+			print "Predicted/target: ", key, target
 			if key == target:
 				correct += 1.
 		print "Accuracy: " + str(correct/len(text))		
 		print "Total tested: " + str(len(text))
+	
+#q = "Who is my best employee?"
+FuzzyAdventure.test()

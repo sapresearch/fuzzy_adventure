@@ -1,21 +1,25 @@
+import re
 import sys
 import string
-from  semanticNet import *
+import my_parser
+#from  semanticNet import *
 from answerGenerator import answerGenerator
-import parser
 import semanticNet
 import wordnet_synonym 
 import glossary
 import stanford_client
 import penn_treebank_node
+import sys
+sys.path.append("/home/I829287/fuzzy_adventure/test")
+import load_data
 
 def nlp_nlidb(question):
 
 	'''STEP1: Extracting the keywords using Parser:'''
 	tree = stanford_client.to_tree(question)
 	top_node = penn_treebank_node.parse(tree)
-	extracted_words = parser.key_words(top_node, question)
-	question_type = parser.questionType(top_node)
+	extracted_words = my_parser.key_words(top_node, question)
+	question_type = my_parser.questionType(top_node)
 
 	'''STEP2: Replace words with glossary terms:'''
 	uniqueWords = glossary.generalizedKeywords(question, extracted_words)
@@ -26,5 +30,59 @@ def nlp_nlidb(question):
 	'''Creating Links between allWords and tables' entities'''
 	tables = semanticNet.tables(allWords)
 	required_values = semanticNet.required_values(tables, allWords)
+	merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
+	#return allWords, required_values, target, conditions, tables, question_type, 
+	return merged
 
-	return allWords, required_values, target, conditions, tables, question_type
+def merge(allWords, required_values, target, conditions, tables, question_type, question):
+	allWords = ' '.join(allWords)
+	required_values = ' '.join(required_values)
+	target = ' '.join(target)
+	conditions = ' '.join(conditions)
+	tables = ' '.join(tables)
+	values = [allWords, target, conditions, question_type]
+
+	formatted = []
+	for v in values:
+		if v != None: formatted.append(v)
+	merged = ' '.join(formatted)
+	return merged
+
+def rewrite():
+	path = "../nlidb/template_selectors/data2.txt"
+	questions, _, _ = load_data.load_data(path)
+	supplemented = []
+	for q in questions:
+		allWords, required_values, target, conditions, tables, question_type = nlp_nlidb(q)
+		allWords = ' '.join(allWords)
+		required_values = ' '.join(required_values)
+		target = ' '.join(target)
+		conditions = ' '.join(conditions)
+		tables = ' '.join(tables)
+		values = [allWords, required_values, target, conditions, tables, question_type, q]
+		formatted = []
+		for v in values:
+			if v != None: formatted.append(v)
+		data = ' '.join(formatted)
+		supplemented.append(data)
+	supplemented = "\n".join(supplemented)
+	new_file = file('more.txt', 'a')
+	new_file.write(supplemented)
+	new_file.close()
+
+def reformat():
+	path = "../nlidb/template_selectors/data2.txt"
+	_, _, types = load_data.load_data(path)
+	path = "more.txt"
+	questions = file(path, 'r').readlines()
+	both = []
+	for i,q in enumerate(questions):
+		t = types[i]
+		q = re.sub("\n", '', q)
+		merged = q + "\t\t" + t
+		both.append(merged)
+	path = 'more.txt'
+	both = "\n".join(both)
+	f = file('more2.txt', 'a')
+	f.write(both)
+	f.close()

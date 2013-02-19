@@ -25,7 +25,8 @@ def answerGenerator(question, allWords):
 		what.add('transaction')
 
 	if 'my' in question.split():
-		manager_ID = raw_input("what is your Employee ID?")
+		#manager_ID = raw_input("what is your Employee ID?")
+		manager_ID = '45'
 		if manager_ID:
 			conditions.add(str('manager_ID: '+ manager_ID))
 		else: 
@@ -35,14 +36,16 @@ def answerGenerator(question, allWords):
 		what.add('transaction')
 		conditions.add('programmer')
 		conditions.add('priority')
-		start_date = raw_input('Please enter the start date to calculate the productivity: ')
+		#start_date = raw_input('Please enter the start date to calculate the productivity: ')
+		start_date = '45'
 
 		if start_date:
 			what.add('transaction')
 			conditions.add(start_date)
 		else:
 			conditions.add('Duration: Last 30 days')
-		end_date = raw_input ('Please enter the end date to calculate the productivity: ')
+		#end_date = raw_input ('Please enter the end date to calculate the productivity: ')
+		end_date = '45'
 
 		if end_date:
 			what.add('transaction')
