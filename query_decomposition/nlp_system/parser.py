@@ -5,7 +5,6 @@ sys.path.append("../")
 import wordnet_synonym 
 import string
 import operator
-import en
 
 def questionType(tree):
     np = tree.descendent(['NP'])
@@ -122,14 +121,13 @@ def key_words(top_node, question):
     all_adjs = keyWords['Adjectives and Propositions'].union(more_possesive_adjective)
     keyWords['Adjectives and Propositions'] = all_adjs
 
-    keyWords = _formatKeyWords(keyWords)
-    return keyWords
+    nouns, verbs, adj = _formatKeyWords(keyWords)
+    return nouns, verbs, adj
 
 def _formatKeyWords(keyWords):
     nouns = []
     verbs = []
     adjs_prpos = []
-    to_remove = []
 
     # Check that at least 1 keyword was found.
     all_keywords = [item for sublist in keyWords.values() for item in sublist]
@@ -141,10 +139,6 @@ def _formatKeyWords(keyWords):
             # nouns.append(str(n_lemmatized))
             nouns.append(str(n.word))
     for v in keyWords['Verbs']:
-
-        "remove the auxiliary verb 'to be':"
-        if en.verb.infinitive(v) == 'be':
-            to_remove.append(v)
         if v!= None:
             # v_stemmed = PStemmer().stem(v.word)
             # verbs.append(str(v_stemmed))
@@ -154,15 +148,7 @@ def _formatKeyWords(keyWords):
         if adj!= None:
             adjs_prpos.append(str(adj.word))
 
-    
-    verbs = [x for x in verbs if x not in to_remove]
-
-    '''combine all key words extracted for each category:'''
-    extracted_words = nouns + verbs + adjs_prpos
-    while '' in extracted_words:
-        extracted_words.remove('')
-
-    return extracted_words
+    return nouns, verbs, adjs_prpos
 
 def possesive_adjectives(question):
     no_punctuation = question.translate(string.maketrans("",""), string.punctuation)
