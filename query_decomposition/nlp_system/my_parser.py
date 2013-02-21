@@ -72,57 +72,57 @@ def key_words(top_node, question):
             NPS.append(node)
         if node.descendent('ADJP'):
             JPS.append(node)
-        
-    VP = nodes[1].descendent(['VP'])
-    PP = nodes[1].descendent(['PP'])
+    if len(nodes)>1:    
+        VP = nodes[1].descendent(['VP'])
+        PP = nodes[1].descendent(['PP'])
 
 
 
-    if top_node.node_type in ['SBARQ','SBAR','S']:
+        if top_node.node_type in ['SBARQ','SBAR','S']:
 
-            
-            if VP:
-                for v in verb_labels:
-                    if VP.descendent(v):
+                
+                if VP:
+                    for v in verb_labels:
+                        if VP.descendent(v):
 
-                        verbs.add(VP.descendent(v))
-
-
-            for np in NPS:
-                if np.descendent('NP'):
-                    nouns.add(np.descendent('NP'))
-                if np.descendent('JJS'):
-                    nouns.add(np.descendent('JJS'))
-                if np.descendent('NN'):
-                    nouns.add(np.descendent('NN'))
-                if np.descendent('NNS'):
-                    nouns.add(np.descendent('NNS'))
-                if np.descendent('NNP'):
-                    nouns.add(np.descendent('NNP'))
+                            verbs.add(VP.descendent(v))
 
 
-            for jp in JPS:
-                # adj_node = None
-                if jp.descendent('RBS'):
-                    prepositions_Adjs.add(jp.descendent('RBS'))
-                if jp.descendent('JJ'):
-                    prepositions_Adjs.add(jp.descendent('JJ'))
-                elif jp.descendent('JJS'):
-                    prepositions_Adjs.add(jp.descendent('JJS'))
+                for np in NPS:
+                    if np.descendent('NP'):
+                        nouns.add(np.descendent('NP'))
+                    if np.descendent('JJS'):
+                        nouns.add(np.descendent('JJS'))
+                    if np.descendent('NN'):
+                        nouns.add(np.descendent('NN'))
+                    if np.descendent('NNS'):
+                        nouns.add(np.descendent('NNS'))
+                    if np.descendent('NNP'):
+                        nouns.add(np.descendent('NNP'))
 
 
-            if PP:
-                # if PP.descendent('IN'):
-                #     keyWords.add(PP.descendent('IN'))
-                if PP.descendent('NN'):
-                    prepositions_Adjs.add(PP.descendent('NN'))
+                for jp in JPS:
+                    # adj_node = None
+                    if jp.descendent('RBS'):
+                        prepositions_Adjs.add(jp.descendent('RBS'))
+                    if jp.descendent('JJ'):
+                        prepositions_Adjs.add(jp.descendent('JJ'))
+                    elif jp.descendent('JJS'):
+                        prepositions_Adjs.add(jp.descendent('JJS'))
 
-    keyWords = {'Nouns':nouns, 'Verbs':verbs, 'Adjectives and Propositions':prepositions_Adjs} 
 
-    """ Custom parsing """
-    more_possesive_adjective = possesive_adjectives(question)
-    all_adjs = keyWords['Adjectives and Propositions'].union(more_possesive_adjective)
-    keyWords['Adjectives and Propositions'] = all_adjs
+                if PP:
+                    # if PP.descendent('IN'):
+                    #     keyWords.add(PP.descendent('IN'))
+                    if PP.descendent('NN'):
+                        prepositions_Adjs.add(PP.descendent('NN'))
+
+        keyWords = {'Nouns':nouns, 'Verbs':verbs, 'Adjectives and Propositions':prepositions_Adjs} 
+
+        """ Custom parsing """
+        more_possesive_adjective = possesive_adjectives(question)
+        all_adjs = keyWords['Adjectives and Propositions'].union(more_possesive_adjective)
+        keyWords['Adjectives and Propositions'] = all_adjs
 
     keyWords = _formatKeyWords(keyWords)
     return keyWords
@@ -132,37 +132,39 @@ def _formatKeyWords(keyWords):
     verbs = []
     adjs_prpos = []
     to_remove = []
+    extracted_words = []
 
     # Check that at least 1 keyword was found.
     all_keywords = [item for sublist in keyWords.values() for item in sublist]
     if len(all_keywords) < 1: print "No keywords found! \r\n"
 
-    for n in keyWords['Nouns']:
-        if n!= None:
-            # n_lemmatized = WN_Lemmatizer().lemmatize(n.word)
-            # nouns.append(str(n_lemmatized))
-            nouns.append(str(n.word))
-    for v in keyWords['Verbs']:
+    else:   
+        for n in keyWords['Nouns']:
+            if n!= None:
+                # n_lemmatized = WN_Lemmatizer().lemmatize(n.word)
+                # nouns.append(str(n_lemmatized))
+                nouns.append(str(n.word))
+        for v in keyWords['Verbs']:
 
-        "remove the auxiliary verb 'to be':"
-        if en.verb.infinitive(v) == 'be':
-            to_remove.append(v)
-        if v!= None:
-            # v_stemmed = PStemmer().stem(v.word)
-            # verbs.append(str(v_stemmed))
-            verbs.append(str(v.word))
+            "remove the auxiliary verb 'to be':"
+            if en.verb.infinitive(v) == 'be':
+                to_remove.append(v)
+            if v!= None:
+                # v_stemmed = PStemmer().stem(v.word)
+                # verbs.append(str(v_stemmed))
+                verbs.append(str(v.word))
 
-    for adj in keyWords['Adjectives and Propositions']:
-        if adj!= None:
-            adjs_prpos.append(str(adj.word))
+        for adj in keyWords['Adjectives and Propositions']:
+            if adj!= None:
+                adjs_prpos.append(str(adj.word))
 
-    
-    verbs = [x for x in verbs if x not in to_remove]
+        
+        verbs = [x for x in verbs if x not in to_remove]
 
-    '''combine all key words extracted for each category:'''
-    extracted_words = nouns + verbs + adjs_prpos
-    while '' in extracted_words:
-        extracted_words.remove('')
+        '''combine all key words extracted for each category:'''
+        extracted_words = nouns + verbs + adjs_prpos
+        while '' in extracted_words:
+            extracted_words.remove('')
 
     return extracted_words
 
