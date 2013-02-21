@@ -1,43 +1,93 @@
+import re
 import sys
 import string
-from  semanticNet import *
+import my_parser
+#from  semanticNet import *
 from answerGenerator import answerGenerator
-import parser
 import semanticNet
-import wordnet_synonym 
-from glossary import *
-import en
+#import wordnet_synonym 
+import glossary
 import stanford_client
 import penn_treebank_node
+import sys
+import os
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/test")
+import load_data
 
 def nlp_nlidb(question):
 
-	'''STEP1: Extracting the keywords using keyWordExtraction:'''
+	'''STEP1: Extracting the keywords using Parser:'''
 	tree = stanford_client.to_tree(question)
 	top_node = penn_treebank_node.parse(tree)
-	nouns, verbs, adjs_prpos = parser.key_words(top_node, question)
-	question_type = parser.questionType(top_node)
-
-	to_remove = []
-	"remove the auxiliary verb 'to be':"
-	for v in verbs:
-		if en.verb.infinitive(v) == 'be':
-			 to_remove.append(v)
-
-	'''combine all key words extracted for each category:'''
-	extracted_words = nouns + verbs + adjs_prpos
-	while '' in extracted_words:
-		extracted_words.remove('')
+	extracted_words = my_parser.key_words(top_node, question)
+	question_type = my_parser.questionType(top_node)
 
 	'''STEP2: Replace words with glossary terms:'''
-	glossaryMatches, remove_list = checkGlossary(question)
-	unnecessary_words = (remove_list + to_remove)
-
-	extracted_words = [x for x in extracted_words if x not in unnecessary_words]
-	uniqueWords = list(set(extracted_words + glossaryMatches))
+	uniqueWords = glossary.generalizedKeywords(question, extracted_words)
+	
+	'''STEP3: Adding some manually defined rules'''
 	allWords, conditions, target = answerGenerator(question, uniqueWords)
 
+	'''Creating Links between allWords and tables' entities'''
 	tables = semanticNet.tables(allWords)
 	required_values = semanticNet.required_values(tables, allWords)
+	#print allWords, required_values, target, conditions, tables, question_type, question
+	merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
+	#return allWords, required_values, target, conditions, tables, question_type, 
+	return merged
 
-	return allWords, required_values, target, conditions, tables, question_type
+def merge(allWords, required_values, target, conditions, tables, question_type, question):
+	allWords = ' '.join(allWords)
+	required_values = ' '.join(required_values)
+	target = ' '.join(target)
+	conditions = ' '.join(conditions)
+	tables = ' '.join(tables)
+	values = [allWords, target, conditions, question_type]
+
+	formatted = []
+	for v in values:
+		if v != None: formatted.append(v)
+	merged = ' '.join(formatted)
+	return merged
+
+def rewrite():
+	path = "../nlidb/template_selectors/data2.txt"
+	questions, _, types = load_data.load_data(path)
+	supplemented = []
+	for i,q in enumerate(questions):
+		t = types[i]
+		#allWords, required_values, target, conditions, tables, question_type = nlp_nlidb(q)
+		#allWords = ' '.join(allWords)
+		#required_values = ' '.join(required_values)
+		#target = ' '.join(target)
+		#conditions = ' '.join(conditions)
+		#tables = ' '.join(tables)
+		#values = [allWords, required_values, target, conditions, tables, question_type, q]
+		values = [nlp_nlidb(q) + q]
+		#formatted = []
+		#for v in values:
+			#if v != None: formatted.append(v)
+		data = ' '.join(values)
+		data = data + "\t\t" + t
+		supplemented.append(data)
+	supplemented = "\n".join(supplemented)
+	new_file = file('more.txt', 'a')
+	new_file.write(supplemented)
+	new_file.close()
+
+def reformat():
+	path = "../nlidb/template_selectors/data2.txt"
+	_, _, types = load_data.load_data(path)
+	path = "more.txt"
+	questions = file(path, 'r').readlines()
+	both = []
+	for i,q in enumerate(questions):
+		t = types[i]
+		q = re.sub("\n", '', q)
+		merged = q + "\t\t" + t
+		both.append(merged)
+	path = 'more.txt'
+	both = "\n".join(both)
+	f = file('more2.txt', 'a')
+	f.write(both)
+	f.close()

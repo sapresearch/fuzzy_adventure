@@ -1,13 +1,15 @@
 # from nltk import WordNetLemmatizer as WN_Lemmatizer
 # from nltk.stem import PorterStemmer as PStemmer
+import os
 import en
 import string
 # Reads the words in the glossary text file and saves each synonym as a key and each label as 
 # a value. Then seperates the phrases base on their word counts and save them in the relevant glossary.
 def createGlossary():
 	# sys.path.append('/home/I837185/git/fuzzy_adventure/Context-based Data/')
-	glossary = open("../../context_based_data/glossary.txt", 'r')
-	glossary_processed = open("../../context_based_data/glossary_processed.txt", 'a')
+
+	glossary = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary.txt", 'r')
+	glossary_processed = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'a')
 	text = glossary.readlines()
 	# values = []
 	glossary_one_word = dict()
@@ -138,3 +140,9 @@ def checkGlossary(question):
 	# print 'glossaryMatches = ', glossaryMatches
 	# print remove_list
 	return glossaryMatches, remove_list
+
+def generalizedKeywords(question, keyWords):
+	glossaryMatches, remove_list = checkGlossary(question)
+	keyWords = [x for x in keyWords if x not in remove_list]
+	uniqueWords = list(set(keyWords + glossaryMatches))
+	return uniqueWords

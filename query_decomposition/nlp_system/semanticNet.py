@@ -1,5 +1,5 @@
 import sys
-sys.path.append("../../external")
+sys.path.append("/home/I829287/fuzzy_adventure/external")
 import en
 
 '''def required value''' 
