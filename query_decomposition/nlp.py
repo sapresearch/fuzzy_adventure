@@ -34,12 +34,3 @@ def tokens(string):
 def remove_stopwords(words):
 	no_stopwords = [w.strip() for w in words if w.strip() not in nltk.corpus.stopwords.words('english')]
 	return no_stopwords
-
-def lexical_type(triplet):
-	lex_type = 'unknown'
-	title = triplet['title']
-	types = {'name': ['name', 'surname', 'givenName'], 'date': ['birthDate', 'deathDate'], 'location': ['birthPlace', 'deathPlace'], 'occupation': ['description']}
-	for type_name, titles in types.items():
-		if title in titles:
-			lex_type = type_name
-	return lex_type

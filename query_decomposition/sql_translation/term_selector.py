@@ -7,12 +7,14 @@ class TermSelector():
 
 	@classmethod
 	def table_names(self):
-		tables = ['state', 'city', 'border_info', 'highlow', 'river', 'mountain']
+		#tables = ['state', 'city', 'border_info', 'highlow', 'river', 'mountain']
+		tables = ['transactions', 'programmers', 'components']
 		return tables
 
 	@classmethod
 	def column_names(self):
-		columns = ['capital', 'population', 'city_name', 'state_name', 'area', 'country_name', 'border', 'highest_point', 'density', 'highest_elevation', 'length']
+		#columns = ['capital', 'population', 'city_name', 'state_name', 'area', 'country_name', 'border', 'highest_point', 'density', 'highest_elevation', 'length']
+		columns = ['id', 'name', 'end_date', 'start_date', 'transaction_id', 'priority', 'trans_number', 'programmer_id', 'status', 'contract_priority', 'productivity', 'component_id']
 		return columns
 
 	@classmethod
@@ -66,6 +68,8 @@ class TermSelector():
 				#print "Best word: " + best_word + " for " + word + ". Distance: " + str(dist)
 		return best_word
 
+print "\n"
+print TermSelector.fill_in_blanks('Who is the most productive programmer on my team?', "select blank.blank from blank where blank.blank=(select max(blank.blank) from blank)")
 #print TermSelector.fill_in_blanks('what is the state_name of the state has the highest population', "select blank.blank from blank where blank.blank=(select max(blank.blank) from blank)" )
 #answer = "select state.state_name from state where state.population=(select max(state.population) from state)"
 #print answer

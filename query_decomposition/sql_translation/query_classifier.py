@@ -9,6 +9,9 @@ import sys
 sys.path.append("../")
 import stanford_client as tagger
 
+""" This is the class the classifies a natural language question to a SQL template/skeleton.
+Later, in the TermSelector, the "blanks" in the template are filled in. """
+
 class FeatureExtraction():
 
 	@classmethod
@@ -57,5 +60,8 @@ class QueryClassifier():
 		return accuracy
 
 #print "----"
-#print QueryClassifier.test()
+print QueryClassifier.test()
 #print QueryClassifier.classify("What states border Florida?")
+#print QueryClassifier.classify("Who is the President of America?")
+#print QueryClassifier.classify("Who is the most productive person on my team?")
+#print QueryClassifier.classify("What component contributes the most to my backlog?")

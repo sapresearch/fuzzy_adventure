@@ -87,6 +87,6 @@ class FuzzyAdventure():
 		print "Total tested: " + str(len(text))
 	
 #q = "Who is my best employee?"
-FuzzyAdventure.test()
+#FuzzyAdventure.test()
 #q = "How long does it take to close a high priority ticket?"
 #FuzzyAdventure.to_sql(q)

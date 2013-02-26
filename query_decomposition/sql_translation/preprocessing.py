@@ -1,10 +1,12 @@
+import os
 import sys
-sys.path.append("../")
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlp_system")
 import stanford_client as tagger
 import re
 
 class Preprocessing():
 
+	" This method was to create the dataset. It's not used anymore. "
 	@classmethod
 	def add_tag_trees(self):
 		f = file('geo_dataset.txt', 'r')
@@ -24,7 +26,7 @@ class Preprocessing():
 	
 	@classmethod
 	def generalize_sql(self):
-		f = file('geo_dataset.txt', 'r')
+		f = file('geo_dataset.txt', 'r') # To change the training dataset, change this file here.
 		originals = []
 		skeletons = []
 		trees = []
