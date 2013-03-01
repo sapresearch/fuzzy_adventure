@@ -18,26 +18,31 @@ def temp():
 root = Tk()
 #Button(root, text='Exit', command=handler('spam')).pack(side=LEFT, expand=YES, fill=X)
 root.title('Fuzzy Adventure')
-#root.iconbitmap('saplogo.ico')
+root.wm_iconbitmap('@'+'SAP-Logo.xbm')
 root.minsize(600,100)
 root.resizable(width=FALSE, height=FALSE)
 root.configure(background='#3F464D')
 
 
-e = Entry(font=('Baskerville Old Face', 13))
+e = Entry(font=('Helvetica', 13), justify='center')
 e.pack(fill=X, padx=20, pady=5)
 e.focus_set()
 
-answer_label = Label(background='#3F464D', fg='#D1D9E0')
+answer_label_font = tkFont.Font(family='Helvetica', size=13)
+answer_label = Label(background='#3F464D', fg='#D1D9E0', font=answer_label_font)
 answer_label.pack()
 
 def query(event):
     question = e.get()
     print question
     if question is not '' and question is not None:
-        answer, lat_type = FuzzyAdventure.to_sql(question)
-        if answer is None: answer = 'No answer found'
-        answer_label.config(text=answer)
+        try:
+            answer, lat_type = FuzzyAdventure.to_sql(question)
+        except:
+            answer = None
+        finally:
+            if answer is None: answer = 'No answer found'
+            answer_label.config(text=answer)
     else:
     	answer_label.config(text='')
     print answer_label['text']
@@ -57,8 +62,8 @@ l2 = Label(bg='#67717A')
 l2.pack(side=BOTTOM, fill=X, padx=20, pady=(10,5))
 l2.bind('<B1-Motion>', quit)
 
-button_font = tkFont.Font(family='Baskerville Old Face', size=11)
-widget = Button(None, text='Answer Me!', relief='groove', bg='#67717A', fg='#D1D9E0', bd=0, font=button_font)
+button_font = tkFont.Font(family='Helvetica', size=11)
+widget = Button(master=None, text='Answer Me!', bg='#67717A', fg='#D1D9E0', bd=1, font=button_font, relief='flat')
 widget.pack(padx=5, pady=5)
 
 widget.bind('<Button-1>', query)
