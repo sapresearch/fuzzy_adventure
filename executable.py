@@ -1,9 +1,10 @@
 import os
 import sys
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition")
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlidb/template_selectors")
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlidb/term_selectors")
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlp_system")
+project_path = os.environ['FUZZY_ADVENTURE']
+sys.path.append(project_path + "/query_decomposition")
+sys.path.append(project_path + "/query_decomposition/nlidb/template_selectors")
+sys.path.append(project_path + "/query_decomposition/nlidb/term_selectors")
+sys.path.append(project_path + "/query_decomposition/nlp_system")
 from bayes import Bayes
 from word_space import WordSpace
 from template_type import TemplateClassifier
@@ -23,8 +24,8 @@ the command line, or the FuzzyAdventure.test() function to find the number of qu
 that it correctly classifies. """
 
 
-#data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
-data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/more2.txt"
+#data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.txt"
+data_file = project_path + "/query_decomposition/nlidb/template_selectors/more2.txt"
 	
 # Use Bayes classifier
 bayes = Bayes(data_file)
@@ -72,7 +73,7 @@ class FuzzyAdventure():
 	
 	@classmethod
 	def test(self):
-		data_file = "/home/I829287/fuzzy_adventure/query_decomposition/nlidb/template_selectors/data2.txt"
+		data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.txt"
 		text, _, targets = load_data.load_data(data_file)
 		text, targets = text[1::2], targets[1::2]
 		correct = 0.
