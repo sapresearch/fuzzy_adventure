@@ -6,24 +6,21 @@ import re
 
 class Preprocessing():
 
-	" This method was to create the dataset. It's not used anymore. "
 	@classmethod
-	def add_tag_trees(self):
-		f = file('geo_dataset.txt', 'r')
-		with_trees = []
-		for line in f:
-			line = re.sub("\n", '', line)
-			l = line.split(',')
-			question = l[0]
-			tree = tagger.to_tree(question)
-			with_trees.append(line + "," + tree + "\n")
-		f.close()
+	def data(self):
+		originals, skeletons, trees = self.generalize_sql()
+		unique = list(set(skeletons))
+		labels = []
+		cleaned_trees = []
+		for tree in trees:
+			cleaned_trees.append(self.format_trees(tree))
+		for i,sql in enumerate(originals):
+			skeleton = skeletons[i]
+			label = unique.index(skeleton)
+			labels.append(label)
+		return originals, labels, cleaned_trees
 
-		f = file('rest_with_trees', 'w+')
-		for w in with_trees:
-			f.write(w)
-		f.close()
-	
+
 	@classmethod
 	def generalize_sql(self):
 		f = file('geo_dataset.txt', 'r') # To change the training dataset, change this file here.
@@ -40,6 +37,42 @@ class Preprocessing():
 			skeletons.append(skeleton)
 		f.close()
 		return originals, skeletons, trees
+
+
+	@classmethod
+	def format_trees(self, tree):
+		tags_only = re.sub("[^A-Z+]", " ", tree)
+		clean = re.sub("\s+", ' ', tags_only)
+		clean = re.sub("^\s", '', clean)
+		clean = re.sub("\s$", '', clean)
+		return clean
+
+
+	@classmethod
+	def to_skeleton(self, sql_query):
+		sql_query = self.sql_tokenize(sql_query)
+
+		sql_keywords = ['delete', 'from', 'having', 'insert', 'join', 'merge', 'null', 'order by', 'select', 'union', 'update', 'where', 'count', 'distinct', 'max', 'min', 'in', 'desc', 'limit', 'sum']
+		sql_syntax = ['=', '.', '(', ')', '*', '>', '<']
+		skeleton = ''
+		for word in sql_query:
+			if word != '':
+				if word in sql_keywords:
+					skeleton += word + ' '
+				elif word in sql_syntax:
+					skeleton += word + ' '
+				else:
+					skeleton += 'blank' + ' '
+		skeleton = re.sub(" \. ", '.', skeleton)
+		skeleton = re.sub(" = ", '=', skeleton)
+		skeleton = re.sub("\( ", "(", skeleton)
+		skeleton = re.sub(" \)", ")", skeleton)
+		skeleton = re.sub("max \(", "max(", skeleton)
+		skeleton = re.sub("min \(", "min(", skeleton)
+		skeleton = re.sub("sum \(", "sum(", skeleton)
+		skeleton = re.sub("count \(", "count(", skeleton)
+		return skeleton
+
 
 	@classmethod
 	def sql_tokenize(self, sql_query):
@@ -82,44 +115,25 @@ class Preprocessing():
 			split_query4.remove('')
 		return split_query4
 
-	@classmethod
-	def to_skeleton(self, sql_query):
-		sql_query = self.sql_tokenize(sql_query)
 
-		sql_keywords = ['delete', 'from', 'having', 'insert', 'join', 'merge', 'null', 'order by', 'select', 'union', 'update', 'where', 'count', 'distinct', 'max', 'min', 'in', 'desc', 'limit', 'sum']
-		sql_syntax = ['=', '.', '(', ')', '*', '>', '<']
-		skeleton = ''
-		for word in sql_query:
-			if word != '':
-				if word in sql_keywords:
-					skeleton += word + ' '
-				elif word in sql_syntax:
-					skeleton += word + ' '
-				else:
-					skeleton += 'blank' + ' '
-		skeleton = re.sub(" \. ", '.', skeleton)
-		skeleton = re.sub(" = ", '=', skeleton)
-		skeleton = re.sub("\( ", "(", skeleton)
-		skeleton = re.sub(" \)", ")", skeleton)
-		skeleton = re.sub("max \(", "max(", skeleton)
-		skeleton = re.sub("min \(", "min(", skeleton)
-		skeleton = re.sub("sum \(", "sum(", skeleton)
-		skeleton = re.sub("count \(", "count(", skeleton)
-		return skeleton
-
+	" This method was to create the dataset. It's not used anymore. "
 	@classmethod
-	def data(self):
-		originals, skeletons, trees = self.generalize_sql()
-		unique = list(set(skeletons))
-		labels = []
-		cleaned_trees = []
-		for tree in trees:
-			cleaned_trees.append(self.format_trees(tree))
-		for i,sql in enumerate(originals):
-			skeleton = skeletons[i]
-			label = unique.index(skeleton)
-			labels.append(label)
-		return originals, labels, cleaned_trees
+	def add_tag_trees(self):
+		f = file('geo_dataset.txt', 'r')
+		with_trees = []
+		for line in f:
+			line = re.sub("\n", '', line)
+			l = line.split(',')
+			question = l[0]
+			tree = tagger.to_tree(question)
+			with_trees.append(line + "," + tree + "\n")
+		f.close()
+
+		f = file('rest_with_trees', 'w+')
+		for w in with_trees:
+			f.write(w)
+		f.close()
+
 
 	@classmethod
 	def query(self, query_label):
@@ -129,10 +143,3 @@ class Preprocessing():
 		query = unique[query_label]
 		return query
 	
-	@classmethod
-	def format_trees(self, tree):
-		tags_only = re.sub("[^A-Z+]", " ", tree)
-		clean = re.sub("\s+", ' ', tags_only)
-		clean = re.sub("^\s", '', clean)
-		clean = re.sub("\s$", '', clean)
-		return clean
