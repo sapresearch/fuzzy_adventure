@@ -3,6 +3,8 @@ import sys
 sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlp_system")
 import stanford_client as tagger
 import re
+import pandas as pd
+from pandas import DataFrame, Series
 
 class Preprocessing():
 
@@ -14,9 +16,13 @@ class Preprocessing():
 		cleaned_trees = []
 		for tree in trees:
 			cleaned_trees.append(self.format_trees(tree))
+
+		df = count(cleaned_trees, skeletons)
+		print df.ix[0]
+
 		for i,sql in enumerate(originals):
 			skeleton = skeletons[i]
-			label = unique.index(skeleton)
+			label = unique.index(skeleton) # Label every original sql with its skeleton
 			labels.append(label)
 		return originals, labels, cleaned_trees
 
@@ -29,12 +35,16 @@ class Preprocessing():
 		trees = []
 		for line in f:
 			line = line.split(',')
+
 			sql = line[1]
-			parse_tree = line[2]
-			skeleton = self.to_skeleton(sql)
-			trees.append(parse_tree)
 			originals.append(sql)
+
+			skeleton = self.to_skeleton(sql)
 			skeletons.append(skeleton)
+
+			parse_tree = line[2]
+			trees.append(parse_tree)
+
 		f.close()
 		return originals, skeletons, trees
 
@@ -143,3 +153,21 @@ class Preprocessing():
 		query = unique[query_label]
 		return query
 	
+
+
+def count(trees, sql):
+    df = DataFrame(zip(trees, sql), columns=['tree','sql'])
+    gb = df.groupby(['tree','sql'])
+
+    c = []
+    for k in gb.groups.keys():
+        l = (len(gb.groups[k]),)
+        c.append(k + l)
+
+    df = DataFrame(c)
+    df.index = [df[0], df[1]]
+    del df[0]
+    del df[1]
+    df.columns = ['count']
+    df.index.names = ['tree','sql']
+    return df

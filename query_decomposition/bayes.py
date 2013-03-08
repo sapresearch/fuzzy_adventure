@@ -9,7 +9,7 @@ class Bayes():
 
 	def __init__(self, file_path):
 		self.file_path = file_path
-		self.word_list = self.build_word_list
+		self.word_list = self.build_word_list()
 		self.model = self.train()
 	
 	""" Create an alphabetized wordlist of all the words in all classes """
@@ -27,7 +27,7 @@ class Bayes():
 	def text_vector(self, text, laplace):
 		text = nlp.tokens(text)
 		vector = []
-		for word in self.word_list():
+		for word in self.word_list:
 			score = 1 if word in text else 0
 			vector.append(score)
 		return vector

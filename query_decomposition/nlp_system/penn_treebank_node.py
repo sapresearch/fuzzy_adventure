@@ -77,6 +77,21 @@ class PennTreebankNode():
         return kids
 
 
+    def __repr__(self):
+        representation = self.node_type
+        if self.word is not None and self.word is not '':
+            representation += ": " + self.word
+        representation += '\n'
+        for child in self.children:
+            tab = 0;
+            parent = self.parent
+            while parent is not None:
+                tab += 1;
+                parent = parent.parent
+            representation += '  ' * tab + '|--' + str(child)
+        return representation
+
+
 def parse(tree, parent=None, root_node=None, count=0, debug=False):
     tree = re.sub('(\(ROOT )(.*)(\))', '\\2', tree)
     start_count, stop_count = 0, 0

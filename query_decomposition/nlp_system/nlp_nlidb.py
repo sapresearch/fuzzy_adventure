@@ -36,7 +36,7 @@ def nlp_nlidb(question):
 	merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
 	return merged
 	'''To use the nlp_nlidb module use:'''
-	# return allWords, required_values, target, conditions, tables, question_type, 
+	#return allWords, required_values, target, conditions, tables, question_type, 
 
 
 def merge(allWords, required_values, target, conditions, tables, question_type, question):

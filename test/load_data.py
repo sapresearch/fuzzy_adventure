@@ -15,5 +15,6 @@ def load_data(file_name):
 		lex_types.append(lex_type)
 		questions.append(question)
 		answers.append(answer)
+	f.close()
 	return questions, answers, lex_types
 
