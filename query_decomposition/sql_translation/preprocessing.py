@@ -62,7 +62,7 @@ class Preprocessing():
 	def to_skeleton(self, sql_query):
 		sql_query = self.sql_tokenize(sql_query)
 
-		sql_keywords = ['delete', 'from', 'having', 'insert', 'join', 'merge', 'null', 'order by', 'select', 'union', 'update', 'where', 'count', 'distinct', 'max', 'min', 'in', 'desc', 'limit', 'sum']
+		sql_keywords = ['delete', 'from', 'having', 'insert', 'join', 'merge', 'null', 'order by', 'select', 'union', 'update', 'where', 'count', 'distinct', 'max', 'min', 'in', 'desc', 'limit', 'sum', 'and', 'or']
 		sql_syntax = ['=', '.', '(', ')', '*', '>', '<']
 		skeleton = ''
 		for word in sql_query:
