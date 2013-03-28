@@ -281,35 +281,32 @@ def generalize_sql(query_list):
 
     return skeletons
 
-if __name__ == "__main__":
+
+
+def leave_one_out():
     import json
     f = open('IMS_questions.txt','r')
     json_load = json.load(f)
         
     df = DataFrame(json_load)
     skeletons = generalize_sql(df.query.apply(unicode.lower))
-    trees = df.tree
-
-    train_data = trees.tolist()[0::4] + trees.tolist()[2::4] + trees.tolist()[3::4]
-    train_label = skeletons[0::4] + skeletons[2::4] + skeletons[3::4]
-
-    test_data = trees.tolist()[1::4]
-    test_label = skeletons[1::4]
-
+    trees = df.tree.tolist()
     tc = TreeClassifier(laplace = 1)
-    tc.fit(train_data, train_label)
-
 
     good = 0
-    for i, test in enumerate(test_data):
-        result = tc.predict(test)['label']
-        if result == test_label[i]:
+    for i in range(len(trees)):
+        train_data = trees[0:i] + trees[i+1:]
+        train_label = skeletons[0:i] + skeletons[i+1:]
+        tc.fit(train_data, train_label)
+
+        test_data = trees[i]
+        test_label = skeletons[i]
+
+        result = tc.predict(test_data)['label']
+        if result == test_label:
             good += 1
-        else:
-            print test
-            print "REAL:", test_label[i]
-            print "CLASS:", result, "\n"
-
-    print "accuracy: ", (float(good) / len(test_label))
+    print "accuracy: ", (float(good) / len(trees))
 
 
+if __name__ == "__main__":
+    leave_one_out()
