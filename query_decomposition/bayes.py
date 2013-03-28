@@ -10,7 +10,7 @@ class Bayes():
 	def __init__(self, file_path):
 		self.file_path = file_path
 		self.word_list = self.build_word_list()
-		self.model = self.train()
+		self.model = self.fit()
 	
 	""" Create an alphabetized wordlist of all the words in all classes """
 	def build_word_list(self):
@@ -32,7 +32,7 @@ class Bayes():
 			vector.append(score)
 		return vector
 	
-	def train(self):
+	def fit(self):
 		texts, _, targets = load_data.load_data(self.file_path)
 		data = []
 		for t in texts:
@@ -42,6 +42,6 @@ class Bayes():
 		model.fit(data, targets)
 		return model
 	
-	def classify(self, text):
+	def predict(self, text):
 		vector = self.text_vector(text, True)
 		return self.model.predict(vector)[0]

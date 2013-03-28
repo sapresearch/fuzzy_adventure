@@ -21,7 +21,7 @@ class WordSpace():
         self.length = self.zero + (2 * self.one) # for both positive and negative count.
 
 
-    def classify(self, query, model=None, word_vector_hash=None):
+    def predict(self, query, model=None, word_vector_hash=None):
         pred = self.hardcode(query)
         if pred != None:
             return pred
@@ -29,14 +29,14 @@ class WordSpace():
             questions, _, types = load_data.load_data(self.file_path)
             questions = questions[1::2]
             types = types[1::2]
-            model, word_vector_hash = self.train(questions, types)
+            model, word_vector_hash = self.fit(questions, types)
         q = query.split(" ")
         q_vect = self.question_vectors(word_vector_hash, [q])[0]
         pred = model.predict(q_vect)[0]
         return pred
 
 
-    def train(self, questions, types):
+    def fit(self, questions, types):
         question_arrays = []
         for q in questions:
             question_arrays.append(q.split(" "))

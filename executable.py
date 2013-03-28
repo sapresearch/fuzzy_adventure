@@ -28,12 +28,13 @@ data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.
 #data_file = project_path + "/query_decomposition/nlidb/template_selectors/more2.txt"
     
 # Use Bayes classifier
-#bayes = Bayes(data_file)
-#tc = TemplateClassifier(bayes)
+model = Bayes(data_file)
 
 # Use word space classifier
-word_space = WordSpace(data_file)
-tc = TemplateClassifier(word_space)
+#model = WordSpace(data_file) 
+
+tc = TemplateClassifier(model)
+
 
 class FuzzyAdventure():
 

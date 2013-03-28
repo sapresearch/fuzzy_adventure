@@ -26,7 +26,7 @@ So we're choosing the skeleton that will yield the highest probability. In doing
 
 class TreeClassifier(object):
 
-    def __init__(self, laplace = 0):
+    def __init__(self, laplace = 1):
         self.laplace = laplace
 
 
@@ -36,8 +36,11 @@ class TreeClassifier(object):
 
 
     def predict(self, tree):
-        tree_rules = self.extract_rules(sc.to_tree(tree))
-
+        """
+        TODO Should take an array and predict every item. A score can be stored.
+        It would follow the guidelines set by scikit-learn.
+        """
+        tree_rules = self.extract_rules(tree)
         df = DataFrame(columns=['label', 'prob'])
         gb = self.posteriori.groupby('label')
 
@@ -66,38 +69,36 @@ class TreeClassifier(object):
 
     def a_priori(self, labels):
         counted_labels = Counter(labels)
-        apriori = DataFrame(counted_labels.most_common())
-        apriori['freq'] = apriori[1] / float(apriori[1].sum())
-        apriori.columns = ['label','count','freq']
+        apriori = DataFrame(counted_labels.most_common(), columns = ['label','count'])
+        apriori['freq'] = apriori['count'] / float(apriori['count'].sum())
         return apriori
 
 
     def a_posteriori(self, trees, labels):
         rules = self.count_rules(trees, labels)
-        index1 = []
-        index2 = []
+        label = []
+        rule = []
         count = []
-        for rule in rules:
-            for key, value in rule.values()[0].items():
-                index1.append(rule.keys()[0])
-                index2.append(key)
+        for r in rules:
+            for key, value in r.values()[0].items():
+                label.append(r.keys()[0])
+                rule.append(key)
                 count.append(value)
 
-        e_df = DataFrame({'label':index1, 'rule':index2, 'count':count})
-
+        e_df = DataFrame({'label':label, 'rule':rule, 'count':count})
         return e_df
-
 
 
     def apply_smoothing(self, group_df, tree_rules):
         t = RuleCounter(tree_rules)
         tree_rules = t.counter.keys()
-        filtered = group_df.ix[tree_rules]
-        absent = filtered[filtered['count'].isnull()]
+        group_rules = group_df.rule
+        num_missing = 0
+        for rule in tree_rules:
+            if group_rules[group_rules == rule].count() == 0:
+                num_missing += 1
 
-        num_missing = absent.index.size
-
-        group_df['count'] = group_df['count'] + 1
+        group_df['count'] = group_df['count'] + self.laplace
         group_size = group_df['count'].sum()
 
         group_df['freq'] = group_df['count'] / float(num_missing + group_size)
@@ -115,11 +116,10 @@ class TreeClassifier(object):
         gb = df.groupby('label')
 
         rules_df = []
+
         for group, indexes in gb.groups.items():
-            rules = []
-            for index in indexes:
-                tree = df.ix[index]['tree']
-                rules += [rule for rule in self.extract_rules(tree)]
+            serie = df.ix[indexes].tree.map(self.extract_rules)
+            rules = np.concatenate(serie.values, axis=1)
             rules_count = RuleCounter(rules)
             rules_df.append({group: rules_count.counter})
 
@@ -131,9 +131,14 @@ class TreeClassifier(object):
         tree = ptn.parse(tree)
         queue = Queue()
         queue.push(tree)
-
+        i = 0
         while not queue.empty():
+
+            qu = queue
             t = queue.pop()
+            if t.node_type == '':
+                raw_input('>>>')
+
             rule = Rule(t.node_type, [])
 
             for child in t.children:
@@ -141,6 +146,9 @@ class TreeClassifier(object):
                 rule.add_child(child.node_type)
 
             tree_rules.append(rule)
+
+        if None in tree_rules:
+            raw_input('>>>')
 
         return np.array(tree_rules)
 
@@ -199,17 +207,33 @@ class Rule(object):
         return False
 
 
+    def __ne__(self, rule):
+        """
+        Check to see if another is not equals
+        Param
+            rule: The rule we want to test against
+        Return
+            True if parents and children are not equals. True otherwise.
+        """
+        return not self.__eq__(rule)
+
+
+    def __hash__(self):
+        hsh = self.parent.__hash__()
+        for child in self.children:
+            hsh += child.__hash__()
+        return hsh
+
+
     def as_tuple(self):
         return (self.parent,) + tuple(self.children)
-
 
 
     def __repr__(self):
         string = str(self.parent)
         if len(self.children) > 0:
             string += "->"
-        for child in self.children:
-            string += child + " "
+            string += " ".join(self.children)
 
         return string
 
@@ -218,9 +242,9 @@ class Rule(object):
 class RuleCounter(object):
     """
     Simulate behaviour of Counter class. Had to implement this because
-    even though rules are not the same in memory, it doesn't matter for our
+    even though rules do not have the same memory address, it doesn't matter for our
     needs. 
-    This class will take a set of objects and count based on the content.
+    This class will take a set of objects and count them based on the content.
     The object is compared with the '==' operator, thus it should
     overwrite the __eq__ method for desired equality.
     """
@@ -248,13 +272,45 @@ class RuleCounter(object):
         self.counter[rule] = 1
 
 
+    def __repr__(self):
+        return str(self.counter)
 
 
+def generalize_sql(query_list):
+    skeletons = []
 
-originals, skeletons, trees = Preprocessing.generalize_sql()
-tc = TreeClassifier()
-tc.fit(trees, skeletons)
-tc.predict('Who is the most productive person on my team?')
+    for query in query_list:
 
+        skeleton = Preprocessing.to_skeleton(query)
+        skeletons.append(skeleton)
+
+    return skeletons
+
+if __name__ == "__main__":
+    import json
+    f = open('IMS_questions.txt','r')
+    json_load = json.load(f)
+        
+    df = DataFrame(json_load)
+    skeletons = generalize_sql(df.query.apply(unicode.lower))
+    trees = df.tree
+
+    train_data = trees.tolist()[0::3] + trees.tolist()[2::3]
+    train_label = skeletons[0::3]+skeletons[2::3]
+
+    test_data = trees.tolist()[1::3]
+    test_label = skeletons[1::3]
+
+    tc = TreeClassifier(laplace = 1)
+    tc.fit(train_data, train_label)
+
+
+    good = 0
+    for i, test in enumerate(test_data):
+        result = tc.predict(test)['label']
+        if result == test_label[i]:
+            good += 1
+
+    print "accuracy: ", (float(good) / len(test_label))
 
 

@@ -158,3 +158,4 @@ def parse_node(node):
         word = word.group(1)
     return node_type, word
 
+parse('(ROOT (. .))')

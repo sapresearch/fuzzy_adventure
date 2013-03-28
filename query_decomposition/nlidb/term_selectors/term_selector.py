@@ -7,46 +7,63 @@ from time import time
 
 class TermSelector():
 
-	@classmethod
-	def fill_in_the_blanks(self, sql_template, keywords):
-		blanks = sql_template[1]
-		template = sql_template[0]
+    @classmethod
+    def fill_in_the_blanks(self, sql_template, keywords):
+        blanks = sql_template[1]
+        template = sql_template[0]
 
-		if len(keywords) < blanks:
-			raise RuntimeError("There were not enough keywords provided to fill all the variables in the SQL template")
+        if len(keywords) < blanks:
+            raise RuntimeError("There were not enough keywords provided to fill all the variables in the SQL template")
 
-		all_queries = []
-		if blanks == 0:
-			all_queries.append(template)
-		else:
-			combos = permutation.permutations(keywords, blanks)
-			all_queries = []
-			for combo in combos:
-				filled_query = template % combo
-				all_queries.append(filled_query)
+        all_queries = []
+        if blanks == 0:
+            all_queries.append(template)
+        else:
+            combos = permutation.permutations(keywords, blanks)
+            all_queries = []
+            for combo in combos:
+                filled_query = template % combo
+                all_queries.append(filled_query)
 
-		return self.filter_answers(self.crash_and_burn(all_queries))
-		#return all_queries
-	
-	@classmethod
-	def crash_and_burn(self, queries):
-		answers = []
-		db = MySQLdb.connect(host="localhost", user="root", passwd="nolwen", db="watchTower")
-		for query in queries:
-			try:
-				db.query(query)
-				result = db.store_result().fetch_row(0)[0][0]
-				answers.append(result)
-			except (MySQLdb.ProgrammingError,MySQLdb.OperationalError):
-				pass
-		db.close()
-		return answers
-	
-	@classmethod
-	def filter_answers(self, answers):
-		temp = [a for a in answers if a > 0] 
-		result = temp[0] if len(temp) > 0 else None
-		return result
+        return self.filter_answers(self.crash_and_burn(all_queries))
+        #return all_queries
+    
+    @classmethod
+    def crash_and_burn(self, queries):
+        answers = []
+        cur = get_cursor()
+        for query in queries:
+            try:
+                cur.execute(query)
+                result = cur.fetchall()[0][0]
+                answers.append(result)
+            except (pyodbc.ProgrammingError, Exception):
+                pass
+        cur.close()
+        return answers
+    
+    @classmethod
+    def filter_answers(self, answers):
+        temp = [a for a in answers if a > 0] 
+        result = temp[0] if len(temp) > 0 else None
+        return result
+
+
+import pyodbc
+import getpass
+cnxn = None
+def get_cursor():
+    if not hasattr(get_cursor, "userName"):
+        get_cursor.userName = raw_input('User: ')
+    if not hasattr(get_cursor, "password"):
+        get_cursor.password = getpass.getpass('Password: ')
+
+    if not hasattr(get_cursor, "cnxn"):
+        c = "DSN=hana;UID=%s;PWD=%s" % (str(get_cursor.userName), str(get_cursor.password))
+        get_cursor.cnxn = pyodbc.connect(c)
+
+    return get_cursor.cnxn.cursor()
+
 
 
 #sql = "SELECT COUNT(transactions.id) FROM transactions WHERE transactions.end_date <>'0000-00-0000' AND transactions.programmer_id=(SELECT id FROM %s WHERE programmers.name = '%s');"

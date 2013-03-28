@@ -1,6 +1,6 @@
 
 class Queue:
-    """A sample implementation of a First-In-First-Out data structure."""
+    """A simple implementation of a First-In-First-Out data structure."""
 
     def __init__(self):
         self.in_stack = []
@@ -15,6 +15,13 @@ class Queue:
             self.out_stack = self.in_stack
             self.in_stack = []
         return self.out_stack.pop()
+
+    def peak(self):
+         if not self.out_stack:
+            self.in_stack.reverse()
+            self.out_stack = self.in_stack
+            self.in_stack = []
+        return self.out_stack[len(self.out_stack)-1]       
 
     def empty(self):
         return (len(self.out_stack) + len(self.in_stack)) == 0

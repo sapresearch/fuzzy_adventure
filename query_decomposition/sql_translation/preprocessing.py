@@ -29,7 +29,7 @@ class Preprocessing():
 
 	@classmethod
 	def generalize_sql(self):
-		f = file('geo_dataset.txt', 'r') # To change the training dataset, change this file here.
+		f = file('IMS_questions.txt', 'r') # To change the training dataset, change this file here.
 		originals = []
 		skeletons = []
 		trees = []
