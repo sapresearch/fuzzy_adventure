@@ -46,10 +46,10 @@ class TreeClassifier(object):
 
 
         for key, indexes in gb.groups.items():
-            group_df, missing_prob = self.apply_smoothing(self.posteriori.ix[indexes], tree_rules)
-
             apriori_prob = self.apriori[self.apriori.label == key]['freq'].values[0]
             prob = apriori_prob
+
+            group_df, missing_prob = self.apply_smoothing(self.posteriori.ix[indexes], tree_rules)
 
             for rule in tree_rules:
                 prob_evidence = group_df[group_df.rule == rule]['freq']
@@ -58,7 +58,7 @@ class TreeClassifier(object):
                 else:
                     prob_evidence = prob_evidence.values[0]
                 prob *= prob_evidence
-
+            
             post = DataFrame({'label':[key], 'prob':[prob]})
             df = df.append(post)
 
@@ -133,12 +133,7 @@ class TreeClassifier(object):
         queue.push(tree)
         i = 0
         while not queue.empty():
-
-            qu = queue
             t = queue.pop()
-            if t.node_type == '':
-                raw_input('>>>')
-
             rule = Rule(t.node_type, [])
 
             for child in t.children:
@@ -295,11 +290,11 @@ if __name__ == "__main__":
     skeletons = generalize_sql(df.query.apply(unicode.lower))
     trees = df.tree
 
-    train_data = trees.tolist()[0::3] + trees.tolist()[2::3]
-    train_label = skeletons[0::3]+skeletons[2::3]
+    train_data = trees.tolist()[0::4] + trees.tolist()[2::4] + trees.tolist()[3::4]
+    train_label = skeletons[0::4] + skeletons[2::4] + skeletons[3::4]
 
-    test_data = trees.tolist()[1::3]
-    test_label = skeletons[1::3]
+    test_data = trees.tolist()[1::4]
+    test_label = skeletons[1::4]
 
     tc = TreeClassifier(laplace = 1)
     tc.fit(train_data, train_label)
@@ -310,6 +305,10 @@ if __name__ == "__main__":
         result = tc.predict(test)['label']
         if result == test_label[i]:
             good += 1
+        else:
+            print test
+            print "REAL:", test_label[i]
+            print "CLASS:", result, "\n"
 
     print "accuracy: ", (float(good) / len(test_label))
 

@@ -152,10 +152,10 @@ def parse(tree, parent=None, root_node=None, count=0, debug=False):
     return root_node
 
 def parse_node(node):
-    node_type = re.search("\A\s?\((\w*)", node).group(1)
+    #node_type = re.search("\A\s?\((\w*|\.)", node).group(1)
+    node_type = re.search("\A\s?\(([\w\.\-]*)", node).group(1)
     word = re.search("\A\s?\(\w* (\w*)", node)
     if word != None:
         word = word.group(1)
     return node_type, word
 
-parse('(ROOT (. .))')

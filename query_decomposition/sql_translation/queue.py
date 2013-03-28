@@ -17,7 +17,7 @@ class Queue:
         return self.out_stack.pop()
 
     def peak(self):
-         if not self.out_stack:
+        if not self.out_stack:
             self.in_stack.reverse()
             self.out_stack = self.in_stack
             self.in_stack = []
