@@ -1,6 +1,8 @@
 import MySQLdb
 import sys
 import os
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/hana")
+import connection
 sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition")
 import permutation
 from time import time
@@ -31,13 +33,13 @@ class TermSelector():
     @classmethod
     def crash_and_burn(self, queries):
         answers = []
-        cur = get_cursor()
+        cur = connection.get_cursor()
         for query in queries:
             try:
                 cur.execute(query)
                 result = cur.fetchall()[0][0]
                 answers.append(result)
-            except (pyodbc.ProgrammingError, Exception):
+            except (Exception):
                 pass
         cur.close()
         return answers
@@ -47,23 +49,6 @@ class TermSelector():
         temp = [a for a in answers if a > 0] 
         result = temp[0] if len(temp) > 0 else None
         return result
-
-
-import pyodbc
-import getpass
-cnxn = None
-def get_cursor():
-    if not hasattr(get_cursor, "userName"):
-        get_cursor.userName = raw_input('User: ')
-    if not hasattr(get_cursor, "password"):
-        get_cursor.password = getpass.getpass('Password: ')
-
-    if not hasattr(get_cursor, "cnxn"):
-        c = "DSN=hana;UID=%s;PWD=%s" % (str(get_cursor.userName), str(get_cursor.password))
-        get_cursor.cnxn = pyodbc.connect(c)
-
-    return get_cursor.cnxn.cursor()
-
 
 
 #sql = "SELECT COUNT(transactions.id) FROM transactions WHERE transactions.end_date <>'0000-00-0000' AND transactions.programmer_id=(SELECT id FROM %s WHERE programmers.name = '%s');"
