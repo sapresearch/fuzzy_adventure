@@ -39,3 +39,7 @@ pip-log.txt
 
 *.txt
 *.out
+
+originals/*
+to_import/*
+names/*
