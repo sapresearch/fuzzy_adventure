@@ -12,7 +12,8 @@ import en
 def questionType(tree):
     np = tree.descendent(['NP'])
 
-    has_employee = tree.word_search('employee')
+    if tree.word_search('employee') or tree.word_search('one'):
+        has_employee = true
     # has_which_employee = tree.word_search('one')
     has_component = tree.word_search('component')
     has_transaction = tree.word_search('transaction')
@@ -72,6 +73,9 @@ def key_words(top_node, question):
             NPS.append(node)
         if node.descendent('ADJP'):
             JPS.append(node)
+        if node.descendent('CD'):
+            nouns.add(node)
+
     if len(nodes)>1:    
         VP = nodes[1].descendent(['VP'])
         PP = nodes[1].descendent(['PP'])

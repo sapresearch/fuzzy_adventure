@@ -72,8 +72,8 @@ class FuzzyAdventure():
         for i,t in enumerate(text):
             target = targets[i]
             sql, key = self.to_sql(t)
-            #print "Question: ", t
-            #print "Predicted/target: ", key, target
+            print "Question: ", t
+            print "Predicted/target: ", key, target
             if key == target:
                 correct += 1.
         print "Accuracy: " + str(correct/len(text))        
