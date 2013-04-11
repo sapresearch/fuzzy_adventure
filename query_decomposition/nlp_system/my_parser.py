@@ -13,7 +13,7 @@ def questionType(tree):
     np = tree.descendent(['NP'])
 
     if tree.word_search('employee') or tree.word_search('one'):
-        has_employee = true
+        has_employee = True
     # has_which_employee = tree.word_search('one')
     has_component = tree.word_search('component')
     has_transaction = tree.word_search('transaction')
@@ -54,6 +54,7 @@ def key_words(top_node, question):
     keyWords = dict()
     NPS=[]
     JPS =[]
+    has_employee = False
     # query = False
     nouns = set()
     verbs = set()
