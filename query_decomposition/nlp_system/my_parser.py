@@ -10,6 +10,7 @@ import operator
 import en
 
 def questionType(tree):
+    has_employee = False
     np = tree.descendent(['NP'])
 
     if tree.word_search('employee') or tree.word_search('one'):
@@ -51,6 +52,7 @@ def questionType(tree):
 def key_words(top_node, question):
     verb_labels = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']
     question_type = questionType(top_node)
+
     keyWords = dict()
     NPS=[]
     JPS =[]
