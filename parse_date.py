@@ -3,6 +3,10 @@ from pandas import DataFrame, Series
 from datetime import datetime
 import sys
 
+"""
+This file is just a small utility for a very specific task. If you don't know why it's here then don't use it.
+"""
+
 def parse_date(dt):
     _dt = None
     try:
