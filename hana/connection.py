@@ -1,4 +1,4 @@
-import pypyodbc
+import pyodbc
 import getpass
 cnxn = None
 def get_cursor():
@@ -9,6 +9,6 @@ def get_cursor():
 
     if not hasattr(get_cursor, "cnxn"):
         c = "DSN=hana;UID=%s;PWD=%s" % (str(get_cursor.userName), str(get_cursor.password))
-        get_cursor.cnxn = pypyodbc.connect(c)
+        get_cursor.cnxn = pyodbc.connect(c)
 
     return get_cursor.cnxn.cursor()

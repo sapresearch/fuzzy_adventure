@@ -30,10 +30,20 @@ def get_statement():
 
 
 stmt = get_statement()
+stmt.execute("""DELETE FROM TOUCHED2""");
+import csv
+import time
 
-rs = stmt.executeQuery("SELECT COUNT(*) FROM TRANSACTIONS")
-rs.next() # rs (ResultSet) is set before the first line. Need to call next in order to point on the first
-print rs.getInt(1) # Result is an int with one column only. Columns start at 1.
+print "Creating queries"
+csv_file = open('to_import/touched.csv', 'rb')
+reader = csv.reader(csv_file)
+reader.next() #jump first line, which is header
+for row in reader:
+    value = (int(row[0]), int(row[2]), int(row[1]))
+    query = """INSERT INTO TOUCHED2 (ID, TRANSACTION_ID, PROGRAMMER_ID) VALUES (%d, %d, %d))""" % value
+    stmt.addBatch(query)
 
-
-
+print "Executing all queries"
+start = time.time()
+stmt.executeBatch();
+System.out.println("Duration: " + (time.time() - start))
