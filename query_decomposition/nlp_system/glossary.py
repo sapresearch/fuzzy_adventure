@@ -7,7 +7,7 @@ import os
 # a value. Then seperates the phrases base on their word counts and save them in the relevant glossary.
 def createGlossary():
 	# sys.path.append('/home/I837185/git/fuzzy_adventure/Context-based Data/')
-	glossary = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'r') 
+	glossary = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary.txt", 'r') 
 	# open("../../context_based_data/glossary.txt", 'r')
 	glossary_processed = glassary_processed = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'a')
 	# open("../../context_based_data/glossary_processed.txt", 'a')
@@ -138,7 +138,7 @@ def checkGlossary(question):
 			glossaryMatches.append(glossary_one_word[k])
 			remove_list.append(k)
 
-	# print 'glossaryMatches = ', glossaryMatches
+	print 'glossaryMatches = ', glossaryMatches
 	# print remove_list
 	return glossaryMatches, remove_list
 

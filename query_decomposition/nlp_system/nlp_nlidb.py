@@ -24,19 +24,19 @@ def nlp_nlidb(question):
 
 	'''STEP2: Replace words with glossary terms:'''
 	uniqueWords = glossary.generalizedKeywords(question, extracted_words)
-	
+	print 'unique=' ,uniqueWords
 	'''STEP3: Adding some manually defined rules'''
 	allWords, conditions, target = answerGenerator(question, uniqueWords)
 
 	'''Creating Links between allWords and tables' entities'''
 	tables = semanticNet.tables(allWords)
 	required_values = semanticNet.required_values(tables, allWords)
-	#print allWords, required_values, target, conditions, tables, question_type, question
-	'''To integrate with SQL Converter use: '''
-	merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
-	return merged
+	# print allWords, required_values, target, conditions, tables, question_type, question
+	# '''To integrate with SQL Converter use: '''
+	# merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
+	# return merged
 	'''To use the nlp_nlidb module use:'''
-	#return allWords, required_values, target, conditions, tables, question_type, 
+	return allWords, required_values, target, conditions, tables, question_type, 
 
 
 def merge(allWords, required_values, target, conditions, tables, question_type, question):

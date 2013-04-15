@@ -30,10 +30,45 @@ while True:
 		print_condition = 'Condition: NOT FOUND'
 		print_table = 'Table: NOT FOUND'
 		print_table = 'Tables: '+ str(list(tables))
+
+		what.add(question_type)
+		for w in what:	
+			table = findTable(w)
+		if table != '':
+			tables.add(table)
+			defaultValues.add(checkDB(w, table))
 		if defaultValues!=[]:
-				print_defaultValue = 'Default value: ' + str(list(defaultValues))
-		print_condition = 'Conditions: ' + str(list(conditions))
+			print_defaultValue = 'Default value: ' + str(list(defaultValues))
+			print_condition = 'Conditions: ' + str(list(conditions))
 
 		print print_table
 		print print_defaultValue
 		print print_condition
+# ======================================================================================
+
+# 	print 'allWords: ', allWords
+# # print_what = 'Look for: UNKOWN'
+# print_defaultValue = 'Default value: NOT FOUND'
+# print_condition = 'Condition: NOT FOUND'
+# print_table = 'Table: NOT FOUND'
+
+# what.add(question_type)
+# for w in what:	
+# table = findTable(w)
+# if table != '':
+# tables.add(table)
+# defaultValues.add(checkDB(w, table))
+
+
+
+# # print_what = 'Look for: ' + str(list(what))
+# print_table = 'Tables: '+ str(list(tables))
+# if defaultValues!=[]:
+# print_defaultValue = 'Default value: ' + str(list(defaultValues))
+# print_condition = 'Conditions: ' + str(list(conditions))
+
+# # print print_what
+# print print_table
+# print print_defaultValue
+# print print_condition
+

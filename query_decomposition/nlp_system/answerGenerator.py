@@ -13,6 +13,10 @@ def answerGenerator(question, allWords):
 		allWords.append('transaction')
 		allWords.append('component')
 		what.add('transaction')
+	if 'messages' in allWords:
+		allWords.append('messages')
+		allWords.append('transaction')
+		what.add('transaction')
 
 	if 'solve' in allWords:
 		allWords.append('transaction')
@@ -23,6 +27,35 @@ def answerGenerator(question, allWords):
 		# print question.split()
 		conditions.add('Maximum value')
 		what.add('transaction')
+
+	if 'hiring date' in allWords:
+		conditions.add('hiring date')
+		what.add('transaction')
+		what.add('employee')
+
+	if 'MPT' in question.split():
+		if 'average' in question.split():
+			allWords.append('transaction')
+			what.add('transaction')
+			conditions.add('average')
+		elif 'percent' in question.split():
+			allWords.append('transaction')
+			what.add('transaction')
+			conditions.add('percent')
+		elif 'most' in question.split():
+			allWords.append('transaction')
+			what.add('transaction')
+			conditions.add('most')
+	if 'escalated' in question.split() or 'escalated' in allWords:
+		conditions.add('flag_escalated')
+	if 'IRT' in question.split() or 'IRT' in allWords:
+			allWords.append('IRT')
+			what.add('transaction')
+
+
+
+	if 'average' in question.split():
+		conditions.add('average')
 
 	if 'my' in question.split():
 		#manager_ID = raw_input("what is your Employee ID?")

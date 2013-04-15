@@ -93,7 +93,7 @@ class FuzzyAdventure():
 
 
 #q = "Who is my best employee?"
-FuzzyAdventure.test()
-#q = "How long does it take to close a high priority ticket?"
-#FuzzyAdventure.to_sql(q)
-#FuzzyAdventure.demo()
+# FuzzyAdventure.test()
+q = "How long does it take to close a high priority ticket?"
+FuzzyAdventure.to_sql(q)
+# FuzzyAdventure.demo()

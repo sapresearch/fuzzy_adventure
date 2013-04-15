@@ -1,19 +1,63 @@
 Contribute = [take part]
 
-Component = [Software, software components, software elements]
+Component = [Software, software components, software elements, CSS_component]
 
-Employee = [resource, development team, person, member on the team, team member, programmer, contributor in the group, in the item management system, contributor, developer, who, Name, Person]
+Employee = [resource, development team, person, member on the team, team member, programmer, contributor in the group, in the item management system, contributor, developer, who, Name, Person, team members, the person you will assign]
 
-causes delay = [contributing to backlog, makes up part, slowing down, not working properly, crash, no support, has problem, assign more people, time consuming, need to monitor, hinder, obstacles, reduce productivity, creates the tickets, trouble, cause work, difficult to maintain, spend a lot of time on, slow the system, backlog attributable, adding to workload, make work more, have the impact, weighting, significant, demanding, have the highest priority, used frequently, highest complexity, take time to implement, spend time, need to be improved]
+causes delay = [contributing to backlog, makes up part, slowing down, not working properly, crash, no support, has problem, assign more people, time consuming, need to monitor, hinder, obstacles, reduce productivity, creates the tickets, trouble, cause work, difficult to maintain, spend a lot of time on, slow the system, backlog attributable, adding to workload, make work more, have the impact, weighting, significant, demanding, have the highest priority, used frequently, highest complexity, take time to implement, spend time, need to be improved, most problem]
 
-most = [Maximum, usually, greatest, highest, most frequently, the longest time, most time, most work, best, the biggest amount, the top, ordered the first, number one, number 1, the quickest, least problem resolution time, largest]
+most = [maximum, usually, greatest, highest, most frequently, the longest time, most time, most work, best, the biggest amount, the top, ordered the first, number one, number 1, the quickest, least problem resolution time, largest, the first in a list,fast]
 
-transaction = [ticket, backlog, manual processes, system, excel, problem,  obstacles, struggling with, domain, feature, module, item, significant item, key factor, issues]
+transaction = [ticket, backlog, manual processes, system, excel, problem, obstacles, struggling with, domain, feature, module, item, significant item, key factor, issues, priority]
 
 take = [require, need]
 
-productive = [Efficient, fastest, close the most ticket, contribute to the success of the team, get work done faster, reduce manual intervention, effective, provide quality work, solve complex issues, closing the most number of open ticket, most open tickets closer, deliver the most, assign most important task to, deal most swiftly, knows jira the most, has the deepest knowledge, answer the most questions, assigned to the most number of open tickets]
+productive = [efficient, fastest, closes the most, close the most, contribute to the success of the team, get work done faster, reduce manual intervention, effective, effectiveness, provide quality work, solve complex issues, closing the most number of open, most open transactions closer, most open tickets closer, deliver the most, deal most swiftly, knows jira the most, has the deepest knowledge, answer the most questions, assigned to the most number of open, solve the most, most productive, most important task to]
 
-solve = [clear]
+solve = [clear, close, complete, finish, problem resolution time, resolve, fix, repair]
+
+when = [how long, how many days, how much time, What duration,lenght of time]
+
+average = [mean]
+
+time = [year, month, day]
+
+year = [so far this year]
+
+open messages = [messages for a topic in IMS queue, unassigned messages, unattended messages] 
+
+closed messages = [confirmed] 
+
+flag = [escalated, Max Attention customers]
+
+number = [count of,how many, Show me the number of, give me the count of, What is the total]
+
+touched = [involved in, involved messages by, handled,worked on,involved in solving]
+
+messages = [tickets] 
+
+IMS queue = [SAP-side, SAP side, SAP queue,queue,our team,PS queue] 
+
+IRT = [Initial Response Time]
+
+hiring date = [how experienced , grade level,level, How knowledgeable,level of expertise, How much experience   ]
+
+list = [ordered by, rank, show me, tell,Count]
+
+stayed = [was in processing by, stays in,get forwarded to]
+
+who = [whos]
+
+percent = [%]
+
+at = [@]
+
+escalated = [de-escalations, flagged as escalated] 
+
+my topic = [our queue, Cost Center]
+
+start_date = [on message arrival,when our team takes over,When a ticket gets queued] 
+
+MPT = [MPT value, processing time]
 
 
