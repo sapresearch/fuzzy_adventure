@@ -24,9 +24,10 @@ the command line, or the FuzzyAdventure.test() function to find the number of qu
 that it correctly classifies. """
 
 
-data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.txt"
+#data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.old.txt"
 #data_file = project_path + "/query_decomposition/nlidb/template_selectors/more2.txt"
-    
+data_file = project_path + "/query_decomposition/nlidb/template_selectors/questions.json"
+
 # Use Bayes classifier
 model = Bayes(data_file)
 
@@ -72,8 +73,8 @@ class FuzzyAdventure():
         for i,t in enumerate(text):
             target = targets[i]
             sql, key = self.to_sql(t)
-            print "Question: ", t
-            print "Predicted/target: ", key, target
+            # print "Question: ", t
+            # print "Predicted/target: ", key, target
             if key == target:
                 correct += 1.
         print "Accuracy: " + str(correct/len(text))        
@@ -93,7 +94,7 @@ class FuzzyAdventure():
 
 
 #q = "Who is my best employee?"
-# FuzzyAdventure.test()
-q = "How long does it take to close a high priority ticket?"
-FuzzyAdventure.to_sql(q)
-# FuzzyAdventure.demo()
+FuzzyAdventure.test()
+#q = "How long does it take to close a high priority ticket?"
+#FuzzyAdventure.to_sql(q)
+#FuzzyAdventure.demo()

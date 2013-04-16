@@ -1,0 +1,606 @@
+[
+    {
+        "type": "A", 
+        "question": "Who is the most productive employee on my team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most efficient employee on my team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Which employee on my team has the highest productivity?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the best?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who's the best employee?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who can close the most tickets the fastest?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the person that contribute the most to the success of my team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Tell me the name of the most productive person on my team."
+    }, 
+    {
+        "type": "A", 
+        "question": "The most productive person is the one who gets their work done and can implement ways to streamline and reduce manual intervention."
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most efficient and effective at their job?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who consistently proves they can provide quality work/support on a regular basis?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is always there to solve complex issues?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Which member on my team is closing the most number of open ticket?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most open tickets closer member on the team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Considering the most number of open tickets closed, who is the most productive member of the team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who on the team, is the person that close the biggest amount of open tickets?"
+    }, 
+    {
+        "type": "A", 
+        "question": "The most productive person is the one who gets their work done and can implement ways to streamline and reduce manual intervention."
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most efficient and effective at their job?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who consistently proves they can provide quality work/support on a regular basis?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is always there to solve complex issues?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who deliver most in my team"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most efficient people in my team"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who always close most number of open tickets in a sprint"
+    }, 
+    {
+        "type": "A", 
+        "question": "Whos is the person you will assign most important task to?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Which person on my team closes the most tickets?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Which one of my team members is most productive?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who, in my team, works fastest?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Which person on my team closes the most tickets?"
+    }, 
+    {
+        "type": "A", 
+        "question": "What person closes the most tickets?"
+    }, 
+    {
+        "type": "A", 
+        "question": "What programmer is the fastest at closing tickets?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Which team member closes the most tickets?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most productive on my team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "What is the name of the top contributor in the group?"
+    }, 
+    {
+        "type": "A", 
+        "question": "What is the first in a list of team members ordered by effectiveness?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Whose tickets are dealt with most swiftly?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is number 1 in the item management system?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who clears problems the quickest?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Rank my team on problem resolution time?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Show me the productivity information about my team"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the number 1 contributor on the team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who on the team solves the most issues?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the top closer on the team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Name the most productive person on the team"
+    }, 
+    {
+        "type": "A", 
+        "question": "Name the most productive person on your team."
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most productive on your team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "In your team, who would you say is the most productive person."
+    }, 
+    {
+        "type": "A", 
+        "question": "Who in your team closes the most open tickets on average?"
+    }, 
+    {
+        "type": "A", 
+        "question": "who is the best developer in my team"
+    }, 
+    {
+        "type": "A", 
+        "question": "who closes more tickets in Jira"
+    }, 
+    {
+        "type": "A", 
+        "question": "who is the most productive developer"
+    }, 
+    {
+        "type": "A", 
+        "question": "who is the fastest developer"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most productive team member?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who is the most efficient person in my team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who has the best productivity in my team?"
+    }, 
+    {
+        "type": "A", 
+        "question": "Who knows Jira best in my team?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What component are taking part the most to my backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What component has the maximum contribution to my backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What components delay my team's work the most?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What components take most time to get resolved?"
+    }, 
+    {
+        "type": "B", 
+        "question": "From all the opened tickets, what software causes the most delay?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What components use most of my ressources?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What component makes up the largest part of my backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software is slowing us down?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What manual processes are slowing me down the most?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What system(s) are not working properly today?"
+    }, 
+    {
+        "type": "B", 
+        "question": "How many times did excel crash today?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Did I have any support from my supervisor today?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software components contribute the most to slowing down the team?"
+    }, 
+    {
+        "type": "B", 
+        "question": "By which components the team is the most slow down?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which software elements contribute the most in your team backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software components are contributing to slowing down your team the most?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What manual processes are slowing me down the most?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What system(s) are not working properly today?"
+    }, 
+    {
+        "type": "B", 
+        "question": "How many times did excel crash today?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Did I have any support from my supervisor today?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which component has most problem"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which component I need to assign more people to"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which ticket component are most time consuming"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which component i need to monitor most to see how to imrove it"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software components hinder my team most?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What components are the biggest obstacles to my team's productivity?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software components hinder my team's productivity the most?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What are the main software components that slow my team down?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software creates the tickets that slow us down the most?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which components are slowing down my team?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What component is my team struggling with?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software components are slowing down my backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which areas of code are generating the most problems?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which features are causing the most work?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which domain is most trouble?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Where is the development the most difficult?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which modules are the most difficult to maintain?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Which modules give us the most trouble?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What modules to we spend a lot of time on?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What are the significant items that are slowing the team down?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What are the key factors to my backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What is slowing down my team?"
+    }, 
+    {
+        "type": "B", 
+        "question": "List the components that slow my system the most"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software components are slowing down the team the most?"
+    }, 
+    {
+        "type": "B", 
+        "question": "Name a few components that are contributing to slowing down the team?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What software components are contributing the most to the backlog of the team?"
+    }, 
+    {
+        "type": "B", 
+        "question": "To what components is your backlog attributable (in general)?"
+    }, 
+    {
+        "type": "B", 
+        "question": "which components contribute most to my backlog"
+    }, 
+    {
+        "type": "B", 
+        "question": "which components are adding to my work load"
+    }, 
+    {
+        "type": "B", 
+        "question": "what are the modules that contribute usually to my backlog"
+    }, 
+    {
+        "type": "B", 
+        "question": "what modules make me work more"
+    }, 
+    {
+        "type": "B", 
+        "question": "What components have the greatest impact on my backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What components are weighting in the most in my backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What items are the most significant in my backlog?"
+    }, 
+    {
+        "type": "B", 
+        "question": "What items are the most demanding in my backlog?"
+    }, 
+    {
+        "type": "C", 
+        "question": "How many transactions did Jeff close?"
+    }, 
+    {
+        "type": "C", 
+        "question": "How many tickets did Paul close?"
+    }, 
+    {
+        "type": "C", 
+        "question": "How many tickets did Paul finish?"
+    }, 
+    {
+        "type": "C", 
+        "question": "How many transactions did Puntis finish?"
+    }, 
+    {
+        "type": "C", 
+        "question": "What number of transactions did Jeff finish?"
+    }, 
+    {
+        "type": "C", 
+        "question": "What number of transactions did Alexis close?"
+    }, 
+    {
+        "type": "C", 
+        "question": "What number of tickets did Jeff finish?"
+    }, 
+    {
+        "type": "C", 
+        "question": "What number of tickets did Alexis close?"
+    }, 
+    {
+        "type": "C", 
+        "question": "How many tickets has Alexis completed?"
+    }, 
+    {
+        "type": "C", 
+        "question": "Give me the number of tickets 1234567890 finished."
+    }, 
+    {
+        "type": "C", 
+        "question": "Count the number of tickets 0987654321 closed."
+    }, 
+    {
+        "type": "D", 
+        "question": "How long does it take on average to close a ticket with a medium priority?"
+    }, 
+    {
+        "type": "D", 
+        "question": "How long does it take on average to close a ticket with a low priority?"
+    }, 
+    {
+        "type": "D", 
+        "question": "How long does it take on average to close a ticket with a high priority?"
+    }, 
+    {
+        "type": "D", 
+        "question": "How long does it take on average to close a ticket with a very high priority?"
+    }, 
+    {
+        "type": "D", 
+        "question": "How much time does it take to close a transaction with medium priority?"
+    }, 
+    {
+        "type": "D", 
+        "question": "How much time does it take to close a transaction with low priority?"
+    }, 
+    {
+        "type": "D", 
+        "question": "How much time does it take to close a transaction with high priority?"
+    }, 
+    {
+        "type": "D", 
+        "question": "How much time does it take to close a transaction with very high priority?"
+    }, 
+    {
+        "type": "D", 
+        "question": "What's the average time to close a medium transaction?"
+    }, 
+    {
+        "type": "D", 
+        "question": "What's the average time to close a low transaction?"
+    }, 
+    {
+        "type": "D", 
+        "question": "What's the average time to complete a high transaction?"
+    }, 
+    {
+        "type": "D", 
+        "question": "What's the average time to complete a very high transaction?"
+    }, 
+    {
+        "type": "D", 
+        "question": "What's the average length of time to close a medium ticket?"
+    }, 
+    {
+        "type": "D", 
+        "question": "What's the average length of time to complete a medium ticket?"
+    }, 
+    {
+        "type": "D", 
+        "question": "For a medium ticket, how long should I wait before it's closed?"
+    }, 
+    {
+        "type": "D", 
+        "question": "For a medium transaction, how long does it typically take?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How long does it take Jeff to close a ticket on average?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How long does it take Jeff to fix a transaction on average?"
+    }, 
+    {
+        "type": "E", 
+        "question": "What's the average time it takes 01010444 to complete a ticket?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How much time will 010104441 take to close a ticket?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How long does it usually take 010104442 to finish a ticket?"
+    }, 
+    {
+        "type": "E", 
+        "question": "If I assign this ticket to 010104443, how long is it going to take?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How long does 010104444 generally take to complete a ticket?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How long does it take 010104445 on average to close a ticket?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How much time does it take 010104446 to close a transaction?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How long does 010104447 take to finish a ticket?"
+    }, 
+    {
+        "type": "E", 
+        "question": "How fast is 010104448 at closing tickets?"
+    }, 
+    {
+        "type": "E", 
+        "question": "What is 010104449's average time to close a ticket?"
+    }, 
+    {
+        "type": "E", 
+        "question": "What's the average time it takes 0101044410 to close a ticket?"
+    }, 
+    {
+        "type": "E", 
+        "question": "Tell me the time it takes 0101044411 to close a ticket on average."
+    }
+]

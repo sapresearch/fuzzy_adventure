@@ -33,10 +33,10 @@ def nlp_nlidb(question):
 	required_values = semanticNet.required_values(tables, allWords)
 	# print allWords, required_values, target, conditions, tables, question_type, question
 	# '''To integrate with SQL Converter use: '''
-	# merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
-	# return merged
+	merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
+	return merged
 	'''To use the nlp_nlidb module use:'''
-	return allWords, required_values, target, conditions, tables, question_type, 
+	# return allWords, required_values, target, conditions, tables, question_type, 
 
 
 def merge(allWords, required_values, target, conditions, tables, question_type, question):
