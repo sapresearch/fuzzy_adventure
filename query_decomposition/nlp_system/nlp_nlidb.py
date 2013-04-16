@@ -24,7 +24,7 @@ def nlp_nlidb(question):
 
 	'''STEP2: Replace words with glossary terms:'''
 	uniqueWords = glossary.generalizedKeywords(question, extracted_words)
-	print 'unique=' ,uniqueWords
+	#print 'unique=' ,uniqueWords
 	'''STEP3: Adding some manually defined rules'''
 	allWords, conditions, target = answerGenerator(question, uniqueWords)
 

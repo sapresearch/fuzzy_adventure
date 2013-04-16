@@ -11,25 +11,40 @@ class TermSelector():
 
     @classmethod
     def fill_in_the_blanks(self, sql_template, keywords):
-        blanks = sql_template[1]
+        metadata = sql_template[1]
+        #blanks = sql_template[1]
         template = sql_template[0]
 
-        if len(keywords) < blanks:
+        if len(keywords) < len(metadata):
             raise RuntimeError("There were not enough keywords provided to fill all the variables in the SQL template")
 
         all_queries = []
-        if blanks == 0:
+        if len(metadata) == 0:
             all_queries.append(template)
         else:
-            combos = permutation.permutations(keywords, blanks)
+            combos = permutation.permutations(keywords, len(metadata))
             all_queries = []
             for combo in combos:
-                filled_query = template % combo
-                all_queries.append(filled_query)
+                try:
+                # filled_query = template % combo
+                    filled_query = template % apply_type(combo, metadata)
+                    all_queries.append(filled_query)
+                except Exception:
+                    continue
 
         return self.filter_answers(self.crash_and_burn(all_queries))
         #return all_queries
     
+
+    @classmethod
+    def apply_type(elements, types):
+        applied = []
+        for (i, element) in enumerate(elements):
+            type_to_apply = types(i)
+            applied.append(type_to_apply(element))
+        return applied
+
+
     @classmethod
     def crash_and_burn(self, queries):
         answers = []

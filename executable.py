@@ -26,7 +26,7 @@ that it correctly classifies. """
 
 #data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.old.txt"
 #data_file = project_path + "/query_decomposition/nlidb/template_selectors/more2.txt"
-data_file = project_path + "/query_decomposition/nlidb/template_selectors/questions.json"
+data_file = project_path + "/query_decomposition/nlidb/template_selectors/questions_plus.json"
 
 # Use Bayes classifier
 model = Bayes(data_file)
@@ -66,15 +66,15 @@ class FuzzyAdventure():
     
     @classmethod
     def test(self):
-        data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.txt"
-        text, _, targets = load_data.load_data(data_file)
+        #data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.txt"
+        text, _, targets = load_data.load_questions(data_file)
         text, targets = text[1::2], targets[1::2]
         correct = 0.
         for i,t in enumerate(text):
             target = targets[i]
             sql, key = self.to_sql(t)
             # print "Question: ", t
-            # print "Predicted/target: ", key, target
+            print "Predicted/target: ", key, target
             if key == target:
                 correct += 1.
         print "Accuracy: " + str(correct/len(text))        

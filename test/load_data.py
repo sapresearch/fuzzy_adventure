@@ -27,8 +27,8 @@ def load_questions(file_name):
     questions = []
 
     for line in json_object:
-        types.append(line['type'])
-        questions.append(line['question'])
+        types.append(str(line['type']))
+        questions.append(str(line['question']))
 
 
     return questions, [], types
