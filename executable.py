@@ -67,13 +67,14 @@ class FuzzyAdventure():
     @classmethod
     def test(self):
         #data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.txt"
-        text, _, targets = load_data.load_questions(data_file)
+        text, targets = load_data.load_questions(data_file)
         text, targets = text[1::2], targets[1::2]
         correct = 0.
         for i,t in enumerate(text):
             target = targets[i]
-            sql, key = self.to_sql(t)
-            # print "Question: ", t
+            answer, key = self.to_sql(t)
+            print "Question: ", t
+            # print "Answer:", answer
             print "Predicted/target: ", key, target
             if key == target:
                 correct += 1.

@@ -14,7 +14,7 @@ class Bayes():
 	
 	""" Create an alphabetized wordlist of all the words in all classes """
 	def build_word_list(self):
-		text, _, _ = load_data.load_questions(self.file_path)
+		text, _ = load_data.load_questions(self.file_path)
 		text = text[0::2]
 		text = [nlp.tokens(t) for t in text]
 		text = [word for sentence in text for word in sentence]
@@ -33,7 +33,7 @@ class Bayes():
 		return vector
 	
 	def fit(self):
-		texts, _, targets = load_data.load_questions(self.file_path)
+		texts, targets = load_data.load_questions(self.file_path)
 		data = []
 		for t in texts:
 			vector = self.text_vector(t, False)

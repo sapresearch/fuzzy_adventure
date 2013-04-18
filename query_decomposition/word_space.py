@@ -26,7 +26,7 @@ class WordSpace():
         if pred != None:
             return pred
         if model == None or word_vector_hash == None:
-            questions, _, types = load_data.load_data(self.file_path)
+            questions, types = load_data.load_questions(self.file_path)
             questions = questions[1::2]
             types = types[1::2]
             model, word_vector_hash = self.fit(questions, types)

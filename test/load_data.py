@@ -1,5 +1,9 @@
 import re
 import json
+import sys
+import os
+sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlp_system")
+import nlp_nlidb
 
 """ This is here because if it's in the question_test.py file, then there's a loop when
 question_test requires fuzzy_adventure, which requires question_type, which requires question_test """
@@ -27,8 +31,14 @@ def load_questions(file_name):
     questions = []
 
     for line in json_object:
+        question = str(line['question'])
+        # allWords, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(question)
+        # question = ' '.join(allWords).lower()
+        # if question == '':
+        #     continue
+        questions.append(question)
         types.append(str(line['type']))
-        questions.append(str(line['question']))
 
+    return questions, types
 
-    return questions, [], types
+# questions, _, types = load_questions('/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/template_selectors/questions_plus.json')

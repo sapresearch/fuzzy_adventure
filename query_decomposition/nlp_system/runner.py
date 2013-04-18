@@ -17,43 +17,43 @@ print '*'*80
 print '*'*80
 print "Enter the question. To exit press enter: "
 while True:
-	print '=' * 80
-	question = raw_input('>> ')
-	if question =='':
-		break
-	else: 
-		'''print question'''
-		allWords, defaultValues, what, conditions, tables, question_type = nlp_nlidb(question)
+    print '=' * 80
+    question = raw_input('>> ')
+    if question =='':
+        break
+    else: 
+        '''print question'''
+        allWords, defaultValues, what, conditions, tables, question_type = nlp_nlidb(question)
 
-		print 'allWords: ', allWords
-		print_defaultValue = 'Default value: NOT FOUND'
-		print_condition = 'Condition: NOT FOUND'
-		print_table = 'Table: NOT FOUND'
-		print_table = 'Tables: '+ str(list(tables))
+        print 'allWords: ', allWords
+        print_defaultValue = 'Default value: NOT FOUND'
+        print_condition = 'Condition: NOT FOUND'
+        print_table = 'Table: NOT FOUND'
+        print_table = 'Tables: '+ str(list(tables))
 
-		what.add(question_type)
-		for w in what:	
-			table = findTable(w)
-		if table != '':
-			tables.add(table)
-			defaultValues.add(checkDB(w, table))
-		if defaultValues!=[]:
-			print_defaultValue = 'Default value: ' + str(list(defaultValues))
-			print_condition = 'Conditions: ' + str(list(conditions))
+        what.add(question_type)
+        for w in what:    
+            table = findTable(w)
+        if table != '':
+            tables.add(table)
+            defaultValues.add(checkDB(w, table))
+        if defaultValues!=[]:
+            print_defaultValue = 'Default value: ' + str(list(defaultValues))
+            print_condition = 'Conditions: ' + str(list(conditions))
 
-		print print_table
-		print print_defaultValue
-		print print_condition
+        print print_table
+        print print_defaultValue
+        print print_condition
 # ======================================================================================
 
-# 	print 'allWords: ', allWords
+#     print 'allWords: ', allWords
 # # print_what = 'Look for: UNKOWN'
 # print_defaultValue = 'Default value: NOT FOUND'
 # print_condition = 'Condition: NOT FOUND'
 # print_table = 'Table: NOT FOUND'
 
 # what.add(question_type)
-# for w in what:	
+# for w in what:    
 # table = findTable(w)
 # if table != '':
 # tables.add(table)

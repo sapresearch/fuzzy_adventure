@@ -7,8 +7,7 @@ bayes = Bayes(data_file)
 classifier = TemplateClassifier(bayes)
 classifier.tempate(query)
 
-I don't want the Bayes class or the WordSpace class to inherit this function from a superclass, because I'll use them
-in other modules where this function isn't necessary. """
+I don't want the Bayes class or the WordSpace class to inherit this function from a superclass, because I'll use them in other modules where this function isn't necessary. """
 
 import sys
 import os
@@ -16,13 +15,13 @@ sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition")
 from confidence_estimator import *
 class TemplateClassifier():
 
-    q1 = ("SELECT name, COUNT(transactions.programmer_id) AS close_count FROM programmers, transactions WHERE programmers.id = transactions.programmer_id AND programmers.name <>'' GROUP BY transactions.programmer_id ORDER BY close_count DESC LIMIT 1;", ())
-    q2 = ('SELECT name, COUNT(transactions.component_id) FROM components INNER JOIN transactions on components.id = transactions.component_id GROUP BY transactions.component_id ORDER BY COUNT(transactions.component_id) DESC LIMIT 1;', ())
-    q3 = ("SELECT COUNT(transactions.id) FROM transactions WHERE transactions.end_date IS NOT NULL AND transactions.programmer_id=(SELECT id FROM programmers WHERE programmers.name = '%s');", (str,))
-    q4 = ("SELECT AVG(SECONDS_BETWEEN(start_date, end_date)) FROM transactions WHERE priority = '%s'", (str,))
-    q5 = ("SELECT AVG(SECONDS_BETWEEN(start_date, end_date)) FROM transactions WHERE transactions.end_date IS NOT NULL AND transactions.programmer_id=(SELECT id FROM programmers WHERE programmers.name = '%s')", (str,))
+    q1 = ("SELECT PROGRAMMERS.FULL_NAME, COUNT(*) AS C FROM TRANSACTIONS INNER JOIN PROGRAMMERS ON TRANSACTIONS.PROGRAMMER_ID = PROGRAMMERS.ID WHERE END_DATE IS NOT NULL GROUP BY PROGRAMMERS.FULL_NAME ORDER BY C DESC LIMIT 1", ())
+    q2 = ("SELECT COMPONENTS.NAME FROM COMPONENTS WHERE ID = (SELECT TRANSACTIONS.COMPONENT_ID FROM ALEXIS.TRANSACTIONS GROUP BY TRANSACTIONS.COMPONENT_ID ORDER BY COUNT(TRANSACTIONS.COMPONENT_ID) DESC LIMIT 1)", ())
+    q3 = ("SELECT COUNT(*), PROGRAMMER_ID FROM TRANSACTIONS INNER JOIN PROGRAMMERS ON TRANSACTIONS.PROGRAMMER_ID = PROGRAMMERS.ID WHERE END_DATE IS NOT NULL AND PROGRAMMERS.NAME = '%s' GROUP BY PROGRAMMER_ID;", (str,))
+    q4 = ("SELECT AVG(SECONDS_BETWEEN(start_date, END_DATE)) FROM TRANSACTIONS WHERE priority = '%s'", (str,))
+    q5 = ("SELECT AVG(SECONDS_BETWEEN(start_date, END_DATE)) FROM TRANSACTIONS WHERE TRANSACTIONS.END_DATE IS NOT NULL AND TRANSACTIONS.PROGRAMMER_ID=(SELECT ID FROM PROGRAMMERS WHERE PROGRAMMERS.NAME = '%s')", (str,))
     q6 = ("SELECT COUNT(*) FROM TOUCHED WHERE PROGRAMMER_ID=%d", (int,))
-    q7 = ("SELECT AVG(SECONDS_BETWEEN(start_date, end_date)) FROM transactions", ())
+    q7 = ("SELECT AVG(SECONDS_BETWEEN(start_date, END_DATE)) FROM TRANSACTIONS", ())
     q8 = ("SELECT AVG(MPT) FROM TRANSACTIONS", ())
     q9 = ("SELECT COUNT(*) FROM TRANSACTIONS WHERE %s='%s'", (str,str))
     q10 = ("SELECT TRANS_NUMBER, COMPONENTS.NAME FROM TRANSACTIONS INNER JOIN COMPONENTS ON TRANSACTIONS.COMPONENT_ID = COMPONENTS.ID WHERE TRANSACTIONS.END_DATE IS NULL AND COMPONENTS.NAME = '%s'", (str,))   
