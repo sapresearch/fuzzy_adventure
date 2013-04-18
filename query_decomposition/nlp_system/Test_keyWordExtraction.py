@@ -1,8 +1,6 @@
-import sys
 import string 
 
-sys.path.append("/home/I837185/git/fuzzy_adventure/query_decomposition")
-# sys.path.append("/home/I837185/git/fuzzy_adventure/query_decomposition/nlp_system")
+# import fuzzy_adventure.query_decomposition 
 # import triplet_extraction
 import keyWordsExtraction
 from stanford_client import to_tree

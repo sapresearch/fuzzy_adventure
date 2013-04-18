@@ -5,9 +5,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 import numpy as np
-import sys
-sys.path.append("../")
-import stanford_client as tagger
+from fuzzy_adventure.query_decomposition.nlp_system import stanford_client as tagger
 
 """ This is the class the classifies a natural language question to a SQL template/skeleton.
 Later, in the TermSelector, the "blanks" in the template are filled in. """

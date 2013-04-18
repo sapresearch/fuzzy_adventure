@@ -1,7 +1,5 @@
-import sys
-sys.path.append("/home/I829287/fuzzy_adventure")
 import fuzzy_adventure
-import load_data
+from fuzzy_adventure.test import load_data
 import re
 import time
 

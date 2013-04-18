@@ -1,6 +1,4 @@
-import sys
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition")
-import load_data
+from fuzzy_adventure.test import load_data
 import question_type
 import time
 

@@ -1,7 +1,4 @@
-import os
-import sys
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlp_system")
-import stanford_client as tagger
+from fuzzy_adventure.query_decomposition.nlp_system import stanford_client as tagger
 import re
 import pandas as pd
 from pandas import DataFrame, Series

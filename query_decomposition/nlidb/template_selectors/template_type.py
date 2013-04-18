@@ -9,10 +9,7 @@ classifier.tempate(query)
 
 I don't want the Bayes class or the WordSpace class to inherit this function from a superclass, because I'll use them in other modules where this function isn't necessary. """
 
-import sys
-import os
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition")
-from confidence_estimator import *
+
 class TemplateClassifier():
 
     q1 = ("SELECT PROGRAMMERS.FULL_NAME, COUNT(*) AS C FROM TRANSACTIONS INNER JOIN PROGRAMMERS ON TRANSACTIONS.PROGRAMMER_ID = PROGRAMMERS.ID WHERE END_DATE IS NOT NULL GROUP BY PROGRAMMERS.FULL_NAME ORDER BY C DESC LIMIT 1", ())

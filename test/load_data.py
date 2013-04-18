@@ -1,9 +1,5 @@
 import re
 import json
-import sys
-import os
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition/nlp_system")
-import nlp_nlidb
 
 """ This is here because if it's in the question_test.py file, then there's a loop when
 question_test requires fuzzy_adventure, which requires question_type, which requires question_test """

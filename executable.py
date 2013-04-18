@@ -1,22 +1,18 @@
+#/usr/bin/python
 import os
 import sys
-project_path = os.environ['FUZZY_ADVENTURE']
-sys.path.append(project_path + "/query_decomposition")
-sys.path.append(project_path + "/query_decomposition/nlidb/template_selectors")
-sys.path.append(project_path + "/query_decomposition/nlidb/term_selectors")
-sys.path.append(project_path + "/query_decomposition/nlp_system")
-from bayes import Bayes
-from word_space import WordSpace
-from template_type import TemplateClassifier
 import MySQLdb
 import time
 import re
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/test")
-import load_data
-import confidence_estimator
-from term_selector import TermSelector
-import nlp
-import nlp_nlidb
+
+from fuzzy_adventure.test import load_data
+from fuzzy_adventure.query_decomposition import bayes, word_space, nlp
+from fuzzy_adventure.query_decomposition.nlidb.template_selectors import template_type
+from fuzzy_adventure.query_decomposition.nlidb.term_selectors import term_selector
+from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
+
+project_path = os.environ['FUZZY_ADVENTURE']
+
 
 """ Main executable file for the whole system.
 To use it, run the FuzzyAdventure.demo() function to let the user input questions to
@@ -29,12 +25,12 @@ that it correctly classifies. """
 data_file = project_path + "/query_decomposition/nlidb/template_selectors/questions_plus.json"
 
 # Use Bayes classifier
-model = Bayes(data_file)
+model = bayes.Bayes(data_file)
 
 # Use word space classifier
-#model = WordSpace(data_file) 
+#model = word_space.WordSpace(data_file) 
 
-tc = TemplateClassifier(model)
+tc = template_type.TemplateClassifier(model)
 
 
 class FuzzyAdventure():
@@ -53,14 +49,12 @@ class FuzzyAdventure():
             answer, lat_type = self.to_sql(query)
             #sql = sql[0]
             #answer = execute(sql)
-            confidence = confidence_estimator.LAT_match(answer, lat_type)
             duration = time.time() - start
     
             if verbose:
                 print "Time: " + str(round(duration, 3))
                 #print "SQL: " + str(sql)
                 print "LAT Type: " + str(lat_type)
-                print "Confidence: " + str(confidence)
             print "Answer: " + str(answer) + "\n"
         return None
     
@@ -89,7 +83,7 @@ class FuzzyAdventure():
         sql, lat_type = tc.template(supplemented)
         keywords = nlp.tokens(nl_query)
         keywords = nlp.remove_stopwords(keywords)
-        answer = TermSelector.fill_in_the_blanks(sql, keywords)
+        answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
         return answer, lat_type
 
 

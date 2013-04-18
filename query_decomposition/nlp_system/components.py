@@ -1,8 +1,4 @@
-import os
-project_path = os.environ['FUZZY_ADVENTURE']
-import sys
-sys.path.append(project_path + '/hana')
-import connection
+from fuzzy_adventure.hana import connection
 
 def get_components():
     if not hasattr(get_components, "components"):

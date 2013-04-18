@@ -4,8 +4,6 @@ from nltk.stem import PorterStemmer
 import pymongo
 from pymongo import Connection
 from bson.objectid import ObjectId
-import sys
-sys.path.append("/home/I829287/fuzzy_adventure/db")
 
 def tokens(string):
 	words = nltk.word_tokenize(string)

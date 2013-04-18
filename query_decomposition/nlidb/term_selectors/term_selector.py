@@ -1,10 +1,6 @@
 import MySQLdb
-import sys
-import os
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/hana")
-import connection
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/query_decomposition")
-import permutation
+from fuzzy_adventure.hana import connection
+from fuzzy_adventure.query_decomposition import permutation
 from time import time
 
 class TermSelector():

@@ -1,6 +1,7 @@
-import sys
-sys.path.append("/home/I829287/fuzzy_adventure/external")
-import en
+# import sys
+# sys.path.append("/home/I829287/fuzzy_adventure/external")
+# import en
+from fuzzy_adventure.external import en
 
 '''def required value''' 
 def required_values(lookFor, allWords):

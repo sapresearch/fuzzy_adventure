@@ -1,7 +1,6 @@
 import xmlrpclib
 import sys
-sys.path.append("/home/I829287/fuzzy_adventure/query_decomposition")
-import nlp
+from fuzzy_adventure.query_decomposition import nlp
 
 def search(synonyms, lex_type):
 	proxy = xmlrpclib.ServerProxy('http://localhost:9000')

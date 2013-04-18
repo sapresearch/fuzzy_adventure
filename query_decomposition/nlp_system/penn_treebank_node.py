@@ -1,8 +1,6 @@
 import copy
 import re
-import sys
-sys.path.append("../")
-import wordnet_synonym
+from fuzzy_adventure.query_decomposition import wordnet_synonym
 
 class PennTreebankNode():
     def __init__(self, node_type='ROOT', word=None, children=[], parent=None, index=None):

@@ -5,10 +5,7 @@ import nltk
 from nltk import *
 from sklearn import tree
 from sklearn.ensemble import ExtraTreesClassifier
-import sys
-import os
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/test")
-import load_data
+from fuzzy_adventure.test import load_data
 import time
 
 class WordSpace():

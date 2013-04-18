@@ -1,8 +1,4 @@
-import os
-project_path = os.environ['FUZZY_ADVENTURE']
-import sys
-sys.path.append(project_path + '/query_decomposition/nlp_system')
-import preprocessing as pp
+from fuzzy_adventure.query_decomposition.nlp_system import preprocessing as pp
 from preprocessing import Preprocessing
 import penn_treebank_node as ptn
 from queue import Queue

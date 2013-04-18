@@ -5,14 +5,11 @@ import my_parser
 #from  semanticNet import *
 from answerGenerator import answerGenerator
 import semanticNet
-#import wordnet_synonym 
+# from fuzzy_adventure.query_decomposition import wordnet_synonym
 import glossary
 import stanford_client
 import penn_treebank_node
-import sys
-import os
-sys.path.append(os.environ['FUZZY_ADVENTURE'] + "/test")
-import load_data
+from fuzzy_adventure.test import load_data
 
 def nlp_nlidb(question):
 

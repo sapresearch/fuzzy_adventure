@@ -1,9 +1,6 @@
 from Tkinter import * # get a widget object
 import tkFont
-import sys
-import os
-sys.path.append(os.environ['FUZZY_ADVENTURE'])
-from executable import *
+from fuzzy_adventure.executable import *
 
 def quit(): # a custom callback handler
     print('Hello, I must be going...') # kill windows and process

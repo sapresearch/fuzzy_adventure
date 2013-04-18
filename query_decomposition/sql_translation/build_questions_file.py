@@ -1,11 +1,7 @@
 import pandas as pd
 from pandas import DataFrame, Series
 import numpy as np
-import os
-project_path = os.environ['FUZZY_ADVENTURE']
-import sys
-sys.path.append(project_path + '/query_decomposition/nlp_system')
-import stanford_client
+from fuzzy_adventure.query_decomposition.nlp_system import stanford_client
 import json
 
 

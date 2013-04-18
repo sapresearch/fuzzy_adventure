@@ -2,9 +2,7 @@ from pybrain.structure.networks.rbm import Rbm
 from pybrain.unsupervised.trainers.rbm import (RbmGibbsTrainerConfig,RbmBernoulliTrainer)
 from pybrain.datasets import UnsupervisedDataSet
 from sklearn.ensemble import RandomForestClassifier
-import sys
-sys.path.append("../test")
-from load_data import load_data
+from fuzzy_adventure.test.load_data import load_data
 from rnn import RNN
 import question_type
 from numpy import *
