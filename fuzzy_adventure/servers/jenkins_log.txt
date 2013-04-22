@@ -673,3 +673,11 @@ WARNING: invalid gitTool selection Default
 INFO: fuzzy_adventure_jenkins #7 main build action completed: FAILURE
 22-Apr-2013 1:32:27 PM hudson.plugins.git.GitTool$DescriptorImpl getInstallation
 WARNING: invalid gitTool selection Default
+22-Apr-2013 3:06:23 PM hudson.plugins.git.GitTool$DescriptorImpl getInstallation
+WARNING: invalid gitTool selection Default
+22-Apr-2013 3:38:16 PM hudson.plugins.git.GitTool$DescriptorImpl getInstallation
+WARNING: invalid gitTool selection Default
+22-Apr-2013 3:41:41 PM hudson.plugins.git.GitTool$DescriptorImpl getInstallation
+WARNING: invalid gitTool selection Default
+22-Apr-2013 3:42:05 PM hudson.model.Run execute
+INFO: fuzzy_adventure_jenkins #8 main build action completed: SUCCESS
