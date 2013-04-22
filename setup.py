@@ -6,8 +6,8 @@ except ImportError:
 config = {
     'description': 'Fuzzy Adventure - SAP questions-answers system',
     'author': '',
-    'url': 'https://github.com/sapresearch/fuzzy_adventure.',
-    'download_url': 'Where to download it.',
+    'url': 'https://github.com/sapresearch/fuzzy_adventure',
+    'download_url': 'https://github.com/sapresearch/fuzzy_adventure',
     'author_email': '',
     'version': '0.1',
     'install_requires': ['nose', 'scikit-learn', 'pandas', 'numpy', 'scipy', 'nltk'],
