@@ -37,4 +37,4 @@ def load_questions(file_name):
 
     return questions, types
 
-# questions, _, types = load_questions('/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/template_selectors/questions_plus.json')
+# questions, _, types = load_questions('/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/template_selectors/questions_plus.json'

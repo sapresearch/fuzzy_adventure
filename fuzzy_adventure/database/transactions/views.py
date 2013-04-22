@@ -4,8 +4,8 @@ from django.template import Context, loader
 import os
 import sys
 sys.path.append(os.environ['FUZZY_ADVENTURE'])
-import executable
-import settings
+from fuzzy_adventure import executable
+from fuzzy_adventure.database import settings
 
 def home(request):
 	t = loader.get_template('search_form.html')
