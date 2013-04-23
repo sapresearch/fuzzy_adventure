@@ -2,6 +2,7 @@ import MySQLdb
 from fuzzy_adventure.hana import connection
 from fuzzy_adventure.query_decomposition import permutation
 from time import time
+import numpy as np
 
 class TermSelector():
 
@@ -33,10 +34,13 @@ class TermSelector():
     
 
     @classmethod
-    def apply_type(elements, types):
+    def apply_type(self, elements, types):
+        if len(elements) != len(types):
+            raise IndexError("The number of elements and types must be equals.")
+
         applied = []
         for (i, element) in enumerate(elements):
-            type_to_apply = types(i)
+            type_to_apply = types[i]
             applied.append(type_to_apply(element))
         return applied
 
@@ -57,7 +61,7 @@ class TermSelector():
     
     @classmethod
     def filter_answers(self, answers):
-        temp = [a for a in answers if a > 0] 
+        temp = np.array([a for a in answers if a > 0 and a != '' and a != None])
         result = temp[0] if len(temp) > 0 else None
         return result
 
