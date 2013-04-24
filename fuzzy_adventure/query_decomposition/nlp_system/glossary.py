@@ -9,7 +9,7 @@ def createGlossary():
 	# sys.path.append('/home/I837185/git/fuzzy_adventure/Context-based Data/')
 	glossary = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary.txt", 'r') 
 	# open("../../context_based_data/glossary.txt", 'r')
-	glossary_processed = glassary_processed = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'a')
+	# glossary_processed = glassary_processed = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'a')
 	# open("../../context_based_data/glossary_processed.txt", 'a')
 	text = glossary.readlines()
 	# values = []
@@ -78,10 +78,10 @@ def createGlossary():
 								w1 = en.verb.infinitive(w1)
 							l= l + ' ' + w1
 						glossary_four_words[l.strip()] = value.lower()
-	glossary_processed.write ( str(glossary_one_word))
-	glossary_processed.write ( str(glossary_two_words))
-	glossary_processed.write ( str(glossary_three_words))
-	glossary_processed.write ( str(glossary_four_words))
+	# glossary_processed.write ( str(glossary_one_word))
+	# glossary_processed.write ( str(glossary_two_words))
+	# glossary_processed.write ( str(glossary_three_words))
+	# glossary_processed.write ( str(glossary_four_words))
 	# print  'one words:', glossary_one_word
 	# print  'two words:', glossary_two_words
 	# print  'three words:',glossary_three_words
@@ -93,8 +93,15 @@ def checkGlossary(question):
 	#check the words
 	glossaryMatches = []
 	remove_list = []
-	q_noPunc = question.translate(string.maketrans("",""), string.punctuation)
-	words = q_noPunc.split(" ")
+
+
+	if type(question) is list:
+		words = question
+	elif type(question) is not list:
+		q_noPunc = question.translate(string.maketrans("",""), string.punctuation)
+		words = q_noPunc.split(" ")
+
+
 	for w in words:
 		w = w.lower()
 		if en.is_noun(w):
@@ -132,18 +139,27 @@ def checkGlossary(question):
 				remove_list.append(w)
 			words = [x for x in words if x not in phrase.split()]
 
-	#check one word glossary:
-	for k in question.split() :
+	# #check one word glossary:
+	# if type(question) is not list:
+
+	# for k in question.split() :
+	for k in words:
 		if k.strip() in glossary_one_word:
 			glossaryMatches.append(glossary_one_word[k])
 			remove_list.append(k)
 
-	print 'glossaryMatches = ', glossaryMatches
+	# print 'glossaryMatches = ', glossaryMatches
 	# print remove_list
 	return glossaryMatches, remove_list
 
 def generalizedKeywords(question, keyWords):
-	glossaryMatches, remove_list = checkGlossary(question)
+	'''Two calls to the checkGlossary, once with the question and once with the keywords, to find all possible matches'''
+	glossaryMatches1, remove_list1 = checkGlossary(question)
+	glossaryMatches2, remove_list2 = checkGlossary(keyWords)
+
+	glossaryMatches = glossaryMatches1+glossaryMatches2
+	remove_list = remove_list1 + remove_list2
+	# print glossaryMatches
 	keyWords = [x for x in keyWords if x not in remove_list]
 	uniqueWords = list(set(keyWords + glossaryMatches))
 	return uniqueWords

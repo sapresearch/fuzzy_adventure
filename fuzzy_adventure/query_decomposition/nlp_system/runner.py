@@ -23,23 +23,27 @@ while True:
         break
     else: 
         '''print question'''
-        allWords, defaultValues, what, conditions, tables, question_type = nlp_nlidb(question)
+        allWords, defaultValues, what, conditions, all_tables, question_type = nlp_nlidb(question)
 
         print 'allWords: ', allWords
         print_defaultValue = 'Default value: NOT FOUND'
         print_condition = 'Condition: NOT FOUND'
         print_table = 'Table: NOT FOUND'
-        print_table = 'Tables: '+ str(list(tables))
-
-        what.add(question_type)
-        for w in what:    
-            table = findTable(w)
-        if table != '':
-            tables.add(table)
-            defaultValues.add(checkDB(w, table))
+        
+        # all_tables = []
+        # what.add(question_type)
+        # for w in what:    
+        #     # print '1', what
+        #     table = semanticNet.tables(w)
+        #     # print 'table:', table
+        #     all_tables.append(table)
+        #     # print 'all', all_tables
+        #     defaultValues.append(semanticNet.required_values(w, table))
         if defaultValues!=[]:
             print_defaultValue = 'Default value: ' + str(list(defaultValues))
             print_condition = 'Conditions: ' + str(list(conditions))
+        if all_tables !=[]:
+            print_table = 'Tables: '+ str(list(all_tables))
 
         print print_table
         print print_defaultValue
