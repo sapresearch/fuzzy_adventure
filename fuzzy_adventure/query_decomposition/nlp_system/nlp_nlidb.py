@@ -26,15 +26,16 @@ def nlp_nlidb(question):
 	#print 'unique=' ,uniqueWords
 	# '''STEP2.2: Extracting the related keywords:'''
 	# relatedWords = relatedKeywords.checkRelation(allWords)
-	# uniqueWords.append(reltedWords)
+	uniqueWords.append(question_type)
 	'''STEP3: Adding some manually defined rules'''
 	allWords, conditions, target = answerGenerator(question, uniqueWords)
 	allWords = allWords + list(target)
+	allWords = set(allWords)
 	# print 'nlp_nlidb', allWords
 
 	'''Creating Links between allWords and tables' entities'''
-	tables = semanticNet.tables(allWords)
-	required_values = semanticNet.required_values(tables, allWords)
+	tables = set(semanticNet.tables(allWords))
+	required_values = set(semanticNet.required_values(tables, allWords))
 	# print allWords, required_values, target, conditions, tables, question_type, question
 	# '''To integrate with SQL Converter use: '''
 	# merged = merge(allWords, required_values, target, conditions, tables, question_type, question)

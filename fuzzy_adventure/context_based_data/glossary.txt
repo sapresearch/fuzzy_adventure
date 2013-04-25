@@ -14,7 +14,7 @@ take = [require, need]
 
 productive = [efficient, fastest, closes the most, close the most, contribute to the success of the team, get work done faster, reduce manual intervention, effective, effectiveness, provide quality work, solve complex issues, closing the most number of open, most open transactions closer, most open tickets closer, deliver the most, deal most swiftly, knows jira the most, has the deepest knowledge, answer the most questions, assigned to the most number of open, solve the most, most productive, most important task to]
 
-solve = [clear, close, complete, finish, problem resolution time, resolve, fix, repair]
+closed = [cleared, solved, completed, finished, problem resolution time, resolved, fixed, repaired, confirmed]
 
 when = [how long, how many days, how much time, What duration,lenght of time]
 
@@ -26,15 +26,13 @@ year = [so far this year]
 
 open messages = [messages for a topic in IMS queue, unassigned messages, unattended messages]
 
-closed messages = [confirmed]
-
 flag = [escalated, Max Attention customers]
 
 number = [count of,how many, Show me the number of, give me the count of, What is the total]
 
 touched = [involved in, involved messages by, handled,worked on,involved in solving]
 
-messages = [tickets]
+tickets = [messages]
 
 IMS queue = [SAP-side, SAP side, SAP queue,queue,our team,PS queue]
 

@@ -1,5 +1,5 @@
-# from nltk import WordNetLemmatizer as WN_Lemmatizer
-# from nltk.stem import PorterStemmer as PStemmer
+from nltk import WordNetLemmatizer as WN_Lemmatizer
+from nltk.stem import PorterStemmer as PStemmer
 import en
 import string
 import os
@@ -9,7 +9,7 @@ def createGlossary():
 	# sys.path.append('/home/I837185/git/fuzzy_adventure/Context-based Data/')
 	glossary = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary.txt", 'r') 
 	# open("../../context_based_data/glossary.txt", 'r')
-	# glossary_processed = glassary_processed = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'a')
+	glossary_processed = glassary_processed = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'a')
 	# open("../../context_based_data/glossary_processed.txt", 'a')
 	text = glossary.readlines()
 	# values = []
@@ -22,6 +22,16 @@ def createGlossary():
 		index = line.find('=')
 		if index != -1:
 		 	value = line[:index].strip()
+		 	# print '1', value
+			# if en.is_noun(value):
+				# value = en.noun.singular(value)
+			# value = WN_Lemmatizer().lemmatize(value)
+			# print '2',value
+			# elif en.is_verb(value):
+				# value = en.verb.infinitive(value)
+			value = PStemmer().stem(value)
+			# print '2', value
+		 	# print 'value:' , value
 			start = line.find('[')
 			end = line.find (']')
 			valuesLines= line[index + 3: end ]
@@ -29,27 +39,30 @@ def createGlossary():
 			list_of_labels = vals.split(',')
 
 			for label in list_of_labels:
+				# print 'test label:',label
 				words = label.split()
 				wordCount = len(words)
 				for i in range(wordCount):
 					if wordCount == 1:
 						label = label.lower()
-						if en.is_noun(label):
-							w = en.noun.singular(w)
-						elif en.is_verb(label):
-							w = en.verb.infinitive(w)
+						# if en.is_noun(label):
+						# 	# label = en.noun.singular(label)
+						# 	label = WN_Lemmatizer().lemmatize(label)
+						# elif en.is_verb(label):
+						# 	# label = en.verb.infinitive(label)
+						label = PStemmer().stem(label)
 						glossary_one_word[label.strip()] = value.lower()
 					elif wordCount == 2:
 						l=''
 						for w in words:
 							# print 'word', w
 							w = w.lower()
-							if en.is_noun(w):
-								w = en.noun.singular(w)
+							# if en.is_noun(w):
+							# 	# w = en.noun.singular(w)
 							# 	w = WN_Lemmatizer().lemmatize(w)
-							elif en.is_verb(w):
-								w = en.verb.infinitive(w)
-							# 	w = PStemmer().stem(w)
+							# elif en.is_verb(w):
+							# 	# w = en.verb.infinitive(w)
+							w = PStemmer().stem(w)
 							l= l + ' ' + w
 							# print 'changed:', w
 						glossary_two_words[l.strip()] = value.lower()
@@ -59,12 +72,12 @@ def createGlossary():
 						for w in words:
 							# print 'word', w
 							w = w.lower()
-							if en.is_noun(w):
-								w = en.noun.singular(w)
+							# if en.is_noun(w):
+							# 	# w = en.noun.singular(w)
 							# 	w = WN_Lemmatizer().lemmatize(w)
-							elif en.is_verb(w):
-								w = en.verb.infinitive(w)
-							# 	w = PStemmer().stem(w)
+							# elif en.is_verb(w):
+							# 	# w = en.verb.infinitive(w)
+							w = PStemmer().stem(w)
 							l= l + ' ' + w
 							# print 'changed:', w
 						glossary_three_words[l.strip()] = value.lower()
@@ -72,16 +85,18 @@ def createGlossary():
 						l=''
 						for w in words:
 							w1 = w.lower()
-							if en.is_noun(w1):
-								w1 = en.noun.singular(w1)
-							elif en.is_verb(w1):
-								w1 = en.verb.infinitive(w1)
+							# if en.is_noun(w1):
+							# 	w1 = WN_Lemmatizer().lemmatize(w1)
+							# 	# w1 = en.noun.singular(w1)
+							# elif en.is_verb(w1):
+							w1 = PStemmer().stem(w1)
+								# w1 = en.verb.infinitive(w1)
 							l= l + ' ' + w1
 						glossary_four_words[l.strip()] = value.lower()
-	# glossary_processed.write ( str(glossary_one_word))
-	# glossary_processed.write ( str(glossary_two_words))
-	# glossary_processed.write ( str(glossary_three_words))
-	# glossary_processed.write ( str(glossary_four_words))
+	glossary_processed.write ( str(glossary_one_word))
+	glossary_processed.write ( str(glossary_two_words))
+	glossary_processed.write ( str(glossary_three_words))
+	glossary_processed.write ( str(glossary_four_words))
 	# print  'one words:', glossary_one_word
 	# print  'two words:', glossary_two_words
 	# print  'three words:',glossary_three_words
@@ -102,12 +117,13 @@ def checkGlossary(question):
 		words = q_noPunc.split(" ")
 
 
-	for w in words:
-		w = w.lower()
-		if en.is_noun(w):
-			w = en.noun.singular(w)
-		elif en.is_verb(w):
-			w = en.verb.infinitive(w)
+	for i in range(len(words)):
+		words[i] = words[i].lower()
+		# if en.is_noun(words[i]):
+		# 	words[i] = en.noun.singular(words[i])
+		# elif en.is_verb(words[i]):
+		# 	words[i] = en.verb.infinitive(words[i])
+		words[i] = PStemmer().stem(words[i])
 
 	glossary_one_word, glossary_two_words, glossary_three_words, glossary_four_words = createGlossary()
 	'''check four words glossary'''
@@ -129,7 +145,7 @@ def checkGlossary(question):
 			for w in words[i:i+3]:
 				remove_list.append(w)
 			words = [x for x in words if x not in phrase.split()]
-	#check two words glossary:
+	'''check two words glossary:'''
 	phrase = ''
 	for i in range(len(words)-1):
 		phrase = ' '. join(words[i:i+2])
@@ -148,7 +164,7 @@ def checkGlossary(question):
 			glossaryMatches.append(glossary_one_word[k])
 			remove_list.append(k)
 
-	# print 'glossaryMatches = ', glossaryMatches
+	print 'glossaryMatches = ', glossaryMatches
 	# print remove_list
 	return glossaryMatches, remove_list
 

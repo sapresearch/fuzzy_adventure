@@ -1,63 +1,97 @@
+from nltk.stem import PorterStemmer as PStemmer
 ''' Answer generator includes a list of rules that are manually entered by the user to improve the performance and find the answer'''
+
+# def checkRelation(allWords):
+# 	if ('best' && 'employee') in allWords:
+# 		return 'most effective'
+
+def returnTime():
+	start_date = raw_input('Please enter the start date to do the calculations:')
+	# start_date = '45'
+
+	if PStemmer().stem(start_date):
+		what_temp.add('transaction')
+		conditions_temp.add(start_date)
+	else:
+		conditions.add('Duration: Last 30 days')
+	end_date = raw_input ('Please enter the end date to calculate the productivity: ')
+	# end_date = '45'
+
+	if PStemmer().stem(end_date):
+		what_temp.add('transaction')
+		conditions_temp.add('end_date')
+
+	return start_date, end_date, conditions_temp,what_temp
+
+def stemmed(word):
+	l = ''
+	words = word.split()
+	for w in words:
+		w = w.lower()
+		w = PStemmer().stem(w)
+		l= l + ' ' + w
+	return l
+
+
 
 def answerGenerator(question, allWords):
 #definitions:
 	conditions, what = set(), set()
 
 
-	if 'causes delay' in allWords:
+	if 'causes delay' or stemmed('causes delay') in [allWords,question]:
 		allWords.append('component')
 		conditions.add('causes delay')
 
-	if 'backlog' in allWords:
+	if stemmed('backlog') in [allWords,question]:
 		allWords.append('transaction')
 		allWords.append('component')
 		what.add('transaction')
-	if 'messages' in allWords:
+
+	if 'messages' or stemmed('messages') in [allWords,question]:
 		allWords.append('messages')
 		allWords.append('transaction')
 		what.add('transaction')
 
-	if 'solve' in allWords:
+	if 'solve' or stemmed('solve') in [allWords,question]:
 		allWords.append('transaction')
-		conditions.add('solve')
+		conditions.add('STATUS = closed')
 		what.add('transaction')
 
-	if 'most' in allWords or 'most' in question.split():
+	if stemmed('most') in [allWords,question]:
 		# print question.split()
 		conditions.add('Maximum value')
 		what.add('transaction')
 
-	if 'hiring date' in allWords:
+	if 'hiring date' or stemmed('hiring date') in [allWords,question]:
 		conditions.add('hiring date')
 		what.add('transaction')
 		what.add('employee')
 
-	if 'MPT' in question.split():
-		if 'average' in question.split():
-			allWords.append('transaction')
-			what.add('transaction')
-			conditions.add('average')
-		elif 'percent' in question.split():
+	if 'MPT' in [allWords,question]:
+		if 'percent' in [allWords,question]:
 			allWords.append('transaction')
 			what.add('transaction')
 			conditions.add('percent')
-		elif 'most' in question.split():
+		elif 'most' in [allWords,question]:
 			allWords.append('transaction')
 			what.add('transaction')
 			conditions.add('most')
-	if 'escalated' in question.split() or 'escalated' in allWords:
+	if 'escalated' or stemmed('escalated') in [allWords,question]:
 		conditions.add('flag_escalated')
-	if 'IRT' in question.split() or 'IRT' in allWords:
+	if 'IRT' in [allWords,question]:
 			allWords.append('IRT')
 			what.add('transaction')
 
 
 
-	if 'average' in question.split():
+	if 'average' in [allWords,question]:
 		conditions.add('average')
+		allWords.append('transaction')
+		what.add('transaction')
+		what.add('component')
 
-	if 'my' in question.split():
+	if 'my' in [allWords,question]:
 		#manager_ID = raw_input("what is your Employee ID?")
 		manager_ID = '45'
 		if manager_ID:
@@ -65,37 +99,39 @@ def answerGenerator(question, allWords):
 		else: 
 			conditions.add('manager_ID Was not provided by the manager!')
 
-	if 'productive' in allWords:
+	if stemmed('productive') in [allWords,question]:
 		what.add('transaction')
 		conditions.add('programmer')
 		conditions.add('priority')
-		#start_date = raw_input('Please enter the start date to calculate the productivity: ')
-		start_date = '45'
+		start_date, end_date, conditions_temp,what_temp = returnTime()
+		conditions.add(conditions_temp)
+		what.add(what_temp)
+		# start_date = '45'
 
-		if start_date:
-			what.add('transaction')
-			conditions.add(start_date)
-		else:
-			conditions.add('Duration: Last 30 days')
-		#end_date = raw_input ('Please enter the end date to calculate the productivity: ')
-		end_date = '45'
+		# if start_date:
+		# 	what.add('transaction')
+		# 	conditions.add(start_date)
+		# else:
+		# 	conditions.add('Duration: Last 30 days')
 
-		if end_date:
-			what.add('transaction')
-			conditions.add('end_date')
-
-	if 'component' in allWords:
-		what.add('component')
-
-	if 'causes delay' in allWords:
-		what.add('component')
+		# end_date = '45'
+		# if end_date:
+		# 	what.add('transaction')
+		# 	conditions.add('end_date')
+	if 'closed' or stemmed('closed') in [allWords,question]:
 		what.add('transaction')
-		conditions.add('Maximum')
-	
-	if 'average' in allWords or 'average' in question.split():
+		if 'when' in [allWords,question]:
+			start_date, end_date, conditions_temp,what_temp = returnTime()
+			conditions.add(conditions_temp)
+			what.add(what_temp)
+		if 'number' in [allWords,question]:
+			conditions.add('number of closed tickets')
+
+
+
+	if stemmed('component') in [allWords,question]:
 		what.add('component')
-		what.add('transaction')
-		conditions.add('average')
+
 
 
 	allWords = list(set(allWords))
