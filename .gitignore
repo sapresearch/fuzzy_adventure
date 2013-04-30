@@ -61,3 +61,6 @@ pip-log.txt
 originals/
 to_import/
 names/
+
+# Ignore nosetests coverage
+cover/

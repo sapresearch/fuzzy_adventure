@@ -1,6 +1,6 @@
 from nltk import WordNetLemmatizer as WN_Lemmatizer
 from nltk.stem import PorterStemmer as PStemmer
-import en
+from fuzzy_adventure.external import en
 import string
 import os
 # Reads the words in the glossary text file and saves each synonym as a key and each label as 
