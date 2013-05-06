@@ -4,13 +4,19 @@ from nltk.stem import PorterStemmer as PStemmer
 from fuzzy_adventure.external import en
 import string
 import os
+from os import path, access, R_OK
+
+PATH=os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt"
+
+
 # Reads the words in the glossary text file and saves each synonym as a key and each label as 
 # a value. Then seperates the phrases base on their word counts and save them in the relevant glossary.
+'''To create the glossary for the first time:'''
 def createGlossary():
 	# sys.path.append('/home/I837185/git/fuzzy_adventure/Context-based Data/')
 	glossary = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary.txt", 'r') 
 	# open("../../context_based_data/glossary.txt", 'r')
-	glossary_processed = glassary_processed = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'a')
+	glossary_processed = open(os.environ['FUZZY_ADVENTURE'] + "/context_based_data/glossary_processed.txt", 'a')
 	# open("../../context_based_data/glossary_processed.txt", 'a')
 	text = glossary.readlines()
 	# values = []
@@ -104,6 +110,42 @@ def createGlossary():
 	# print  'four words:',glossary_four_words
 	return glossary_one_word, glossary_two_words, glossary_three_words, glossary_four_words
 
+'''To read the existing glossary'''
+def readGlossary():
+
+	glossary_one_word = dict()
+	glossary_two_words = dict()
+	glossary_three_words = dict()
+	glossary_four_words = dict()
+
+	glossary = open(PATH,'r')
+
+	text = glossary.read()
+	i=0
+
+	while i<=3:
+		start = findnth(text, '{', i)
+		end = findnth(text, '}', i) + 1
+		temp_glossary = text[start:end]
+		gl = eval(temp_glossary)
+		# print gl
+		if i==0:
+			glossary_one_word = gl
+		if i==1:
+			glossary_two_words = gl
+		if i==2:
+			glossary_three_words = gl
+		if i==3:
+			glossary_four_words = gl
+		i = i+1
+
+	return glossary_one_word, glossary_two_words, glossary_three_words, glossary_four_words
+
+def findnth(text, val, n):
+    parts= text.split(val, n+1)
+    if len(parts)<=n+1:
+        return -1
+    return len(text)-len(parts[-1])-len(val)
 	
 def checkGlossary(question):
 	#check the words
@@ -126,7 +168,11 @@ def checkGlossary(question):
 		# 	words[i] = en.verb.infinitive(words[i])
 		words[i] = PStemmer().stem(words[i])
 
-	glossary_one_word, glossary_two_words, glossary_three_words, glossary_four_words = createGlossary()
+	if path.isfile(PATH) and access(PATH, R_OK):
+	    glossary_one_word, glossary_two_words, glossary_three_words, glossary_four_words = readGlossary()
+	else:
+		glossary_one_word, glossary_two_words, glossary_three_words, glossary_four_words = createGlossary()
+
 	'''check four words glossary'''
 	phrase = ''
 	for i in range(len(words)-3):
