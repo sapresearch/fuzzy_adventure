@@ -1,3 +1,4 @@
+
 import re
 import sys
 import string
@@ -31,16 +32,20 @@ def nlp_nlidb(question):
 	allWords, conditions, target = answerGenerator(question, uniqueWords)
 	allWords = allWords + list(target)
 	allWords = set(allWords)
+	
 	# print 'nlp_nlidb', allWords
 
 	'''Creating Links between allWords and tables' entities'''
 	tables = set(semanticNet.tables(allWords))
-	required_values = set(semanticNet.required_values(tables, allWords))
+	# required_values = set(semanticNet.required_values(tables, allWords))
+	'''required_values is not being used in our system anymore'''
+	required_values =''
 	# print allWords, required_values, target, conditions, tables, question_type, question
 	# '''To integrate with SQL Converter use: '''
 	# merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
 	# return merged
 	'''To use the nlp_nlidb module use:'''
+
 	return allWords, required_values, target, conditions, tables, question_type, 
 
 
@@ -99,3 +104,4 @@ def reformat():
 	f = file('more2.txt', 'a')
 	f.write(both)
 	f.close()
+
