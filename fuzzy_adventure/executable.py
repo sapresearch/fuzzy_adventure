@@ -35,7 +35,6 @@ tc = template_type.TemplateClassifier(model)
 
 class FuzzyAdventure():
 
-
     @classmethod
     def demo(self, verbose=False):
         while True:
