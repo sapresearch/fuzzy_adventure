@@ -59,7 +59,6 @@ class FuzzyAdventure():
     
     @classmethod
     def test(self):
-        #data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.txt"
         text, targets = load_data.load_questions(data_file)
         text, targets = text[1::2], targets[1::2]
         correct = 0.
@@ -77,8 +76,9 @@ class FuzzyAdventure():
 
     @classmethod
     def to_sql(self, nl_query):
-        supplemented = nlp_nlidb.nlp_nlidb(nl_query)
-        #print supplemented 
+        supplemented, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(nl_query)
+        # supplemented = nlp_nlidb.nlp_nlidb(nl_query)
+        print supplemented 
         sql, lat_type = tc.template(supplemented)
         keywords = nlp.tokens(nl_query)
         keywords = nlp.remove_stopwords(keywords)
