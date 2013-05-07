@@ -1,3 +1,4 @@
+#/usr/bin/python
 import os
 import sys
 import MySQLdb
@@ -10,7 +11,6 @@ from fuzzy_adventure.query_decomposition import bayes, word_space, nlp
 from fuzzy_adventure.query_decomposition.nlidb.template_selectors import template_type
 from fuzzy_adventure.query_decomposition.nlidb.term_selectors import term_selector
 from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
-
 
 """ Main executable file for the whole system. """
 
@@ -57,14 +57,14 @@ class FuzzyAdventure():
 
     @classmethod
     def to_sql(self, nl_query):
+        #supplemented, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(nl_query)
         supplemented = nlp_nlidb.nlp_nlidb(nl_query)
-        #print supplemented 
         sql, lat_type = self.tc.template(supplemented)
+        print supplemented
         keywords = nlp.tokens(nl_query)
         keywords = nlp.remove_stopwords(keywords)
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
         return answer, lat_type
-
 
 def main():
 
@@ -104,3 +104,4 @@ def main():
 
 if __name__=="__main__":
     main()
+

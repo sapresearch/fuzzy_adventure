@@ -66,15 +66,3 @@ class TermSelector():
         return result
 
 
-#sql = "SELECT COUNT(transactions.id) FROM transactions WHERE transactions.end_date <>'0000-00-0000' AND transactions.programmer_id=(SELECT id FROM %s WHERE programmers.name = '%s');"
-"""
-keywords = ['jeff', 'baumer', 'hello', '0100157232', 'transactions', 'mark', 'rob', 'other', 'thing', 'world', 'foo', 'bar', 'programmers']
-arg = (sql, 2)
-
-start = time()
-queries = TermSelector.fill_in_the_blanks(arg, keywords)
-answers = TermSelector.crash_and_burn(queries)
-correct = TermSelector.filter_answers(answers)
-print correct
-print "Duration: " + str(time() - start)
-"""

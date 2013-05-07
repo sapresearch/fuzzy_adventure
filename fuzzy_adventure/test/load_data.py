@@ -1,6 +1,7 @@
 import re
 import json
 
+
 """ This is here because if it's in the question_test.py file, then there's a loop when
 question_test requires fuzzy_adventure, which requires question_type, which requires question_test """
 def load_data(file_name):
@@ -29,6 +30,7 @@ def load_questions(file_name):
     for line in json_object:
         question = str(line['question'])
         # allWords, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(question)
+        # print allWords
         # question = ' '.join(allWords).lower()
         # if question == '':
         #     continue
@@ -37,4 +39,3 @@ def load_questions(file_name):
 
     return questions, types
 
-# questions, _, types = load_questions('/home/I834397/Git/fuzzy_adventure/query_decomposition/nlidb/template_selectors/questions_plus.json'
