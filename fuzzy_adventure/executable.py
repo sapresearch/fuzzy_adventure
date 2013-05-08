@@ -5,33 +5,14 @@ import MySQLdb
 import time
 import re
 
+from optparse import OptionParser
 from fuzzy_adventure.test import load_data
 from fuzzy_adventure.query_decomposition import bayes, word_space, nlp
 from fuzzy_adventure.query_decomposition.nlidb.template_selectors import template_type
 from fuzzy_adventure.query_decomposition.nlidb.term_selectors import term_selector
 from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
 
-project_path = os.environ['FUZZY_ADVENTURE']
-
-
-""" Main executable file for the whole system.
-To use it, run the FuzzyAdventure.demo() function to let the user input questions to
-the command line, or the FuzzyAdventure.test() function to find the number of questions
-that it correctly classifies. """
-
-
-#data_file = project_path + "/query_decomposition/nlidb/template_selectors/data2.old.txt"
-#data_file = project_path + "/query_decomposition/nlidb/template_selectors/more2.txt"
-data_file = project_path + "/query_decomposition/nlidb/template_selectors/questions_plus.json"
-
-# Use Bayes classifier
-model = bayes.Bayes(data_file)
-
-# Use word space classifier
-#model = word_space.WordSpace(data_file) 
-
-tc = template_type.TemplateClassifier(model)
-
+""" Main executable file for the whole system. """
 
 class FuzzyAdventure():
 
@@ -58,8 +39,8 @@ class FuzzyAdventure():
         return None
     
     @classmethod
-    def test(self):
-        text, targets = load_data.load_questions(data_file)
+    def test(self, verbose=False):
+        text, targets = load_data.load_questions(self.data_file)
         text, targets = text[1::2], targets[1::2]
         correct = 0.
         for i,t in enumerate(text):
@@ -86,10 +67,42 @@ class FuzzyAdventure():
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
         return answer, lat_type
 
+def main():
 
+    usage = "usage: %prog [options] arg"
+    parser = OptionParser(usage)
+    parser.add_option("-t", "--test", action="store_true", dest="test", default=False, help="Run a test on the program")
+    parser.add_option("-d", "--demo", action="store_true", dest="demo", default="False", help="Demo the program")
+    parser.add_option("-q", "--question", dest="question", metavar="QUESTION", help="specify a question to convert to SQL. Example: -q=\"How long does it take to close a high priority ticket?\"")
+    parser.add_option("-f", "--file", dest="file", default="questions_plus.json", metavar="DATAFILE", help="specify a file (located in the data directory query_decomposition/nlidb/template_selectors/) that you would like to use as input to the program. Default is 'questions_plus.json'")
+    parser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False)
+    parser.add_option("--wordspace", action="store_true", dest="wordspace", default=False, help="Use the wordspace classifier instead of the Bayes classifier. Default=False")
 
-#q = "Who is my best employee?"
-FuzzyAdventure.test()
-#q = "How long does it take to close a high priority ticket?"
-#FuzzyAdventure.to_sql(q)
-#FuzzyAdventure.demo()
+    (option, args) = parser.parse_args()
+
+    project_path = os.environ['FUZZY_ADVENTURE']
+    data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
+    FuzzyAdventure.data_file = data_directory + option.file
+
+    if option.wordspace:
+        # Use word space classifier
+        FuzzyAdventure.model = word_space.WordSpace(FuzzyAdventure.data_file)
+    else:
+        # Use Bayes classifier
+        FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
+
+    FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
+
+    if option.test:
+        FuzzyAdventure.test(option.verbose)
+    if option.question:
+        FuzzyAdventure.to_sql(option.question)
+    if option.demo:
+        FuzzyAdventure.demo(option.verbose)
+
+    if not (option.question or option.demo or option.test):
+        print "You must enter an option for the program to perform. For more details run 'python executable.py --help'"
+
+if __name__=="__main__":
+    main()
+
