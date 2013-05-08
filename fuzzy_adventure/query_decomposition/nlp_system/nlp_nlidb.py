@@ -29,6 +29,9 @@ def nlp_nlidb(question):
 	uniqueWords.append(question_type)
 	'''STEP3: Adding some manually defined rules'''
 	allWords, conditions, target = answerGenerator(question, uniqueWords)
+
+	# To be handled differently, this is here only so the master branch can run.
+	allWords = filter(lambda x: x != None, allWords)
 	allWords = allWords + list(target)
 	allWords = set(allWords)
 	

@@ -6,7 +6,8 @@ from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb.py
 """
 At the time of this writing, this example would fail with the following error
 allWords, required_values, target, conditions, tables, question_type= nlp_nlidb.nlp_nlidb("What component has the maximum contribution to my backlog?")
-
+or 
+'Whos is the person you will assign most important task to?'
 
 ---------------------------------------------------------------------------
 AttributeError                            Traceback (most recent call last)
