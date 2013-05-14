@@ -74,8 +74,7 @@ def answerGenerator(question, allWords):
 		conditions.add('STATUS = closed')
 		what.add('transaction')
 
-	if 'most' in allWords or question:
-		# print question.split()
+	if 'most' in allWords or 'most' in question:
 		conditions.add('Maximum value')
 		what.add('transaction')
 
