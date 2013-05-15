@@ -1,0 +1,314 @@
+what components are contributing the most to my backlog? 
+What component are taking part the most to my backlog? 
+What component has the maximum contribution to my backlog? 
+What components delay my team's work the most? 
+What components take most time to get resolved?
+From all the opened tickets, what software causes the most delay? 
+What components use most of my resources? 
+What component makes up the largest part of my backlog? 
+What software is slowing us down? 
+What manual processes are slowing me down the most? 
+What system(s) are not working properly today? 
+How many times did excel crash today? 
+Did I have any support from my supervisor today? 
+What software components contribute the most to slowing down the team? 
+By which components the team is the most slow down? 
+Which software elements contribute the most in your team backlog? 
+Did I have any support from my supervisor today? 
+Which component has most problem 
+Which component I need to assign more people to 
+Which ticket component are most time consuming 
+Which component i need to monitor most to see how to improve it 
+What software components hinder my team most? 
+What components are the biggest obstacles to my team's productivity? 
+What software components hinder my team's productivity the most? 
+What are the main software components that slow my team down? 
+What software creates the tickets that slow us down the most? 
+Which components are slowing down my team? 
+What component is my team struggling with? 
+What software components are slowing down my backlog? 
+Which areas of code are generating the most problems? 
+Which features are causing the most work? 
+Which domain is most trouble? 
+Where is the development the most difficult? 
+Which modules are the most difficult to maintain? 
+Which modules give us the most trouble? 
+What modules do we spend a lot of time on?
+What are the significant items that are slowing the team down? 
+What are the key factors to my backlog? 
+What is slowing down my team? 
+List the components that slow my system the most 
+What software components are slowing down the team the most? 
+Name a few components that are contributing to slowing down the team? 
+What software components are contributing the most to the backlog of the team? 
+To what components is your backlog attributable (in general)? 
+which components contribute most to my backlog 
+which components are adding to my work load 
+what are the modules that contribute usually to my backlog 
+what modules make me work more
+What components have the greatest impact on my backlog? 
+What components are weighting the most in my backlog? 
+What items are the most significant in my backlog? 
+What items are the most demanding in my backlog? 
+ what components have the highest priority? 
+ what components are used most frequently? 
+ what components have the highest complexity? 
+ what components take the longest time to implement? 
+ On which component do I work the most 
+ Which component takes the most time 
+ Which component requires the most work 
+ On which component do I spend the most time 
+
+ 
+ 
+Who is the most productive person on my team? 
+
+Who is the most productive employee on my team? 
+Who is the most efficient employee on my team? 
+Which employee on my team has the highest productivity? 
+Who is the best1?
+
+Who can close the most tickets the fastest? 
+Who is the person that contribute the most to the success of my team? 
+Tell me the name of the most productive person on my team. 
+Who is the most efficient and effective at their job? 
+Who consistently proves they can provide quality work/support on a regular basis? 
+Who is always there to solve complex issues? 
+Which member on my team is closing the most number of open ticket? 
+Who is the most open tickets closer member on the team? 
+Considering the most number of open tickets closed, who is the most productive member of the team? 
+Who on the team, is the person that close the biggest amount of open tickets? 
+Who deliver most in my team 
+Who is the most efficient people in my team 
+Who always close most number of open tickets in a sprint 
+Who is the person you will assign most important task to? 
+Which person on my team closes the most tickets? 
+Which one of my team members is most productive? 
+Who, in my team, works fastest? 
+Which person on my team closes the most tickets? 
+What person closes the most tickets? 
+What programmer is the fastest at closing tickets? 
+Which team member closes the most tickets? 
+Who is the most productive on my team? 
+What is the name of the top contributor in the group? 
+What is the first in a list of team members ordered by effectiveness? 
+Whose tickets are dealt with most swiftly? 
+Who is number 1 in the item management system? 
+Who clears problems the quickest? 
+Rank my team on problem resolution time? 
+
+Show me the productivity information about my team
+Who is the number 1 contributor on the team? 
+Who on the team solves the most issues? 
+Who is the top closer on the team? 
+Name the most productive person on the team 
+Name the most productive person on your team. 
+Who is the most productive on your team? 
+In your team, who would you say is the most productive person. 
+Who in your team closes the most open tickets on average? 
+who is the best developer in my team 
+who closes more tickets in Jira 
+who is the most productive developer 
+who is the fastest developer 
+Who is the most productive team member? 
+Who is the most efficient person in my team? 
+Who has the best productivity in my team? 
+Who knows Jira best in my team? 
+ Who solve the most number of open tickets? 
+ Who has the deepest knowledge of the project? 
+ Who answer the most questions for the project? 
+ Who is assigned to the most number of open tickets? 
+ Who is the best developer 
+ Who is the fastest developer 
+ Which developer is the most productive 
+ Which developer is the fastest 
+
+
+
+How many messages a person closed? 
+How many messages a person solved
+How many messages a person got confirmed?
+How good is person to close the tickets? 
+How many tickets a person closed? 
+Show me the number of confirmed messages by person? 
+give me the count of closed messages by person? 
+How many messages were closed by Person? 
+How many messages did Person close?
+How many messages did a person close? 
+How many tickets were closed by a person?
+
+
+How many messages have been closed by a person? 
+Tell how many messages were closed by a person? 
+When the tickets arrive in the queue for our team to solve, what is the average MPT already? 
+when the tickets come to our team, what is the value of MPT? 
+
+
+How many messages a person touched?
+How many messages a person has worked on 
+How many messages a person was involved in
+How many messages a person worked on? 
+a person was involved in solving how many of the tickets?
+show me the messages that person got involved in? 
+Give me the count of involved messages by person?
+How many messages were touched by Person? 
+How many messages did Person touch? 
+How many messages did a person touch? 
+How many tickets were touched by a person? 
+What is the total of messages employee X touched? 
+What is the total of messages employee X touched but did not close? 
+How many messages have been touched by a person? 
+Tell how many messages were touched by a person 
+
+
+How long a message stays in the SAP side?
+How many days a message was in processing by SAP 
+How many days a message stayed in IMS queue? 
+How long in average does it take for a message to be closed by our team? 
+How long a message stays in SAP queue in average? 
+What is the % from MPT this message was @ SAP-side? 
+What is the % from MPT this message was @ SAP-side?
+How long does a message stay in the SAP side? 
+What duration does a message stay in the SAP side? 
+How long did message stay in SAP side? 
+How long was this message on the SAP side? 
+What is the average length of time a message is on SAP's side? 
+How long was message X on SAP's side? 
+-How many escalated messages a person worked on?
+How many escalated messages were processed by a person? 
+How many de-escalations a person was working on?
+show me the number of escalated messages handled by person? 
+show me the number of escalated messages handled by person?
+How many escalated message did Person work on? 
+Of the messages Person worked on, how many were escalated? 
+How many escalated messages did a person worked on? 
+How many messages flagged as escalated did a person worked on?
+How many escalated messages did a person worked on? 
+How many messages flagged as escalated did a person worked on? 
+How many escalations has employee X worked on in year Y? 
+How many escalations has employee X closed so far this year? 
+How many escalated message did a person work on? 
+Count the escalated messages a person has worked on. 
+
+
+What is the average MPT when the message arrives?
+What is the average MPT when messages get forwarded to our queue?
+What is the average MPT when messages leave PS queue?
+what is the IRT when message arrives? (Initial Response Time) 
+what is average MPT for messages in my topic?
+
+What is the average MPT of messages when our team takes over? 
+What is the average MPT of incoming tickets in our queue?
+what is the MPT for my Cost Center? 
+what is the MPT for my Cost Center? 
+What's the team MPT average? 
+What's the MPT average for my team? 
+
+What is the average MPT when messages get forwarded to our queue?
+What is the average MPT when messages leave PS queue? 
+When the message arrives, what is the average MPT? 
+What is the average MPT on message arrival? 
+When the message arrives, what is the average MPT? 
+What is the average MPT on message arrival? 
+When we get tickets in our queue, what is the average MPT of our team? 
+When a ticket gets queued, what is the average MPT of our team?
+When the message arrives, what is the average MPT? 
+What is the average MPT on message arrival? 
+What is the average MPT when a message arrives on component X? 
+What is the MPT value of messages arriving on component X? 
+
+What is the average MPT of messages arriving in our team's queue? 
+What is the average MPT of team messages upon arrival in our queue? 
+What is the average MPT of our team when we get the tickets in our queue? 
+What is the average MPT when a message arrives on component X? 
+What is the MPT value of messages arriving on component X? 
+Average MPT when the message arrives? 
+When the message arrives, what is the average MPT? 
+When we get the tickets in our queue, what is the average MPT? 
+Average MPT of the team when tickets arrive in the queue? 
+Average MPT when the message arrives? 
+When the message arrives, what is the average MPT?
+What is the average MPT when we get the tickets in IMS queue in year 2012? 
+What is the average MPT of team when we get CSS_component tickets in IMS queue 
+What is the mean MPT of a ticket that lands in my team? 
+Give me the average processing time of all the tickets that my team received. 
+
+
+How experienced is a person?
+How long has a person been with SAP? 
+What is the level of an employee? 
+How knowledgeable a person is in a topic?
+What level of expertise a person has in a topic?
+what is the hiring date of person? 
+what is the grade level of person? 
+How experienced is Employee? 
+How much experience does Employee have? 
+How long has a person been with SAP? 
+What is the level of an employee? 
+What year was employee X hired? 
+How many year has employee X been working in component X? 
+What is the experience of an employee? 
+How much experience does an employee have 
+What is the average MPT of our team when we get the tickets in our queue? 
+When we get the tickets in our queue, what is the average MPT of our team? 
+For the tickets in our queue, what is the average MPT of our team? 
+show me the average MPT for my CostCenter 
+what is my costcenter average MPT? 
+
+
+
+When a person started working on a component?
+When did person start working on a component 
+When was work on a component started by this person 
+Show me the date this message got assigned 
+What is the IRT counter for message? 
+How experienced is a person in this component? 
+How many years an employee has experience of working on this component? 
+How long a person has been working on a component 
+How many years/months a person has been working on a component 
+What date did employee X start working in component Y? 
+What is the earliest message resolved in component X by employee Y?
+When did someone started working on a topic? 
+When was someone first assigned to work on a component? 
+
+Give me the list of the open messages for a topic.
+Can I have a list of all open messages for a topic? 
+give me the list of messages that are open for a topic. 
+What are my topic open messages? 
+Show me the open messages in my topic. 
+What is remaining to solve in a topic? 
+list the open messages for a topic. 
+Give me the list of the messages for a topic in IMS queue 
+Give me the list of the open customer and internal messages for a topic 
+What messages haven't been closed yet? 
+What messages are still pending? 
+I want the full list of open tickets for a topic. 
+What is the list of open messages for a component? 
+
+Give me the list of the messages without processor?
+Give me the list of the messages that have no processor 
+Can you list all the messages without a processor? 
+Show me all unassigned messages in my topic 
+Show me messages with no processor
+which messages don't have a programmer assigned to them. 
+list the messages that need to be assigned to someone. 
+Give me the list of unassigned messages 
+Give me the list of unattended messages for a component 
+What messages are currently without processor in component X? 
+What messages haven't been handled yet? 
+Return the list of tickets that are not assigned. 
+What are the messages without processor? 
+
+Give me all the messages with the specific flags?
+Give me the list of messages that have specific flags. 
+Can I have the list of messages with these flags? 
+Show me all flagged messages 
+Show me escalated messages 
+Which messages have this flag. 
+list the messages with this flag. 
+Give me all the escalated messages 
+Give me all the messages from Max Attention customers 
+What messages are escalated? 
+What messages are currently from MaxAttention customers? 
+Considering a specific flag, what is the list of messages? 
+What is the list of messages with a flag activated? 
