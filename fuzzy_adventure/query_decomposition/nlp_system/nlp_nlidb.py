@@ -42,27 +42,33 @@ def nlp_nlidb(question):
 	# required_values = set(semanticNet.required_values(tables, allWords))
 	'''required_values is not being used in our system anymore'''
 	required_values =''
-	# print allWords, required_values, target, conditions, tables, question_type, question
+
+	return allWords, required_values, target, conditions, tables, question_type, question
 	# '''To integrate with SQL Converter use: '''
 	# merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
 	# return merged
-	'''To use the nlp_nlidb module use:'''
+	# '''To use the nlp_nlidb module use:'''
 
-	return allWords, required_values, target, conditions, tables, question_type 
+	# return allWords, required_values, target, conditions, tables, question_type 
 
+
+def keyWords_allQuestions(question):
+
+	allWords, required_values, target, conditions, tables, question_type, question = nlp_nlidb(question)
+	return [merge(allWords, required_values, target, conditions, tables, question_type, question)]
 
 def merge(allWords, required_values, target, conditions, tables, question_type, question):
-	allWords = ' '.join(allWords)
-	required_values = ' '.join(required_values)
-	target = ' '.join(target)
-	conditions = ' '.join(conditions)
-	tables = ' '.join(tables)
+	allWords = ','.join(allWords)
+	required_values = ','.join(required_values)
+	target = ','.join(target)
+	conditions = ','.join(conditions)
+	tables = ','.join(tables)
 	values = [allWords, target, conditions, question_type]
 
 	formatted = []
 	for v in values:
-		if v != None: formatted.append(v)
-	merged = ' '.join(formatted)
+		if v != None and len(v)!=0 : formatted.append(v)
+	merged = ','.join(formatted)
 	return merged
 
 def rewrite():
