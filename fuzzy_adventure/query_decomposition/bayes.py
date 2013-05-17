@@ -1,5 +1,6 @@
 import nlp
 from sklearn.naive_bayes import GaussianNB
+from sklearn import svm
 from fuzzy_adventure.test import load_data
 
 class Bayes():
@@ -35,7 +36,8 @@ class Bayes():
         for t in texts:
             vector = self.text_vector(t, False)
             data.append(vector)
-        model = GaussianNB()
+        model = svm.SVC()
+        # model = GaussianNB()
         model.fit(data, targets)
         return model
     

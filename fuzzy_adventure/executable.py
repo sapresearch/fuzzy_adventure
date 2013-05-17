@@ -61,7 +61,7 @@ class FuzzyAdventure():
         supplemented = ' '.join(allWords)
         # supplemented = nlp_nlidb.nlp_nlidb(nl_query)
         print supplemented 
-        sql, lat_type = tc.template(supplemented)
+        sql, lat_type = FuzzyAdventure.tc.template(supplemented)
         keywords = nlp.tokens(nl_query)
         keywords = nlp.remove_stopwords(keywords)
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)

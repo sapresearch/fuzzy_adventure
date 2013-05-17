@@ -1,5 +1,5 @@
 from nose.tools import *
-from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb.py
+from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
 
 
 
