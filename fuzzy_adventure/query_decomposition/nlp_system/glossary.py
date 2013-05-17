@@ -207,11 +207,13 @@ def checkGlossary(question):
 
 	# for k in question.split() :
 	for k in words:
+		k = k.rstrip()
+		k = k.lstrip()
 		if k.strip() in glossary_one_word:
+
 			glossaryMatches.append(glossary_one_word[k])
 			remove_list.append(k)
 
-	print 'glossaryMatches = ', glossaryMatches
 	# print remove_list
 	return glossaryMatches, remove_list
 
@@ -221,6 +223,8 @@ def generalizedKeywords(question, keyWords):
 	glossaryMatches2, remove_list2 = checkGlossary(keyWords)
 
 	glossaryMatches = glossaryMatches1+glossaryMatches2
+	if len(glossaryMatches) != 0:
+		print 'glossaryMatches = ', glossaryMatches
 	remove_list = remove_list1 + remove_list2
 	# print glossaryMatches
 	keyWords = [x for x in keyWords if x not in remove_list]

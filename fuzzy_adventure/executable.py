@@ -57,7 +57,7 @@ class FuzzyAdventure():
 
     @classmethod
     def to_sql(self, nl_query):
-        allWords, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(nl_query)
+        allWords, _, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(nl_query)
         supplemented = ' '.join(allWords)
         # supplemented = nlp_nlidb.nlp_nlidb(nl_query)
         print supplemented 
