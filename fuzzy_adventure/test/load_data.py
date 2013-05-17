@@ -1,5 +1,6 @@
 import re
 import json
+# from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
 
 
 """ This is here because if it's in the question_test.py file, then there's a loop when
@@ -23,16 +24,17 @@ def load_data(file_name):
 def load_questions(file_name):
     f = open(file_name, 'r')
     json_object = json.load(f)
+
     f.close()
     types = []
     questions = []
 
     for line in json_object:
         question = str(line['question'])
-        # allWords, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(question)
-        # print allWords
-        # question = ' '.join(allWords).lower()
-        # if question == '':
+        # allWords, _, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(question)
+        # streamlined_q = ' '.join(allWords).lower()
+        # if streamlined_q == '':
+        #     print "Not processed:", question
         #     continue
         questions.append(question)
         types.append(str(line['type']))
