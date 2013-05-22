@@ -5,6 +5,7 @@ from fuzzy_adventure.external import en
 from fuzzy_adventure.query_decomposition import wordnet_synonym
 import string
 import operator
+from fuzzy_adventure.debug import debug
 
 
 def questionType(tree):
@@ -143,7 +144,7 @@ def _formatKeyWords(keyWords):
 
     # Check that at least 1 keyword was found.
     all_keywords = [item for sublist in keyWords.values() for item in sublist]
-    if len(all_keywords) < 1: print "No keywords found! \r\n"
+    if len(all_keywords) < 1: debug.debug_statement("No keywords found!")
 
     else:   
         for n in keyWords['Nouns']:
