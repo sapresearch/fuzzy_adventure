@@ -11,6 +11,9 @@ from fuzzy_adventure.query_decomposition import bayes, word_space, nlp
 from fuzzy_adventure.query_decomposition.nlidb.template_selectors import template_type
 from fuzzy_adventure.query_decomposition.nlidb.term_selectors import term_selector
 from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
+from fuzzy_adventure.query_decomposition.classifier import TemplateClassifier
+from sklearn import svm
+from debug import debug
 
 """ Main executable file for the whole system. """
 
@@ -72,13 +75,18 @@ def main():
     usage = "usage: %prog [options] arg"
     parser = OptionParser(usage)
     parser.add_option("-t", "--test", action="store_true", dest="test", default=False, help="Run a test on the program")
-    parser.add_option("-d", "--demo", action="store_true", dest="demo", default="False", help="Demo the program")
+    parser.add_option("-d", "--demo", action="store_true", dest="demo", default=False, help="Demo the program")
+    parser.add_option("--debug", action="store_true", dest="debug", default=False, help="Debug switch to print debug statements")
     parser.add_option("-q", "--question", dest="question", metavar="QUESTION", help="specify a question to convert to SQL. Example: -q=\"How long does it take to close a high priority ticket?\"")
     parser.add_option("-f", "--file", dest="file", default="questions_plus.json", metavar="DATAFILE", help="specify a file (located in the data directory query_decomposition/nlidb/template_selectors/) that you would like to use as input to the program. Default is 'questions_plus.json'")
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False)
     parser.add_option("--wordspace", action="store_true", dest="wordspace", default=False, help="Use the wordspace classifier instead of the Bayes classifier. Default=False")
 
     (option, args) = parser.parse_args()
+
+    if option.debug:
+        debug.debug_on()
+
 
     project_path = os.environ['FUZZY_ADVENTURE']
     data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
@@ -89,19 +97,27 @@ def main():
         FuzzyAdventure.model = word_space.WordSpace(FuzzyAdventure.data_file)
     else:
         # Use Bayes classifier
-        FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
+        # FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
+        FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC())
 
     FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
 
+
+
     if option.test:
-        FuzzyAdventure.test(option.verbose)
-    if option.question:
+        FuzzyAdventure.model.fit()
+        print 'Score:',FuzzyAdventure.model.score()
+        # FuzzyAdventure.test(option.verbose)
+    elif option.question:
         FuzzyAdventure.to_sql(option.question)
-    if option.demo:
+    elif option.demo:
         FuzzyAdventure.demo(option.verbose)
 
     if not (option.question or option.demo or option.test):
         print "You must enter an option for the program to perform. For more details run 'python executable.py --help'"
+
+    if option.debug:
+        debug.debug_off()
 
 if __name__=="__main__":
     main()
