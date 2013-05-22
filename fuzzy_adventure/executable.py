@@ -5,7 +5,7 @@ import MySQLdb
 import time
 import re
 
-from optparse import OptionParser
+from optparse import OptionParser, OptionGroup
 from fuzzy_adventure.test import load_data
 from fuzzy_adventure.query_decomposition import bayes, word_space, nlp
 from fuzzy_adventure.query_decomposition.nlidb.template_selectors import template_type
@@ -74,10 +74,19 @@ def main():
 
     usage = "usage: %prog [options] arg"
     parser = OptionParser(usage)
-    parser.add_option("-t", "--test", action="store_true", dest="test", default=False, help="Run a test on the program")
-    parser.add_option("-d", "--demo", action="store_true", dest="demo", default=False, help="Demo the program")
-    parser.add_option("--debug", action="store_true", dest="debug", default=False, help="Debug switch to print debug statements")
-    parser.add_option("-q", "--question", dest="question", metavar="QUESTION", help="specify a question to convert to SQL. Example: -q=\"How long does it take to close a high priority ticket?\"")
+
+    usage_group = OptionGroup(parser, "Behaviour Options - Use only one")
+    usage_group.add_option("-t", "--test", action="store_true", dest="test", default=False, help="Run a test on the program")
+    usage_group.add_option("-d", "--demo", action="store_true", dest="demo", default=False, help="Demo the program")
+    usage_group.add_option("-q", "--question", dest="question", metavar="QUESTION", help="specify a question to convert to SQL. Example: -q=\"How long does it take to close a high priority ticket?\"")
+    parser.add_option_group(usage_group)
+
+
+    debug_group = OptionGroup(parser, "Debug Options")
+    debug_group.add_option("--debug", action="store_true", dest="debug", default=False, help="Debug switch to print debug statements")
+    parser.add_option_group(debug_group)
+
+
     parser.add_option("-f", "--file", dest="file", default="questions_plus.json", metavar="DATAFILE", help="specify a file (located in the data directory query_decomposition/nlidb/template_selectors/) that you would like to use as input to the program. Default is 'questions_plus.json'")
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False)
     parser.add_option("--wordspace", action="store_true", dest="wordspace", default=False, help="Use the wordspace classifier instead of the Bayes classifier. Default=False")
@@ -108,13 +117,13 @@ def main():
         FuzzyAdventure.model.fit()
         print 'Score:',FuzzyAdventure.model.score()
         # FuzzyAdventure.test(option.verbose)
-    elif option.question:
+    if option.question:
         FuzzyAdventure.to_sql(option.question)
-    elif option.demo:
+    if option.demo:
         FuzzyAdventure.demo(option.verbose)
 
     if not (option.question or option.demo or option.test):
-        print "You must enter an option for the program to perform. For more details run 'python executable.py --help'"
+        print "You must enter a Behaviour Option for the program to perform. For more details run 'python executable.py --help'"
 
     if option.debug:
         debug.debug_off()
