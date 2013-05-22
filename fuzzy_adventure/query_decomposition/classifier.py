@@ -1,4 +1,3 @@
-import nlp
 from sklearn.naive_bayes import GaussianNB
 from sklearn import svm
 from fuzzy_adventure.test import load_data
@@ -45,10 +44,12 @@ class NLP_Transform(object):
 
     def transform(self, raw_documents):
         documents = []
+
         for raw_doc in raw_documents:
             allWords, _, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(raw_doc)
             if len(allWords) == 0:
                 documents.append(raw_doc)
             else:
                 documents.append(' '.join(allWords))
+
         return documents
