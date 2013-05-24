@@ -1,7 +1,7 @@
 #/usr/bin/python
 import os
 import sys
-import MySQLdb
+#import MySQLdb
 import time
 import re
 
@@ -21,26 +21,22 @@ class FuzzyAdventure():
 
     @classmethod
     def demo(self, verbose=False):
-        while True:
-            print "Ask a question:"
-            query = raw_input()
-    
-            verbose = re.match(".*-v", query) != None
-            query = re.sub("-v", '', query)
-    
+        print "Ask a question or type exit() to exit:"
+        query = raw_input()
+        while not re.match("exit()", query): 
+
             start = time.time()
             answer, lat_type = self.to_sql(query)
-            #sql = sql[0]
-            #answer = execute(sql)
             duration = time.time() - start
-    
+
             if verbose:
                 print "Time: " + str(round(duration, 3))
-                #print "SQL: " + str(sql)
                 print "LAT Type: " + str(lat_type)
             print "Answer: " + str(answer) + "\n"
-        return None
-    
+            print "------------------------------"
+            print "Ask a question or type exit() to exit:"
+            query = raw_input()
+
     @classmethod
     def test(self, verbose=False):
         text, targets = load_data.load_questions(self.data_file)
@@ -54,9 +50,9 @@ class FuzzyAdventure():
             print "Predicted/target: ", key, target
             if key == target:
                 correct += 1.
-        print "Accuracy: " + str(correct/len(text))        
+        print "Accuracy: " + str(correct/len(text))
         print "Total tested: " + str(len(text))
-    
+
 
     @classmethod
     def to_sql(self, nl_query):
@@ -95,7 +91,6 @@ def main():
 
     if option.debug:
         debug.debug_on()
-
 
     project_path = os.environ['FUZZY_ADVENTURE']
     data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
