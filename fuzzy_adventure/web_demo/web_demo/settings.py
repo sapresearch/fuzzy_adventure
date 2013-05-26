@@ -4,7 +4,10 @@ import os
 import sys
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__name__), "..")
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "views"))
+FUZZY_ROOT = os.path.join(PROJECT_ROOT, "..")
+sys.path.insert(0, os.path.abspath(FUZZY_ROOT))
+sys.path.insert(0, os.path.abspath(os.path.join(FUZZY_ROOT, "fuzzy_adventure")))
+sys.path.insert(0, os.path.abspath(os.path.join(PROJECT_ROOT, "views")))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -81,9 +84,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     #'django.contrib.staticfiles',
 )
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '(ri30qp61x5loi+(txho&amp;j625smoh!rt*zs-b^(mk2-e%0yi9e'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
