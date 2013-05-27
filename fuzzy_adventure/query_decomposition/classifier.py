@@ -27,7 +27,10 @@ class TemplateClassifier(object):
 
     
     def predict(self, text):
-        return self.classifier.predict(text)
+        if type(text) != type([]):
+            text = [text]
+        prediction = self.classifier.predict([text])
+        return prediction
 
 
     def score(self):
