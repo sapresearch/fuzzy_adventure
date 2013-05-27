@@ -1,4 +1,4 @@
-fuzzy_adventure
+fuzzy_adventure:
 ===============
 
 A question-answering system.
