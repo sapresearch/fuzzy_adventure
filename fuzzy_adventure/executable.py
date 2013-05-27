@@ -107,18 +107,18 @@ def main():
     else:
         # Use Bayes classifier
         # FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
-        FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC())
+        FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC(), test_size=0.2)
+        FuzzyAdventure.model.fit()
 
     FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
 
 
 
     if option.test:
-        FuzzyAdventure.model.fit()
-        print 'Score:',FuzzyAdventure.model.score()
+        print 'Score:', FuzzyAdventure.model.score()
         # FuzzyAdventure.test(option.verbose)
     if option.question:
-        FuzzyAdventure.to_sql(option.question)
+        print FuzzyAdventure.model.predict(option.question)
     if option.demo:
         FuzzyAdventure.demo(option.verbose)
 
