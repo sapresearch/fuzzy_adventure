@@ -35,5 +35,3 @@ class TemplateClassifier():
         klass = self.model.predict(query)
         sql = self.templates[klass]
         return sql, klass
-
-# dummy comment to test PR
