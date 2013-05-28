@@ -9,15 +9,14 @@ def welcome(request):
     except:
         question = ""
 
-    ''' Uncomment out this block when things work
+    #Uncomment out this block when things work
+    if question != "":
+        from executable import FuzzyAdventure
+        answers = [FuzzyAdventure.web_demo(question.encode('ascii', 'ignore'))]
+    else:
+        answers = []
 
-        if question:
-            from executable import FuzzyAdventure
-            answers = [FuzzyAdventure.web_demo(question.encode('ascii', 'ignore'))]
-        else:
-            answers = []
+    
 
-    '''
-
-    answers = ["a", "b", "c"]
+    # answers = ["a", "b", "c"]
     return render_to_response("home.html", {'question': question, 'answer_ary': answers}, context_instance=RequestContext(request))

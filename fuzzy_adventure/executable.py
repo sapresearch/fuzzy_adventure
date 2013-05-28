@@ -73,9 +73,9 @@ class FuzzyAdventure():
         FuzzyAdventure.data_file = data_directory + data_file
 
         if usebayes:
-            FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
-            #FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC(), test_size=0.2)
-            #FuzzyAdventure.model.fit() 
+            # FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
+            FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC(), test_size=0.2)
+            FuzzyAdventure.model.fit() 
         else:
             FuzzyAdventure.model = word_space.WordSpace(FuzzyAdventure.data_file)
 
