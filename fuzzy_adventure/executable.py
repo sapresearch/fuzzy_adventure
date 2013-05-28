@@ -1,7 +1,7 @@
 #/usr/bin/python
 import os
 import sys
-import MySQLdb
+#import MySQLdb
 import time
 import re
 
@@ -21,26 +21,22 @@ class FuzzyAdventure():
 
     @classmethod
     def demo(self, verbose=False):
-        while True:
-            print "Ask a question:"
-            query = raw_input()
-    
-            verbose = re.match(".*-v", query) != None
-            query = re.sub("-v", '', query)
-    
+        print "Ask a question or type exit() to exit:"
+        query = raw_input()
+        while not re.match("exit()", query): 
+
             start = time.time()
             answer, lat_type = self.to_sql(query)
-            #sql = sql[0]
-            #answer = execute(sql)
             duration = time.time() - start
-    
+
             if verbose:
                 print "Time: " + str(round(duration, 3))
-                #print "SQL: " + str(sql)
                 print "LAT Type: " + str(lat_type)
             print "Answer: " + str(answer) + "\n"
-        return None
-    
+            print "------------------------------"
+            print "Ask a question or type exit() to exit:"
+            query = raw_input()
+
     @classmethod
     def test(self, verbose=False):
         text, targets = load_data.load_questions(self.data_file)
@@ -54,9 +50,9 @@ class FuzzyAdventure():
             print "Predicted/target: ", key, target
             if key == target:
                 correct += 1.
-        print "Accuracy: " + str(correct/len(text))        
+        print "Accuracy: " + str(correct/len(text))
         print "Total tested: " + str(len(text))
-    
+
 
     @classmethod
     def to_sql(self, nl_query):
@@ -69,6 +65,25 @@ class FuzzyAdventure():
         keywords = nlp.remove_stopwords(keywords)
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
         return answer, lat_type
+
+    @classmethod
+    def web_demo(self, nl_query, data_file="questions_plus.json", usebayes=True):
+        project_path = os.environ['FUZZY_ADVENTURE']
+        data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
+        FuzzyAdventure.data_file = data_directory + data_file
+
+        if usebayes:
+            # FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
+            FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC(), test_size=0.2)
+            FuzzyAdventure.model.fit() 
+        else:
+            FuzzyAdventure.model = word_space.WordSpace(FuzzyAdventure.data_file)
+
+        FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
+
+        answer, lat_type = self.to_sql(nl_query)
+
+        return answer
 
 def main():
 
@@ -95,7 +110,6 @@ def main():
 
     if option.debug:
         debug.debug_on()
-
 
     project_path = os.environ['FUZZY_ADVENTURE']
     data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
