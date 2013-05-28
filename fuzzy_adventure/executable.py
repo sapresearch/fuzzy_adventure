@@ -66,6 +66,25 @@ class FuzzyAdventure():
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
         return answer, lat_type
 
+    @classmethod
+    def web_demo(self, nl_query, data_file="questions_plus.json", usebayes=True):
+        project_path = os.environ['FUZZY_ADVENTURE']
+        data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
+        FuzzyAdventure.data_file = data_directory + data_file
+
+        if usebayes:
+            FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
+            #FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC(), test_size=0.2)
+            #FuzzyAdventure.model.fit() 
+        else:
+            FuzzyAdventure.model = word_space.WordSpace(FuzzyAdventure.data_file)
+
+        FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
+
+        answer, lat_type = self.to_sql(nl_query)
+
+        return answer
+
 def main():
 
     usage = "usage: %prog [options] arg"

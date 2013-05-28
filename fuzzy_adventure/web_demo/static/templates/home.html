@@ -42,8 +42,6 @@
         padding: 14px 24px;
       }
 
-
-
       /* Customize the navbar links to be fill the entire space of the .navbar */
       .navbar .navbar-inner {
         padding: 0;
@@ -71,12 +69,25 @@
       .navbar .nav li:last-child a {
         border-right: 0;
         border-radius: 0 3px 3px 0;
-      }  
+      } 
+      
+      /* Customize question and answer tables */
       .question_header {
        text-align: center;
        margin-bottom: 40px; 
       }
 
+      .answertable_header {
+        text-align: center;
+        font-size: 60px;
+        margin-bottom: 30px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+      }
+
+       .answertable_entries { 
+
+        }
     </style>
     <link href="{{ STATIC_URL }}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -112,23 +123,34 @@
       <!-- Jumbotron -->
       <div id="questionbox" class="jumbotron"> 
         <h1 class="muted question_header">Submit a Question</h1>
-        <input type="text" id="questionfield" class="span4 input-large" placeholder={{question|default:"Question"}}>
+        <input type="text" id="questionfield" class="span4 input-large" placeholder="{{question|default:"Question"}}">
         <a class="btn btn-large btn-success" href='#' onClick="window.location = '/QA_demo/?question='+encodeURIComponent(document.getElementById('questionfield').value)">Submit</a>
       </div>
-      <hr>
-    
+ 
 
-      <div class="footer">
-        <p>SAP Research 2013</p>
-      </div>
+     {% if answer_ary|length > 0 %}
+     <table id = "answertable" class ="table table-hover table-bordered">
+        <thead><p class="answertable_header">Answers:</p></thead>
+            <tbody>
+        {% for answer in answer_ary %}
+               <tr class="info">
+                    <td><p class="answertable_entries">{{answer}}</p></td>
+               </tr>
+        {% endfor %}
+          </tbody>
+     </table>
+     {% endif %}
 
+        
+    <hr>
     </div> <!-- /container -->
-
-
 
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap.js"></script> -->
 
   </body>
+    <div class="footer">
+        <p class="text-center">SAP Research 2013</p>
+    </div>
 </html>
 
