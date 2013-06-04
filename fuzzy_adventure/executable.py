@@ -13,6 +13,7 @@ from fuzzy_adventure.query_decomposition.nlidb.term_selectors import term_select
 from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
 from fuzzy_adventure.query_decomposition.classifier import TemplateClassifier
 from sklearn import svm
+from sklearn import linear_model
 from debug import debug
 
 """ Main executable file for the whole system. """
@@ -26,64 +27,57 @@ class FuzzyAdventure():
         while not re.match("exit()", query): 
 
             start = time.time()
-            answer, lat_type = self.to_sql(query)
+            answer, category = self.to_sql(query)
             duration = time.time() - start
 
             if verbose:
                 print "Time: " + str(round(duration, 3))
-                print "LAT Type: " + str(lat_type)
+                print "LAT Type: " + str(category)
             print "Answer: " + str(answer) + "\n"
             print "------------------------------"
             print "Ask a question or type exit() to exit:"
             query = raw_input()
 
-    @classmethod
-    def test(self, verbose=False):
-        text, targets = load_data.load_questions(self.data_file)
-        text, targets = text[1::2], targets[1::2]
-        correct = 0.
-        for i,t in enumerate(text):
-            target = targets[i]
-            answer, key = self.to_sql(t)
-            print "Question: ", t
-            # print "Answer:", answer
-            print "Predicted/target: ", key, target
-            if key == target:
-                correct += 1.
-        print "Accuracy: " + str(correct/len(text))
-        print "Total tested: " + str(len(text))
-
 
     @classmethod
     def to_sql(self, nl_query):
-        allWords, _, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(nl_query)
-        supplemented = ' '.join(allWords)
-        # supplemented = nlp_nlidb.nlp_nlidb(nl_query)
-        print supplemented 
-        sql, lat_type = FuzzyAdventure.tc.template(supplemented)
+        sql, category = FuzzyAdventure.tc.template(nl_query)
         keywords = nlp.tokens(nl_query)
         keywords = nlp.remove_stopwords(keywords)
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
-        return answer, lat_type
+
+        return answer
 
     @classmethod
-    def web_demo(self, nl_query, data_file="questions_plus.json", usebayes=True):
+    def web_demo(self, nl_query, data_file="questions_plus.json"):
         project_path = os.environ['FUZZY_ADVENTURE']
         data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
         FuzzyAdventure.data_file = data_directory + data_file
 
-        if usebayes:
-            # FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
-            FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC(), test_size=0.2)
-            FuzzyAdventure.model.fit() 
-        else:
-            FuzzyAdventure.model = word_space.WordSpace(FuzzyAdventure.data_file)
+        FuzzyAdventure.set_classifier(FuzzyAdventure.data_file)
 
-        FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
-
-        answer, lat_type = self.to_sql(nl_query)
+        answer = self.to_sql(nl_query)
 
         return answer
+
+    @classmethod
+    def set_classifier(self, data_file, model = linear_model.LogisticRegression()):
+
+        # If the data file is different than before, delete the classifier to recreate it
+        if hasattr(FuzzyAdventure, "data_file"):
+            if FuzzyAdventure.data_file != data_file:
+                delattr(FuzzyAdventure, "model")
+        else:
+            FuzzyAdventure.data_file = data_file
+
+        # Only create a classifier if none were existant or if a new model is passed
+        if not hasattr(FuzzyAdventure, "model") or not isinstance(FuzzyAdventure.model.model, model.__class__):
+            debug.debug_statement('New classifier created with model %s' % model.__class__.__name__)
+            FuzzyAdventure.model = TemplateClassifier(data_file, model, test_size=0.2)
+            FuzzyAdventure.model.fit()
+            FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
+        else:
+            debug.debug_statement('No new classifier created')
 
 def main():
 
@@ -96,15 +90,13 @@ def main():
     usage_group.add_option("-q", "--question", dest="question", metavar="QUESTION", help="specify a question to convert to SQL. Example: -q=\"How long does it take to close a high priority ticket?\"")
     parser.add_option_group(usage_group)
 
-
     debug_group = OptionGroup(parser, "Debug Options")
     debug_group.add_option("--debug", action="store_true", dest="debug", default=False, help="Debug switch to print debug statements")
     parser.add_option_group(debug_group)
 
-
     parser.add_option("-f", "--file", dest="file", default="questions_plus.json", metavar="DATAFILE", help="specify a file (located in the data directory query_decomposition/nlidb/template_selectors/) that you would like to use as input to the program. Default is 'questions_plus.json'")
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False)
-    parser.add_option("--wordspace", action="store_true", dest="wordspace", default=False, help="Use the wordspace classifier instead of the Bayes classifier. Default=False")
+
 
     (option, args) = parser.parse_args()
 
@@ -115,22 +107,11 @@ def main():
     data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
     FuzzyAdventure.data_file = data_directory + option.file
 
-    if option.wordspace:
-        # Use word space classifier
-        FuzzyAdventure.model = word_space.WordSpace(FuzzyAdventure.data_file)
-    else:
-        # Use Bayes classifier
-        # FuzzyAdventure.model = bayes.Bayes(FuzzyAdventure.data_file)
-        FuzzyAdventure.model = TemplateClassifier(FuzzyAdventure.data_file, svm.SVC(), test_size=0.2)
-        FuzzyAdventure.model.fit()
-
-    FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
-
+    FuzzyAdventure.set_classifier(FuzzyAdventure.data_file)
 
 
     if option.test:
         print 'Score:', FuzzyAdventure.model.score()
-        # FuzzyAdventure.test(option.verbose)
     if option.question:
         print FuzzyAdventure.model.predict(option.question)
     if option.demo:

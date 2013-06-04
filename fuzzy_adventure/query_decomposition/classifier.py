@@ -4,6 +4,7 @@ from fuzzy_adventure.test import load_data
 from sklearn import cross_validation
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
+from numpy import random
 
 
 class TemplateClassifier(object):
@@ -20,7 +21,7 @@ class TemplateClassifier(object):
         self.train, self.test, self.t_train, self.t_test = cross_validation.train_test_split(self.data, 
                                                         self.target, 
                                                         test_size=self.test_size, 
-                                                        random_state=0)
+                                                        random_state=random.RandomState())
 
         self.classifier = Pipeline([('nlp', NLP_Transform()), ('vect', CountVectorizer(ngram_range=(1,1))), ('clf', self.model)])  
         self.classifier.fit(self.train, self.t_train)
@@ -49,7 +50,16 @@ class NLP_Transform(object):
         documents = []
 
         for raw_doc in raw_documents:
-            allWords, _, _, _, _, _, _ = nlp_nlidb.nlp_nlidb(raw_doc)
+            everything = []
+            allWords, required_values, target, conditions, tables, question_type, question = nlp_nlidb.nlp_nlidb(raw_doc)
+            # everything.extend(allWords)
+            # everything.extend(required_values)
+            # everything.extend(target)
+            # everything.extend(conditions)
+            # everything.extend(tables)
+            # everything.extend(question_type)
+            # everything.extend(question)
+            
             if len(allWords) == 0:
                 documents.append(raw_doc)
             else:
