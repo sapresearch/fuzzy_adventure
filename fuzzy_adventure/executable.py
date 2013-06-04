@@ -54,15 +54,14 @@ class FuzzyAdventure():
         data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
         FuzzyAdventure.data_file = data_directory + data_file
 
-        model = linear_model.LogisticRegression()
-        FuzzyAdventure.set_classifier(model, FuzzyAdventure.data_file)
+        FuzzyAdventure.set_classifier(FuzzyAdventure.data_file)
 
         answer = self.to_sql(nl_query)
 
         return answer
 
     @classmethod
-    def set_classifier(self, model, data_file):
+    def set_classifier(self, data_file, model = linear_model.LogisticRegression()):
 
         # If the data file is different than before, delete the classifier to recreate it
         if hasattr(FuzzyAdventure, "data_file"):
@@ -108,8 +107,7 @@ def main():
     data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
     FuzzyAdventure.data_file = data_directory + option.file
 
-    model = linear_model.LogisticRegression()
-    FuzzyAdventure.set_classifier(model, FuzzyAdventure.data_file)
+    FuzzyAdventure.set_classifier(FuzzyAdventure.data_file)
 
 
     if option.test:
