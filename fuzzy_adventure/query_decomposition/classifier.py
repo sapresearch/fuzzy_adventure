@@ -13,7 +13,6 @@ class TemplateClassifier(object):
         self.file_path = file_path
         self.model = model
         self.data, self.target = load_data.load_questions(self.file_path)
-        self.target = map(lambda x: ord(x) - ord('A'), self.target)
         self.test_size = test_size
         self.train, self.test, self.t_train, self.t_test = None, None, None, None
     
@@ -28,15 +27,12 @@ class TemplateClassifier(object):
 
     
     def predict(self, text):
-        if type(text) != type([]):
-            text = [text]
         prediction = self.classifier.predict(text)
-        return chr(prediction[0] + ord('A'))
+        return prediction
 
 
     def score(self):
         return self.classifier.score(self.test, self.t_test)
-
 
 
 from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
