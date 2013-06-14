@@ -1,7 +1,7 @@
 #/usr/bin/python
 import os
 import sys
-#import MySQLdb
+
 import time
 import re
 
@@ -15,6 +15,7 @@ from fuzzy_adventure.query_decomposition.classifier import TemplateClassifier
 from sklearn import svm
 from sklearn import linear_model
 from debug import debug
+
 
 """ Main executable file for the whole system. """
 
@@ -112,6 +113,21 @@ def main():
 
     if option.test:
         print 'Score:', FuzzyAdventure.model.score()
+        if option.debug:
+            debug.debug_statement("Target/Classification results")
+            m = FuzzyAdventure.model
+            data = m.train
+            target = m.t_train
+            predictions = m.predict(data)
+            for i, prediction in enumerate(predictions):
+                debug.debug_statement("%s / %s | %s" %(target[i], prediction, data[i]))
+
+            data = m.test
+            target = m.t_test
+            predictions = m.predict(data)
+            for i, prediction in enumerate(predictions):
+                debug.debug_statement("%s / %s | %s" %(target[i], prediction, data[i]))
+
     if option.question:
         print FuzzyAdventure.model.predict(option.question)
     if option.demo:
