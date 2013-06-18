@@ -37,7 +37,9 @@ def createGlossary():
 			# print '2',value
 			# elif en.is_verb(value):
 				# value = en.verb.infinitive(value)
-			value = PStemmer().stem(value)
+			
+			# value = PStemmer().stem(value)
+			
 			# print '2', value
 		 	# print 'value:' , value
 			start = line.find('[')
@@ -58,7 +60,9 @@ def createGlossary():
 						# 	label = WN_Lemmatizer().lemmatize(label)
 						# elif en.is_verb(label):
 						# 	# label = en.verb.infinitive(label)
-						label = PStemmer().stem(label)
+						
+						# label = PStemmer().stem(label)
+						
 						glossary_one_word[label.strip()] = value.lower()
 					elif wordCount == 2:
 						l=''
@@ -70,7 +74,9 @@ def createGlossary():
 							# 	w = WN_Lemmatizer().lemmatize(w)
 							# elif en.is_verb(w):
 							# 	# w = en.verb.infinitive(w)
-							w = PStemmer().stem(w)
+							
+							# w = PStemmer().stem(w)
+							
 							l= l + ' ' + w
 							# print 'changed:', w
 						glossary_two_words[l.strip()] = value.lower()
@@ -85,7 +91,9 @@ def createGlossary():
 							# 	w = WN_Lemmatizer().lemmatize(w)
 							# elif en.is_verb(w):
 							# 	# w = en.verb.infinitive(w)
-							w = PStemmer().stem(w)
+							
+							# w = PStemmer().stem(w)
+							
 							l= l + ' ' + w
 							# print 'changed:', w
 						glossary_three_words[l.strip()] = value.lower()
@@ -97,7 +105,9 @@ def createGlossary():
 							# 	w1 = WN_Lemmatizer().lemmatize(w1)
 							# 	# w1 = en.noun.singular(w1)
 							# elif en.is_verb(w1):
-							w1 = PStemmer().stem(w1)
+							
+							# w1 = PStemmer().stem(w1)
+							
 								# w1 = en.verb.infinitive(w1)
 							l= l + ' ' + w1
 						glossary_four_words[l.strip()] = value.lower()
@@ -167,7 +177,8 @@ def checkGlossary(question):
 		# 	words[i] = en.noun.singular(words[i])
 		# elif en.is_verb(words[i]):
 		# 	words[i] = en.verb.infinitive(words[i])
-		words[i] = PStemmer().stem(words[i])
+		
+		# words[i] = PStemmer().stem(words[i])
 
 	if path.isfile(PATH) and access(PATH, R_OK):
 	    glossary_one_word, glossary_two_words, glossary_three_words, glossary_four_words = readGlossary()
