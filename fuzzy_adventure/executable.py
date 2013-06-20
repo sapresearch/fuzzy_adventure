@@ -86,8 +86,11 @@ class FuzzyAdventure():
             debug.debug_statement('No new classifier created')
 
     @classmethod
-    def place_params(qnum, params):
-        tc = TemplateClassifier()
+    def place_params(self, qnum, params):
+        project_path = os.environ['FUZZY_ADVENTURE']
+        data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
+        datafile = data_directory + "questions_plus.json"
+        tc = TemplateClassifier(datafile, model= linear_model.LogisticRegression(), test_size=0.2)
         templates = tc.templates
         template = templates[qnum][0]
         types = templates[qnum][1]

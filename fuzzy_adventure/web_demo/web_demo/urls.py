@@ -3,7 +3,7 @@ from web_demo.settings import DEBUG
 
 urlpatterns = patterns('',
 
-     url(r'^QA_demo/$', 'views.home.welcome'),,
+     url(r'^QA_demo/$', 'views.home.welcome'),
      url(r'^QA_demo/about/$', 'views.base.about'),
      url(r'^QA_demo/contact/$', 'views.base.contact'),
      url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
