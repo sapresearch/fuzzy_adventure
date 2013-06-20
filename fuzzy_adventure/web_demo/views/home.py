@@ -59,3 +59,4 @@ def welcome(request):
     context['questionlist'] = questionlist
 
     return render_to_response("home.html", context, context_instance=RequestContext(request))
+
