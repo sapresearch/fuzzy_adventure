@@ -32,6 +32,6 @@ class TemplateClassifier():
         self.model = model
     
     def template(self, query):
-        category = self.model.predict(query)
-        sql = self.templates[category]
+        category = self.model.predict([query])
+        sql = self.templates[category[0]]
         return sql, category

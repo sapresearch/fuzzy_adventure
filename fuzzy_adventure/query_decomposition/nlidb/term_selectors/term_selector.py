@@ -1,8 +1,9 @@
-import MySQLdb
+#import MySQLdb
 from fuzzy_adventure.hana import connection
 from fuzzy_adventure.query_decomposition import permutation
 from time import time
 import numpy as np
+from pandas import DataFrame
 
 class TermSelector():
 
@@ -52,8 +53,9 @@ class TermSelector():
         for query in queries:
             try:
                 cur.execute(query)
-                result = cur.fetchall()[0][0]
-                answers.append(result)
+                result = cur.fetchall()
+                df = DataFrame(result)
+                answers.append(df[0].tolist())
             except (Exception):
                 pass
         cur.close()

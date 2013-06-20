@@ -28,13 +28,14 @@ class FuzzyAdventure():
         while not re.match("exit()", query): 
 
             start = time.time()
-            answer, category = self.to_sql(query)
+            answer = self.to_sql(query)
             duration = time.time() - start
 
             if verbose:
                 print "Time: " + str(round(duration, 3))
-                print "LAT Type: " + str(category)
-            print "Answer: " + str(answer) + "\n"
+            print "Answer: " 
+            for a in answer:
+                print str(a)
             print "------------------------------"
             print "Ask a question or type exit() to exit:"
             query = raw_input()
@@ -42,6 +43,10 @@ class FuzzyAdventure():
 
     @classmethod
     def to_sql(self, nl_query):
+
+        if FuzzyAdventure.easter_egg(nl_query):
+            return [42]
+
         sql, category = FuzzyAdventure.tc.template(nl_query)
         keywords = nlp.tokens(nl_query)
         keywords = nlp.remove_stopwords(keywords)
@@ -80,7 +85,6 @@ class FuzzyAdventure():
         else:
             debug.debug_statement('No new classifier created')
 
-
     @classmethod
     def place_params(qnum, params):
         tc = TemplateClassifier()
@@ -95,6 +99,12 @@ class FuzzyAdventure():
 
         filled_query = template % applied
         return filled_query
+
+    @classmethod
+    def easter_egg(self, query):
+        words = query.split()
+        words = map(lambda x: x.lower(), words)
+        return "universe" in words and "life" in words and "everything" in words
 
 def main():
 
@@ -157,4 +167,3 @@ def main():
 
 if __name__=="__main__":
     main()
-
