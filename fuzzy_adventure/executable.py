@@ -80,6 +80,22 @@ class FuzzyAdventure():
         else:
             debug.debug_statement('No new classifier created')
 
+
+    @classmethod
+    def place_params(qnum, params):
+        tc = TemplateClassifier()
+        templates = tc.templates
+        template = templates[qnum][0]
+        types = templates[qnum][1]
+
+        applied = []
+        for (i, param) in enumerate(params):
+            type_to_apply = types[i]
+            applied.append(type_to_apply(param))
+
+        filled_query = template % applied
+        return filled_query
+
 def main():
 
     usage = "usage: %prog [options] arg"
