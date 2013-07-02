@@ -12,6 +12,7 @@ import glossary
 import stanford_client
 import penn_treebank_node
 from fuzzy_adventure.test import load_data
+from fuzzy_adventure.debug import debug
 
 def nlp_nlidb(question):
 
@@ -50,28 +51,36 @@ def nlp_nlidb(question):
 	# 	allWords_temp.append(w)
 	# allWords = allWords_temp
 
-	# return allWords, required_values, target, conditions, tables, question_type, question, Proper_Nouns
+	# return allWords, required_values, target, conditions, tables, question_type,Proper_Nouns
 
 	# '''To integrate with SQL Converter use: '''
-	# merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
+	merged = merge(allWords, required_values, target, conditions, tables, question_type, question, Proper_Nouns)
 	# return merged
 	# '''To use the nlp_nlidb module use:'''
+
+	print question
+	print merged
+	# print allWords, required_values, target, conditions, tables, question_type, Proper_Nouns 
+
 
 	return allWords, required_values, target, conditions, tables, question_type, Proper_Nouns 
 
 
+
 def keyWords_allQuestions(question):
 
-	allWords, required_values, target, conditions, tables, question_type, question = nlp_nlidb(question)
-	return [merge(allWords, required_values, target, conditions, tables, question_type, question)]
+	allWords, required_values, target, conditions, tables, question_type, Proper_Nouns = nlp_nlidb(question)
+	return [merge(allWords, required_values, target, conditions, tables, question_type, question, Proper_Nouns)]
 
-def merge(allWords, required_values, target, conditions, tables, question_type, question):
+def merge(allWords, required_values, target, conditions, tables, question_type, question,Proper_Nouns):
 	allWords = ','.join(allWords)
 	required_values = ','.join(required_values)
 	target = ','.join(target)
 	conditions = ','.join(conditions)
 	tables = ','.join(tables)
-	values = [allWords, target, conditions, question_type]
+	Proper_Nouns = ','.join(Proper_Nouns)
+	values = [allWords, target, conditions, question_type, Proper_Nouns]
+
 
 	formatted = []
 	for v in values:

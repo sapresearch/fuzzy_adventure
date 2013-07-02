@@ -192,7 +192,8 @@ def _formatKeyWords(keyWords):
         while '' in extracted_words:
             extracted_words.remove('')
 
-    print extracted_words
+    # print extracted_words
+    
     return extracted_words
 
 def possesive_adjectives(question):

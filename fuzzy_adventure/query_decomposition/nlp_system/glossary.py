@@ -237,7 +237,7 @@ def generalizedKeywords(question, keyWords):
 	glossaryMatches = glossaryMatches1+glossaryMatches2
 	if len(glossaryMatches) != 0:
 		statement = 'glossaryMatches = ' + str(glossaryMatches)
-		debug.debug_statement(statement)
+		# debug.debug_statement(statement)
 	remove_list = remove_list1 + remove_list2
 	# print glossaryMatches
 	keyWords = [x for x in keyWords if x not in remove_list]

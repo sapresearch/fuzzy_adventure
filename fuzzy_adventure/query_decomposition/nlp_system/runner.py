@@ -1,6 +1,7 @@
 
 from nlp_nlidb import *
 import os
+from components import *
 
 def clear():
     if os.name == 'posix':
@@ -8,6 +9,8 @@ def clear():
 
     elif os.name == ('ce', 'nt', 'dos'):
         os.system('cls')
+
+from fuzzy_adventure.hana import connection
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 clear()
@@ -34,6 +37,9 @@ while True:
         print "question_type:", question_type
         print "what: ", what
         print "Proper Nouns: ", Proper_Nouns
+        test = get_components().components
+        print test
+
         # print_defaultValue = 'Default value: NOT FOUND'
         # print_condition = 'Condition: NOT FOUND'
         # print_table = 'Table: NOT FOUND'

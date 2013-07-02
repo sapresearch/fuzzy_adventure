@@ -477,11 +477,11 @@
     }, 
     {
         "type": "C", 
-        "question": "Give me the number of tickets 1234567890 finished."
+        "question": "Give me the number of tickets a person finished."
     }, 
     {
         "type": "C", 
-        "question": "Count the number of tickets 0987654321 closed."
+        "question": "Count the number of tickets a person closed."
     }, 
     {
         "type": "C", 
@@ -493,7 +493,7 @@
     }, 
     {
         "type": "C", 
-        "question": "How good is person to close the tickets?"
+        "question": "How good is a person to close the tickets?"
     }, 
     {
         "type": "C", 
@@ -501,19 +501,19 @@
     }, 
     {
         "type": "C", 
-        "question": "Show me the number of confirmed messages by person?"
+        "question": "Show me the number of confirmed messages by a person?"
     }, 
     {
         "type": "C", 
-        "question": "give me the count of closed messages by person?"
+        "question": "give me the count of closed messages by a person?"
     }, 
     {
         "type": "C", 
-        "question": "How many message were closed by Person?"
+        "question": "How many message were closed by a Person?"
     }, 
     {
         "type": "C", 
-        "question": "How many messages did Person close?"
+        "question": "How many messages did a Person close?"
     }, 
     {
         "type": "D", 
@@ -577,7 +577,7 @@
     }, 
     {
         "type": "D", 
-        "question": "For a medium transaction, how long does it typically take?"
+        "question": "For a medium transaction, how long does it typically take to close the ticket?"
     }, 
     {
         "type": "E", 
@@ -589,51 +589,51 @@
     }, 
     {
         "type": "E", 
-        "question": "What's the average time it takes 01010444 to complete a ticket?"
+        "question": "What's the average time it takes a person to complete a ticket?"
     }, 
     {
         "type": "E", 
-        "question": "How much time will 010104441 take to close a ticket?"
+        "question": "How much time will a person take to close a ticket?"
     }, 
     {
         "type": "E", 
-        "question": "How long does it usually take 010104442 to finish a ticket?"
+        "question": "How long does it usually take a person to finish a ticket?"
     }, 
     {
         "type": "E", 
-        "question": "If I assign this ticket to 010104443, how long is it going to take?"
+        "question": "If I assign this ticket to a person, how long is it going to take?"
     }, 
     {
         "type": "E", 
-        "question": "How long does 010104444 generally take to complete a ticket?"
+        "question": "How long does a person generally take to complete a ticket?"
     }, 
     {
         "type": "E", 
-        "question": "How long does it take 010104445 on average to close a ticket?"
+        "question": "How long does it take a person on average to close a ticket?"
     }, 
     {
         "type": "E", 
-        "question": "How much time does it take 010104446 to close a transaction?"
+        "question": "How much time does it take a person to close a transaction?"
     }, 
     {
         "type": "E", 
-        "question": "How long does 010104447 take to finish a ticket?"
+        "question": "How long does a person take to finish a ticket?"
     }, 
     {
         "type": "E", 
-        "question": "How fast is 010104448 at closing tickets?"
+        "question": "How fast is a person at closing tickets?"
     }, 
     {
         "type": "E", 
-        "question": "What is 010104449's average time to close a ticket?"
+        "question": "What is a person's average time to close a ticket?"
     }, 
     {
         "type": "E", 
-        "question": "What's the average time it takes 0101044410 to close a ticket?"
+        "question": "What's the average time it takes a person to close a ticket?"
     }, 
     {
         "type": "E", 
-        "question": "Tell me the time it takes 0101044411 to close a ticket on average."
+        "question": "Tell me the time it takes a person to close a ticket on average."
     }, 
     {
         "type": "F", 
@@ -661,15 +661,15 @@
     }, 
     {
         "type": "F", 
-        "question": "Give me the count of involved messages by person?"
+        "question": "Give me the count of involved messages by a person?"
     }, 
     {
         "type": "F", 
-        "question": "How many message were touched by Person?"
+        "question": "How many message were touched by a Person?"
     }, 
     {
         "type": "F", 
-        "question": "How many messages did Person touch?"
+        "question": "How many messages did a Person touch?"
     }, 
     {
         "type": "G", 
@@ -685,7 +685,7 @@
     }, 
     {
         "type": "G", 
-        "question": "How long does in average does it take for a message to be closed by our team?"
+        "question": "How long in average does it take for a message to be closed by our team?"
     }, 
     {
         "type": "G", 
@@ -717,7 +717,7 @@
     }, 
     {
         "type": "H", 
-        "question": "what is the IRT when message arrives? (Initial Response Time)"
+        "question": "what is the IRT when message arrives? ( Initial Response Time )"
     }, 
     {
         "type": "H", 
@@ -789,19 +789,19 @@
     }, 
     {
         "type": "I", 
-        "question": "show me the number of escalated messages handled by person?"
+        "question": "show me the number of escalated messages handled by a person?"
     }, 
     {
         "type": "I", 
-        "question": "show me the number of escalated messages handled by person?"
+        "question": "show me the number of escalated messages handled by a person?"
     }, 
     {
         "type": "I", 
-        "question": "How many escalated message did Person work on?"
+        "question": "How many escalated message did a Person work on?"
     }, 
     {
         "type": "I", 
-        "question": "Of the messages Person worked on, how many were escalated?"
+        "question": "Of the messages a Person worked on, how many were escalated?"
     }, 
     {
         "type": "I", 
@@ -813,27 +813,27 @@
     }, 
     {
         "type": "I", 
-        "question": "show me the number of escalated messages handled by person?"
+        "question": "show me the number of escalated messages handled by a person?"
     }, 
     {
         "type": "I", 
-        "question": "show me the number of escalated messages handled by person?"
+        "question": "show me the number of escalated messages handled by a person?"
     }, 
     {
         "type": "I", 
-        "question": "How many escalated message did Person work on?"
+        "question": "How many escalated message did a Person work on?"
     }, 
     {
         "type": "I", 
-        "question": "Of the messages Person worked on, how many were escalated?"
+        "question": "Of the messages a Person worked on, how many were escalated?"
     }, 
     {
         "type": "J", 
-        "question": "Give me the list of opened transactions for component aaa-bbb-cxc."
+        "question": "Give me the list of open transactions for component aaa-bbb-cxc."
     }, 
     {
         "type": "J", 
-        "question": "Return the list of opened tickets for component asd-asd-asd."
+        "question": "Return the list of open tickets for component asd-asd-asd."
     }, 
     {
         "type": "J", 

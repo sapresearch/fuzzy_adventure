@@ -1,221 +1,221 @@
 What component are taking part the most to my backlog? 
-keyWords: ['transaction,contribut,transact,component,compon,most,are,transaction,component,manager_ID: 45,Maximum value']
+keyWords: ['transaction,taking,component,most,part,are,transaction,component,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What component has the maximum contribution to my backlog? 
-keyWords: ['transaction,contribut,transact,component,compon,most,ha,transaction,component,manager_ID: 45,Maximum value']
+keyWords: ['most,contribution,transaction,component,has,transaction,component,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What components delay my team's work the most? 
-keyWords: ['delay,transaction,component,compon,most,team,transaction,component,manager_ID: 45,Maximum value']
+keyWords: ['transaction,component,teams,delay,most,components,transaction,component,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What components take most time to get resolved?
-keyWords: ['compon,most,transaction,component,take,transaction,component,STATUS = closed,Maximum value']
+keyWords: ['transaction,closed,component,most,take,components,transaction,component,STATUS = closed,Maximum value']
 
 =========================================================================================================
 From all the opened tickets, what software causes the most delay? 
-keyWords: ['compon,transact,transaction,component,transaction,Maximum value,component']
+keyWords: ['transaction,component,transaction,Maximum value,component']
 
 =========================================================================================================
 What components use most of my resources? 
-keyWords: ['employe,use,transaction,component,compon,most,transaction,component,manager_ID: 45,Maximum value']
+keyWords: ['use,transaction,component,most,components,resources,transaction,component,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What component makes up the largest part of my backlog? 
-keyWords: ['transaction,make,component,compon,most,part,transact,transaction,component,manager_ID: 45,Maximum value']
+keyWords: ['component,part,transaction,makes,most,transaction,component,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What software is slowing us down? 
-keyWords: ['compon,is,slow']
+keyWords: ['is,transaction,component,slowing,transaction,w,l,o']
 
 =========================================================================================================
 What manual processes are slowing me down the most? 
-keyWords: ['most,transact,slow,are,transaction,transaction,Maximum value']
+keyWords: ['most,transaction,are,slowing,transaction,w,Maximum value,l,o']
 
 =========================================================================================================
 What system(s) are not working properly today? 
-keyWords: ['causes delay,transact,component,are,today,causes delay']
+keyWords: ['causes delay,component,systems,today,are,causes delay']
 
 =========================================================================================================
 How many times did excel crash today? 
-keyWords: ['causes delay,transact,component,number,How_quantity,today,causes delay,How_quantity']
+keyWords: ['causes delay,transaction,component,number,How_quantity,today,causes delay,How_quantity']
 
 =========================================================================================================
 Did I have any support from my supervisor today? 
-keyWords: ['manager_ID: 45']
+keyWords: ['manager_ID: 45,Did']
 
 =========================================================================================================
 What software components contribute the most to slowing down the team? 
-keyWords: ['causes delay,transaction,contribut,component,compon,most,team,transaction,component,causes delay,Maximum value']
+keyWords: ['causes delay,transaction,contribute,component,most,team,transaction,component,causes delay,w,Maximum value,l,o']
 
 =========================================================================================================
 By which components the team is the most slow down? 
-keyWords: ['causes delay,transaction,is,component,most,team,transaction,component,causes delay,Maximum value']
+keyWords: ['slow,is,component,down,most,transaction,team,transaction,component,w,Maximum value,l,o']
 
 =========================================================================================================
 Which software elements contribute the most in your team backlog? 
-keyWords: ['transaction,contribut,transact,component,compon,most,team,transaction,Maximum value']
+keyWords: ['component,team,transaction,contribute,most,transaction,Maximum value']
 
 =========================================================================================================
 Did I have any support from my supervisor today? 
-keyWords: ['manager_ID: 45']
+keyWords: ['manager_ID: 45,Did']
 
 =========================================================================================================
 Which component has most problem 
-keyWords: ['causes delay,transact,ha,component,transaction,transaction,component,causes delay,Maximum value']
+keyWords: ['causes delay,has,component,transaction,transaction,component,causes delay,Maximum value']
 
 =========================================================================================================
 Which component I need to assign more people to 
-keyWords: ['compon,causes delay,component,take,component,causes delay']
+keyWords: ['causes delay,component,take,component,causes delay']
 
 =========================================================================================================
 Which ticket component are most time consuming 
-keyWords: ['most,transact,transaction,component,are,transaction,component,Maximum value']
+keyWords: ['most,transaction,component,are,transaction,component,Maximum value']
 
 =========================================================================================================
 Which component i need to monitor most to see how to improve it 
-keyWords: ['causes delay,transaction,How_quality,component,compon,take,transaction,component,causes delay,Maximum value,How_quality']
+keyWords: ['causes delay,How_quality,component,take,transaction,transaction,component,causes delay,Maximum value,How_quality']
 
 =========================================================================================================
 What software components hinder my team most? 
-keyWords: ['compon,causes delay,transaction,component,team,transaction,component,causes delay,manager_ID: 45,Maximum value']
+keyWords: ['causes delay,transaction,component,team,transaction,component,causes delay,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What components are the biggest obstacles to my team's productivity? 
-keyWords: ['product,transaction,transact,component,team,biggest,transaction,component,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,programmer']
+keyWords: ['biggest,component,transaction,productivity,teams,transaction,component,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,programmer']
 
 =========================================================================================================
 What software components hinder my team's productivity the most? 
-keyWords: ['causes delay,product,transaction,component,compon,team,transaction,component,causes delay,end_date,45,priority,Duration: Last 30 days,manager_ID: 45,Maximum value,programmer']
+keyWords: ['causes delay,transaction,productivity,component,teams,most,transaction,component,causes delay,end_date,45,priority,Duration: Last 30 days,manager_ID: 45,Maximum value,programmer']
 
 =========================================================================================================
 What are the main software components that slow my team down? 
-keyWords: ['compon,slow,main,component,team,component,manager_ID: 45']
+keyWords: ['slow,main,component,transaction,team,transaction,component,w,manager_ID: 45,l,o']
 
 =========================================================================================================
 What software creates the tickets that slow us down the most? 
-keyWords: ['causes delay,slow,transact,component,compon,most,transaction,transaction,causes delay,Maximum value']
+keyWords: ['most,slow,component,transaction,causes delay,transaction,causes delay,w,Maximum value,l,o']
 
 =========================================================================================================
 Which components are slowing down my team? 
-keyWords: ['compon,causes delay,component,are,team,component,causes delay,manager_ID: 45']
+keyWords: ['causes delay,transaction,component,are,components,team,transaction,component,w,causes delay,manager_ID: 45,l,o']
 
 =========================================================================================================
 What component is my team struggling with? 
-keyWords: ['transact,component,team,component,manager_ID: 45']
+keyWords: ['transaction,component,team,component,manager_ID: 45']
 
 =========================================================================================================
 What software components are slowing down my backlog? 
-keyWords: ['causes delay,transaction,transact,component,compon,are,transaction,component,causes delay,manager_ID: 45']
+keyWords: ['causes delay,transaction,component,are,transaction,component,w,causes delay,manager_ID: 45,l,o']
 
 =========================================================================================================
 Which areas of code are generating the most problems? 
-keyWords: ['causes delay,code,area,gener,component,transaction,are,transaction,causes delay,Maximum value']
+keyWords: ['generating,code,problems,most,transaction,are,areas,transaction,Maximum value']
 
 =========================================================================================================
 Which features are causing the most work? 
-keyWords: ['caus,most,transact,transaction,are,transaction,Maximum value']
+keyWords: ['most,causing,features,transaction,are,transaction,Maximum value']
 
 =========================================================================================================
 Which domain is most trouble? 
-keyWords: ['most,transact,transaction,component,causes delay,transaction,causes delay,Maximum value']
+keyWords: ['most,transaction,component,causes delay,transaction,causes delay,Maximum value']
 
 =========================================================================================================
 Where is the development the most difficult? 
-keyWords: ['employe,transaction,Location,difficult,transaction,Maximum value,Location']
+keyWords: ['development,transaction,Location,difficult,transaction,Maximum value,Location']
 
 =========================================================================================================
 Which modules are the most difficult to maintain? 
-keyWords: ['causes delay,transaction,transact,component,most,are,transaction,causes delay,Maximum value']
+keyWords: ['causes delay,transaction,modules,component,most,are,transaction,causes delay,Maximum value']
 
 =========================================================================================================
 Which modules give us the most trouble? 
-keyWords: ['causes delay,transaction,give,transact,component,most,transaction,causes delay,Maximum value']
+keyWords: ['causes delay,transaction,give,modules,component,most,transaction,causes delay,Maximum value']
 
 =========================================================================================================
 What modules do we spend a lot of time on?
-keyWords: ['do,transact,component,lot,causes delay,causes delay']
+keyWords: ['component,do,modules,lot,causes delay,causes delay']
 
 =========================================================================================================
 What are the significant items that are slowing the team down? 
-keyWords: ['causes delay,slow,transact,component,are,team,causes delay']
+keyWords: ['causes delay,transaction,items,component,slowing,are,team,transaction,causes delay,w,l,o']
 
 =========================================================================================================
 What are the key factors to my backlog? 
-keyWords: ['transact,transaction,component,transaction,manager_ID: 45']
+keyWords: ['transaction,component,key,factors,transaction,manager_ID: 45']
 
 =========================================================================================================
 What is slowing down my team? 
-keyWords: ['causes delay,is,component,team,causes delay,manager_ID: 45']
+keyWords: ['causes delay,is,transaction,component,team,transaction,w,causes delay,manager_ID: 45,l,o']
 
 =========================================================================================================
 List the components that slow my system the most 
-keyWords: ['compon,most,transact,transaction,component,transaction,component,manager_ID: 45,Maximum value']
+keyWords: ['most,transaction,component,components,transaction,component,w,manager_ID: 45,Maximum value,l,o,List']
 
 =========================================================================================================
 What software components are slowing down the team the most? 
-keyWords: ['causes delay,transaction,component,compon,most,are,team,transaction,component,causes delay,Maximum value']
+keyWords: ['causes delay,transaction,component,most,are,team,transaction,component,causes delay,w,Maximum value,l,o']
 
 =========================================================================================================
 Name a few components that are contributing to slowing down the team? 
-keyWords: ['employe,causes delay,component,compon,few,team,component,causes delay']
+keyWords: ['causes delay,transaction,component,few,components,team,employee,transaction,component,causes delay,w,l,o,Name']
 
 =========================================================================================================
 What software components are contributing the most to the backlog of the team? 
-keyWords: ['transaction,contribut,transact,component,compon,most,are,team,transaction,component,Maximum value']
+keyWords: ['transaction,component,contributing,most,are,team,transaction,component,Maximum value']
 
 =========================================================================================================
 To what components is your backlog attributable (in general)? 
-keyWords: ['causes delay,transaction,is,component,compon,gener,transact,transaction,component,causes delay']
+keyWords: ['causes delay,transaction,is,component,general,components,transaction,component,causes delay']
 
 =========================================================================================================
 which components contribute most to my backlog 
-keyWords: ['compon,transact,transaction,component,contribut,transaction,component,manager_ID: 45,Maximum value']
+keyWords: ['contribute,component,components,transaction,transaction,component,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 which components are adding to my work load 
-keyWords: ['compon,work,component,are,ad,component,manager_ID: 45']
+keyWords: ['adding,work,component,are,components,component,manager_ID: 45']
 
 =========================================================================================================
 what are the modules that contribute usually to my backlog 
-keyWords: ['most,transact,transaction,component,contribut,transaction,manager_ID: 45,Maximum value']
+keyWords: ['component,most,transaction,modules,contribute,transaction,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 what modules make me work more
-keyWords: ['make,work,transact']
+keyWords: ['make,work,modules']
 
 =========================================================================================================
 What components have the greatest impact on my backlog? 
-keyWords: ['impact,transaction,transact,component,compon,most,have,transaction,component,manager_ID: 45,Maximum value']
+keyWords: ['impact,transaction,have,component,most,components,transaction,component,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What components are weighting the most in my backlog? 
-keyWords: ['causes delay,transaction,transact,component,compon,most,are,transaction,component,causes delay,manager_ID: 45,Maximum value']
+keyWords: ['causes delay,transaction,component,most,are,components,transaction,component,causes delay,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What items are the most significant in my backlog? 
-keyWords: ['causes delay,transact,transaction,component,are,transaction,causes delay,manager_ID: 45,Maximum value']
+keyWords: ['causes delay,transaction,component,are,items,transaction,causes delay,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What items are the most demanding in my backlog? 
-keyWords: ['causes delay,transaction,transact,component,most,are,transaction,causes delay,manager_ID: 45,Maximum value']
+keyWords: ['causes delay,transaction,items,component,most,are,transaction,causes delay,manager_ID: 45,Maximum value']
 
 =========================================================================================================
  what components have the highest priority? 
-keyWords: ['causes delay,transaction,transact,component,compon,most,transaction,component,causes delay,Maximum value']
+keyWords: ['causes delay,transaction,component,components,most,transaction,component,causes delay,g, ,i,h,o,p,r,t,y,Maximum value']
 
 =========================================================================================================
  what components are used most frequently? 
-keyWords: ['use,transaction,component,compon,most,are,transaction,component,Maximum value']
+keyWords: ['used,component,most,transaction,are,components,transaction,component,Maximum value']
 
 =========================================================================================================
  what components have the highest complexity? 
-keyWords: ['compon,causes delay,component,have,component,causes delay']
+keyWords: ['causes delay,transaction,component,have,components,transaction,component,causes delay,g, ,i,h,o,p,r,t,y']
 
 =========================================================================================================
  what components take the longest time to implement? 
-keyWords: ['compon,most,transaction,component,take,transaction,component,Maximum value']
+keyWords: ['most,transaction,component,take,components,transaction,component,Maximum value']
 
 =========================================================================================================
  On which component do I work the most 
@@ -223,11 +223,11 @@ keyWords: ['most,transaction,component,transaction,component,Maximum value']
 
 =========================================================================================================
  Which component takes the most time 
-keyWords: ['compon,most,transaction,component,take,transaction,component,Maximum value']
+keyWords: ['most,transaction,component,takes,transaction,component,Maximum value']
 
 =========================================================================================================
  Which component requires the most work 
-keyWords: ['compon,most,transaction,component,take,transaction,component,Maximum value']
+keyWords: ['requires,transaction,component,most,transaction,component,Maximum value']
 
 =========================================================================================================
  On which component do I spend the most time 
@@ -235,906 +235,906 @@ keyWords: ['most,transaction,component,spend,transaction,component,Maximum value
 
 =========================================================================================================
 Who is the most productive person on my team? 
-keyWords: ['employe,product,transaction,who,team,employee,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
+keyWords: ['employee,transaction,productive,team,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
 
 =========================================================================================================
 Who is the most productive employee on my team? 
-keyWords: ['employe,product,transaction,who,team,employee,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
+keyWords: ['employee,transaction,productive,team,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
 
 =========================================================================================================
 Who is the most efficient employee on my team? 
-keyWords: ['employe,product,transaction,who,most,team,employee,transaction,manager_ID: 45,Maximum value,employee']
+keyWords: ['employee,most,productive,transaction,team,transaction,manager_ID: 45,Maximum value,employee']
 
 =========================================================================================================
 Which employee on my team has the highest productivity? 
-keyWords: ['employe,product,transaction,most,team,ha,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer']
+keyWords: ['transaction,productivity,most,team,employee,has,transaction,end_date,Duration: Last 30 days,programmer, ,g,i,h,45,o,priority,p,r,t,y,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 Who is the best1?
-keyWords: ['employee,best1,who,employee']
+keyWords: ['employee,best1,employee,best1']
 
 =========================================================================================================
 Who can close the most tickets the fastest? 
-keyWords: ['employee,product,who,transact,transaction,transaction,Maximum value,employee']
+keyWords: ['tickets,employee,productive,transaction,transaction,Maximum value,employee']
 
 =========================================================================================================
 Who is the person that contribute the most to the success of my team? 
-keyWords: ['employe,transaction,contribut,success,who,most,team,employee,transaction,manager_ID: 45,Maximum value,employee']
+keyWords: ['transaction,success,contribute,most,team,employee,transaction,manager_ID: 45,Maximum value,employee']
 
 =========================================================================================================
 Tell me the name of the most productive person on my team. 
-keyWords: ['employe,product,transaction,list,team,employee,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
+keyWords: ['employee,transaction,productive,list,team,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee,Tell']
 
 =========================================================================================================
 Who is the most efficient and effective at their job? 
-keyWords: ['product,transaction,who,most,job,employee,transaction,Maximum value,employee']
+keyWords: ['employee,most,job,productive,transaction,transaction,Maximum value,employee']
 
 =========================================================================================================
 Who consistently proves they can provide quality work/support on a regular basis? 
-keyWords: ['prove,provid,who,qualiti,regular,employee,basi,employee']
+keyWords: ['basis,provide,proves,employee,quality,regular,employee']
 
 =========================================================================================================
 Who is always there to solve complex issues? 
-keyWords: ['product,transaction,transact,who,employee,close,is,transaction,STATUS = closed,employee']
+keyWords: ['employee,is,productive,transaction,transaction,STATUS = closed,employee']
 
 =========================================================================================================
 Which member on my team is closing the most number of open ticket? 
-keyWords: ['product,transaction,is,number,member,team,open,transact,transaction,manager_ID: 45,Maximum value']
+keyWords: ['transaction,is,number,member,most,team,closing,open,transaction,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 Who is the most open tickets closer member on the team? 
-keyWords: ['product,transaction,transact,who,member,team,employee,transaction,Maximum value,employee']
+keyWords: ['employee,productive,transaction,transaction,Maximum value,employee']
 
 =========================================================================================================
 Considering the most number of open tickets closed, who is the most productive member of the team? 
-keyWords: ['employee,product,who,transact,transaction,transaction,priority,number of closed tickets,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
+keyWords: ['employee,productive,transaction,transaction,priority,number of closed tickets,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
 
 =========================================================================================================
 Who on the team, is the person that close the biggest amount of open tickets? 
-keyWords: ['employe,transaction,transact,who,most,team,employee,close,open,transaction,Maximum value,employee']
+keyWords: ['tickets,transaction,most,team,employee,close,open,transaction,Maximum value,employee']
 
 =========================================================================================================
 Who deliver most in my team 
-keyWords: ['transaction,who,most,deliv,employee,team,transaction,manager_ID: 45,Maximum value,employee']
+keyWords: ['employee,most,transaction,deliver,team,transaction,manager_ID: 45,Maximum value,employee']
 
 =========================================================================================================
 Who is the most efficient people in my team 
-keyWords: ['product,transaction,peopl,who,most,team,employee,transaction,manager_ID: 45,Maximum value,employee']
+keyWords: ['productive,people,most,transaction,team,employee,transaction,manager_ID: 45,Maximum value,employee']
 
 =========================================================================================================
 Who always close most number of open tickets in a sprint 
-keyWords: ['transaction,transact,who,number,most,employee,close,sprint,open,transaction,Maximum value,number of closed tickets,employee']
+keyWords: ['tickets,transaction,number,most,employee,close,sprint,open,transaction,Maximum value,number of closed tickets,employee']
 
 =========================================================================================================
 Who is the person you will assign most important task to? 
-keyWords: ['employe,product,transaction,who,employee,assign,transaction,Maximum value,employee']
+keyWords: ['employee,productive,assign,transaction,transaction,Maximum value,employee']
 
 =========================================================================================================
 Which person on my team closes the most tickets? 
-keyWords: ['employe,product,transaction,transact,team,transaction,manager_ID: 45,Maximum value']
+keyWords: ['tickets,employee,productive,transaction,team,transaction,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 Which one of my team members is most productive? 
-keyWords: ['employe,product,transaction,one,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer']
+keyWords: ['employee,transaction,productive,one,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer']
 
 =========================================================================================================
 Who, in my team, works fastest? 
-keyWords: ['employee,product,work,who,team,manager_ID: 45,employee']
+keyWords: ['employee,works,productive,team,manager_ID: 45,employee']
 
 =========================================================================================================
 Which person on my team closes the most tickets? 
-keyWords: ['employe,product,transaction,transact,team,transaction,manager_ID: 45,Maximum value']
+keyWords: ['tickets,employee,productive,transaction,team,transaction,manager_ID: 45,Maximum value']
 
 =========================================================================================================
 What person closes the most tickets? 
-keyWords: ['employe,product,transaction,transact,transaction,Maximum value']
+keyWords: ['tickets,employee,productive,transaction,transaction,Maximum value']
 
 =========================================================================================================
 What programmer is the fastest at closing tickets? 
-keyWords: ['employe,close,product,transact']
+keyWords: ['employee,closing,productive']
 
 =========================================================================================================
 Which team member closes the most tickets? 
-keyWords: ['employe,product,transaction,transact,transaction,Maximum value']
+keyWords: ['tickets,employee,productive,transaction,transaction,Maximum value']
 
 =========================================================================================================
 Who is the most productive on my team? 
-keyWords: ['employee,transaction,product,who,team,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
+keyWords: ['employee,transaction,productive,team,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
 
 =========================================================================================================
 What is the name of the top contributor in the group? 
-keyWords: ['employe,top']
+keyWords: ['employee,top']
 
 =========================================================================================================
 What is the first in a list of team members ordered by effectiveness? 
-keyWords: ['employe,product,list,order,first']
+keyWords: ['employee,list,productive,ordered,first']
 
 =========================================================================================================
 Whose tickets are dealt with most swiftly? 
-keyWords: ['most,transact,transaction,dealt,transaction,Maximum value']
+keyWords: ['most,transaction,dealt,transaction,Maximum value,Whose']
 
 =========================================================================================================
 Who is number 1 in the item management system? 
-keyWords: ['employee,most,transact,who,transaction,transaction,Maximum value,employee']
+keyWords: ['employee,most,transaction,transaction,Maximum value,employee']
 
 =========================================================================================================
 Who clears problems the quickest? 
-keyWords: ['transaction,transact,who,most,employee,close,transaction,Maximum value,employee']
+keyWords: ['clears,most,transaction,problems,employee,transaction,Maximum value,employee']
 
 =========================================================================================================
 Rank my team on problem resolution time? 
-keyWords: ['close,list,manager_ID: 45']
+keyWords: ['transaction,list,closed,transaction,manager_ID: 45,Rank']
 
 =========================================================================================================
 Show me the productivity information about my team
-keyWords: ['product,transaction,list,team,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,programmer']
+keyWords: ['list,transaction,productivity,team,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,programmer,Show']
 
 =========================================================================================================
 Who is the number 1 contributor on the team? 
-keyWords: ['employe,transaction,who,most,team,employee,transaction,Maximum value,employee']
+keyWords: ['employee,most,transaction,team,transaction,Maximum value,employee']
 
 =========================================================================================================
 Who on the team solves the most issues? 
-keyWords: ['product,transaction,transact,who,team,employee,close,transaction,STATUS = closed,Maximum value,employee']
+keyWords: ['employee,most,transaction,solves,team,transaction,STATUS = closed,Maximum value,employee']
 
 =========================================================================================================
 Who is the top closer on the team? 
-keyWords: ['employee,most,who,transaction,team,transaction,Maximum value,employee']
+keyWords: ['employee,most,transaction,team,transaction,Maximum value,employee']
 
 =========================================================================================================
 Name the most productive person on the team 
-keyWords: ['employe,employee,product,transaction,team,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
+keyWords: ['employee,transaction,productive,team,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee,Name']
 
 =========================================================================================================
 Name the most productive person on your team. 
-keyWords: ['employe,employee,product,transaction,team,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
+keyWords: ['employee,transaction,productive,team,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee,Name']
 
 =========================================================================================================
 Who is the most productive on your team? 
-keyWords: ['employee,transaction,product,who,team,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
+keyWords: ['employee,transaction,productive,team,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
 
 =========================================================================================================
 In your team, who would you say is the most productive person. 
-keyWords: ['employe,employee,product,who,transaction,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
+keyWords: ['employee,productive,transaction,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
 
 =========================================================================================================
 Who in your team closes the most open tickets on average? 
-keyWords: ['product,transaction,transact,who,component,team,employee,open,averag,transaction,component,average,Maximum value,employee']
+keyWords: ['tickets,productive,average,component,transaction,team,employee,open,transaction,component,average,Maximum value,employee']
 
 =========================================================================================================
 who is the best developer in my team 
-keyWords: ['employe,most,who,transaction,employee,transaction,manager_ID: 45,Maximum value,employee']
+keyWords: ['employee,most,transaction,team,transaction,manager_ID: 45,Maximum value,employee']
 
 =========================================================================================================
 who closes more tickets in Jira 
-keyWords: ['jira,transaction,transact,who,employee,close,transaction,employee']
+keyWords: ['tickets,jira,employee,transaction,closes,transaction,employee,Jira']
 
 =========================================================================================================
 who is the most productive developer 
-keyWords: ['employe,employee,product,who,transaction,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
+keyWords: ['employee,productive,transaction,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
 
 =========================================================================================================
 who is the fastest developer 
-keyWords: ['employe,employee,product,who,employee']
+keyWords: ['employee,productive,employee']
 
 =========================================================================================================
 Who is the most productive team member? 
-keyWords: ['employee,transaction,product,who,team,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
+keyWords: ['employee,transaction,productive,team,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days,employee']
 
 =========================================================================================================
 Who is the most efficient person in my team? 
-keyWords: ['employe,product,transaction,who,most,team,employee,transaction,manager_ID: 45,Maximum value,employee']
+keyWords: ['employee,most,productive,transaction,team,transaction,manager_ID: 45,Maximum value,employee']
 
 =========================================================================================================
 Who has the best productivity in my team? 
-keyWords: ['product,transaction,who,most,team,employee,ha,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
+keyWords: ['transaction,productivity,most,team,employee,has,transaction,priority,Duration: Last 30 days,end_date,manager_ID: 45,45,Maximum value,programmer,employee']
 
 =========================================================================================================
 Who knows Jira best in my team? 
-keyWords: ['jira,transaction,who,most,know,team,employee,transaction,manager_ID: 45,Maximum value,employee']
+keyWords: ['jira,transaction,knows,most,team,employee,transaction,manager_ID: 45,Maximum value,employee,Jira']
 
 =========================================================================================================
  Who solve the most number of open tickets? 
-keyWords: ['product,transaction,transact,who,number,employee,close,open,transaction,STATUS = closed,Maximum value,employee']
+keyWords: ['tickets,productive,number,transaction,employee,open,transaction,STATUS = closed,Maximum value,employee']
 
 =========================================================================================================
  Who has the deepest knowledge of the project? 
-keyWords: ['project,employee,product,who,employee']
+keyWords: ['project,employee,productive,employee']
 
 =========================================================================================================
  Who answer the most questions for the project? 
-keyWords: ['project,employee,product,who,transaction,transaction,Maximum value,employee']
+keyWords: ['project,employee,productive,transaction,transaction,Maximum value,employee']
 
 =========================================================================================================
  Who is assigned to the most number of open tickets? 
-keyWords: ['transaction,transact,who,number,most,employee,open,assign,transaction,Maximum value,employee']
+keyWords: ['tickets,transaction,number,assigned,most,employee,open,transaction,Maximum value,employee']
 
 =========================================================================================================
  Who is the best developer 
-keyWords: ['employe,most,who,transaction,employee,transaction,Maximum value,employee']
+keyWords: ['employee,most,transaction,transaction,Maximum value,employee']
 
 =========================================================================================================
  Who is the fastest developer 
-keyWords: ['employe,employee,product,who,employee']
+keyWords: ['employee,productive,employee']
 
 =========================================================================================================
  Which developer is the most productive 
-keyWords: ['employe,is,transaction,product,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days']
+keyWords: ['employee,is,productive,transaction,transaction,priority,end_date,programmer,45,Maximum value,Duration: Last 30 days']
 
 =========================================================================================================
  Which developer is the fastest 
-keyWords: ['employe,is,product']
+keyWords: ['employee,is,productive']
 
 =========================================================================================================
 How many messages a person closed? 
-keyWords: ['employe,transaction,messages,number,How_quantity,close,ticket,transaction,number of closed tickets,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,closed,employee,transaction,number of closed tickets,How_quantity']
 
 =========================================================================================================
 How many messages a person solved
-keyWords: ['employe,transaction,messages,number,How_quantity,close,ticket,transaction,STATUS = closed,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,closed,employee,transaction,STATUS = closed,number of closed tickets,How_quantity']
 
 =========================================================================================================
 How many messages a person got confirmed?
-keyWords: ['employe,transaction,messages,number,How_quantity,got,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,closed,employee,got,transaction,number of closed tickets,How_quantity']
 
 =========================================================================================================
 How good is person to close the tickets? 
-keyWords: ['employe,close,transact,How_quality,transaction,transaction,How_quality']
+keyWords: ['tickets,close,How_quality,transaction,employee,transaction,How_quality']
 
 =========================================================================================================
 How many tickets a person closed? 
-keyWords: ['employe,transaction,transact,number,How_quantity,close,transaction,number of closed tickets,How_quantity']
+keyWords: ['tickets,transaction,number,How_quantity,closed,employee,transaction,number of closed tickets,How_quantity']
 
 =========================================================================================================
 Show me the number of confirmed messages by person? 
-keyWords: ['employe,transaction,messages,list,number,close,ticket,transaction']
+keyWords: ['tickets,transaction,messages,list,number,closed,employee,transaction,number of closed tickets,Show']
 
 =========================================================================================================
 give me the count of closed messages by person? 
-keyWords: ['employe,transaction,messages,list,number,ticket,transaction,number of closed tickets']
+keyWords: ['tickets,transaction,list,messages,number,employee,transaction,number of closed tickets']
 
 =========================================================================================================
 How many messages were closed by Person? 
-keyWords: ['employe,transaction,messages,number,How_quantity,close,ticket,transaction,number of closed tickets,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,closed,employee,transaction,number of closed tickets,How_quantity,Person']
 
 =========================================================================================================
 How many messages did Person close?
-keyWords: ['employe,transaction,messages,number,How_quantity,close,ticket,transaction,number of closed tickets,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,employee,close,transaction,number of closed tickets,How_quantity,Person']
 
 =========================================================================================================
 How many messages did a person close? 
-keyWords: ['employe,transaction,messages,number,How_quantity,close,ticket,transaction,number of closed tickets,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,employee,close,transaction,number of closed tickets,How_quantity']
 
 =========================================================================================================
 How many tickets were closed by a person?
-keyWords: ['employe,transaction,transact,number,How_quantity,were,close,transaction,number of closed tickets,How_quantity']
+keyWords: ['tickets,transaction,number,How_quantity,closed,were,employee,transaction,number of closed tickets,How_quantity']
 
 =========================================================================================================
 How many messages have been closed by a person? 
-keyWords: ['employe,transaction,messages,number,been,How_quantity,have,ticket,transaction,number of closed tickets,How_quantity']
+keyWords: ['tickets,transaction,messages,number,been,How_quantity,have,employee,transaction,number of closed tickets,How_quantity']
 
 =========================================================================================================
 Tell how many messages were closed by a person? 
-keyWords: ['employe,transaction,list,messages,number,How_quantity,ticket,transaction,number of closed tickets,How_quantity']
+keyWords: ['tickets,transaction,messages,list,number,How_quantity,employee,transaction,number of closed tickets,How_quantity,Tell']
 
 =========================================================================================================
 When the tickets arrive in the queue for our team to solve, what is the average MPT already? 
-keyWords: ['transaction,transact,component,arriv,mpt,Time,close,ims queu,averag,transaction,component,STATUS = closed,average,Time']
+keyWords: ['tickets,transaction,average,component,mpt,solve,ims queue,Time,arrive,transaction,component,STATUS = closed,average,Time,MPT']
 
 =========================================================================================================
 when the tickets come to our team, what is the value of MPT? 
-keyWords: ['transact,mpt,Time,ims queu,come,is,valu,Time']
+keyWords: ['tickets,is,value,mpt,ims queue,Time,come,Time,MPT']
 
 =========================================================================================================
 How many messages a person touched?
-keyWords: ['employe,transaction,messages,number,How_quantity,touch,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,touched,employee,transaction,How_quantity']
 
 =========================================================================================================
 How many messages a person has worked on 
-keyWords: ['employe,transaction,messages,number,How_quantity,touch,ticket,ha,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,touched,employee,has,transaction,How_quantity']
 
 =========================================================================================================
 How many messages a person was involved in
-keyWords: ['involv,employe,transaction,wa,messages,number,How_quantity,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,involved,messages,number,How_quantity,employee,was,transaction,How_quantity']
 
 =========================================================================================================
 How many messages a person worked on? 
-keyWords: ['employe,transaction,messages,number,How_quantity,touch,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,touched,employee,transaction,How_quantity']
 
 =========================================================================================================
 a person was involved in solving how many of the tickets?
-keyWords: ['employe,transaction,transact,number,How_quantity,touch,close,transaction,STATUS = closed,How_quantity']
+keyWords: ['tickets,transaction,number,How_quantity,touched,employee,transaction,STATUS = closed,How_quantity']
 
 =========================================================================================================
 show me the messages that person got involved in? 
-keyWords: ['employe,transaction,messages,list,touch,ticket,transaction']
+keyWords: ['tickets,transaction,list,messages,touched,employee,transaction']
 
 =========================================================================================================
 Give me the count of involved messages by person?
-keyWords: ['employe,transaction,messages,list,number,touch,ticket,transaction']
+keyWords: ['tickets,transaction,messages,list,number,touched,employee,transaction']
 
 =========================================================================================================
 How many messages were touched by Person? 
-keyWords: ['employe,transaction,messages,number,How_quantity,touch,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,touched,employee,transaction,How_quantity,Person']
 
 =========================================================================================================
 How many messages did Person touch? 
-keyWords: ['employe,transaction,messages,number,How_quantity,touch,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,number,touch,How_quantity,employee,transaction,How_quantity,Person']
 
 =========================================================================================================
 How many messages did a person touch? 
-keyWords: ['employe,transaction,messages,number,How_quantity,touch,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,number,touch,How_quantity,employee,transaction,How_quantity']
 
 =========================================================================================================
 How many tickets were touched by a person? 
-keyWords: ['employe,transact,number,How_quantity,were,touch,How_quantity']
+keyWords: ['tickets,number,How_quantity,touched,were,employee,How_quantity']
 
 =========================================================================================================
 What is the total of messages employee X touched? 
-keyWords: ['employe,transaction,messages,number,touch,ticket,transaction']
+keyWords: ['tickets,transaction,messages,number,touched,employee,transaction,X']
 
 =========================================================================================================
 What is the total of messages employee X touched but did not close? 
-keyWords: ['employe,transaction,messages,number,close,touch,x,ticket,transaction,number of closed tickets']
+keyWords: ['tickets,transaction,messages,number,touched,close,employee,x,transaction,number of closed tickets,X']
 
 =========================================================================================================
 How many messages have been touched by a person? 
-keyWords: ['employe,transaction,messages,number,been,How_quantity,have,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,number,been,How_quantity,have,employee,transaction,How_quantity']
 
 =========================================================================================================
 Tell how many messages were touched by a person 
-keyWords: ['employe,transaction,list,messages,number,How_quantity,ticket,transaction,How_quantity']
+keyWords: ['tickets,transaction,messages,list,number,How_quantity,employee,transaction,How_quantity,Tell']
 
 =========================================================================================================
 How long a message stays in the SAP side?
-keyWords: ['transaction,messages,How_quality,when,stay,ticket,sap,side,transaction,How_quality']
+keyWords: ['transaction,when,How_quality,messages,stayed,ims queue,message,transaction,How_quality,SAP']
 
 =========================================================================================================
 How many days a message was in processing by SAP 
-keyWords: ['transaction,when,messages,stay,How_quantity,ticket,sap,transaction,How_quantity']
+keyWords: ['transaction,when,messages,stayed,How_quantity,message,sap,transaction,How_quantity,SAP']
 
 =========================================================================================================
 How many days a message stayed in IMS queue? 
-keyWords: ['transaction,messages,when,stay,How_quantity,im,ticket,ims queu,transaction,How_quantity']
+keyWords: ['transaction,messages,when,How_quantity,stayed,ims,ims queue,message,transaction,How_quantity,IMS']
 
 =========================================================================================================
 How long in average does it take for a message to be closed by our team? 
-keyWords: ['transaction,messages,How_quality,when,component,take,ticket,ims queu,averag,transaction,component,average,45,Duration: Last 30 days,end_date,How_quality']
+keyWords: ['transaction,messages,average,How_quality,when,component,ims queue,message,take,transaction,component,average,45,Duration: Last 30 days,end_date,How_quality']
 
 =========================================================================================================
 How long a message stays in SAP queue in average? 
-keyWords: ['transaction,messages,How_quality,when,stay,component,ticket,ims queu,averag,sap,transaction,component,average,How_quality']
+keyWords: ['transaction,messages,average,How_quality,when,stayed,component,ims queue,message,sap,transaction,component,average,How_quality,SAP']
 
 =========================================================================================================
 What is the % from MPT this message was @ SAP-side? 
-keyWords: ['transaction,wa,sapsid,messages,mpt,ticket,transaction']
+keyWords: ['transaction,sapside,messages,mpt,message,was,transaction,MPT,SAPside']
 
 =========================================================================================================
 What is the % from MPT this message was @ SAP-side?
-keyWords: ['transaction,wa,sapsid,messages,mpt,ticket,transaction']
+keyWords: ['transaction,sapside,messages,mpt,message,was,transaction,MPT,SAPside']
 
 =========================================================================================================
 How long does a message stay in the SAP side? 
-keyWords: ['transaction,when,How_quality,messages,stay,ticket,ims queu,transaction,How_quality']
+keyWords: ['transaction,when,How_quality,messages,stay,ims queue,message,transaction,How_quality,SAP']
 
 =========================================================================================================
 What duration does a message stay in the SAP side? 
-keyWords: ['transaction,messages,when,stay,ticket,ims queu,transaction']
+keyWords: ['transaction,when,messages,stay,ims queue,message,transaction,SAP']
 
 =========================================================================================================
 How long did message stay in SAP side? 
-keyWords: ['transaction,messages,How_quality,when,stay,ticket,sap,side,transaction,How_quality']
+keyWords: ['transaction,when,How_quality,messages,stay,ims queue,message,transaction,How_quality,SAP']
 
 =========================================================================================================
 How long was this message on the SAP side? 
-keyWords: ['transaction,when,How_quality,messages,ticket,ims queu,transaction,How_quality']
+keyWords: ['transaction,when,How_quality,messages,ims queue,message,transaction,How_quality,SAP']
 
 =========================================================================================================
 What is the average length of time a message is on SAP's side? 
-keyWords: ['transaction,component,is,messages,length,time,ticket,ims queu,averag,transaction,component,average']
+keyWords: ['transaction,component,average,messages,length,time,message,side,is,saps,transaction,component,average,SAPs']
 
 =========================================================================================================
 How long was message X on SAP's side? 
-keyWords: ['transaction,when,How_quality,messages,ticket,ims queu,transaction,How_quality']
+keyWords: ['transaction,when,How_quality,messages,message,side,saps,transaction,How_quality,X,SAPs']
 
 =========================================================================================================
 -How many escalated messages a person worked on?
-keyWords: ['employe,transaction,work,messages,number,How_quantity,flag,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['tickets,transaction,messages,number,How_quantity,flag,employee,worked,transaction,flag_escalated,How_quantity']
 
 =========================================================================================================
 How many escalated messages were processed by a person? 
-keyWords: ['employe,transaction,process,messages,number,How_quantity,were,flag,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['tickets,transaction,messages,How_quantity,number,flag,processed,were,employee,transaction,flag_escalated,How_quantity']
 
 =========================================================================================================
 How many de-escalations a person was working on?
-keyWords: ['employe,wa,work,number,deescal,How_quantity,How_quantity']
+keyWords: ['deescalations,working,number,How_quantity,employee,was,How_quantity']
 
 =========================================================================================================
 show me the number of escalated messages handled by person? 
-keyWords: ['employe,transaction,messages,list,flag,touch,ticket,transaction,flag_escalated']
+keyWords: ['tickets,transaction,messages,list,flag,touched,employee,transaction,flag_escalated']
 
 =========================================================================================================
 show me the number of escalated messages handled by person?
-keyWords: ['employe,transaction,messages,list,flag,touch,ticket,transaction,flag_escalated']
+keyWords: ['tickets,transaction,messages,list,flag,touched,employee,transaction,flag_escalated']
 
 =========================================================================================================
 How many escalated message did Person work on? 
-keyWords: ['employe,transaction,messages,How_quantity,number,flag,touch,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['transaction,work,messages,How_quantity,number,flag,employee,transaction,flag_escalated,How_quantity,Person']
 
 =========================================================================================================
 Of the messages Person worked on, how many were escalated? 
-keyWords: ['employe,transaction,messages,flag,How_quantity,touch,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['tickets,transaction,messages,flag,How_quantity,touched,employee,transaction,flag_escalated,How_quantity,Person']
 
 =========================================================================================================
 How many escalated messages did a person worked on? 
-keyWords: ['employe,transaction,messages,How_quantity,number,flag,touch,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['tickets,transaction,messages,How_quantity,number,flag,touched,employee,transaction,flag_escalated,How_quantity']
 
 =========================================================================================================
 How many messages flagged as escalated did a person worked on?
-keyWords: ['employe,transaction,escal,work,messages,number,How_quantity,flag,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['tickets,transaction,messages,escalated,number,How_quantity,employee,flag,worked,transaction,flag_escalated,How_quantity']
 
 =========================================================================================================
 How many escalated messages did a person worked on? 
-keyWords: ['employe,transaction,messages,How_quantity,number,flag,touch,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['tickets,transaction,messages,How_quantity,number,flag,touched,employee,transaction,flag_escalated,How_quantity']
 
 =========================================================================================================
 How many messages flagged as escalated did a person worked on? 
-keyWords: ['employe,transaction,escal,messages,number,How_quantity,touch,flag,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['tickets,transaction,messages,escalated,number,How_quantity,touched,employee,flag,transaction,flag_escalated,How_quantity']
 
 =========================================================================================================
 How many escalations has employee X worked on in year Y? 
-keyWords: ['employe,flag,number,How_quantity,time,touch,x,ha,flag_escalated,How_quantity']
+keyWords: ['number,How_quantity,escalations,time,employee,x,has,touched,flag_escalated,How_quantity,X,Y']
 
 =========================================================================================================
 How many escalations has employee X closed so far this year? 
-keyWords: ['employe,transaction,year,flag,number,How_quantity,time,close,x,ha,transaction,flag_escalated,number of closed tickets,How_quantity']
+keyWords: ['transaction,time,number,How_quantity,escalations,closed,year,employee,x,has,transaction,flag_escalated,number of closed tickets,How_quantity,X']
 
 =========================================================================================================
 How many escalated message did a person work on? 
-keyWords: ['employe,transaction,messages,How_quantity,number,flag,touch,ticket,transaction,flag_escalated,How_quantity']
+keyWords: ['transaction,work,messages,How_quantity,number,flag,employee,transaction,flag_escalated,How_quantity']
 
 =========================================================================================================
 Count the escalated messages a person has worked on. 
-keyWords: ['employe,transaction,messages,list,flag,touch,ticket,transaction,flag_escalated']
+keyWords: ['tickets,transaction,messages,list,flag,touched,employee,transaction,flag_escalated,Count']
 
 =========================================================================================================
 What is the average MPT when the message arrives?
-keyWords: ['transaction,component,messages,arriv,mpt,Time,ticket,averag,transaction,component,average,Time']
+keyWords: ['arrives,component,average,messages,mpt,transaction,Time,message,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT when messages get forwarded to our queue?
-keyWords: ['transaction,component,messages,stay,mpt,Time,ticket,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,component,average,messages,stayed,mpt,ims queue,Time,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT when messages leave PS queue?
-keyWords: ['ps,transaction,component,messages,mpt,leav,Time,ticket,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,ps,transaction,component,average,messages,leave,mpt,ims queue,Time,transaction,component,average,Time,MPT,PS']
 
 =========================================================================================================
 what is the IRT when message arrives? (Initial Response Time) 
-keyWords: ['transaction,irt,messages,arriv,Time,ticket,IRT,transaction,Time']
+keyWords: ['arrives,irt,messages,transaction,Time,message,IRT,transaction,Time,IRT,Time']
 
 =========================================================================================================
 what is average MPT for messages in my topic?
-keyWords: ['transaction,component,messages,topic,mpt,ticket,averag,transaction,component,average,manager_ID: 45']
+keyWords: ['tickets,transaction,messages,average,component,mpt,transaction,component,average,manager_ID: 45']
 
 =========================================================================================================
 What is the average MPT of messages when our team takes over? 
-keyWords: ['transaction,component,messages,mpt,take,Time,ticket,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,takes,component,average,messages,mpt,ims queue,Time,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT of incoming tickets in our queue?
-keyWords: ['transaction,transact,component,mpt,incom,ims queu,averag,transaction,component,average']
+keyWords: ['tickets,transaction,incoming,average,component,mpt,ims queue,transaction,component,average,MPT']
 
 =========================================================================================================
 what is the MPT for my Cost Center? 
-keyWords: ['mpt,my top,manager_ID: 45']
+keyWords: ['mpt,cost,manager_ID: 45,MPT,Cost,Center']
 
 =========================================================================================================
 what is the MPT for my Cost Center? 
-keyWords: ['mpt,my top,manager_ID: 45']
+keyWords: ['mpt,cost,manager_ID: 45,MPT,Cost,Center']
 
 =========================================================================================================
 What's the team MPT average? 
-keyWords: ['mpt,transaction,component,transaction,component,average']
+keyWords: ['mpt,transaction,component,transaction,component,average,MPT']
 
 =========================================================================================================
 What's the MPT average for my team? 
-keyWords: ['mpt,transaction,component,transaction,component,average,manager_ID: 45']
+keyWords: ['mpt,transaction,component,transaction,component,average,manager_ID: 45,MPT']
 
 =========================================================================================================
 What is the average MPT when messages get forwarded to our queue?
-keyWords: ['transaction,component,messages,stay,mpt,Time,ticket,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,component,average,messages,stayed,mpt,ims queue,Time,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT when messages leave PS queue? 
-keyWords: ['transaction,component,messages,mpt,leav,Time,ticket,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,queue,transaction,component,average,messages,leave,mpt,ims queue,Time,transaction,component,average,Time,MPT,PS']
 
 =========================================================================================================
 When the message arrives, what is the average MPT? 
-keyWords: ['transaction,component,messages,arriv,mpt,Time,ticket,averag,transaction,component,average,Time']
+keyWords: ['arrives,component,average,messages,mpt,transaction,Time,message,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT on message arrival? 
-keyWords: ['transaction,component,messages,start_dat,mpt,ticket,averag,transaction,component,average']
+keyWords: ['transaction,messages,average,component,mpt,start_date,transaction,component,average,MPT']
 
 =========================================================================================================
 When the message arrives, what is the average MPT? 
-keyWords: ['transaction,component,messages,arriv,mpt,Time,ticket,averag,transaction,component,average,Time']
+keyWords: ['arrives,component,average,messages,mpt,transaction,Time,message,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT on message arrival? 
-keyWords: ['transaction,component,messages,start_dat,mpt,ticket,averag,transaction,component,average']
+keyWords: ['transaction,messages,average,component,mpt,start_date,transaction,component,average,MPT']
 
 =========================================================================================================
 When we get tickets in our queue, what is the average MPT of our team? 
-keyWords: ['transaction,get,is,team,component,mpt,my top,Time,ims queu,transact,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,get,average,component,mpt,ims queue,Time,is,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 When a ticket gets queued, what is the average MPT of our team?
-keyWords: ['transaction,get,transact,team,component,mpt,queu,Time,averag,transaction,component,average,Time']
+keyWords: ['transaction,average,Time,component,mpt,team,gets,queued,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 When the message arrives, what is the average MPT? 
-keyWords: ['transaction,component,messages,arriv,mpt,Time,ticket,averag,transaction,component,average,Time']
+keyWords: ['arrives,component,average,messages,mpt,transaction,Time,message,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT on message arrival? 
-keyWords: ['transaction,component,messages,start_dat,mpt,ticket,averag,transaction,component,average']
+keyWords: ['transaction,messages,average,component,mpt,start_date,transaction,component,average,MPT']
 
 =========================================================================================================
 What is the average MPT when a message arrives on component X? 
-keyWords: ['transaction,component,messages,arriv,compon,mpt,Time,ticket,averag,transaction,component,average,Time']
+keyWords: ['arrives,messages,average,component,mpt,transaction,Time,message,transaction,component,average,Time,MPT,X']
 
 =========================================================================================================
 What is the MPT value of messages arriving on component X? 
-keyWords: ['transaction,component,messages,arriv,compon,mpt,ticket,transaction,component']
+keyWords: ['tickets,transaction,messages,component,mpt,arriving,transaction,component,MPT,X']
 
 =========================================================================================================
 What is the average MPT of messages arriving in our team's queue? 
-keyWords: ['transaction,component,messages,arriv,mpt,ticket,ims queu,averag,transaction,component,average']
+keyWords: ['tickets,transaction,component,average,messages,teams,mpt,ims queue,arriving,transaction,component,average,MPT']
 
 =========================================================================================================
 What is the average MPT of team messages upon arrival in our queue? 
-keyWords: ['transaction,component,messages,arriv,mpt,my top,team,ticket,ims queu,averag,transaction,component,average']
+keyWords: ['arrival,tickets,transaction,component,average,messages,mpt,ims queue,team,transaction,component,average,MPT']
 
 =========================================================================================================
 What is the average MPT of our team when we get the tickets in our queue? 
-keyWords: ['transaction,get,transact,component,mpt,Time,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,get,average,component,mpt,ims queue,Time,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT when a message arrives on component X? 
-keyWords: ['transaction,component,messages,arriv,compon,mpt,Time,ticket,averag,transaction,component,average,Time']
+keyWords: ['arrives,messages,average,component,mpt,transaction,Time,message,transaction,component,average,Time,MPT,X']
 
 =========================================================================================================
 What is the MPT value of messages arriving on component X? 
-keyWords: ['transaction,component,messages,arriv,compon,mpt,ticket,transaction,component']
+keyWords: ['tickets,transaction,messages,component,mpt,arriving,transaction,component,MPT,X']
 
 =========================================================================================================
 Average MPT when the message arrives? 
-keyWords: ['transaction,messages,mpt,Time,ticket,averag,transaction,Time']
+keyWords: ['transaction,messages,average,component,mpt,Time,transaction,component,average,Time']
 
 =========================================================================================================
 When the message arrives, what is the average MPT? 
-keyWords: ['transaction,component,messages,arriv,mpt,Time,ticket,averag,transaction,component,average,Time']
+keyWords: ['arrives,component,average,messages,mpt,transaction,Time,message,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 When we get the tickets in our queue, what is the average MPT? 
-keyWords: ['transaction,get,transact,component,mpt,my top,Time,ims queu,is,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,get,average,component,mpt,ims queue,Time,is,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 Average MPT of the team when tickets arrive in the queue? 
-keyWords: ['mpt,ims queu,transact,averag,Time,Time']
+keyWords: ['transaction,average,component,mpt,ims queue,Time,transaction,component,average,Time']
 
 =========================================================================================================
 Average MPT when the message arrives? 
-keyWords: ['transaction,messages,mpt,Time,ticket,averag,transaction,Time']
+keyWords: ['transaction,messages,average,component,mpt,Time,transaction,component,average,Time']
 
 =========================================================================================================
 When the message arrives, what is the average MPT?
-keyWords: ['transaction,component,messages,arriv,mpt,Time,ticket,averag,transaction,component,average,Time']
+keyWords: ['arrives,component,average,messages,mpt,transaction,Time,message,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 What is the average MPT when we get the tickets in IMS queue in year 2012? 
-keyWords: ['transaction,get,transact,time,component,mpt,im,Time,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,get,average,time,component,mpt,ims,ims queue,Time,transaction,component,average,Time,MPT,IMS']
 
 =========================================================================================================
 What is the average MPT of team when we get CSS_component tickets in IMS queue 
-keyWords: ['transaction,csscompon,get,transact,team,component,mpt,im,Time,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,get,average,team,component,mpt,ims,ims queue,Time,csscomponent,transaction,component,average,Time,MPT,CSScomponent,IMS']
 
 =========================================================================================================
 What is the mean MPT of a ticket that lands in my team? 
-keyWords: ['transact,land,mpt,averag,team,manager_ID: 45']
+keyWords: ['lands,average,component,mpt,transaction,team,transaction,component,average,manager_ID: 45,MPT']
 
 =========================================================================================================
 Give me the average processing time of all the tickets that my team received. 
-keyWords: ['transaction,transact,component,mpt,team,averag,transaction,component,average,manager_ID: 45']
+keyWords: ['tickets,transaction,average,component,mpt,team,transaction,component,average,manager_ID: 45']
 
 =========================================================================================================
 How experienced is a person?
-keyWords: ['employe,hiring d,How_quality,How_quality']
+keyWords: ['employee,hiring date,How_quality,transaction,employee,transaction,hiring date,How_quality']
 
 =========================================================================================================
 How long has a person been with SAP? 
-keyWords: ['employe,sap,when,been,How_quality,How_quality']
+keyWords: ['employee,sap,when,been,How_quality,How_quality,SAP']
 
 =========================================================================================================
 What is the level of an employee? 
-keyWords: ['employe,hiring d']
+keyWords: ['employee,hiring date,transaction,employee,transaction,hiring date']
 
 =========================================================================================================
 How knowledgeable a person is in a topic?
-keyWords: ['topic,employe,is,hiring d,How_quality,How_quality']
+keyWords: ['transaction,is,How_quality,component,hiring date,employee,employee,transaction,hiring date,How_quality']
 
 =========================================================================================================
 What level of expertise a person has in a topic?
-keyWords: ['topic,employe,ha,hiring d']
+keyWords: ['employee,hiring date,has,component,transaction,employee,transaction,hiring date']
 
 =========================================================================================================
 what is the hiring date of person? 
-keyWords: ['date,employe,transaction,employee,employee,transaction,hiring date']
+keyWords: ['date,employee,transaction,employee,transaction,hiring date']
 
 =========================================================================================================
 what is the grade level of person? 
-keyWords: ['employe,hiring d']
+keyWords: ['employee,hiring date,transaction,employee,transaction,hiring date']
 
 =========================================================================================================
 How experienced is Employee? 
-keyWords: ['employe,hiring d,How_quality,How_quality']
+keyWords: ['employee,hiring date,How_quality,transaction,employee,transaction,hiring date,How_quality,Employee']
 
 =========================================================================================================
 How much experience does Employee have? 
-keyWords: ['employe,hiring d,How_quality,have,How_quality']
+keyWords: ['employee,hiring date,How_quality,have,transaction,employee,transaction,hiring date,How_quality,Employee']
 
 =========================================================================================================
 How long has a person been with SAP? 
-keyWords: ['employe,sap,when,been,How_quality,How_quality']
+keyWords: ['employee,sap,when,been,How_quality,How_quality,SAP']
 
 =========================================================================================================
 What is the level of an employee? 
-keyWords: ['employe,hiring d']
+keyWords: ['employee,hiring date,transaction,employee,transaction,hiring date']
 
 =========================================================================================================
 What year was employee X hired? 
-keyWords: ['employe,x,hire,time']
+keyWords: ['employee,x,hired,time,X']
 
 =========================================================================================================
 How many year has employee X been working in component X? 
-keyWords: ['employe,work,component,number,been,compon,How_quantity,time,x,component,How_quantity']
+keyWords: ['working,component,number,been,How_quantity,time,employee,x,component,How_quantity,X,X']
 
 =========================================================================================================
 What is the experience of an employee? 
-keyWords: ['employe,experi']
+keyWords: ['employee,experience']
 
 =========================================================================================================
 How much experience does an employee have 
-keyWords: ['employe,hiring d,How_quality,have,How_quality']
+keyWords: ['employee,hiring date,How_quality,have,transaction,employee,transaction,hiring date,How_quality']
 
 =========================================================================================================
 What is the average MPT of our team when we get the tickets in our queue? 
-keyWords: ['transaction,get,transact,component,mpt,Time,ims queu,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,get,average,component,mpt,ims queue,Time,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 When we get the tickets in our queue, what is the average MPT of our team? 
-keyWords: ['transaction,get,is,team,component,mpt,my top,Time,ims queu,transact,averag,transaction,component,average,Time']
+keyWords: ['tickets,transaction,get,average,component,mpt,ims queue,Time,is,transaction,component,average,Time,MPT']
 
 =========================================================================================================
 For the tickets in our queue, what is the average MPT of our team? 
-keyWords: ['transact,transaction,component,my top,transaction,component,average,component']
+keyWords: ['transaction,component,ims queue,transaction,component,average,component,MPT']
 
 =========================================================================================================
 show me the average MPT for my CostCenter 
-keyWords: ['component,transaction,list,transaction,component,average,manager_ID: 45']
+keyWords: ['queue,component,transaction,list,transaction,component,average,manager_ID: 45,MPT']
 
 =========================================================================================================
 what is my costcenter average MPT? 
-keyWords: ['mpt,transaction,component,costcent,transaction,component,average,manager_ID: 45']
+keyWords: ['queue,mpt,transaction,component,transaction,component,average,manager_ID: 45,MPT']
 
 =========================================================================================================
 When a person started working on a component?
-keyWords: ['employe,component,compon,start,Time,touch,component,Time']
+keyWords: ['started,employee,component,working,Time,component,Time']
 
 =========================================================================================================
 When did person start working on a component 
-keyWords: ['employe,component,compon,start,Time,touch,component,Time']
+keyWords: ['employee,start,component,Time,component,Time']
 
 =========================================================================================================
 When was work on a component started by this person 
-keyWords: ['employe,component,compon,start,Time,touch,component,Time']
+keyWords: ['started,employee,work,component,Time,component,Time']
 
 =========================================================================================================
 Show me the date this message got assigned 
-keyWords: ['messages,ticket,transaction,list,transaction']
+keyWords: ['messages,transaction,list,transaction,Show']
 
 =========================================================================================================
 What is the IRT counter for message? 
-keyWords: ['transaction,messages,irt,counter,IRT,ticket,transaction']
+keyWords: ['transaction,messages,irt,counter,IRT,message,transaction,IRT']
 
 =========================================================================================================
 How experienced is a person in this component? 
-keyWords: ['compon,employe,component,hiring d,How_quality,component,How_quality']
+keyWords: ['employee,hiring date,How_quality,component,transaction,employee,transaction,component,hiring date,How_quality']
 
 =========================================================================================================
 How many years an employee has experience of working on this component? 
-keyWords: ['employe,experi,component,number,compon,How_quantity,time,touch,ha,component,How_quantity']
+keyWords: ['working,component,number,experience,How_quantity,employee,has,component,How_quantity']
 
 =========================================================================================================
 How long a person has been working on a component 
-keyWords: ['employe,component,How_quality,when,been,compon,touch,ha,component,How_quality']
+keyWords: ['working,component,How_quality,when,been,employee,has,component,How_quality']
 
 =========================================================================================================
 How many years/months a person has been working on a component 
-keyWords: ['employe,yearsmonth,component,number,been,compon,How_quantity,touch,component,How_quantity']
+keyWords: ['working,component,number,been,yearsmonths,How_quantity,employee,component,How_quantity']
 
 =========================================================================================================
 What date did employee X start working in component Y? 
-keyWords: ['employe,x,component,start,compon,component']
+keyWords: ['employee,x,component,start,component,X,Y']
 
 =========================================================================================================
 What is the earliest message resolved in component X by employee Y?
-keyWords: ['employe,transaction,component,messages,compon,close,ticket,earliest,transaction,component,STATUS = closed']
+keyWords: ['transaction,messages,component,closed,employee,message,earliest,transaction,component,STATUS = closed,X,Y']
 
 =========================================================================================================
 When did someone started working on a topic? 
-keyWords: ['topic,start,someon,touch,Time,Time']
+keyWords: ['started,someone,component,working,Time,Time']
 
 =========================================================================================================
 When was someone first assigned to work on a component? 
-keyWords: ['component,someon,compon,Time,touch,assign,first,component,Time']
+keyWords: ['someone,work,component,assigned,Time,first,component,Time']
 
 =========================================================================================================
 Give me the list of the open messages for a topic.
-keyWords: ['transaction,messages,list,topic,ticket,open,transaction']
+keyWords: ['tickets,transaction,messages,component,list,open,transaction']
 
 =========================================================================================================
 Can I have a list of all open messages for a topic? 
-keyWords: ['ticket,transaction,messages,transaction']
+keyWords: ['tickets,messages,transaction,component,transaction,Can']
 
 =========================================================================================================
 give me the list of messages that are open for a topic. 
-keyWords: ['transaction,messages,list,topic,ticket,open,transaction']
+keyWords: ['tickets,transaction,messages,component,list,open,transaction']
 
 =========================================================================================================
 What are my topic open messages? 
-keyWords: ['topic,messages,ticket,transaction,open,transaction,manager_ID: 45']
+keyWords: ['tickets,transaction,messages,component,queue,open,transaction,manager_ID: 45']
 
 =========================================================================================================
 Show me the open messages in my topic. 
-keyWords: ['transaction,messages,list,topic,ticket,open,transaction,manager_ID: 45']
+keyWords: ['tickets,transaction,messages,component,list,queue,open,transaction,manager_ID: 45,Show']
 
 =========================================================================================================
 What is remaining to solve in a topic? 
-keyWords: ['topic,close,is,transaction,remain,transaction,STATUS = closed']
+keyWords: ['solve,is,transaction,component,remaining,transaction,STATUS = closed']
 
 =========================================================================================================
 list the open messages for a topic. 
-keyWords: ['ticket,transaction,messages,transaction']
+keyWords: ['tickets,messages,transaction,component,transaction']
 
 =========================================================================================================
 Give me the list of the messages for a topic in IMS queue 
-keyWords: ['transaction,messages,list,topic,im,ticket,ims queu,transaction']
+keyWords: ['tickets,transaction,messages,list,component,ims,ims queue,transaction,IMS']
 
 =========================================================================================================
 Give me the list of the open customer and internal messages for a topic 
-keyWords: ['transaction,messages,list,custom,topic,intern,ticket,open,transaction']
+keyWords: ['customer,tickets,transaction,messages,list,internal,component,open,transaction']
 
 =========================================================================================================
 What messages haven't been closed yet? 
-keyWords: ['ticket,transaction,messages,transaction']
+keyWords: ['tickets,transaction,messages,transaction']
 
 =========================================================================================================
 What messages are still pending? 
-keyWords: ['transaction,messages,pend,are,ticket,still,transaction']
+keyWords: ['tickets,transaction,messages,are,still,pending,transaction']
 
 =========================================================================================================
 I want the full list of open tickets for a topic. 
-keyWords: ['topic,open,transact,full,list']
+keyWords: ['tickets,component,full,list,open']
 
 =========================================================================================================
 What is the list of open messages for a component? 
-keyWords: ['transaction,messages,list,compon,component,ticket,open,transaction,component']
+keyWords: ['tickets,transaction,messages,list,component,open,transaction,component']
 
 =========================================================================================================
 Give me the list of the messages without processor?
-keyWords: ['messages,ticket,transaction,list,processor,transaction']
+keyWords: ['tickets,messages,transaction,list,processor,transaction']
 
 =========================================================================================================
 Give me the list of the messages that have no processor 
-keyWords: ['messages,ticket,transaction,list,processor,transaction']
+keyWords: ['tickets,messages,transaction,list,processor,transaction']
 
 =========================================================================================================
 Can you list all the messages without a processor? 
-keyWords: ['ticket,transaction,messages,transaction']
+keyWords: ['tickets,transaction,messages,transaction,Can']
 
 =========================================================================================================
 Show me all unassigned messages in my topic 
-keyWords: ['transaction,messages,open messag,list,topic,ticket,transaction,manager_ID: 45']
+keyWords: ['tickets,transaction,messages,list,component,queue,open messages,transaction,manager_ID: 45,Show']
 
 =========================================================================================================
 Show me messages with no processor
-keyWords: ['messages,ticket,transaction,list,processor,transaction']
+keyWords: ['tickets,messages,transaction,list,processor,transaction,Show']
 
 =========================================================================================================
 which messages don't have a programmer assigned to them. 
-keyWords: ['employe,transaction,dont,messages,ticket,assign,transaction']
+keyWords: ['tickets,transaction,dont,messages,assigned,employee,transaction']
 
 =========================================================================================================
 list the messages that need to be assigned to someone. 
-keyWords: ['ticket,transaction,messages,someon,take,transaction']
+keyWords: ['tickets,someone,messages,take,transaction,transaction']
 
 =========================================================================================================
 Give me the list of unassigned messages 
-keyWords: ['open messag,list,transaction,messages,ticket,transaction']
+keyWords: ['tickets,list,transaction,messages,open messages,transaction']
 
 =========================================================================================================
 Give me the list of unattended messages for a component 
-keyWords: ['transaction,messages,open messag,list,compon,component,ticket,transaction,component']
+keyWords: ['tickets,transaction,messages,component,list,open messages,transaction,component']
 
 =========================================================================================================
 What messages are currently without processor in component X? 
-keyWords: ['transaction,component,messages,compon,are,ticket,processor,transaction,component']
+keyWords: ['tickets,transaction,component,messages,are,processor,transaction,component,X']
 
 =========================================================================================================
 What messages haven't been handled yet? 
-keyWords: ['touch,ticket,transaction,messages,transaction']
+keyWords: ['tickets,transaction,messages,touched,transaction']
 
 =========================================================================================================
 Return the list of tickets that are not assigned. 
-keyWords: ['transact,list']
+keyWords: ['tickets,list,Return']
 
 =========================================================================================================
 What are the messages without processor? 
-keyWords: ['ticket,transaction,messages,processor,transaction']
+keyWords: ['tickets,transaction,messages,processor,transaction']
 
 =========================================================================================================
 Give me all the messages with the specific flags?
-keyWords: ['flag,transaction,messages,ticket,specif,transaction']
+keyWords: ['tickets,specific,transaction,messages,flags,transaction']
 
 =========================================================================================================
 Give me the list of messages that have specific flags. 
-keyWords: ['transaction,specif,list,messages,flag,ticket,transaction']
+keyWords: ['tickets,transaction,messages,list,specific,flags,transaction']
 
 =========================================================================================================
 Can I have the list of messages with these flags? 
-keyWords: ['ticket,transaction,messages,transaction']
+keyWords: ['tickets,transaction,messages,transaction,Can']
 
 =========================================================================================================
 Show me all flagged messages 
-keyWords: ['messages,flag,transaction,list,ticket,transaction']
+keyWords: ['tickets,messages,transaction,list,flagged,transaction,Show']
 
 =========================================================================================================
 Show me escalated messages 
-keyWords: ['messages,flag,transaction,list,ticket,transaction,flag_escalated']
+keyWords: ['tickets,list,flag,transaction,messages,transaction,flag_escalated,Show']
 
 =========================================================================================================
 Which messages have this flag. 
-keyWords: ['flag,transaction,messages,ticket,have,transaction']
+keyWords: ['tickets,flag,transaction,messages,have,transaction']
 
 =========================================================================================================
 list the messages with this flag. 
-keyWords: ['ticket,transaction,messages,transaction']
+keyWords: ['tickets,transaction,messages,transaction']
 
 =========================================================================================================
 Give me all the escalated messages 
-keyWords: ['flag,transaction,messages,ticket,transaction,flag_escalated']
+keyWords: ['tickets,flag,transaction,messages,transaction,flag_escalated']
 
 =========================================================================================================
 Give me all the messages from Max Attention customers 
-keyWords: ['flag,transaction,messages,ticket,transaction']
+keyWords: ['tickets,flag,transaction,messages,transaction,Max,Attention']
 
 =========================================================================================================
 What messages are escalated? 
-keyWords: ['ticket,flag,transaction,messages,are,transaction,flag_escalated']
+keyWords: ['tickets,flag,transaction,messages,are,transaction,flag_escalated']
 
 =========================================================================================================
 What messages are currently from MaxAttention customers? 
-keyWords: ['transaction,messages,custom,are,ticket,maxattent,transaction']
+keyWords: ['tickets,customers,transaction,maxattention,messages,are,transaction,MaxAttention']
 
 =========================================================================================================
 Considering a specific flag, what is the list of messages? 
-keyWords: ['component,ticket,transaction,messages,transaction,component']
+keyWords: ['tickets,component,transaction,messages,transaction,component']
 
 =========================================================================================================
 What is the list of messages with a flag activated? 
-keyWords: ['transaction,list,messages,activ,flag,ticket,transaction']
+keyWords: ['tickets,transaction,messages,list,activated,flag,transaction']
 
 =========================================================================================================
