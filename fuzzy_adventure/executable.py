@@ -86,6 +86,24 @@ class FuzzyAdventure():
             debug.debug_statement('No new classifier created')
 
     @classmethod
+    def place_params(self, qnum, params):
+        project_path = os.environ['FUZZY_ADVENTURE']
+        data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
+        datafile = data_directory + "questions_plus.json"
+        tc = TemplateClassifier(datafile, model= linear_model.LogisticRegression(), test_size=0.2)
+        templates = tc.templates
+        template = templates[qnum][0]
+        types = templates[qnum][1]
+
+        applied = []
+        for (i, param) in enumerate(params):
+            type_to_apply = types[i]
+            applied.append(type_to_apply(param))
+
+        filled_query = template % applied
+        return filled_query
+
+    @classmethod
     def easter_egg(self, query):
         words = query.split()
         words = map(lambda x: x.lower(), words)
@@ -152,4 +170,3 @@ def main():
 
 if __name__=="__main__":
     main()
-

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load stringhelpers %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -85,9 +86,6 @@
 
       }
 
-       .answertable_entries { 
-
-        }
     </style>
     <link href="{{ STATIC_URL }}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -109,7 +107,6 @@
               <ul class="nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="about.html">About</a></li> 
-                <li><a href="train.html">Train</a></li>
                 <li><a href="">Tests</a></li> 
                 <li><a href="https://github.com/sapresearch/fuzzy_adventure">Code</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -120,33 +117,94 @@
       </div>
 
 
+    <ul class="nav nav-tabs" id="tablist">
+        <li><a data-target="#submitquestion" data-toggle="tab">Submit a Question</a></li>
+        <li><a data-target="#choosequestion" data-toggle="tab">Choose a Question</a></li>
+    </ul>
+
+
       <!-- Jumbotron -->
-      <div id="questionbox" class="jumbotron"> 
-        <h1 class="muted question_header">Submit a Question</h1>
-        <input type="text" id="questionfield" class="span4 input-large" placeholder="{{question|default:"Question"}}">
-        <a class="btn btn-large btn-success" href='#' onClick="window.location = '/QA_demo/?question='+encodeURIComponent(document.getElementById('questionfield').value)">Submit</a>
-      </div>
- 
+      <div id="questionbox" class="tab-content jumbotron"> 
+          
+        <!-- div for choosing question -->
+            <div id="choosequestion" class="tab-pane">
 
-     {% if answer_ary|length > 0 %}
-     <table id = "answertable" class ="table table-hover table-bordered">
-        <thead><p class="answertable_header">Answers:</p></thead>
-            <tbody>
-        {% for answer in answer_ary %}
-               <tr class="info">
-                    <td><p class="answertable_entries">{{answer}}</p></td>
-               </tr>
-        {% endfor %}
-          </tbody>
-     </table>
-     {% endif %}
+                <div class="accordion" id="qlist">
+                    
+                {% for question in questionlist %}
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                        <a style="text-align:left;" class="accordion-toggle" data-toggle="collapse" data-parent="#qlist" href="#question{{forloop.counter}}"> 
+                        {{ question|empty }} </a>
+                        </div>
+                        <div id="question{{forloop.counter}}" class="accordion-body collapse">
+                            <div class=accordion-inner">
+                            {{ question|repl:forloop.counter|safe }}
 
-        
+                            <button class="btn btn-success" style="margin: 0% 0% 1% 10%;" type="button" onClick="parseparams({{forloop.counter}})">
+                                Submit
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- div for submitting question -->
+              <div id="submitquestion" class="tab-pane active">
+                <h1 class="muted question_header">Submit a Question</h1>
+                <input type="text" id="questionfield" class="span4 input-large" placeholder="{{question|default:"Question"}}">
+                <a class="btn btn-large btn-success" href='#' onClick="window.location = '/QA_demo/?question='+encodeURIComponent(document.getElementById('questionfield').value)">Submit</a>
+              </div>
+         
+
+             {% if answer_ary|length > 0 %}
+             <table id = "answertable" class ="table table-hover table-bordered">
+                <thead><p class="answertable_header">Answers:</p></thead>
+                    <tbody>
+                {% for answer in answer_ary %}
+                       <tr class="info">
+                            <td><p class="answertable_entries">{{answer}}</p></td>
+                       </tr>
+                {% endfor %}
+                  </tbody>
+             </table>
+             {% endif %}
+            </div
+  
     <hr>
     </div> <!-- /container -->
 
     <!-- Placed at the end of the document so the pages load faster -->
-    <!-- <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap.js"></script> -->
+    
+    <script src="{{ STATIC_URL }}/bootstrap/js/jquery-1.10.1.min.js"></script>
+    <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+
+        function parseparams(num){ 
+
+                tempstring='/QA_demo/?question_type='+num;
+                count =1;
+                $( 'input[class=\"input-large inputbox'+num+'\"]' ).each(function() {
+                tempstring+='&param'+ count +'='+encodeURIComponent($(this).val());
+                count+=1;
+                }); 
+                    window.location=tempstring;
+                }
+
+        $('#myCollapsible').collapse({
+        toggle: false
+        })        
+
+    
+        $('#tablist a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+        })
+
+        </script>
 
   </body>
     <div class="footer">

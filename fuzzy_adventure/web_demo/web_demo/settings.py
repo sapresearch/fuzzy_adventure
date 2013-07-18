@@ -29,6 +29,10 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = [os.environ['IP_ADDRESS']]
+
+SECRET_KEY = os.environ['SECRET_KEY']
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -82,7 +86,7 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    #'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -118,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'web_demo'
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
