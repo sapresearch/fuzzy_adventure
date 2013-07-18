@@ -1,8 +1,8 @@
 Contribute = [take part]
 
-Component = [Software, software components, software elements, CSS_component]
+Component = [Software, software components, software elements, CSS_component, topic]
 
-Employee = [resource, development team, person, member on the team, team member, programmer, contributor in the group, in the item management system, contributor, developer, who, Name, Person, team members, the person you will assign]
+Employee = [resource, development team, person,person's, member on the team, team member, programmer, contributor in the group, in the item management system, contributor, developer, who, Name, Person, team members, the person you will assign]
 
 causes delay = [contributing to backlog, makes up part, slowing down, not working properly, crash, no support, has problem, assign more people, time consuming, need to monitor, hinder, obstacles, reduce productivity, creates the tickets, trouble, cause work, difficult to maintain, spend a lot of time on, slow the system, backlog attributable, adding to workload, make work more, have the impact, weighting, significant, demanding, have the highest priority, used frequently, highest complexity, take time to implement, spend time, need to be improved, most problem]
 
@@ -52,7 +52,7 @@ at = [@]
 
 escalated = [de-escalations, flagged as escalated]
 
-my topic = [our queue, Cost Center]
+queue = [my topic, costcenter, ps queue]
 
 start_date = [on message arrival,when our team takes over,When a ticket gets queued]
 

@@ -95,6 +95,7 @@ def answerGenerator(question, allWords):
 	if 'escalated' in allWords or 'escalated' in question or stemmed('escalated') in allWords or stemmed('escalated')in  question:
 		conditions.add('flag_escalated')
 	if 'IRT' in allWords or 'IRT' in question:
+			print 'de-escalated', 'yes'
 			allWords.append('IRT')
 			what.add('transaction')
 
@@ -129,6 +130,24 @@ def answerGenerator(question, allWords):
 			what.update(what_temp)
 		if 'number' in allWords or 'number' in question:
 			conditions.add('number of closed tickets')
+
+	if 'high' in allWords or 'high' in question:
+		what.add('transaction')
+		conditions_temp = 'high priority'
+		conditions.update(conditions_temp)
+
+	if 'low' in allWords or 'low' in question:
+		what.add('transaction')
+		conditions_temp = 'low'
+		conditions.update(conditions_temp)
+
+	if 'medium' in allWords or 'medium' in question:
+		what.add('transaction')
+		conditions_temp = 'medium'
+		conditions.update(conditions_temp)
+
+
+
 
 
 

@@ -1,0 +1,667 @@
+New classifier created with model LogisticRegression
+For a medium transaction, how long does it typically take to close the ticket?
+give me the count of closed messages by a person?
+What components use most of my ressources?
+what is the MPT for my CostCenter?
+Who deliver most in my team
+Name the tickets with no programmers.
+How much time does it take to close a transaction with very high priority?
+Which modules give us the most trouble?
+How many messages a person has worked on?
+How many messages a person worked on?
+What component is my team struggling with?
+What person closes the most tickets?
+What number of tickets did Alexis close?
+The most productive person is the one who gets their work done and can implement ways to streamline and reduce manual intervention.
+How long does it take on average to close a ticket with a low priority?
+Show me the number of confirmed messages by a person?
+How many messages did a Person close?
+When we get tickets in our queue, what is the average MPT of our team?
+How much time does it take a person to close a transaction?
+How many days a message stayed in IMS queue?
+Tell me the name of the most productive person on my team.
+Which person on my team closes the most tickets?
+What components are weighting in the most in my backlog?
+Name a few components that are contributing to slowing down the team?
+a person was involved in solving how many of the tickets?
+Which component I need to assign more people to
+Who is the most efficient employee on my team?
+How long was this message on the SAP side?
+How long does it take a person on average to close a ticket?
+What is the name of the top contributor in the group?
+Of the messages a Person worked on, how many were escalated?
+What items are the most significant in my backlog?
+How many messages a person touched?
+How many escalated messages were processed by a person?
+which components are adding to my work load
+what is the IRT when message arrives? ( Initial Response Time )
+How long does it take on average to close a ticket with a high priority?
+How many escalated message did a Person work on?
+How long does a person take to finish a ticket?
+Whos is the person you will assign most important task to?
+Which areas of code are generating the most problems?
+Where is the development the most difficult?
+Who is the top closer on the team?
+which components contribute most to my backlog
+What is slowing down my team?
+Who is the number 1 contributor on the team?
+Who clears problems the quickest?
+Who is the best?
+Rank my team on problem resolution time?
+What's the average length of time to close a medium ticket?
+How many transactions did Jeff close?
+Who has the best productivity in my team?
+What component has the maximum contribution to my backlog?
+List all the messages where no programmers have been assigned to.
+Give me the list of the messages with no programmers.
+How long a message stays in SAP queue in average?
+Who is the most efficient people in my team
+show me the messages that person got involved in?
+Tell me the time it takes a person to close a ticket on average.
+How many times did excel crash today?
+What components take most time to get resolved?
+Give me the number of tickets a person finished.
+To what components is your backlog attributable (in general)?
+Which modules are the most difficult to maintain?
+Who is always there to solve complex issues?
+What is the average MPT when messages leave PS queue?
+In your team, who would you say is the most productive person.
+Who on the team, is the person that close the biggest amount of open tickets?
+What software components are contributing to slowing down your team the most?
+Who is the most productive on your team?
+What manual processes are slowing me down the most?
+What items are the most demanding in my backlog?
+What component are taking part the most to my backlog?
+Who can close the most tickets the fastest?
+Which person on my team closes the most tickets?
+Of the messages a Person worked on, how many were escalated?
+What software components contribute the most to slowing down the team?
+What software components are slowing down the team the most?
+What component makes up the largest part of my backlog?
+What is the first in a list of team members ordered by effectiveness?
+When the message arrives, what is the average MPT?
+No keywords found!
+Did I have any support from my supervisor today?
+Who is the person that contribute the most to the success of my team?
+No keywords found!
+show me the number of escalated messages handled by a person?
+How many message were closed by a Person?
+Name the most productive person on the team
+Considering the most number of open tickets closed, who is the most productive member of the team?
+Which employee on my team has the highest productivity?
+What is the average MPT of messages when our team takes over?
+How long does it take on average to close a ticket with a very high priority?
+Who always close most number of open tickets in a sprint
+How many message were touched by a Person?
+Which team member closes the most tickets?
+Which domain is most trouble?
+What's the average time to complete a very high transaction?
+How many days a message was in processing by SAP?
+What's the average time to complete a high transaction?
+How many escalated messages were processed by a person?
+What are the main software components that slow my team down?
+How many messages a person was involved in?
+What software components hinder my team's productivity the most?
+How many messages a person solved?
+what is the MPT for my CostCenter?
+Which software elements contribute the most in your team backlog?
+What's the average time to close a medium transaction?
+What is the average MPT of incoming tickets in our queue?
+what modules make me work more
+How many de-escalations a person was working on?
+What are the key factors to my backlog?
+How long in average does it take for a message to be closed by our team?
+What's the average time to close a low transaction?
+What number of transactions did Jeff finish?
+What system(s) are not working properly today?
+What's the average time it takes a person to close a ticket?
+What programmer is the fastest at closing tickets?
+No keywords found!
+Return the list of open tickets for component asd-asd-asd.
+What components delay my team's work the most?
+Who is the most efficient and effective at their job?
+who is the fastest developer
+What's the average length of time to complete a medium ticket?
+When a ticket gets queued, what is the average MPT of our team?
+What is the average MPT on message arrival?
+What is the average MPT on message arrival?
+Who is the most efficient person in my team?
+How many messages did a Person touch?
+What is the average MPT when messages leave PS queue?
+What system(s) are not working properly today?
+No keywords found!
+show me the number of escalated messages handled by a person?
+How many escalated message did a Person work on?
+Who in your team closes the most open tickets on average?
+What software is slowing us down?
+List all the open messages for the topic qwe-qew-qew.
+By which components the team is the most slow down?
+What software components are contributing the most to the backlog of the team?
+Which component has most problem
+The most productive person is the one who gets their work done and can implement ways to streamline and reduce manual intervention.
+How many tickets did Paul close?
+Who knows Jira best in my team?
+What modules to we spend a lot of time on?
+If I assign this ticket to a person, how long is it going to take?
+How good is a person to close the tickets?
+No keywords found!
+Return the messages with no processors.
+How much time does it take to close a transaction with high priority?
+What components are the biggest obstacles to my team's productivity?
+How fast is a person at closing tickets?
+How many times did excel crash today?
+Which member on my team is closing the most number of open ticket?
+What number of tickets did Jeff finish?
+When the message arrives, what is the average MPT?
+What is the average MPT when messages get forwarded to our queue?
+Which features are causing the most work?
+Who on the team solves the most issues?
+Show me the productivity information about my team
+How long does it take Jeff to close a ticket on average?
+Who is always there to solve complex issues?
+What is the average MPT when messages get forwarded to our queue?
+who is the most productive developer
+Who, in my team, works fastest?
+No keywords found!
+show me the number of escalated messages handled by a person?
+List all the messages with no end date for the component asfd-adsf-adsf.
+Who consistently proves they can provide quality work/support on a regular basis?
+When the message arrives, what is the average MPT?
+How many tickets a person closed?
+Who is the most productive on my team?
+What's the average time it takes a person to complete a ticket?
+Which components are slowing down my team?
+How many messages a person got confirmed?
+How long does it take Jeff to fix a transaction on average?
+What manual processes are slowing me down the most?
+No keywords found!
+Did I have any support from my supervisor today?
+who is the best developer in my team
+How long does it take on average to close a ticket with a medium priority?
+Score: What is the % from MPT this message was @ SAP-side?
+Who is number 1 in the item management system?
+How many de-escalations a person was working on?
+Which component i need to monitor most to see how to imrove it
+For a medium ticket, how long should I wait before it's closed?
+How much time will a person take to close a ticket?
+Whose tickets are dealt with most swiftly?
+Who is the most productive team member?
+How long a message stays in the SAP side?
+Who's the best employee?
+Which ticket component are most time consuming
+From all the opened tickets, what software causes the most delay?
+Give me the count of involved messages by a person?
+What is the average MPT on message arrival?
+No keywords found!
+show me the number of escalated messages handled by a person?
+List the components that slow my system the most
+Who is the most open tickets closer member on the team?
+How many tickets did Paul finish?
+who closes more tickets in Jira
+List all the tickets with no processor.
+Count the number of tickets a person closed.
+What software components are slowing down my backlog?
+How much time does it take to close a transaction with medium priority?
+How long does a person generally take to complete a ticket?
+What are the significant items that are slowing the team down?
+How long did message stay in SAP side?
+How long does it usually take a person to finish a ticket?
+Which one of my team members is most productive?
+What is a person's average time to close a ticket?
+Who is the most efficient and effective at their job?
+How many transactions did Puntis finish?
+What components have the greatest impact on my backlog?
+Who consistently proves they can provide quality work/support on a regular basis?
+What software creates the tickets that slow us down the most?
+What is the % from MPT this message was @ SAP-side?
+what are the modules that contribute usually to my backlog
+How much time does it take to close a transaction with low priority?
+How many tickets has Alexis completed?
+Who is the most productive employee on my team?
+What software components hinder my team most?
+what is average MPT for messages in my topic?
+Give me the list of open transactions for component aaa-bbb-cxc.
+Name the most productive person on your team.
+What number of transactions did Alexis close?
+0.954545454545
+Target/Classification results
+For a medium transaction, how long does it typically take to close the ticket?
+give me the count of closed messages by a person?
+What components use most of my ressources?
+what is the MPT for my CostCenter?
+Who deliver most in my team
+Name the tickets with no programmers.
+How much time does it take to close a transaction with very high priority?
+Which modules give us the most trouble?
+How many messages a person has worked on?
+How many messages a person worked on?
+What component is my team struggling with?
+What person closes the most tickets?
+What number of tickets did Alexis close?
+The most productive person is the one who gets their work done and can implement ways to streamline and reduce manual intervention.
+How long does it take on average to close a ticket with a low priority?
+Show me the number of confirmed messages by a person?
+How many messages did a Person close?
+When we get tickets in our queue, what is the average MPT of our team?
+How much time does it take a person to close a transaction?
+How many days a message stayed in IMS queue?
+Tell me the name of the most productive person on my team.
+Which person on my team closes the most tickets?
+What components are weighting in the most in my backlog?
+Name a few components that are contributing to slowing down the team?
+a person was involved in solving how many of the tickets?
+Which component I need to assign more people to
+Who is the most efficient employee on my team?
+How long was this message on the SAP side?
+How long does it take a person on average to close a ticket?
+What is the name of the top contributor in the group?
+Of the messages a Person worked on, how many were escalated?
+What items are the most significant in my backlog?
+How many messages a person touched?
+How many escalated messages were processed by a person?
+which components are adding to my work load
+what is the IRT when message arrives? ( Initial Response Time )
+How long does it take on average to close a ticket with a high priority?
+How many escalated message did a Person work on?
+How long does a person take to finish a ticket?
+Whos is the person you will assign most important task to?
+Which areas of code are generating the most problems?
+Where is the development the most difficult?
+Who is the top closer on the team?
+which components contribute most to my backlog
+What is slowing down my team?
+Who is the number 1 contributor on the team?
+Who clears problems the quickest?
+Who is the best?
+Rank my team on problem resolution time?
+What's the average length of time to close a medium ticket?
+How many transactions did Jeff close?
+Who has the best productivity in my team?
+What component has the maximum contribution to my backlog?
+List all the messages where no programmers have been assigned to.
+Give me the list of the messages with no programmers.
+How long a message stays in SAP queue in average?
+Who is the most efficient people in my team
+show me the messages that person got involved in?
+Tell me the time it takes a person to close a ticket on average.
+How many times did excel crash today?
+What components take most time to get resolved?
+Give me the number of tickets a person finished.
+To what components is your backlog attributable (in general)?
+Which modules are the most difficult to maintain?
+Who is always there to solve complex issues?
+What is the average MPT when messages leave PS queue?
+In your team, who would you say is the most productive person.
+Who on the team, is the person that close the biggest amount of open tickets?
+What software components are contributing to slowing down your team the most?
+Who is the most productive on your team?
+What manual processes are slowing me down the most?
+What items are the most demanding in my backlog?
+What component are taking part the most to my backlog?
+Who can close the most tickets the fastest?
+Which person on my team closes the most tickets?
+Of the messages a Person worked on, how many were escalated?
+What software components contribute the most to slowing down the team?
+What software components are slowing down the team the most?
+What component makes up the largest part of my backlog?
+What is the first in a list of team members ordered by effectiveness?
+When the message arrives, what is the average MPT?
+No keywords found!
+Did I have any support from my supervisor today?
+Who is the person that contribute the most to the success of my team?
+No keywords found!
+show me the number of escalated messages handled by a person?
+How many message were closed by a Person?
+Name the most productive person on the team
+Considering the most number of open tickets closed, who is the most productive member of the team?
+Which employee on my team has the highest productivity?
+What is the average MPT of messages when our team takes over?
+How long does it take on average to close a ticket with a very high priority?
+Who always close most number of open tickets in a sprint
+How many message were touched by a Person?
+Which team member closes the most tickets?
+Which domain is most trouble?
+What's the average time to complete a very high transaction?
+How many days a message was in processing by SAP?
+What's the average time to complete a high transaction?
+How many escalated messages were processed by a person?
+What are the main software components that slow my team down?
+How many messages a person was involved in?
+What software components hinder my team's productivity the most?
+How many messages a person solved?
+what is the MPT for my CostCenter?
+Which software elements contribute the most in your team backlog?
+What's the average time to close a medium transaction?
+What is the average MPT of incoming tickets in our queue?
+what modules make me work more
+How many de-escalations a person was working on?
+What are the key factors to my backlog?
+How long in average does it take for a message to be closed by our team?
+What's the average time to close a low transaction?
+What number of transactions did Jeff finish?
+What system(s) are not working properly today?
+What's the average time it takes a person to close a ticket?
+What programmer is the fastest at closing tickets?
+No keywords found!
+Return the list of open tickets for component asd-asd-asd.
+What components delay my team's work the most?
+Who is the most efficient and effective at their job?
+who is the fastest developer
+What's the average length of time to complete a medium ticket?
+When a ticket gets queued, what is the average MPT of our team?
+What is the average MPT on message arrival?
+What is the average MPT on message arrival?
+Who is the most efficient person in my team?
+How many messages did a Person touch?
+What is the average MPT when messages leave PS queue?
+What system(s) are not working properly today?
+No keywords found!
+show me the number of escalated messages handled by a person?
+How many escalated message did a Person work on?
+Who in your team closes the most open tickets on average?
+What software is slowing us down?
+List all the open messages for the topic qwe-qew-qew.
+By which components the team is the most slow down?
+What software components are contributing the most to the backlog of the team?
+Which component has most problem
+The most productive person is the one who gets their work done and can implement ways to streamline and reduce manual intervention.
+How many tickets did Paul close?
+Who knows Jira best in my team?
+What modules to we spend a lot of time on?
+If I assign this ticket to a person, how long is it going to take?
+How good is a person to close the tickets?
+No keywords found!
+Return the messages with no processors.
+How much time does it take to close a transaction with high priority?
+What components are the biggest obstacles to my team's productivity?
+How fast is a person at closing tickets?
+How many times did excel crash today?
+Which member on my team is closing the most number of open ticket?
+What number of tickets did Jeff finish?
+When the message arrives, what is the average MPT?
+What is the average MPT when messages get forwarded to our queue?
+Which features are causing the most work?
+Who on the team solves the most issues?
+Show me the productivity information about my team
+How long does it take Jeff to close a ticket on average?
+Who is always there to solve complex issues?
+What is the average MPT when messages get forwarded to our queue?
+who is the most productive developer
+Who, in my team, works fastest?
+No keywords found!
+show me the number of escalated messages handled by a person?
+List all the messages with no end date for the component asfd-adsf-adsf.
+Who consistently proves they can provide quality work/support on a regular basis?
+When the message arrives, what is the average MPT?
+How many tickets a person closed?
+Who is the most productive on my team?
+What's the average time it takes a person to complete a ticket?
+Which components are slowing down my team?
+How many messages a person got confirmed?
+How long does it take Jeff to fix a transaction on average?
+What manual processes are slowing me down the most?
+No keywords found!
+Did I have any support from my supervisor today?
+who is the best developer in my team
+How long does it take on average to close a ticket with a medium priority?
+D / D | For a medium transaction, how long does it typically take to close the ticket?
+C / C | give me the count of closed messages by a person?
+B / B | What components use most of my ressources?
+H / H | what is the MPT for my CostCenter?
+A / A | Who deliver most in my team
+K / K | Name the tickets with no programmers.
+D / D | How much time does it take to close a transaction with very high priority?
+B / B | Which modules give us the most trouble?
+F / F | How many messages a person has worked on?
+F / F | How many messages a person worked on?
+B / B | What component is my team struggling with?
+A / A | What person closes the most tickets?
+C / C | What number of tickets did Alexis close?
+A / A | The most productive person is the one who gets their work done and can implement ways to streamline and reduce manual intervention.
+D / D | How long does it take on average to close a ticket with a low priority?
+C / C | Show me the number of confirmed messages by a person?
+C / C | How many messages did a Person close?
+H / H | When we get tickets in our queue, what is the average MPT of our team?
+E / E | How much time does it take a person to close a transaction?
+G / G | How many days a message stayed in IMS queue?
+A / A | Tell me the name of the most productive person on my team.
+A / A | Which person on my team closes the most tickets?
+B / B | What components are weighting in the most in my backlog?
+B / B | Name a few components that are contributing to slowing down the team?
+F / F | a person was involved in solving how many of the tickets?
+B / B | Which component I need to assign more people to
+A / A | Who is the most efficient employee on my team?
+G / G | How long was this message on the SAP side?
+E / E | How long does it take a person on average to close a ticket?
+A / A | What is the name of the top contributor in the group?
+I / I | Of the messages a Person worked on, how many were escalated?
+B / B | What items are the most significant in my backlog?
+F / F | How many messages a person touched?
+I / I | How many escalated messages were processed by a person?
+B / B | which components are adding to my work load
+H / H | what is the IRT when message arrives? ( Initial Response Time )
+D / D | How long does it take on average to close a ticket with a high priority?
+I / I | How many escalated message did a Person work on?
+E / E | How long does a person take to finish a ticket?
+A / A | Whos is the person you will assign most important task to?
+B / B | Which areas of code are generating the most problems?
+B / B | Where is the development the most difficult?
+A / A | Who is the top closer on the team?
+B / B | which components contribute most to my backlog
+B / B | What is slowing down my team?
+A / A | Who is the number 1 contributor on the team?
+A / A | Who clears problems the quickest?
+A / A | Who is the best?
+A / C | Rank my team on problem resolution time?
+D / D | What's the average length of time to close a medium ticket?
+C / C | How many transactions did Jeff close?
+A / A | Who has the best productivity in my team?
+B / B | What component has the maximum contribution to my backlog?
+K / K | List all the messages where no programmers have been assigned to.
+K / K | Give me the list of the messages with no programmers.
+G / G | How long a message stays in SAP queue in average?
+A / A | Who is the most efficient people in my team
+F / F | show me the messages that person got involved in?
+E / E | Tell me the time it takes a person to close a ticket on average.
+B / B | How many times did excel crash today?
+B / B | What components take most time to get resolved?
+C / C | Give me the number of tickets a person finished.
+B / B | To what components is your backlog attributable (in general)?
+B / B | Which modules are the most difficult to maintain?
+A / A | Who is always there to solve complex issues?
+H / H | What is the average MPT when messages leave PS queue?
+A / A | In your team, who would you say is the most productive person.
+A / A | Who on the team, is the person that close the biggest amount of open tickets?
+B / B | What software components are contributing to slowing down your team the most?
+A / A | Who is the most productive on your team?
+B / B | What manual processes are slowing me down the most?
+B / B | What items are the most demanding in my backlog?
+B / B | What component are taking part the most to my backlog?
+A / A | Who can close the most tickets the fastest?
+A / A | Which person on my team closes the most tickets?
+I / I | Of the messages a Person worked on, how many were escalated?
+B / B | What software components contribute the most to slowing down the team?
+B / B | What software components are slowing down the team the most?
+B / B | What component makes up the largest part of my backlog?
+A / A | What is the first in a list of team members ordered by effectiveness?
+H / H | When the message arrives, what is the average MPT?
+B / B | Did I have any support from my supervisor today?
+A / A | Who is the person that contribute the most to the success of my team?
+I / I | show me the number of escalated messages handled by a person?
+C / C | How many message were closed by a Person?
+A / A | Name the most productive person on the team
+A / A | Considering the most number of open tickets closed, who is the most productive member of the team?
+A / A | Which employee on my team has the highest productivity?
+H / H | What is the average MPT of messages when our team takes over?
+D / D | How long does it take on average to close a ticket with a very high priority?
+A / A | Who always close most number of open tickets in a sprint
+F / F | How many message were touched by a Person?
+A / A | Which team member closes the most tickets?
+B / B | Which domain is most trouble?
+D / D | What's the average time to complete a very high transaction?
+G / G | How many days a message was in processing by SAP?
+D / D | What's the average time to complete a high transaction?
+I / I | How many escalated messages were processed by a person?
+B / B | What are the main software components that slow my team down?
+F / F | How many messages a person was involved in?
+B / B | What software components hinder my team's productivity the most?
+C / C | How many messages a person solved?
+H / H | what is the MPT for my CostCenter?
+B / B | Which software elements contribute the most in your team backlog?
+D / D | What's the average time to close a medium transaction?
+H / H | What is the average MPT of incoming tickets in our queue?
+B / B | what modules make me work more
+I / I | How many de-escalations a person was working on?
+B / B | What are the key factors to my backlog?
+G / G | How long in average does it take for a message to be closed by our team?
+D / D | What's the average time to close a low transaction?
+C / C | What number of transactions did Jeff finish?
+B / B | What system(s) are not working properly today?
+E / E | What's the average time it takes a person to close a ticket?
+A / A | What programmer is the fastest at closing tickets?
+J / B | Return the list of open tickets for component asd-asd-asd.
+B / B | What components delay my team's work the most?
+A / A | Who is the most efficient and effective at their job?
+A / A | who is the fastest developer
+D / D | What's the average length of time to complete a medium ticket?
+H / H | When a ticket gets queued, what is the average MPT of our team?
+H / H | What is the average MPT on message arrival?
+H / H | What is the average MPT on message arrival?
+A / A | Who is the most efficient person in my team?
+F / C | How many messages did a Person touch?
+H / H | What is the average MPT when messages leave PS queue?
+B / B | What system(s) are not working properly today?
+I / I | show me the number of escalated messages handled by a person?
+I / I | How many escalated message did a Person work on?
+A / A | Who in your team closes the most open tickets on average?
+B / B | What software is slowing us down?
+J / J | List all the open messages for the topic qwe-qew-qew.
+B / B | By which components the team is the most slow down?
+B / B | What software components are contributing the most to the backlog of the team?
+B / B | Which component has most problem
+A / A | The most productive person is the one who gets their work done and can implement ways to streamline and reduce manual intervention.
+C / C | How many tickets did Paul close?
+A / A | Who knows Jira best in my team?
+B / B | What modules to we spend a lot of time on?
+E / E | If I assign this ticket to a person, how long is it going to take?
+C / C | How good is a person to close the tickets?
+K / K | Return the messages with no processors.
+D / D | How much time does it take to close a transaction with high priority?
+B / B | What components are the biggest obstacles to my team's productivity?
+E / A | How fast is a person at closing tickets?
+B / B | How many times did excel crash today?
+A / A | Which member on my team is closing the most number of open ticket?
+C / C | What number of tickets did Jeff finish?
+H / H | When the message arrives, what is the average MPT?
+H / H | What is the average MPT when messages get forwarded to our queue?
+B / B | Which features are causing the most work?
+A / A | Who on the team solves the most issues?
+A / A | Show me the productivity information about my team
+E / E | How long does it take Jeff to close a ticket on average?
+A / A | Who is always there to solve complex issues?
+H / H | What is the average MPT when messages get forwarded to our queue?
+A / A | who is the most productive developer
+A / A | Who, in my team, works fastest?
+I / I | show me the number of escalated messages handled by a person?
+J / B | List all the messages with no end date for the component asfd-adsf-adsf.
+A / A | Who consistently proves they can provide quality work/support on a regular basis?
+H / H | When the message arrives, what is the average MPT?
+C / C | How many tickets a person closed?
+A / A | Who is the most productive on my team?
+E / E | What's the average time it takes a person to complete a ticket?
+B / B | Which components are slowing down my team?
+C / C | How many messages a person got confirmed?
+E / E | How long does it take Jeff to fix a transaction on average?
+B / B | What manual processes are slowing me down the most?
+B / B | Did I have any support from my supervisor today?
+A / A | who is the best developer in my team
+D / D | How long does it take on average to close a ticket with a medium priority?
+What is the % from MPT this message was @ SAP-side?
+Who is number 1 in the item management system?
+How many de-escalations a person was working on?
+Which component i need to monitor most to see how to imrove it
+For a medium ticket, how long should I wait before it's closed?
+How much time will a person take to close a ticket?
+Whose tickets are dealt with most swiftly?
+Who is the most productive team member?
+How long a message stays in the SAP side?
+Who's the best employee?
+Which ticket component are most time consuming
+From all the opened tickets, what software causes the most delay?
+Give me the count of involved messages by a person?
+What is the average MPT on message arrival?
+No keywords found!
+show me the number of escalated messages handled by a person?
+List the components that slow my system the most
+Who is the most open tickets closer member on the team?
+How many tickets did Paul finish?
+who closes more tickets in Jira
+List all the tickets with no processor.
+Count the number of tickets a person closed.
+What software components are slowing down my backlog?
+How much time does it take to close a transaction with medium priority?
+How long does a person generally take to complete a ticket?
+What are the significant items that are slowing the team down?
+How long did message stay in SAP side?
+How long does it usually take a person to finish a ticket?
+Which one of my team members is most productive?
+What is a person's average time to close a ticket?
+Who is the most efficient and effective at their job?
+How many transactions did Puntis finish?
+What components have the greatest impact on my backlog?
+Who consistently proves they can provide quality work/support on a regular basis?
+What software creates the tickets that slow us down the most?
+What is the % from MPT this message was @ SAP-side?
+what are the modules that contribute usually to my backlog
+How much time does it take to close a transaction with low priority?
+How many tickets has Alexis completed?
+Who is the most productive employee on my team?
+What software components hinder my team most?
+what is average MPT for messages in my topic?
+Give me the list of open transactions for component aaa-bbb-cxc.
+Name the most productive person on your team.
+What number of transactions did Alexis close?
+H / H | What is the % from MPT this message was @ SAP-side?
+A / A | Who is number 1 in the item management system?
+I / I | How many de-escalations a person was working on?
+B / B | Which component i need to monitor most to see how to imrove it
+D / D | For a medium ticket, how long should I wait before it's closed?
+E / E | How much time will a person take to close a ticket?
+A / B | Whose tickets are dealt with most swiftly?
+A / A | Who is the most productive team member?
+G / G | How long a message stays in the SAP side?
+A / A | Who's the best employee?
+B / B | Which ticket component are most time consuming
+B / B | From all the opened tickets, what software causes the most delay?
+F / F | Give me the count of involved messages by a person?
+H / H | What is the average MPT on message arrival?
+I / I | show me the number of escalated messages handled by a person?
+B / B | List the components that slow my system the most
+A / A | Who is the most open tickets closer member on the team?
+C / C | How many tickets did Paul finish?
+A / A | who closes more tickets in Jira
+K / K | List all the tickets with no processor.
+C / C | Count the number of tickets a person closed.
+B / B | What software components are slowing down my backlog?
+D / D | How much time does it take to close a transaction with medium priority?
+E / E | How long does a person generally take to complete a ticket?
+B / B | What are the significant items that are slowing the team down?
+G / G | How long did message stay in SAP side?
+E / E | How long does it usually take a person to finish a ticket?
+A / A | Which one of my team members is most productive?
+E / E | What is a person's average time to close a ticket?
+A / A | Who is the most efficient and effective at their job?
+C / C | How many transactions did Puntis finish?
+B / B | What components have the greatest impact on my backlog?
+A / A | Who consistently proves they can provide quality work/support on a regular basis?
+B / B | What software creates the tickets that slow us down the most?
+H / H | What is the % from MPT this message was @ SAP-side?
+B / B | what are the modules that contribute usually to my backlog
+D / D | How much time does it take to close a transaction with low priority?
+C / C | How many tickets has Alexis completed?
+A / A | Who is the most productive employee on my team?
+B / B | What software components hinder my team most?
+H / H | what is average MPT for messages in my topic?
+J / B | Give me the list of open transactions for component aaa-bbb-cxc.
+A / A | Name the most productive person on your team.
+C / C | What number of transactions did Alexis close?
