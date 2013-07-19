@@ -77,9 +77,10 @@ STATIC_URL = os.path.join(PROJECT_ROOT,'static')
 
 #Additional locations of static files
 STATICFILES_DIRS = (
-   os.path.join(STATIC_URL, "bootstrap", "css"),
-   os.path.join(STATIC_URL, "bootstrap", "js"),
-   os.path.join(STATIC_URL, "bootstrap", "img"),
+   os.path.join(STATIC_URL, "resource", "css"),
+   os.path.join(STATIC_URL, "resource", "js"),
+   os.path.join(STATIC_URL, "resource", "img"),
+   os.path.join(STATIC_URL, "resource", "pdf"),
    os.path.join(STATIC_URL, "media"),
 )
 
