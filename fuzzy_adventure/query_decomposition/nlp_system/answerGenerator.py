@@ -112,6 +112,9 @@ def answerGenerator(question, allWords):
 			conditions.add(str('manager_ID: '+ manager_ID))
 		else: 
 			conditions.add('manager_ID Was not provided by the manager!')
+	if 'support from my supervisor' in question:
+		allWords.append('experienced')
+		what.add('employee')
 
 	if stemmed('productive') in allWords or stemmed('productive') in question:
 		what.add('transaction')

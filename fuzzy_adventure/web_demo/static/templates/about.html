@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+     {% block child %}
+
+      <TITLE>
+         About Q and Q Systems
+      </TITLE>
+<H2>Introduction</H2>
+   
+<p>
+A Question-Answering (Q&A) system receives the users&#8217; 
+questions posed in natural language and provides them with automatic answers. 
+It&#8217;s an information retrieval system that returns the exact satisfying 
+answers instead of a collection of documents.</p>
+<p>
+In order to design such a computer system, multidisciplinary research 
+should be conducted within the domains of Natural Language Processing (NLP), 
+Machine Learning, Data Mining and information Retrieval.</p>
+
+<p>
+The first Q&A systems were Green’s <b>BASEBALL</b>, built in 1961, 
+and <b>LUNAR</b>, 1977, which were effectively able to answer questions 
+about the US baseball league and the geological analysis of rocks returned 
+by the Apollo moon missions, respectively. The development of 
+<i>comprehensive theories</i> in computational linguistics goes back to 1970s 
+and 1980s which has led to the NLP projects such as Q&A systems.
+
+<p>
+Some significant achievements in this domain include, but are not limited to, 
+Google/Google Now, Apple's Siri, IBM’s Watson, Wolfram Alpha, START and AskMSR.</p>
+
+<p>
+Question-Answering (Q&A) system could offer the followings [1]:
+<ol>
+<li>A human natural language interface</li>
+<li>Direct answers instead of a collection of documents</li>
+<li>Derived information and inferences:</li>
+<li>Answer triggers actions: System can be programmatically link to other applications so that answers led directly to actions.’</li>
+</ol>
+</p>
+
+<p>
+<figure>
+  <img src="/{{ STATIC_URL }}/resource/img/about_files/architecture.png" alt="Q&A Architecture Diagram" width="600">
+  <figcaption>Figure depicts the different levels of a Q&A system which is Input, Processing and Output [1]</figcaption>
+</figure>
+</p>
+
+<p>
+Our system also offers an alternative solution to return 
+answers to managers&#8217; questions which gives them the option to select a 
+question among a list of provided questions. This alternative serves as a backup 
+in case the system would not understand the posed question.
+</p>
+
+<h2>Question Selection Process</h2>
+
+<p>
+After having a few interviews with the IMS managers, we were able to collect 12 main questions which address some of their concerns. These questions are listed below. The unknown entity is left as blank.
+
+<ol>
+<li>How many messages (employee ID or employee Name) _____________ closed.</li>
+<li>How many messages (employee ID or employee Name) ______________ touched.</li>
+<li>How long a message stays in the SAP side?</li>
+<li>How many escalated messages (employee ID or employee Name) _____________ has worked on.</li>
+<li>What is the average MPT when the messages get forwarded to our queue?</li>
+<li>How experienced is (employee ID or employee Name) _____________ ?</li>
+<li>When (employee ID or employee Name) _____________ started working on (name of a component) _____________ component.</li>
+<li>Give me the list of the open messages for (name of the topic)______________ topic.</li>
+<li>Give me the list of the messages without a processor.</li>
+<li>Give me the list of all the messages with (name of the flag) ______________ flag.</li>
+<li>Who is the most productive person on my team?</li>
+<li>What component contributes the most to my backlog?</li>
+</ol>
+
+<h2> System Overview </h2>
+
+<p> 
+The system includes the following modules:
+
+<ol>
+<li>Natural Language Processing Module and its interface to the database (NLIDB)</li>
+   <ol>
+   <li>This module receives the question. The question could be posed in different ways.  Our system creates the parse tree and part of speech tagging for each question. We have developed an algorithm to choose the most informative words in each question which could represent the whole question and we refer to them as keywords</li>
+   <li>The selected keywords will then be sent to our context-based glossary to be checked and replaced with a common label that replaces all its synonyms. Our context-based glossary was created from the online surveys which were spread among some SAP employees/managers and is accessible through our Github page under the context-based data directory</li>
+   <li>The next step will be to apply some manually added rules to our keywords so as to make the system more accurate<\li>
+   <li>The selected keywords will be fed into our Natural Language Interface to Database (NLIDB) module which its job is to map the returned keywords to the tables and fields in our database. In other words, our NLIDB module creates the semantic net between the keywords and the database<\li>
+   <li>Finally, the NLP-NLIDB’s output is a quintuplet of</li>
+     <ol>
+     <li>List of keywords</li>
+     <li>Related table names</li>
+     <li>Related fields in the tables</li>
+     <li>Proper nouns found in the question</li>
+	 <li>List of the conditions</li>
+     </ol>
+   </ol>
+   <li>SQL Converter Module</li>
+   <p>
+   Our system addresses 12 questions in total and they could be asked in different ways in 
+   English natural language and this was a limitation that needed to be considered before 
+   we chose our SQL Converter’s architecture. Various architectures which could be used for 
+   SQL conversion module were studied, such as Pattern Matching, Hybrid of Pattern Matching 
+   and Relational Rules, Syntax-Based Systems, Semantic Grammar Systems, Intermediate 
+   Representation Language and Function-based Systems. For more information and the advantages 
+   and disadvantages of each of these systems, please refer to [2].
+   </p>
+   <p>
+   Every Machine Learning System needs some training data in order to learn the existing 
+   patterns and apply it to the unseen cases. Since there didn’t exist any training data 
+   for the managers’ questions, we conducted four different surveys and asked the employees
+   who are familiar with the domain to rephrase the questions in four different ways. The 
+   result was a dataset consisting of 286 questions and a domain specific glossary which 
+   helps the system to relate the similar words. For more information please refer to the 
+   Survey’s section in this document.
+   </p>
+   <p>
+   Considering the limited number of questions we needed to tackle and small dataset 
+   that we were able to collect, we chose the “Hybrid of Pattern Matching and Relational 
+   Rules” method. SQL statements being directed to our system had a dynamic nature. Therefore, 
+   we designed some SQL templates which could be completed in real-time. 
+   </p>
+   <p>
+   Fuzzy Adventure system’s SQL Conversion Module consists of two sub systems; 
+   Template Selector and Term Selector.
+   </p>
+       <dl>
+       <dt>Template Selector</dt>
+	   <dd>
+	   <p>The number of SQL templates corresponds to the number of questions. There exist 
+	   a one-to-one relationship between the type of the question and the template. 
+	   In case that we need to deal with more number of questions in the future, we 
+	   could design more flexible templates that could cover many-to-one relationships 
+	   between many questions and one template. 
+	   </p>
+	   <p>
+	   Extracted keywords from the NLP-NLIDB modules are then vectorized and 
+	   used for the system’s training purposes. We conducted different experiments 
+	   with various supervised machine learning algorithms and parameters such as Naïve 
+	   Bayes, Support Vector Machines, Linear Regressions and Logistic Regressions. 
+	   Logistic Regression returned the best results. 
+       </p>
+	   <p>
+	   The dataset was divided for training and testing purposes. In training stage, 
+	   system learns each question and its corresponding SQL template and in testing 
+	   (execution) stage a question will be matched to the most probable template. Our 
+	   system returns the right SQL template in 82%-95% of the cases.
+	   </p>
+	   </dd>
+       <dt>Term Selector</dt>
+	   <dd>
+	    Term Selector: Once the template is selected, we need to fill the values dynamically. 
+		In general the questions we tackle, either ask about a specific employee or a specific 
+		component. The relevant information is among the list of keywords being fed to the SQL 
+		module from the NLP-NLIDB module. Our current version is simply trying every permutation 
+		of every keywords returned by the NLP module into the template. Those filled templates 
+		are then sent to the database. Most of them do not return an answer because they simply 
+		don’t make sense, but one of the permutations has the right answer. Since only one 
+		permutation makes sense, it is easy to select it because it’s the only query that the 
+		database has an answer for. Theoretically, there may be more than one combination that 
+		returns the answer but we never faced such problem in our experiments. Solution to this 
+		problem could be considered in future improvements.
+	   </dd>
+       </dl>
+	</p>
+   <li>Graphical User Interface</li>
+   <p>
+   Fuzzy Adventure’s GUI is a Django web application, using twitter bootstrap for the front end
+   </p>
+   <p> 
+   The following figure depicts an overview of our system. We explain the system with an 
+   example. Consider the question being posed as:
+   </p>
+   <p><b>Who is the most productive employee on my team?</b></p>
+   <dl>
+   <dt>Syntactic Parser</dt>
+   <dd>This question will be syntactically parsed since our keyword_Extraction algorithm 
+   extract some keywords based on their roles in the sentence
+    <p>
+   (ROOT (SBARQ (WHNP (WP Who)) (SQ (VBZ is) (NP (NP (DT the) 
+   (ADJP (RBS most) (JJ productive)) (NN employee)) (PP (IN on) 
+   (NP (PRP$ my) (NN team)))))))
+   </p>
+   </dd>
+   
+   <dt>Keywords extraction and Category Identification</dt> 
+   <dd>keyword_Extraction algorithm extract some keywords. In this case:
+   <ul>
+   <li>Key words: most productive, on team</li>
+   <li>Category: Looking for = Employee</li>
+   </ul>
+   </dd>
+   
+   <dt>Lexical Cohesive Units analyzer<\dt>
+   <dd>Checking if a group of words imply a specific meaning by consulting the glossary. 
+   For instance by consulting the glossary we figure out that “Team member” means employee.
+   </dd>
+   
+   <dt>Semantic Analyzer</dt> 
+   <dd>Consulting the WordNet, the linguistic analyzer looks for the entity label that 
+   also matches the fields in database. For instance, the system replaces any word within 
+   the list of {person, member of the team, team member, programmer, contributor, developer} 
+   with the word employee
+   </dd>
+   
+   <dt>NLIDB</dt>
+   <dd>job is to map the words in the extracted keywords with the tables and fields in 
+   database and creating the relationship between the attributes (semantic net).
+   </dd>
+   
+   <dt>SQL Converter</dt> 
+   <dd>receives the quintuplet from NLIDB and sends the appropriate query to the database.</dd>  
+   </dl>
+<figure>
+  <img src="/{{ STATIC_URL }}/resource/img/about_files/system.png" alt="Q&A System Oveview" width="600">
+  <figcaption>System Oveview</figcaption>
+</figure>
+ </ol>
+<h2>Experiments and Results</h2>
+<p>
+To choose the right template, various machine learning approaches such as Logistic 
+Regression, Linear Regression, Support Vector Machines and Naïve Bayes examined. 
+To train and test the system, the list of selected keywords was used as a vector of 
+features which were explained in previous sections.
+</p>
+<p>
+Following figure shows the results we gained by applying Logistic Regression, 
+Linear Regression and Support Vector Machines. Each of these models ran through 
+multiple simulations:
+</p>
+<ol>
+<li>The set of questions was separated between training and testing. 
+The proportion varied from 90% for training and 10% for testing to 60% for 
+training and 40% for testing by steps of 5%
+</li>
+<li>Every model ran 500 times for every test/train split</li>
+<li>Scores are averaged over the test sets of the same size</li>
+</ol>
+<figure>
+  <img src="/{{ STATIC_URL }}/resource/img/about_files/score.png" alt="score" width="600">
+  <figcaption>Graph of Scores</figcaption>
+</figure>
+<p>
+As we can see, logistic regression has a higher precision comparing to the 
+Linear Regression and Support Vector Machines. Considering the size of our 
+question set we didn’t explore any further with more models. We were satisfied 
+with the result for the moment as it would provide a user experience close enough 
+to perfection for this project.
+</p>
+<h2>Future Work</h2>
+<p>
+Considering the limited number of questions we needed to tackle and the 
+small dataset that we were able to collect, we chose the “Hybrid of Pattern 
+Matching and Relational Rules” method which presents an acceptable performance. 
+However, our next milestone would be to improve our SQL converting modules to 
+generalize the system and broaden the number of questions. 
+</p>
+<p>
+For more information about different NLP to SQL conversion methods refer to our presentation in [2].
+</p>
+<h2>Constraints and Limitations</h2>
+<p>
+The main constraint we are facing during the course of our system development 
+is the data accessibility through the CSS application. The problem still persists 
+but we are trying to solve the problem.
+</p>
+<h2>References</h2>
+<ol>
+<li>Popkin, Jamie, “Google, Apple Siri and IBM Watson: The Future of Natural-Language Question Answering in Your Enterprise”, June 2013. 
+More info: jens.fuchs@sap.com</li>
+<li>link to NLP-SQL Converter.pdf]</li
+</ol>
+
+{% endblock %}

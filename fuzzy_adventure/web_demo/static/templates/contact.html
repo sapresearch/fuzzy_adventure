@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+     {% block child %}
+
+      <!-- Jumbotron -->
+      <div > 
+
+     <div class = "row-fluid" style="float:center">
+
+        <div class="span12">
+
+            <div id = "John" class = "span3 frame-center" >
+                <img src="/{{ STATIC_URL }}/resource/img/contact_files/john.jpg"/>
+            </div>
+            
+            <div id = "Puntis" class = "span3 frame-center">
+                <img src="/{{ STATIC_URL }}/resource/img/contact_files/puntis.jpg"/>
+            </div>
+            
+            <div id = "Alexis" class = "span3 frame-center">
+                <img src="/{{ STATIC_URL }}/resource/img/contact_files/alexis.jpg"/>
+            </div>
+            
+            <div id = "Caitlin" class = "span3 frame-center">
+                <img src="/{{ STATIC_URL }}/resource/img/contact_files/caitlin.jpg"/>
+            </div>
+
+          </div>
+
+      </div>
+
+        <div id="result" class="hero-unit">
+                <h2 style="text-align:center;">SAP Research</h2>
+                <h4 id ="role" style="text-align:center;">2013</h4>
+                <p id ="title" style="text-align:center;"></p>
+                <p id = "address" style="text-align:center;"></p>
+                <p id = "email" style="text-align:center;"></p>
+                <p id = "phone" style="text-align:center;"></p>
+        </div>
+
+      </div> <!-- /container -->
+
+{% endblock %}
+
+
