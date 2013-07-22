@@ -37,8 +37,8 @@ while True:
         print "question_type:", question_type
         print "what: ", what
         print "Proper Nouns: ", Proper_Nouns
-        test = get_components().components
-        print test
+        # test = get_components()
+        # print test
 
         # print_defaultValue = 'Default value: NOT FOUND'
         # print_condition = 'Condition: NOT FOUND'
