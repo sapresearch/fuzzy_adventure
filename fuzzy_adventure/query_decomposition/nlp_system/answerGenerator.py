@@ -1,4 +1,6 @@
 from nltk.stem import PorterStemmer as PStemmer
+from components import *
+import types
 ''' Answer generator includes a list of rules that are manually entered by the user to improve the performance and find the answer'''
 
 # def checkRelation(allWords):
@@ -156,6 +158,20 @@ def answerGenerator(question, allWords):
 
 	if stemmed('component') in allWords or stemmed('component') in  question:
 		what.add('component')
+
+
+	component_Names = get_components()
+	component_Names_l = list(component_Names)
+	# print component_Names_l
+	# print type(component_Names_l)
+	for c_n in component_Names_l:
+
+		if c_n!=None:
+			c_n_asc = c_n.encode('ascii','ignore')
+			if c_n_asc in question:
+				what.add('component')
+				allWords.append(c_n_asc)
+
 
 
 
