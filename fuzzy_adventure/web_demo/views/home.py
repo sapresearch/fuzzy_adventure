@@ -2,26 +2,28 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from fuzzy_adventure.query_decomposition.nlidb.term_selectors.term_selector import TermSelector
 import re
 
 questionlist = [
-        "How many messages <(employee ID or employee Name)> closed.",
-        "How many messages <(employee ID or employee Name)> touched.",
-        "How long a message stays in the SAP side?",
-        "How many escalated messages <(employee ID or employee Name)> has worked on.",
-        "What is the average MPT when the messages get forwarded to our queue?",
-        "What is the average MPT when the messages get forwarded to our queue?",
-        "When <(employee ID or employee Name)> started working on  <(name of a component)> component.",
-        "Give me the list of the open messages for <(name of the topic)> topic.",
-        "Give me the list of the messages without a processor.",
-        "Give me the list of all the messages with <(name of the flag)> flag.",
+        
         "Who is the most productive person on my team?",
         "What component contribute the most to my backlog?",
+        "How many messages <(employee ID or employee Name)> closed.",
+        "How long does it take on average to close a ticket with priority <(priority level)>",
+        "How long on average does it take <(person)> to close a ticket?",
+        "How many messages <(employee ID or employee Name)> touched.",
+        "How long on average does it take to close a ticket?",
+        "What is the average MPT when the messages get forwarded to our queue?",
+        "How many escalated messages <(employee ID or employee Name)> has worked on.",
+        "Give me the list of the open messages for <(name of the topic)> topic.",
+        "Give me the list of the messages without a processor.",
+        #"When <(employee ID or employee Name)> started working on  <(name of a component)> component.",
     ]
 
 
 def welcome(request):
-    
+
     params = []
     try:
         question = request.GET['question']
@@ -53,7 +55,8 @@ def welcome(request):
         question = questionlist[question_type-1]
         question = re.sub(r'<(.*?)>', param1, question) if param1 else question
         question = re.sub(r'<(.*?)>', param2, question) if param2 else  question
-        answers = FuzzyAdventure.place_params(question_type, params)
+        sql_query = FuzzyAdventure.place_params(question_type, params)
+        answers = TermSelector.filter_answers(TermSelector.crash_and_burn([sql_query]))
     else:
         answers = []
 

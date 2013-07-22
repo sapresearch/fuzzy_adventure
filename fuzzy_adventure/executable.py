@@ -7,7 +7,7 @@ import re
 
 from optparse import OptionParser, OptionGroup
 from fuzzy_adventure.test import load_data
-from fuzzy_adventure.query_decomposition import bayes, word_space, nlp
+from fuzzy_adventure.query_decomposition import bayes, word_space, nlp, classifier
 from fuzzy_adventure.query_decomposition.nlidb.template_selectors import template_type
 from fuzzy_adventure.query_decomposition.nlidb.term_selectors import term_selector
 from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
@@ -47,9 +47,11 @@ class FuzzyAdventure():
         if FuzzyAdventure.easter_egg(nl_query):
             return [42]
 
+        transform = classifier.NLP_Transform()
+
         sql, category = FuzzyAdventure.tc.template(nl_query)
-        keywords = nlp.tokens(nl_query)
-        keywords = nlp.remove_stopwords(keywords)
+        keywords = transform.transform([nl_query])
+        #keywords = nlp.remove_stopwords(keywords)
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
 
         return answer
@@ -77,7 +79,7 @@ class FuzzyAdventure():
             FuzzyAdventure.data_file = data_file
 
         # Only create a classifier if none were existant or if a new model is passed
-        if not hasattr(FuzzyAdventure, "model") or not isinstance(FuzzyAdventure.model.model, model.__class__):
+        if not hasattr(FuzzyAdventure, "model") or not hasattr(FuzzyAdventure, "tc") or not isinstance(FuzzyAdventure.model.model, model.__class__):
             debug.debug_statement('New classifier created with model %s' % model.__class__.__name__)
             FuzzyAdventure.model = TemplateClassifier(data_file, model, test_size=0.2)
             FuzzyAdventure.model.fit()
@@ -89,11 +91,15 @@ class FuzzyAdventure():
     def place_params(self, qnum, params):
         project_path = os.environ['FUZZY_ADVENTURE']
         data_directory = project_path + "/query_decomposition/nlidb/template_selectors/"
-        datafile = data_directory + "questions_plus.json"
-        tc = TemplateClassifier(datafile, model= linear_model.LogisticRegression(), test_size=0.2)
-        templates = tc.templates
-        template = templates[qnum][0]
-        types = templates[qnum][1]
+        data_file = data_directory + "questions_plus.json"
+        FuzzyAdventure.set_classifier(data_file)
+        templates = FuzzyAdventure.tc.templates
+        #convert number to letter for key in template classifier map
+
+        letter = chr(ord('A') + qnum - 1)
+ 
+        template = templates[letter][0]
+        types = templates[letter][1]
 
         applied = []
         for (i, param) in enumerate(params):
