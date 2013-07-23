@@ -58,8 +58,6 @@ def nlp_nlidb(question):
 	# return merged
 	# '''To use the nlp_nlidb module use:'''
 
-	print question
-	print merged
 	# print allWords, required_values, target, conditions, tables, question_type, Proper_Nouns 
 
 
