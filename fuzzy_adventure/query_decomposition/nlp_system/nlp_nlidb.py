@@ -60,7 +60,8 @@ def nlp_nlidb(question):
 
 	# print allWords, required_values, target, conditions, tables, question_type, Proper_Nouns 
 
-
+	debug.debug_statement(question)
+	debug.debug_statement(merged)
 	return allWords, required_values, target, conditions, tables, question_type, Proper_Nouns 
 
 
