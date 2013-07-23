@@ -25,7 +25,7 @@ class TermSelector():
             for combo in combos:
                 try:
                 # filled_query = template % combo
-                    filled_query = template % apply_type(combo, metadata)
+                    filled_query = template % self.apply_type(combo, metadata)
                     all_queries.append(filled_query)
                 except Exception:
                     continue
@@ -43,7 +43,7 @@ class TermSelector():
         for (i, element) in enumerate(elements):
             type_to_apply = types[i]
             applied.append(type_to_apply(element))
-        return applied
+        return tuple(applied)
 
 
     @classmethod
@@ -60,11 +60,9 @@ class TermSelector():
                 pass
         cur.close()
         return answers
-    
+
     @classmethod
     def filter_answers(self, answers):
-        temp = np.array([a for a in answers if a > 0 and a != '' and a != None])
-        result = temp[0] if len(temp) > 0 else None
+        temp = np.array([a for a in answers if len(a) > 0 and a[0]])
+        result = temp[0] if len(temp) > 0 else [None]
         return result
-
-
