@@ -51,7 +51,7 @@ class FuzzyAdventure():
 
         sql, category = FuzzyAdventure.tc.template(nl_query)
         keywords = transform.transform([nl_query])
-        #keywords = nlp.remove_stopwords(keywords)
+        keywords = keywords[0].split(" ")
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
 
         return answer
