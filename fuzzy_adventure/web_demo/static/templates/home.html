@@ -42,7 +42,7 @@
               <div id="submitquestion" class="tab-pane active">
                 <h1 class="muted question_header">Submit a Question</h1>
                 <input type="text" id="questionfield" class="span4 input-large" placeholder="{{question|default:"Question"}}">
-                <a class="btn btn-large btn-success" href='#' onClick="window.location = '/QA_demo/?question='+encodeURIComponent(document.getElementById('questionfield').value)">Submit</a>
+                <a class="btn btn-large btn-success" href='#' onClick="if(document.getElementById('questionfield').value != ''){window.location = '/QA_demo/?question='+encodeURIComponent(document.getElementById('questionfield').value)}">Submit</a>
               </div>
          
 
