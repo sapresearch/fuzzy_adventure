@@ -8,7 +8,7 @@ import re
 from optparse import OptionParser, OptionGroup
 from fuzzy_adventure.test import load_data
 from fuzzy_adventure.query_decomposition import bayes, word_space, nlp, classifier
-from fuzzy_adventure.query_decomposition.nlidb.template_selectors import template_type
+from fuzzy_adventure.query_decomposition.nlidb.template_selectors import template_selector
 from fuzzy_adventure.query_decomposition.nlidb.term_selectors import term_selector
 from fuzzy_adventure.query_decomposition.nlp_system import nlp_nlidb
 from fuzzy_adventure.query_decomposition.classifier import TemplateClassifier
@@ -83,7 +83,7 @@ class FuzzyAdventure():
             debug.debug_statement('New classifier created with model %s' % model.__class__.__name__)
             FuzzyAdventure.model = TemplateClassifier(data_file, model, test_size=0.2)
             FuzzyAdventure.model.fit()
-            FuzzyAdventure.tc = template_type.TemplateClassifier(FuzzyAdventure.model)
+            FuzzyAdventure.tc = template_selector.TemplateSelector(FuzzyAdventure.model)
         else:
             debug.debug_statement('No new classifier created')
 
