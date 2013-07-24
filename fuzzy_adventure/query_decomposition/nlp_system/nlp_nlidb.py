@@ -17,7 +17,7 @@ def nlp_nlidb(question):
 	'''STEP1: Extracting the keywords using Parser:'''
 	tree = stanford_client.to_tree(question)
 	top_node = penn_treebank_node.parse(tree)
-	extracted_words = my_parser.key_words(top_node, question)
+	extracted_words, Proper_Nouns = my_parser.key_words(top_node, question)
 	question_type = my_parser.questionType(top_node)
 
 
@@ -35,20 +35,18 @@ def nlp_nlidb(question):
 	allWords = allWords + list(target)
 	allWords = set(allWords)
 	
-	# print 'nlp_nlidb', allWords
 
 	'''Creating Links between allWords and tables' entities'''
 	tables = set(semanticNet.tables(allWords))
 	# required_values = set(semanticNet.required_values(tables, allWords))
 	'''required_values is not being used in our system anymore'''
 	required_values =''
-	# print allWords, required_values, target, conditions, tables, question_type, question
 	# '''To integrate with SQL Converter use: '''
 	# merged = merge(allWords, required_values, target, conditions, tables, question_type, question)
 	# return merged
 	'''To use the nlp_nlidb module use:'''
 
-	return allWords, required_values, target, conditions, tables, question_type 
+	return allWords, required_values, target, conditions, tables, question_type, Proper_Nouns  
 
 
 def merge(allWords, required_values, target, conditions, tables, question_type, question):

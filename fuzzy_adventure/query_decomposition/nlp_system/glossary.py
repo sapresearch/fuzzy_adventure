@@ -30,18 +30,14 @@ def createGlossary():
 		index = line.find('=')
 		if index != -1:
 		 	value = line[:index].strip()
-		 	# print '1', value
 			# if en.is_noun(value):
 				# value = en.noun.singular(value)
 			# value = WN_Lemmatizer().lemmatize(value)
-			# print '2',value
 			# elif en.is_verb(value):
 				# value = en.verb.infinitive(value)
 			
 			# value = PStemmer().stem(value)
 			
-			# print '2', value
-		 	# print 'value:' , value
 			start = line.find('[')
 			end = line.find (']')
 			valuesLines= line[index + 3: end ]
@@ -49,7 +45,7 @@ def createGlossary():
 			list_of_labels = vals.split(',')
 
 			for label in list_of_labels:
-				# print 'test label:',label
+
 				words = label.split()
 				wordCount = len(words)
 				for i in range(wordCount):
@@ -67,7 +63,6 @@ def createGlossary():
 					elif wordCount == 2:
 						l=''
 						for w in words:
-							# print 'word', w
 							w = w.lower()
 							# if en.is_noun(w):
 							# 	# w = en.noun.singular(w)
@@ -78,13 +73,11 @@ def createGlossary():
 							# w = PStemmer().stem(w)
 							
 							l= l + ' ' + w
-							# print 'changed:', w
 						glossary_two_words[l.strip()] = value.lower()
 
 					elif wordCount == 3:
 						l=''
 						for w in words:
-							# print 'word', w
 							w = w.lower()
 							# if en.is_noun(w):
 							# 	# w = en.noun.singular(w)
@@ -95,7 +88,6 @@ def createGlossary():
 							# w = PStemmer().stem(w)
 							
 							l= l + ' ' + w
-							# print 'changed:', w
 						glossary_three_words[l.strip()] = value.lower()
 					elif wordCount == 4:
 						l=''
@@ -115,10 +107,6 @@ def createGlossary():
 	glossary_processed.write ( str(glossary_two_words))
 	glossary_processed.write ( str(glossary_three_words))
 	glossary_processed.write ( str(glossary_four_words))
-	# print  'one words:', glossary_one_word
-	# print  'two words:', glossary_two_words
-	# print  'three words:',glossary_three_words
-	# print  'four words:',glossary_four_words
 	return glossary_one_word, glossary_two_words, glossary_three_words, glossary_four_words
 
 '''To read the existing glossary'''
@@ -139,7 +127,6 @@ def readGlossary():
 		end = findnth(text, '}', i) + 1
 		temp_glossary = text[start:end]
 		gl = eval(temp_glossary)
-		# print gl
 		if i==0:
 			glossary_one_word = gl
 		if i==1:
@@ -162,17 +149,29 @@ def checkGlossary(question):
 	#check the words
 	glossaryMatches = []
 	remove_list = []
+	words = []
 
 
 	if type(question) is list:
 		words = question
-	elif type(question) is not list:
+		for i in range(len(words)):
+			words[i] = words[i].lower()
+	elif isinstance(question,str):
 		q_noPunc = question.translate(string.maketrans("",""), string.punctuation)
 		words = q_noPunc.split(" ")
+		for i in range(len(words)):
+			words[i] = words[i].lower()
+
+	
+	elif isinstance(question,tuple):
+		for i in question:
+			if i != []:
+				i = str(i).lower()
+				words.append(i)
 
 
-	for i in range(len(words)):
-		words[i] = words[i].lower()
+
+
 		# if en.is_noun(words[i]):
 		# 	words[i] = en.noun.singular(words[i])
 		# elif en.is_verb(words[i]):
@@ -226,10 +225,10 @@ def checkGlossary(question):
 			glossaryMatches.append(glossary_one_word[k])
 			remove_list.append(k)
 
-	# print remove_list
 	return glossaryMatches, remove_list
 
 def generalizedKeywords(question, keyWords):
+	words = []
 	'''Two calls to the checkGlossary, once with the question and once with the keywords, to find all possible matches'''
 	glossaryMatches1, remove_list1 = checkGlossary(question)
 	glossaryMatches2, remove_list2 = checkGlossary(keyWords)
@@ -239,8 +238,13 @@ def generalizedKeywords(question, keyWords):
 		statement = 'glossaryMatches = ' + str(glossaryMatches)
 		# debug.debug_statement(statement)
 	remove_list = remove_list1 + remove_list2
-	# print glossaryMatches
-	keyWords = [x for x in keyWords if x not in remove_list]
+
+	'''Convert the tuple to a list'''
+	for i in keyWords:
+			if i != []:
+				i = str(i)
+				words.append(i)
+
+	keyWords = [x for x in words if x not in remove_list]
 	uniqueWords = list(set(keyWords + glossaryMatches))
-# >>>>>>> 1fb6ded45ada99e511032183b2346e8fa99840f5
 	return uniqueWords

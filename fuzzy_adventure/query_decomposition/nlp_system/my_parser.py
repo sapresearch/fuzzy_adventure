@@ -53,17 +53,16 @@ def proper_nouns(question):
     PPN = []
     words = nltk.word_tokenize(question)
     tags = nltk.pos_tag(words)
-    for tag in tags:
-        if 'NNP' in tag:
-            PPN.append(tag[0])
+    for i in range(len(tags)-1):
+        if tags[i][1] == 'NNP' and tags[i+1][1] == 'NNP':
+            name = (str(words[i])).upper() + ' ' + (str(words[i+1])).upper() 
+            PPN.append(name)
     return PPN
 
 def key_words(top_node, question):
     verb_labels = ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']
     question_type = questionType(top_node)
     PPN = proper_nouns(question)
-
-    # print question_type
 
     keyWords = dict()
     NPS=[]
@@ -192,8 +191,6 @@ def _formatKeyWords(keyWords):
         while '' in extracted_words:
             extracted_words.remove('')
 
-    # print extracted_words
-    
     return extracted_words
 
 def possesive_adjectives(question):
