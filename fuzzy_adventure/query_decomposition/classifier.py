@@ -52,10 +52,10 @@ class NLP_Transform(object):
             # everything.extend(required_values)
             # everything.extend(target)
             everything.extend(conditions)
-            everything.extend(tables)
+            #everything.extend(tables)
             # everything.extend(question_type)
             # everything.extend(question)
-            
+
             everything.extend(allWords)
             everything.extend(proper_nouns)
             if len(everything) == 0:
