@@ -95,7 +95,6 @@ def answerGenerator(question, allWords):
     if 'escalated' in allWords or 'escalated' in question or stemmed('escalated') in allWords or stemmed('escalated')in  question:
 		conditions.add('flag_escalated')
     if 'IRT' in allWords or 'IRT' in question:
-			print 'de-escalated', 'yes'
 			allWords.append('IRT')
 			what.add('transaction')
 
