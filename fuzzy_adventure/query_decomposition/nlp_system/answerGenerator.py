@@ -97,6 +97,7 @@ def answerGenerator(question, allWords):
 	if 'escalated' in allWords or 'escalated' in question or stemmed('escalated') in allWords or stemmed('escalated')in  question:
 		conditions.add('flag_escalated')
 	if 'IRT' in allWords or 'IRT' in question:
+			print 'de-escalated', 'yes'
 			allWords.append('IRT')
 			what.add('transaction')
 
@@ -161,6 +162,8 @@ def answerGenerator(question, allWords):
 
 	component_Names = get_components()
 	component_Names_l = list(component_Names)
+	# print component_Names_l
+	# print type(component_Names_l)
 	for c_n in component_Names_l:
 
 		if c_n!=None:
