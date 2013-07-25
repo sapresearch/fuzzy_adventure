@@ -53,9 +53,12 @@ def proper_nouns(question):
     PPN = []
     words = nltk.word_tokenize(question)
     tags = nltk.pos_tag(words)
-    for tag in tags:
-        if 'NNP' in tag:
-            PPN.append(tag[0])
+
+    for i in range(len(tags)-1):
+        if tags[i][1] == 'NNP' and tags[i+1][1] == 'NNP':
+           name = (str(words[i])).upper() + ' ' + (str(words[i+1])).upper()
+           PPN.append(name)
+
     return PPN
 
 def key_words(top_node, question):
