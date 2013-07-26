@@ -55,7 +55,7 @@ def proper_nouns(question):
     tags = nltk.pos_tag(words)
 
     for i in range(len(tags)-1):
-        if tags[i][1] == 'NNP' and tags[i+1][1] == 'NNP':
+        if tags[i][1].startswith('NNP') and tags[i+1][1].startswith('NNP'):
            name = (str(words[i])).upper() + ' ' + (str(words[i+1])).upper()
            PPN.append(name)
 
