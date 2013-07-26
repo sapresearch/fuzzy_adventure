@@ -2,12 +2,9 @@ import re
 import sys
 import string
 import my_parser
-# import relatedKeywords
-#from  semanticNet import *
 from answerGenerator import answerGenerator
 from fuzzy_adventure.external import en
 import semanticNet
-# from fuzzy_adventure.query_decomposition import wordnet_synonym
 import glossary
 import stanford_client
 import penn_treebank_node
@@ -27,7 +24,6 @@ def nlp_nlidb(question):
        uniqueWords = glossary.generalizedKeywords(question, extracted_words)
 
        # '''STEP2.2: Extracting the related keywords:'''
-       # relatedWords = relatedKeywords.checkRelation(allWords)
        uniqueWords.append(question_type)
        '''STEP3: Adding some manually defined rules'''
 
@@ -40,29 +36,12 @@ def nlp_nlidb(question):
 
        '''Creating Links between allWords and tables' entities'''
        tables = set(semanticNet.tables(allWords))
-       # required_values = set(semanticNet.required_values(tables, allWords))
        '''required_values is not being used in our system anymore'''
        required_values =''
 
-       # allWords_temp = []
-       # for w in allWords:
-       #        w = en.noun.singular(w)
-       #        allWords_temp.append(w)
-       # allWords = allWords_temp
+       debug.debug_statement([allWords, required_values, target, conditions, tables, question_type, Proper_Nouns, component_value])
 
-       # return allWords, required_values, target, conditions, tables, question_type,Proper_Nouns
-
-       # '''To integrate with SQL Converter use: '''
-       merged = merge(allWords, required_values, target, conditions, tables, question_type, question, Proper_Nouns, component_value)
-       # return merged
-       # '''To use the nlp_nlidb module use:'''
-
-       # print allWords, required_values, target, conditions, tables, question_type, Proper_Nouns 
-
-       debug.debug_statement(question)
-       debug.debug_statement(merged)
-       return allWords, required_values, target, conditions, tables, question_type, Proper_Nouns,component_value 
-
+       return allWords, required_values, target, conditions, tables, question_type, Proper_Nouns, component_value
 
 
 def keyWords_allQuestions(question):

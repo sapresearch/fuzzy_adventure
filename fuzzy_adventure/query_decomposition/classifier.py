@@ -47,7 +47,7 @@ class NLP_Transform(object):
 
         for raw_doc in raw_documents:
             everything = []
-            allWords, required_values, target, conditions, tables, question_type, proper_nouns = nlp_nlidb.nlp_nlidb(raw_doc)
+            allWords, required_values, target, conditions, tables, question_type, proper_nouns, component_name = nlp_nlidb.nlp_nlidb(raw_doc)
             # everything.extend(allWords)
             # everything.extend(required_values)
             # everything.extend(target)
@@ -57,7 +57,7 @@ class NLP_Transform(object):
             # everything.extend(question)
 
             everything.extend(allWords)
-            everything.extend(proper_nouns)
+            #everything.extend(proper_nouns)
             if len(everything) == 0:
                  documents.append(raw_doc)
             else:
