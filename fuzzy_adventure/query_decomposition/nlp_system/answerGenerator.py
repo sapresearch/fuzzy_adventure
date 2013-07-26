@@ -1,5 +1,8 @@
 from nltk.stem import PorterStemmer as PStemmer
 from components import *
+import nltk
+import re
+
 ''' Answer generator includes a list of rules that are manually entered by the user to improve the performance and find the answer'''
 
 # def checkRelation(allWords):
@@ -53,9 +56,9 @@ def stemmed(word):
 
 
 def answerGenerator(question, allWords):
-#definitions:
-    conditions,what,conditions_temp,what_temp  =  set(),set(),set(),set()
-    component_value = 'No_Component'
+    conditions,what,conditions_temp,what_temp, component_value =  set(),set(),set(),set(), set()
+
+    question_re = nltk.word_tokenize(question)
 
     if 'causes delay' in allWords or 'causes delay' in question or stemmed('causes delay') in allWords or stemmed('causes delay') in question:
         allWords.append('component')
@@ -94,7 +97,7 @@ def answerGenerator(question, allWords):
             allWords.append('transaction')
             what.add('transaction')
             conditions.add('most')
-    if 'escalated' in allWords or 'escalated' in question or stemmed('escalated') in allWords or stemmed('escalated')in  question:
+    if 'escalated' in allWords or 'escalated' in question or stemmed('escalated') in allWords or stemmed('escalated') in question:
         conditions.add('flag_escalated')
     if 'IRT' in allWords or 'IRT' in question:
             allWords.append('IRT')
@@ -111,7 +114,7 @@ def answerGenerator(question, allWords):
         manager_ID = '45'
         if manager_ID:
             conditions.add(str('manager_ID: '+ manager_ID))
-        else: 
+        else:
             conditions.add('manager_ID Was not provided by the manager!')
     if 'support from my supervisor' in question:
         allWords.append('experienced')
@@ -159,14 +162,11 @@ def answerGenerator(question, allWords):
         what.add('component')
 
     component_Names = get_components()
-    component_Names_l = list(component_Names)
 
-    for c_n in component_Names_l:
-        if c_n!=None:
-            c_n_asc = c_n.encode('ascii','ignore')
-            if c_n_asc in question:
-                what.add('component')
-                component_value = c_n_asc    
+    for word in question_re:
+        if word in component_Names:
+            what.add('component')
+            component_value.add(word)
 
     allWords = list(set(allWords))
     return allWords, conditions, what, component_value

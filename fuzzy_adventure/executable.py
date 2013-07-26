@@ -47,13 +47,12 @@ class FuzzyAdventure():
         if FuzzyAdventure.easter_egg(nl_query):
             return [42]
 
-        transform = classifier.NLP_Transform()
-
         sql, category = FuzzyAdventure.tc.template(nl_query)
         keywords = []
-        allWords, required_values, target, conditions, tables, question_type, proper_nouns  = nlp_nlidb.nlp_nlidb(nl_query)
+        allWords, required_values, target, conditions, tables, question_type, proper_nouns, component_name  = nlp_nlidb.nlp_nlidb(nl_query)
         keywords.extend(allWords)
         keywords.extend(conditions)
+        keywords.extend(component_name)
         keywords.extend(map(lambda x: x.upper(), proper_nouns))
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
 
