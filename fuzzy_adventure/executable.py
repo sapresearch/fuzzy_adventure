@@ -50,8 +50,11 @@ class FuzzyAdventure():
         transform = classifier.NLP_Transform()
 
         sql, category = FuzzyAdventure.tc.template(nl_query)
-        keywords = transform.transform([nl_query])
-        keywords = keywords[0].split(" ")
+        keywords = []
+        allWords, required_values, target, conditions, tables, question_type, proper_nouns  = nlp_nlidb.nlp_nlidb(nl_query)
+        keywords.extend(allWords)
+        keywords.extend(conditions)
+        keywords.extend(map(lambda x: x.upper(), proper_nouns))
         answer = term_selector.TermSelector.fill_in_the_blanks(sql, keywords)
 
         return answer
