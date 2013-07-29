@@ -38,12 +38,17 @@ def welcome(request):
         if question_type:
             try:
                 param1 = request.GET['param1']
+                param1 = re.sub(r'[?.,\'!]', "", param1)
+                #uppercase for matching usernames in databse
+                if question_type in [3, 5, 6, 9]:
+                    param1 = param1.upper()
                 params.append(param1)
             except:
                 param1 = ""
 
             try:
                 param2 = request.GET['param2']
+                param2 = re.sub(r'[?.,\'!]', "", param2)
                 params.append(param2)
             except:
                 param2 = ""
