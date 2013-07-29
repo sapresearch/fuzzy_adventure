@@ -99,7 +99,7 @@ class FuzzyAdventure():
         #convert number to letter for key in template classifier map
 
         letter = chr(ord('A') + qnum - 1)
- 
+
         template = templates[letter][0]
         types = templates[letter][1]
 
@@ -108,7 +108,8 @@ class FuzzyAdventure():
             type_to_apply = types[i]
             applied.append(type_to_apply(param))
 
-        filled_query = template % applied
+        filled_query = template % tuple(applied)
+
         return filled_query
 
     @classmethod
