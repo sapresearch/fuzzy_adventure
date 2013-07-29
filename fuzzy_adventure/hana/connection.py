@@ -17,7 +17,9 @@ def get_cursor():
                 get_cursor.password = getpass.getpass('Password: ')            
 
             try:
-                c = "DSN=hana;UID=%s;PWD=%s" % (str(get_cursor.userName), str(get_cursor.password))
+                usrName = str(get_cursor.userName)
+                pwd = str(get_cursor.password)
+                c = "DSN=hana;UID=%s;PWD=%s" % (usrName, pwd)
                 cnxn = pdbc.connect(c)
                 retry = False
             except pdbc.Error as err:
