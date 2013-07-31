@@ -1,4 +1,4 @@
-import pypyodbc as pdbc
+#import pypyodbc as pdbc
 import getpass
 import sys
 
@@ -17,10 +17,14 @@ def get_cursor():
                 get_cursor.password = getpass.getpass('Password: ')            
 
             try:
-                c = "DSN=hana;UID=%s;PWD=%s" % (str(get_cursor.userName), str(get_cursor.password))
-                cnxn = pdbc.connect(c)
+                pdbc = __import__('pypyodbc')
+                usrName = str(get_cursor.userName)
+                pwd = str(get_cursor.password)
+                param = "DSN=hana;UID=%s;PWD=%s" % (usrName, pwd)
+                cnxn = pdbc.connect(param)
                 retry = False
             except pdbc.Error as err:
+                print param
                 print err.args
                 print 'Username and/or Password are incorrect'
                 delattr(get_cursor,"userName")

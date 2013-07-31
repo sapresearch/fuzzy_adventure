@@ -700,6 +700,22 @@
         "question": "How long was this message on the SAP side?"
     }, 
     {
+        "type": "G", 
+        "question": "How long does it take on average to close a ticket?"
+    },
+    {
+        "type": "G", 
+        "question": "How long does it take on average to close a transaction?"
+    }, 
+    {
+        "type": "G", 
+        "question": "How long does it take on average to close a message?"
+    },  
+    {
+        "type": "G", 
+        "question": "How long does it usually take to close a message?"
+    },  
+    {
         "type": "H", 
         "question": "What is the % from MPT this message was @ SAP-side?"
     }, 
